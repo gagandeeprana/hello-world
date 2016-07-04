@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite1]">
+  <parameter name="go" value="Racing"/>
+  <test name="test1">
+    <parameter name="go" value="Racing"/>
+    <classes>
+      <class name="com.test.grouptest.NewTest2"/>
+      <class name="com.test.grouptest.CNewTest"/>
+    </classes>
+  </test> <!-- test1 -->
+</suite> <!-- Failed suite [Suite1] -->

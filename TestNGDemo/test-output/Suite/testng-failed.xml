@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test">
+    <groups>
+      <define name="all">
+        <include name="functest"/>
+        <include name="checkintest"/>
+      </define> <!-- all -->
+      <run>
+        <include name="all"/>
+        <exclude name="functest"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.cloudsmartz.demo6.GroupTestExample"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Failed suite [Suite] -->
