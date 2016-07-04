@@ -1,0 +1,1 @@
+xcopy D:\penportalworkspace\TestNGDemo D:\JavaGit\hello-world\TestNGDemo /s   - copy folder and subfolders from source to dest and /s means copy also subfolders
