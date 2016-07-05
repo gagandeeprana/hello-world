@@ -3,3 +3,4 @@ systeminfo - compelte detail about your pc.
 ver - version of your os
 msiexec/i - install software
 firefox - open mozilla firefox from command run
+sysdm.cpl - this command open environment variables directly...
