@@ -1,4 +1,4 @@
 Dim speaks, speech
-speaks="Pinky ki haal aa tera..??...Ki kardi hain aaj kal..??... Hor Harvinder Singh ji...how are you..??....balllleee...."
+speaks="Hello How are you ...??"
 Set speech=CreateObject("sapi.spvoice")
 speech.Speak speaks
