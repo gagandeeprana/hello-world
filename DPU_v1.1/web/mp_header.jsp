@@ -13,7 +13,6 @@
     }
 </style>
 <header  style="background-color: white;margin-bottom: 0px;">
-    <img src="images/logo_new.png" class="img-responsive" style=""/>
 </header>
 
 <nav class="navbar navbar-inverse " >

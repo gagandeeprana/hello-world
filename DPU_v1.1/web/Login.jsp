@@ -6,7 +6,7 @@
     <body>
       
         <jsp:include page="mp_header.jsp"/>
-        <form action="AuthServlet" method="post">
+        <form action="Admin/SendMessage.jsp" method="post">
             <div class="container-fluid " >
                 <div class="row " align="">
 

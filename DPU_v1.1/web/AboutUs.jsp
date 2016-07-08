@@ -13,26 +13,16 @@
             <div class="panel ">
                 <div class="panel-primary">
                     <p style="text-align: justify;">
-                        <a href="http://www.alphaitworld.co.in" target="_self"><img height="30" width="150" src="images/l.png"/></a> is
-                        a software development company which provides custom development services to the
-                        customers and training in advanced technologies to the corporate clients. alphaITworld
-                        focuses on providing IT consulting services, offshore web development and software
-                        development, re-engineering solutions and ready-to-deploy business applications
-                        for a number of industries including e-commerce, banking and finance.
+                        Headquartered in Rochester, NY, CloudSmartz, Inc. is a Global IT Services company providing a full spectrum of IT services for mid-enterprise customers and strategic partners in the communication industry. We focus on delivering Software Development as a Service, SDN/NFV Solutions, IaaS, Secure Managed Services, and Business Consulting. Because of CloudSmartz? broad range of capabilities we are able to offer superior customer experience through our innovative, agile technical solutions.
+
+We apply 20+ years of IT experience for solving unique business problems in a creative and strategic way. We make it our responsibility to have our global customers thrive by applying applications and technology to create outstanding customer experiences.
+
+The best part of all this? Once we have transformed how your business uses technology ? by turning a hindrance into the catalyst for your success ? your business can thrive.
                     </p> 
                     <p style="text-align: justify;  ">
-                        At <a href="http://www.alphaitworld.co.in" target="_self">alphaITworld</a> we are
-                        proud of our high quality standards. These standards allow us to provide our customer
-                        with reliable and error free software applications, regardless of complexity . Our
-                        top-notch developers use the latest software methodologies and technologies. This
-                        means they can concentrate on our clients business goals and keep them involved
-                        in every stage through the entire project. Our meticulous approach has helped us
-                        to build our excellent track record with no failed or aborted projects.</p>
+                        We are a one-stop-shop for any and all of your IT needs ? From Cloud hosting solutions to managed services solutions, we believe that companies should not have to waste their valuable time and resources on mundane IT issues from computer crashes to data security. We believe in providing companies the support they need to ensure that they have the help they need, when they need it most.</p>
                     <p style="text-align: justify; ">
-                        Our vision is to provide our customers with exceptional service every time. To continually
-                        adapt to the changing needs of our customers, by being on the leading edge of technology.
-                        To provide quality products at competitive prices and contribute to the business
-                        success of our clients.</p>
+                        If you have questions about IT, we have the answers. We have equipped ourselves with a comprehensive knowledge of IT resources and solutions ? so that we can work with a company to collaboratively decide which services are right for them ? From SDN/NFV, Cloud, and Application Development solutions.</p>
                 </div>
 
             </div>

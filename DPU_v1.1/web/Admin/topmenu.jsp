@@ -2,7 +2,6 @@
 <div id="navigation">
     <ul>
         <li><a href="Homepage.jsp">Home</a></li>
-            <c:if test="${sessionScope.userType.equalsIgnoreCase('admin')}">
             <li><a href="ManageEmployees.jsp">Employees</a>
                 <div>
                     <ul style="width:100%;margin-left: 10px;">
@@ -10,8 +9,6 @@
                     </ul>
                 </div>
             </li>
-
-        </c:if>
         <li><a href="ManageDealers.jsp">Dealers</a>
             <div>
                 <ul style="width:100%;margin-left:10px;">
@@ -38,7 +35,6 @@
                 </ul>
             </div>
         </li>
-        <c:if test="${sessionScope.userType.equalsIgnoreCase('admin')}">
             <li><a href="">Reports</a>
                 <div>
                     <ul style="width:100%;margin-left:10px;">
@@ -47,7 +43,6 @@
                     </ul>
                 </div>
             </li>
-        </c:if>
         <li><a href="#">Settings</a>
             <div>
                 <ul style="width:100%;margin-left:10px;">
