@@ -1,0 +1,33 @@
+	division---
+
+  	add---
+	clear();
+        disable(false);
+        disableFields(true);
+        addUpdateFlag = "add";
+
+	update--
+	btnUpdate.setEnabled(false);
+        disableFields(true);
+        disable(false);
+        addUpdateFlag = "update";
+
+	save--
+        DivisionBean obj = new DivisionBean();
+        obj.setDivision(txtDivisionName.getText());
+        DivisionDAO divisionDAO = new DivisionDAOImpl();
+        String msg = "";
+        if (addUpdateFlag.equals("add")) {
+            msg = divisionDAO.addDivision(obj);
+        } else {
+            obj.setDivisionId(divisionId);
+            msg = divisionDAO.updateDivision(obj);
+        }
+        JOptionPane.showMessageDialog(null, msg);
+        lstDivisions = new DivisionDAOImpl().getAllDivisions("");
+        listSelectionModel.setValueIsAdjusting(false);
+        generateTable();
+        clear();
+
+        disable(true);
+        disableFields(false);	
