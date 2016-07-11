@@ -1,16 +1,13 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.DivisionBean;
-import dpu.dao.admin.DivisionDAO;
 import dpu.dao.admin.impl.DivisionDAOImpl;
 import java.awt.Toolkit;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.apache.log4j.Logger;
 
 public class MainFrame extends javax.swing.JFrame implements ListSelectionListener {
 
@@ -20,14 +17,12 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     String addUpdateFlag = "";
     int divisionId = 0;
     ClassUI classUI = null;
+    DivisionUI divisionUI = null;
 
     public MainFrame() {
         initComponents();
-        System.out.println("111111111");
         classUI = new ClassUI();
-        System.out.println("2222222222");
-
-        System.out.println("33333333333");
+        divisionUI = new DivisionUI();
         setResizable(true);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
 //        clear();
@@ -35,24 +30,15 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
 //        disableFields(false);
         lstDivisions = new DivisionDAOImpl().getAllDivisions("");
 //        logger.info("MainFrame : Listof Divisions: " + lstDivisions.size());
-        generateTable();
+        divisionUI.generateTable();
 //        classUI.generateTable();
+        tblDivision.setAutoCreateRowSorter(true);
         listSelectionModel = tblDivision.getSelectionModel();
         listSelectionModel.addListSelectionListener(this);
 //        btnUpdate.setEnabled(false);
     }
 
-    private void generateTable() {
-        Object[][] data = new Object[lstDivisions.size()][2];
-        for (int i = 0; i < lstDivisions.size(); i++) {
-            DivisionBean obj = lstDivisions.get(i);
-            data[i][0] = obj.getDivisionId();
-            data[i][1] = obj.getDivision();
-        }
-        String[] cols = {"Division Id", "Division"};
-        tblDivision = new JTable(data, cols);
-        jScrollPane2.setViewportView(tblDivision);
-    }
+    
 
 //    private void clear() {
 //        txtDivisionName.setText("");
@@ -75,11 +61,11 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        mainTabbedPane = new javax.swing.JTabbedPane();
+        divisionPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDivision = new javax.swing.JTable();
-        btnClear = new javax.swing.JButton();
+        btnClearManageDivision = new javax.swing.JButton();
         txtDivisionSearch = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnAddManageDivision = new javax.swing.JButton();
@@ -141,6 +127,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tblDivision.setAutoCreateRowSorter(true);
         tblDivision.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -154,10 +141,10 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
         ));
         jScrollPane2.setViewportView(tblDivision);
 
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
+        btnClearManageDivision.setText("Clear");
+        btnClearManageDivision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
+                btnClearManageDivisionActionPerformed(evt);
             }
         });
 
@@ -179,39 +166,39 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout divisionPanelLayout = new javax.swing.GroupLayout(divisionPanel);
+        divisionPanel.setLayout(divisionPanelLayout);
+        divisionPanelLayout.setHorizontalGroup(
+            divisionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(divisionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(divisionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(divisionPanelLayout.createSequentialGroup()
                         .addComponent(btnAddManageDivision)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDivisionSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear)))
+                        .addComponent(btnClearManageDivision)))
                 .addContainerGap(780, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        divisionPanelLayout.setVerticalGroup(
+            divisionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, divisionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(divisionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDivisionSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(btnClear)
+                    .addComponent(btnClearManageDivision)
                     .addComponent(btnAddManageDivision))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Division", jPanel1);
+        mainTabbedPane.addTab("Division", divisionPanel);
 
         tblClass.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -283,7 +270,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Class", jPanel2);
+        mainTabbedPane.addTab("Class", jPanel2);
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -342,7 +329,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addGap(80, 80, 80))
         );
 
-        jTabbedPane1.addTab("Company", jPanel3);
+        mainTabbedPane.addTab("Company", jPanel3);
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -401,7 +388,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addGap(80, 80, 80))
         );
 
-        jTabbedPane1.addTab("Equipment", jPanel4);
+        mainTabbedPane.addTab("Equipment", jPanel4);
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -460,7 +447,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addGap(80, 80, 80))
         );
 
-        jTabbedPane1.addTab("Role", jPanel5);
+        mainTabbedPane.addTab("Role", jPanel5);
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -526,7 +513,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Terminal", jPanel6);
+        mainTabbedPane.addTab("Terminal", jPanel6);
 
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -585,7 +572,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addGap(80, 80, 80))
         );
 
-        jTabbedPane1.addTab("Tracking", jPanel7);
+        mainTabbedPane.addTab("Tracking", jPanel7);
 
         jTable9.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -645,17 +632,17 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("PowerUnit", jPanel8);
+        mainTabbedPane.addTab("PowerUnit", jPanel8);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(mainTabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(mainTabbedPane)
         );
 
         pack();
@@ -667,15 +654,13 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     }//GEN-LAST:event_txtDivisionSearchKeyTyped
 
     private void txtDivisionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionSearchKeyReleased
-        // TODO add your handling code here:
-        lstDivisions = new DivisionDAOImpl().getAllDivisions(txtDivisionSearch.getText());
-        generateTable();
+        divisionUI.generateTable();
     }//GEN-LAST:event_txtDivisionSearchKeyReleased
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-//        clear();
-    }//GEN-LAST:event_btnClearActionPerformed
+    private void btnClearManageDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageDivisionActionPerformed
+        txtDivisionSearch.setText("");
+        divisionUI.generateTable();
+    }//GEN-LAST:event_btnClearManageDivisionActionPerformed
 
     private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
         // TODO add your handling code here:
@@ -686,7 +671,6 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     }//GEN-LAST:event_txtClassSearchKeyTyped
 
     private void btnAddClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClassActionPerformed
-        // TODO add your handling code here:
         classUI.clear();
         classUI.disable(false);
         classUI.disableFields(true);
@@ -694,18 +678,16 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     }//GEN-LAST:event_btnAddClassActionPerformed
 
     private void btnClearClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearClassActionPerformed
-        // TODO add your handling code here:
         classUI.clear();
     }//GEN-LAST:event_btnClearClassActionPerformed
 
     private void btnAdd7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd7ActionPerformed
-        // TODO add your handling code here:
         AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
         addPowerUnitFrame.setVisible(true);
     }//GEN-LAST:event_btnAdd7ActionPerformed
 
     private void btnAddManageDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageDivisionActionPerformed
-        // TODO add your handling code here:
+        divisionUI.disable(false);
         AddDivisionFrame addDivisionFrame = new AddDivisionFrame();
         addDivisionFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageDivisionActionPerformed
@@ -753,8 +735,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JButton btnAdd6;
     private javax.swing.JButton btnAdd7;
     public static javax.swing.JButton btnAddClass;
-    protected javax.swing.JButton btnAddManageDivision;
-    protected javax.swing.JButton btnClear;
+    public static javax.swing.JButton btnAddManageDivision;
     private javax.swing.JButton btnClear2;
     private javax.swing.JButton btnClear3;
     private javax.swing.JButton btnClear4;
@@ -762,12 +743,14 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JButton btnClear6;
     private javax.swing.JButton btnClear7;
     public static javax.swing.JButton btnClearClass;
+    public static javax.swing.JButton btnClearManageDivision;
     private javax.swing.JButton btnUpdate2;
     private javax.swing.JButton btnUpdate3;
     private javax.swing.JButton btnUpdate4;
     private javax.swing.JButton btnUpdate5;
     private javax.swing.JButton btnUpdate6;
     private javax.swing.JButton btnUpdate7;
+    public static javax.swing.JPanel divisionPanel;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -776,7 +759,6 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -784,7 +766,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -792,15 +774,15 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    public javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
+    public static javax.swing.JTabbedPane mainTabbedPane;
     public static javax.swing.JTable tblClass;
-    private javax.swing.JTable tblDivision;
+    public static javax.swing.JTable tblDivision;
     public static javax.swing.JTextField txtClassSearch;
     private javax.swing.JTextField txtDivisionName2;
     private javax.swing.JTextField txtDivisionName3;
@@ -808,7 +790,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JTextField txtDivisionName5;
     private javax.swing.JTextField txtDivisionName6;
     private javax.swing.JTextField txtDivisionName7;
-    private javax.swing.JTextField txtDivisionSearch;
+    public static javax.swing.JTextField txtDivisionSearch;
     // End of variables declaration//GEN-END:variables
 
     @Override

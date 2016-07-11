@@ -5,6 +5,14 @@
  */
 package dpu.ui.common;
 
+import dpu.Validations;
+import dpu.beans.admin.DivisionBean;
+import dpu.dao.admin.DivisionDAO;
+import dpu.dao.admin.impl.DivisionDAOImpl;
+import java.util.List;
+import javax.swing.JOptionPane;
+import static org.apache.log4j.NDC.clear;
+
 /**
  *
  * @author Gagandeep
@@ -14,9 +22,48 @@ public class AddDivisionFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddPowerUnit
      */
+    boolean check1 = false;
+    boolean check2 = false;
+    String msg = "";
+    DivisionUI divisionUI = null;
+
     public AddDivisionFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        divisionUI = new DivisionUI();
+        btnSaveAddDivision.setEnabled(false);
+    }
+
+    public boolean validateDivisionId(String str) {
+        if (Validations.isEmpty(str)) {
+            msg = "Left Empty..!";
+            return false;
+        }
+        if (Validations.hasNumerals(str)) {
+            msg = "Only Numerics Allowed..!";
+            return false;
+        }
+        if (Validations.hasSpace(str)) {
+            msg = "Space Not Allowed..!";
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateDivisionName(String str) {
+        if (Validations.isEmpty(str)) {
+            msg = "Left Empty..!";
+            return false;
+        }
+        if (Validations.hasAlphabets(str)) {
+            msg = "Only Alphabets Allowed..!";
+            return false;
+        }
+        if (Validations.hasSpace(str)) {
+            msg = "Space Not Allowed..!";
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -32,8 +79,10 @@ public class AddDivisionFrame extends javax.swing.JFrame {
         txtDivisionIdAddDivision = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtDivisionNameAddDivision = new javax.swing.JTextField();
-        btnSaveAddPowerUnit = new javax.swing.JButton();
-        btnCancelAddPowerUnit = new javax.swing.JButton();
+        btnSaveAddDivision = new javax.swing.JButton();
+        btnCancelAddDivision = new javax.swing.JButton();
+        lblDivisionIdAddDivisionFrameValidation = new javax.swing.JLabel();
+        lblDivisionNameAddDivisionFrameValidation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,12 +93,33 @@ public class AddDivisionFrame extends javax.swing.JFrame {
                 txtDivisionIdAddDivisionActionPerformed(evt);
             }
         });
+        txtDivisionIdAddDivision.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDivisionIdAddDivisionKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("Division Name");
 
-        btnSaveAddPowerUnit.setText("Save");
+        txtDivisionNameAddDivision.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDivisionNameAddDivisionKeyReleased(evt);
+            }
+        });
 
-        btnCancelAddPowerUnit.setText("Cancel");
+        btnSaveAddDivision.setText("Save");
+        btnSaveAddDivision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveAddDivisionActionPerformed(evt);
+            }
+        });
+
+        btnCancelAddDivision.setText("Cancel");
+        btnCancelAddDivision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelAddDivisionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,11 +127,11 @@ public class AddDivisionFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(121, 121, 121)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSaveAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSaveAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelAddPowerUnit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnCancelAddDivision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -69,28 +139,35 @@ public class AddDivisionFrame extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDivisionNameAddDivision)
-                            .addComponent(txtDivisionIdAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(149, Short.MAX_VALUE))
+                            .addComponent(txtDivisionIdAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDivisionIdAddDivisionFrameValidation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDivisionNameAddDivisionFrameValidation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelAddPowerUnit, btnSaveAddPowerUnit});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelAddDivision, btnSaveAddDivision});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtDivisionIdAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDivisionIdAddDivisionFrameValidation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtDivisionIdAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(txtDivisionNameAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtDivisionNameAddDivision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDivisionNameAddDivisionFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSaveAddPowerUnit)
-                    .addComponent(btnCancelAddPowerUnit))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(btnSaveAddDivision)
+                    .addComponent(btnCancelAddDivision))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -99,6 +176,71 @@ public class AddDivisionFrame extends javax.swing.JFrame {
     private void txtDivisionIdAddDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDivisionIdAddDivisionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDivisionIdAddDivisionActionPerformed
+
+    private void btnCancelAddDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddDivisionActionPerformed
+        dispose();
+        divisionUI.disable(true);
+    }//GEN-LAST:event_btnCancelAddDivisionActionPerformed
+
+    private void btnSaveAddDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAddDivisionActionPerformed
+        String msg = divisionUI.save();
+        JOptionPane.showMessageDialog(null, msg);
+        dispose();
+    }//GEN-LAST:event_btnSaveAddDivisionActionPerformed
+
+    private void txtDivisionIdAddDivisionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionIdAddDivisionKeyReleased
+        DivisionDAO divisionDAO = new DivisionDAOImpl();
+        List<DivisionBean> lstDivisions = divisionDAO.getAllDivisions("");
+        try {
+            if (validateDivisionId(txtDivisionIdAddDivision.getText())) {
+                check1 = true;
+                lblDivisionIdAddDivisionFrameValidation.setText("");
+                for (DivisionBean divisionBean : lstDivisions) {
+                    if (divisionBean.getDivisionId() == Integer.parseInt(txtDivisionIdAddDivision.getText().trim())) {
+                        lblDivisionIdAddDivisionFrameValidation.setText("Already Taken");
+                        btnSaveAddDivision.setEnabled(false);
+                        check1 = false;
+                    }
+                }
+            } else {
+                lblDivisionIdAddDivisionFrameValidation.setText(msg);
+                btnSaveAddDivision.setEnabled(false);
+                check1 = false;
+            }
+            if (check1 == true && check2 == true) {
+                btnSaveAddDivision.setEnabled(true);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_txtDivisionIdAddDivisionKeyReleased
+
+    private void txtDivisionNameAddDivisionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionNameAddDivisionKeyReleased
+        DivisionDAO divisionDAO = new DivisionDAOImpl();
+        List<DivisionBean> lstDivisions = divisionDAO.getAllDivisions("");
+        try {
+            if (validateDivisionName(txtDivisionNameAddDivision.getText())) {
+                check2 = true;
+                lblDivisionNameAddDivisionFrameValidation.setText("");
+                for (DivisionBean divisionBean : lstDivisions) {
+                    if (divisionBean.getDivision().equals(txtDivisionNameAddDivision.getText().trim())) {
+                        lblDivisionNameAddDivisionFrameValidation.setText("Already Taken");
+                        btnSaveAddDivision.setEnabled(false);
+                        check2 = false;
+                    }
+                }
+            } else {
+                lblDivisionNameAddDivisionFrameValidation.setText(msg);
+                btnSaveAddDivision.setEnabled(false);
+                check2 = false;
+            }
+            if (check1 == true && check2 == true) {
+                btnSaveAddDivision.setEnabled(true);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_txtDivisionNameAddDivisionKeyReleased
 
     /**
      * @param args the command line arguments
@@ -139,11 +281,13 @@ public class AddDivisionFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelAddPowerUnit;
-    private javax.swing.JButton btnSaveAddPowerUnit;
+    private javax.swing.JButton btnCancelAddDivision;
+    private javax.swing.JButton btnSaveAddDivision;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtDivisionIdAddDivision;
-    private javax.swing.JTextField txtDivisionNameAddDivision;
+    private javax.swing.JLabel lblDivisionIdAddDivisionFrameValidation;
+    private javax.swing.JLabel lblDivisionNameAddDivisionFrameValidation;
+    public static javax.swing.JTextField txtDivisionIdAddDivision;
+    public static javax.swing.JTextField txtDivisionNameAddDivision;
     // End of variables declaration//GEN-END:variables
 }

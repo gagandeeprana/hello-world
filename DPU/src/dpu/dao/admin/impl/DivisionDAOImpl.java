@@ -28,7 +28,7 @@ public class DivisionDAOImpl implements DivisionDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from divisionmaster where name like ?");
+            pstmt = conn.prepareStatement("select * from divisionmaster where name like ? order by name");
             pstmt.setString(1, "%" + name + "%");
             rs = pstmt.executeQuery();
             while (rs.next()) {
