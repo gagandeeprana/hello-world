@@ -17,4 +17,5 @@ public interface DivisionDAO {
     List<DivisionBean> getAllDivisions(String name);
     String addDivision(DivisionBean obj);
     String updateDivision(DivisionBean obj);
+    String deleteDivision(int divisionId);
 }

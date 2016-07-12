@@ -49,8 +49,9 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into companymaster (name) values(?)");
-            pstmt.setString(1, obj.getCompanyName());
+            pstmt = conn.prepareStatement("insert into companymaster values(?,?)");
+            pstmt.setInt(1, obj.getCompanyId());
+            pstmt.setString(2, obj.getCompanyName());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Company Added";
@@ -67,7 +68,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update classmaster set name = ? where company_id = ?");
+            pstmt = conn.prepareStatement("update companymaster set name = ? where company_id = ?");
             pstmt.setString(1, obj.getCompanyName());
             pstmt.setInt(2, obj.getCompanyId());
             int i = pstmt.executeUpdate();
@@ -78,5 +79,23 @@ public class CompanyDAOImpl implements CompanyDAO {
             logger.error("CompanyDAOImpl : updateCompany : " + e);
         }
         return "Failed to Update Company";
+    }
+
+    @Override
+    public String deleteCompany(int companyId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("delete from companymaster where company_id = ?");
+            pstmt.setInt(1, companyId);
+            int i = pstmt.executeUpdate();
+            if (i > 0) {
+                return "Company Deleted";
+            }
+        } catch (Exception e) {
+            logger.error("CompanyDAOImpl : deleteCompany : " + e);
+        }
+        return "Failed to Delete Company";
     }
 }

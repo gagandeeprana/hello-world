@@ -10,4 +10,6 @@ public interface CompanyDAO {
     String addCompany(CompanyBean obj);
 
     String updateCompany(CompanyBean obj);
+
+    String deleteCompany(int companyId);
 }

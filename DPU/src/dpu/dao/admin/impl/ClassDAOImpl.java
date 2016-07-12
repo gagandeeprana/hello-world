@@ -6,9 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.beans.admin.ClassBean;
-import dpu.beans.admin.DivisionBean;
 import dpu.dao.admin.ClassDAO;
-import dpu.dao.admin.DivisionDAO;
 import dpu.dao.common.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,8 +49,9 @@ public class ClassDAOImpl implements ClassDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into classmaster (title) values(?)");
-            pstmt.setString(1, obj.getName());
+            pstmt = conn.prepareStatement("insert into classmaster values(?,?)");
+            pstmt.setInt(1, obj.getClassId());
+            pstmt.setString(2, obj.getName());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Class Added";
@@ -80,5 +79,23 @@ public class ClassDAOImpl implements ClassDAO {
             logger.error("ClassDAOImpl : updateClass : " + e);
         }
         return "Failed to Update Class";
+    }
+    
+    @Override
+    public String deleteClass(int classId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("delete from classmaster where class_id = ?");
+            pstmt.setInt(1, classId);
+            int i = pstmt.executeUpdate();
+            if (i > 0) {
+                return "Class Deleted";
+            }
+        } catch (Exception e) {
+            logger.error("ClassDAOImpl : deleteClass : " + e);
+        }
+        return "Failed to Delete Class";
     }
 }

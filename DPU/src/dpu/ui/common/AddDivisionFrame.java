@@ -5,33 +5,41 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.DivisionUIHelper;
 import dpu.Validations;
 import dpu.beans.admin.DivisionBean;
 import dpu.dao.admin.DivisionDAO;
 import dpu.dao.admin.impl.DivisionDAOImpl;
 import java.util.List;
 import javax.swing.JOptionPane;
-import static org.apache.log4j.NDC.clear;
 
-/**
- *
- * @author Gagandeep
- */
 public class AddDivisionFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddPowerUnit
+     * Creates new form AddDivision
      */
-    boolean check1 = false;
-    boolean check2 = false;
+
     String msg = "";
-    DivisionUI divisionUI = null;
+    DivisionUIHelper divisionUI = null;
+    String addUpdateFlag = "";
+    DivisionBean divisionBean;
 
     public AddDivisionFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        divisionUI = new DivisionUI();
+        divisionUI = new DivisionUIHelper();
         btnSaveAddDivision.setEnabled(false);
+    }
+
+    public AddDivisionFrame(DivisionBean divisionBean) {
+        initComponents();
+        divisionUI = new DivisionUIHelper();
+        this.divisionBean = divisionBean;
+        setLocationRelativeTo(null);
+        addUpdateFlag = "update";
+        showRecord(divisionBean);
+        btnSaveAddDivision.setText("Update");
+        btnSaveAddDivision.setEnabled(true);
     }
 
     public boolean validateDivisionId(String str) {
@@ -64,6 +72,11 @@ public class AddDivisionFrame extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+
+    public void showRecord(DivisionBean divisionBean) {
+        txtDivisionIdAddDivision.setText(String.valueOf(divisionBean.getDivisionId()));
+        txtDivisionNameAddDivision.setText(divisionBean.getDivision());
     }
 
     /**
@@ -183,7 +196,15 @@ public class AddDivisionFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelAddDivisionActionPerformed
 
     private void btnSaveAddDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAddDivisionActionPerformed
-        String msg = divisionUI.save();
+        String msg = "";
+        if (addUpdateFlag.equals("update")) {
+            divisionBean = new DivisionBean();
+            divisionBean.setDivisionId(Integer.parseInt(txtDivisionIdAddDivision.getText()));
+            divisionBean.setDivision(txtDivisionNameAddDivision.getText());
+            msg = divisionUI.update(divisionBean);
+        } else {
+            msg = divisionUI.save();
+        }
         JOptionPane.showMessageDialog(null, msg);
         dispose();
     }//GEN-LAST:event_btnSaveAddDivisionActionPerformed
@@ -193,21 +214,18 @@ public class AddDivisionFrame extends javax.swing.JFrame {
         List<DivisionBean> lstDivisions = divisionDAO.getAllDivisions("");
         try {
             if (validateDivisionId(txtDivisionIdAddDivision.getText())) {
-                check1 = true;
                 lblDivisionIdAddDivisionFrameValidation.setText("");
                 for (DivisionBean divisionBean : lstDivisions) {
                     if (divisionBean.getDivisionId() == Integer.parseInt(txtDivisionIdAddDivision.getText().trim())) {
                         lblDivisionIdAddDivisionFrameValidation.setText("Already Taken");
                         btnSaveAddDivision.setEnabled(false);
-                        check1 = false;
                     }
                 }
             } else {
                 lblDivisionIdAddDivisionFrameValidation.setText(msg);
                 btnSaveAddDivision.setEnabled(false);
-                check1 = false;
             }
-            if (check1 == true && check2 == true) {
+            if (lblDivisionIdAddDivisionFrameValidation.getText().equals("") && lblDivisionNameAddDivisionFrameValidation.getText().equals("")) {
                 btnSaveAddDivision.setEnabled(true);
             }
         } catch (Exception e) {
@@ -220,21 +238,18 @@ public class AddDivisionFrame extends javax.swing.JFrame {
         List<DivisionBean> lstDivisions = divisionDAO.getAllDivisions("");
         try {
             if (validateDivisionName(txtDivisionNameAddDivision.getText())) {
-                check2 = true;
                 lblDivisionNameAddDivisionFrameValidation.setText("");
                 for (DivisionBean divisionBean : lstDivisions) {
                     if (divisionBean.getDivision().equals(txtDivisionNameAddDivision.getText().trim())) {
                         lblDivisionNameAddDivisionFrameValidation.setText("Already Taken");
                         btnSaveAddDivision.setEnabled(false);
-                        check2 = false;
                     }
                 }
             } else {
                 lblDivisionNameAddDivisionFrameValidation.setText(msg);
                 btnSaveAddDivision.setEnabled(false);
-                check2 = false;
             }
-            if (check1 == true && check2 == true) {
+            if (lblDivisionIdAddDivisionFrameValidation.getText().equals("") && lblDivisionNameAddDivisionFrameValidation.getText().equals("")) {
                 btnSaveAddDivision.setEnabled(true);
             }
         } catch (Exception e) {

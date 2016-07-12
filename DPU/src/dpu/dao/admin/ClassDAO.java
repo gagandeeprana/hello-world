@@ -10,4 +10,7 @@ public interface ClassDAO {
     String addClass(ClassBean obj);
 
     String updateClass(ClassBean obj);
+    String deleteClass(int classId);
+    
+    
 }

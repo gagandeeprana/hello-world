@@ -1,57 +1,86 @@
 package dpu.ui.common;
 
+import dpu.ui.helper.common.ClassUIHelper;
+import dpu.ui.helper.common.DivisionUIHelper;
+import dpu.ui.helper.common.CompanyUIHelper;
 import dpu.beans.admin.DivisionBean;
 import dpu.dao.admin.impl.DivisionDAOImpl;
 import java.awt.Toolkit;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.List;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.ImageIcon;
 
-public class MainFrame extends javax.swing.JFrame implements ListSelectionListener {
+public class MainFrame extends javax.swing.JFrame {
 
     List<DivisionBean> lstDivisions = null;
-//    Logger logger = Logger.getLogger(MainFrame.class);
-    ListSelectionModel listSelectionModel = null;
     String addUpdateFlag = "";
     int divisionId = 0;
-    ClassUI classUI = null;
-    DivisionUI divisionUI = null;
+    ClassUIHelper classUI = null;
+    DivisionUIHelper divisionUI = null;
+    CompanyUIHelper companyUI = null;
 
     public MainFrame() {
         initComponents();
-        classUI = new ClassUI();
-        divisionUI = new DivisionUI();
         setResizable(true);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-//        clear();
-//        disable(true);
-//        disableFields(false);
         lstDivisions = new DivisionDAOImpl().getAllDivisions("");
-//        logger.info("MainFrame : Listof Divisions: " + lstDivisions.size());
-        divisionUI.generateTable();
-//        classUI.generateTable();
         tblDivision.setAutoCreateRowSorter(true);
-        listSelectionModel = tblDivision.getSelectionModel();
-        listSelectionModel.addListSelectionListener(this);
-//        btnUpdate.setEnabled(false);
+        instantiateUIHelper();
+        callGenerateTable();
+        try {
+            String latitude = "40.714728";
+            String longitude = "-73.998672";
+            String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
+                    + latitude
+                    + ","
+                    + longitude
+                    + "&zoom=11&size=612x612&scale=2&maptype=roadmap";
+            String destinationFile = "src/dpu/ui/common/image.jpg";
+// read the map image from Google
+// then save it to a local file: image.jpg
+//
+            URL url = new URL(imageUrl);
+            InputStream is = url.openStream();
+            System.out.println("111111111");
+            OutputStream os = new FileOutputStream(destinationFile);
+            System.out.println("2222222222");
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+            is.close();
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e);
+            System.exit(1);
+        }
+// create a GUI component that loads the image: image.jpg
+//
+        ImageIcon imageIcon = new ImageIcon((new ImageIcon("src/dpu/ui/common/image.jpg"))
+                .getImage().getScaledInstance(630, 600,
+                        java.awt.Image.SCALE_SMOOTH));
+
+        mapLabel.setIcon(imageIcon);
     }
 
-    
+    private void instantiateUIHelper() {
+        classUI = new ClassUIHelper();
+        divisionUI = new DivisionUIHelper();
+        companyUI = new CompanyUIHelper();
+    }
 
-//    private void clear() {
-//        txtDivisionName.setText("");
-//    }
-//
-//    private void disable(boolean val) {
-//        btnAdd.setEnabled(val);
-//        btnSave.setEnabled(!val);
-//    }
-//
-//    private void disableFields(boolean val) {
-//        txtDivisionName.setEditable(val);
-//    }
+    private void callGenerateTable() {
+        classUI.generateTable();
+        divisionUI.generateTable();
+        companyUI.generateTable();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,21 +98,20 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
         txtDivisionSearch = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnAddManageDivision = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        classPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClass = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        btnAddClass = new javax.swing.JButton();
-        btnClearClass = new javax.swing.JButton();
+        btnAddManageClass = new javax.swing.JButton();
+        btnClearManageClass = new javax.swing.JButton();
         txtClassSearch = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        companyPanel = new javax.swing.JPanel();
+        btnAddManageCompany = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtDivisionName2 = new javax.swing.JTextField();
-        btnAdd2 = new javax.swing.JButton();
-        btnUpdate2 = new javax.swing.JButton();
-        btnClear2 = new javax.swing.JButton();
+        txtCompanySearch = new javax.swing.JTextField();
+        btnClearManageCompany = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblCompany = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -124,6 +152,8 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
         txtDivisionName7 = new javax.swing.JTextField();
         btnAdd7 = new javax.swing.JButton();
         btnClear7 = new javax.swing.JButton();
+        mapPanel = new javax.swing.JPanel();
+        mapLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,6 +169,7 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 "Division Id", "Title"
             }
         ));
+        tblDivision.setRowHeight(18);
         jScrollPane2.setViewportView(tblDivision);
 
         btnClearManageDivision.setText("Clear");
@@ -215,17 +246,17 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
 
         jLabel2.setText("Search");
 
-        btnAddClass.setText("+");
-        btnAddClass.addActionListener(new java.awt.event.ActionListener() {
+        btnAddManageClass.setText("+");
+        btnAddManageClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddClassActionPerformed(evt);
+                btnAddManageClassActionPerformed(evt);
             }
         });
 
-        btnClearClass.setText("Clear");
-        btnClearClass.addActionListener(new java.awt.event.ActionListener() {
+        btnClearManageClass.setText("Clear");
+        btnClearManageClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearClassActionPerformed(evt);
+                btnClearManageClassActionPerformed(evt);
             }
         });
 
@@ -238,41 +269,66 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout classPanelLayout = new javax.swing.GroupLayout(classPanel);
+        classPanel.setLayout(classPanelLayout);
+        classPanelLayout.setHorizontalGroup(
+            classPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(classPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAddClass)
+                .addGroup(classPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(classPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageClass)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtClassSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClearClass))
+                        .addComponent(btnClearManageClass))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(766, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        classPanelLayout.setVerticalGroup(
+            classPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddClass)
+                .addGroup(classPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManageClass)
                     .addComponent(jLabel2)
-                    .addComponent(btnClearClass)
+                    .addComponent(btnClearManageClass)
                     .addComponent(txtClassSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3)
                 .addContainerGap())
         );
 
-        mainTabbedPane.addTab("Class", jPanel2);
+        mainTabbedPane.addTab("Class", classPanel);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        btnAddManageCompany.setText("+");
+        btnAddManageCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManageCompanyActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Search");
+
+        txtCompanySearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCompanySearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCompanySearchKeyTyped(evt);
+            }
+        });
+
+        btnClearManageCompany.setText("Clear");
+        btnClearManageCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageCompanyActionPerformed(evt);
+            }
+        });
+
+        tblCompany.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -283,53 +339,41 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
                 "Id", "Title"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tblCompany);
 
-        jLabel3.setText("Company Name");
-
-        btnAdd2.setText("Add");
-
-        btnUpdate2.setText("Update");
-
-        btnClear2.setText("Clear");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1258, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnAdd2)
+        javax.swing.GroupLayout companyPanelLayout = new javax.swing.GroupLayout(companyPanel);
+        companyPanel.setLayout(companyPanelLayout);
+        companyPanelLayout.setHorizontalGroup(
+            companyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(companyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(companyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(companyPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageCompany)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCompanySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdate2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear2))
-                    .addComponent(txtDivisionName2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnClearManageCompany))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(766, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        companyPanelLayout.setVerticalGroup(
+            companyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, companyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(companyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManageCompany)
                     .addComponent(jLabel3)
-                    .addComponent(txtDivisionName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnClearManageCompany)
+                    .addComponent(txtCompanySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd2)
-                    .addComponent(btnUpdate2)
-                    .addComponent(btnClear2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
+                .addComponent(jScrollPane4)
+                .addContainerGap())
         );
 
-        mainTabbedPane.addTab("Company", jPanel3);
+        mainTabbedPane.addTab("Company", companyPanel);
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -634,6 +678,23 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
 
         mainTabbedPane.addTab("PowerUnit", jPanel8);
 
+        mapLabel.setText("jLabel1");
+
+        javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
+        mapPanel.setLayout(mapPanelLayout);
+        mapPanelLayout.setHorizontalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mapPanelLayout.createSequentialGroup()
+                .addComponent(mapLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 665, Short.MAX_VALUE))
+        );
+        mapPanelLayout.setVerticalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mapLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+        );
+
+        mainTabbedPane.addTab("Map", mapPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -648,9 +709,60 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAdd7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd7ActionPerformed
+        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
+        addPowerUnitFrame.setVisible(true);
+    }//GEN-LAST:event_btnAdd7ActionPerformed
+
+    private void btnClearManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCompanyActionPerformed
+        // TODO add your handling code here:
+        txtCompanySearch.setText("");
+        companyUI.generateTable();
+    }//GEN-LAST:event_btnClearManageCompanyActionPerformed
+
+    private void txtCompanySearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCompanySearchKeyTyped
+
+    private void txtCompanySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyReleased
+        // TODO add your handling code here:
+        companyUI.generateTable();
+    }//GEN-LAST:event_txtCompanySearchKeyReleased
+
+    private void btnAddManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageCompanyActionPerformed
+        // TODO add your handling code here:
+        companyUI.disable(false);
+        AddCompanyFrame addCompanyFrame = new AddCompanyFrame();
+        addCompanyFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageCompanyActionPerformed
+
+    private void txtClassSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClassSearchKeyTyped
+
+    private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
+        classUI.generateTable();
+    }//GEN-LAST:event_txtClassSearchKeyReleased
+
+    private void btnClearManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageClassActionPerformed
+        txtClassSearch.setText("");
+        classUI.generateTable();
+    }//GEN-LAST:event_btnClearManageClassActionPerformed
+
+    private void btnAddManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageClassActionPerformed
+        classUI.disable(false);
+        AddClassFrame addClassFrame = new AddClassFrame();
+        addClassFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageClassActionPerformed
+
+    private void btnAddManageDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageDivisionActionPerformed
+        divisionUI.disable(false);
+        AddDivisionFrame addDivisionFrame = new AddDivisionFrame();
+        addDivisionFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageDivisionActionPerformed
+
     private void txtDivisionSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionSearchKeyTyped
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtDivisionSearchKeyTyped
 
     private void txtDivisionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionSearchKeyReleased
@@ -661,36 +773,6 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
         txtDivisionSearch.setText("");
         divisionUI.generateTable();
     }//GEN-LAST:event_btnClearManageDivisionActionPerformed
-
-    private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClassSearchKeyReleased
-
-    private void txtClassSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClassSearchKeyTyped
-
-    private void btnAddClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClassActionPerformed
-        classUI.clear();
-        classUI.disable(false);
-        classUI.disableFields(true);
-        classUI.addUpdateFlag = "add";
-    }//GEN-LAST:event_btnAddClassActionPerformed
-
-    private void btnClearClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearClassActionPerformed
-        classUI.clear();
-    }//GEN-LAST:event_btnClearClassActionPerformed
-
-    private void btnAdd7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd7ActionPerformed
-        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
-        addPowerUnitFrame.setVisible(true);
-    }//GEN-LAST:event_btnAdd7ActionPerformed
-
-    private void btnAddManageDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageDivisionActionPerformed
-        divisionUI.disable(false);
-        AddDivisionFrame addDivisionFrame = new AddDivisionFrame();
-        addDivisionFrame.setVisible(true);
-    }//GEN-LAST:event_btnAddManageDivisionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -718,6 +800,9 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -728,28 +813,29 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd2;
     private javax.swing.JButton btnAdd3;
     private javax.swing.JButton btnAdd4;
     private javax.swing.JButton btnAdd5;
     private javax.swing.JButton btnAdd6;
     private javax.swing.JButton btnAdd7;
-    public static javax.swing.JButton btnAddClass;
+    public static javax.swing.JButton btnAddManageClass;
+    public static javax.swing.JButton btnAddManageCompany;
     public static javax.swing.JButton btnAddManageDivision;
-    private javax.swing.JButton btnClear2;
     private javax.swing.JButton btnClear3;
     private javax.swing.JButton btnClear4;
     private javax.swing.JButton btnClear5;
     private javax.swing.JButton btnClear6;
     private javax.swing.JButton btnClear7;
-    public static javax.swing.JButton btnClearClass;
+    public static javax.swing.JButton btnClearManageClass;
+    public static javax.swing.JButton btnClearManageCompany;
     public static javax.swing.JButton btnClearManageDivision;
-    private javax.swing.JButton btnUpdate2;
     private javax.swing.JButton btnUpdate3;
     private javax.swing.JButton btnUpdate4;
     private javax.swing.JButton btnUpdate5;
     private javax.swing.JButton btnUpdate6;
     private javax.swing.JButton btnUpdate7;
+    public static javax.swing.JPanel classPanel;
+    public static javax.swing.JPanel companyPanel;
     public static javax.swing.JPanel divisionPanel;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -759,8 +845,6 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    public javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -768,23 +852,25 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     private javax.swing.JPanel jPanel8;
     public static javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    public static javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
     public static javax.swing.JTabbedPane mainTabbedPane;
+    private javax.swing.JLabel mapLabel;
+    private javax.swing.JPanel mapPanel;
     public static javax.swing.JTable tblClass;
+    public static javax.swing.JTable tblCompany;
     public static javax.swing.JTable tblDivision;
     public static javax.swing.JTextField txtClassSearch;
-    private javax.swing.JTextField txtDivisionName2;
+    public static javax.swing.JTextField txtCompanySearch;
     private javax.swing.JTextField txtDivisionName3;
     private javax.swing.JTextField txtDivisionName4;
     private javax.swing.JTextField txtDivisionName5;
@@ -793,17 +879,4 @@ public class MainFrame extends javax.swing.JFrame implements ListSelectionListen
     public static javax.swing.JTextField txtDivisionSearch;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-//        if (!e.getValueIsAdjusting()) {
-//            System.out.println("touched... " + e.getValueIsAdjusting());
-//            int i = tblDivision.getSelectedRow();
-//            String divisionName = lstDivisions.get(i).getDivision();
-//            divisionId = lstDivisions.get(i).getDivisionId();
-//            txtDivisionName.setText(divisionName);
-//            btnUpdate.setEnabled(true);
-//            disable(false);
-//            listSelectionModel.setValueIsAdjusting(false);
-//        }
-    }
 }

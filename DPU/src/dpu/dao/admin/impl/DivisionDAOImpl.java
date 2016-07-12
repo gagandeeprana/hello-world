@@ -49,8 +49,9 @@ public class DivisionDAOImpl implements DivisionDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into divisionmaster (name) values(?)");
-            pstmt.setString(1, obj.getDivision());
+            pstmt = conn.prepareStatement("insert into divisionmaster values(?,?)");
+            pstmt.setInt(1, obj.getDivisionId());
+            pstmt.setString(2, obj.getDivision());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Division Added";
@@ -78,5 +79,23 @@ public class DivisionDAOImpl implements DivisionDAO {
             logger.error("DivisionDAOImpl : updateDivision : " + e);
         }
         return "Failed to Update Division";
+    }
+
+    @Override
+    public String deleteDivision(int divisionId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("delete from divisionmaster where division_id = ?");
+            pstmt.setInt(1, divisionId);
+            int i = pstmt.executeUpdate();
+            if (i > 0) {
+                return "Division Deleted";
+            }
+        } catch (Exception e) {
+            logger.error("DivisionDAOImpl : deleteDivision : " + e);
+        }
+        return "Failed to Delete Division";
     }
 }
