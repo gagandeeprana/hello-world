@@ -53,6 +53,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
         setSettingsIcon();
         setSettingsPanelBody();
         showHideTabs();
+
+        mainTabbedPane.add(new TestJPanel(), mainTabbedPane.getTabCount()-1);
+        mainTabbedPane.setTitleAt(mainTabbedPane.getTabCount()-2,"Test Tab");
         try {
 //            Browser browser = new Browser();
 //            BrowserView view = new BrowserView(browser);
@@ -123,7 +126,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
         System.out.println(lstTabs);
         for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
             check = false;
-            
+
             for (String tab : lstTabs) {
                 if (mainTabbedPane.getTitleAt(i).equals(tab)) {
                     check = true;
