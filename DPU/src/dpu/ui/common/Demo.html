@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #map {
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="height: 50px; width: 100%">
+            <input type="text" placeholder="Zoom.." id="txtZoom" />
+            <input type="text" placeholder="Latitude.." id="txtLat" />
+            <input type="text" placeholder="Longitude.." id="txtLong" />
+            <input type="button" value = "Show.." id="btnShow" />
+        </div>
+        <div id="map"></div>
+        <div id="capture"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>
+            var map;
+            var zoom111 = 8;
+            var latitudeValue = -34.397;
+            var longitudeValue = 150.644;
+
+            function loadScript() {
+                var script = document.createElement("script");
+                script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBam5PfNNw6W9_qvY1jECbmfZ6lnfVL9mE&callback=initMap";
+                document.body.appendChild(script);
+            }
+
+            window.onload = loadScript;
+
+            $(document).ready(function () {
+                $('#btnShow').click(function () {
+                    zoom111 = parseInt($('#txtZoom').val());
+                    latitudeValue = parseInt($('#txtLat').val());
+                    longitudeValue = parseInt($('#txtLong').val());
+                    loadScript();
+                });
+            });
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                        lat: latitudeValue, lng: longitudeValue},
+                    zoom: zoom111
+                });
+            }
+        </script>
+    </body>
+</html>

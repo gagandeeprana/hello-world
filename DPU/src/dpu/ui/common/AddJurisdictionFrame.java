@@ -1,0 +1,579 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dpu.ui.common;
+
+import dpu.ui.helper.common.JurisdictionUIHelper;
+import dpu.Validations;
+import dpu.beans.admin.CountryBean;
+import dpu.beans.admin.JurisdictionBean;
+import dpu.dao.admin.CountryDAO;
+import dpu.dao.admin.JurisdictionDAO;
+import dpu.dao.admin.impl.CountryDAOImpl;
+import dpu.dao.admin.impl.JurisdictionDAOImpl;
+import java.util.List;
+import javax.swing.JOptionPane;
+
+public class AddJurisdictionFrame extends javax.swing.JFrame {
+
+    /**
+     * Creates new form AddJurisdiction
+     */
+    String msg = "";
+    JurisdictionUIHelper jurisdictionUI = null;
+    String addUpdateFlag = "";
+    JurisdictionBean jurisdictionBean;
+    CountryDAO countryDAO = null;
+    public static List<CountryBean> lstCountries = null;
+
+    public AddJurisdictionFrame() {
+        initComponents();
+        setLocationRelativeTo(null);
+        countryDAO = new CountryDAOImpl();
+        fillCountryDropDown();
+        jurisdictionUI = new JurisdictionUIHelper();
+        btnSaveAddJurisdiction.setEnabled(false);
+        fillLabel();
+    }
+
+    private void fillCountryDropDown() {
+        lstCountries = countryDAO.getAllCountries("");
+        for (CountryBean countryBean : lstCountries) {
+            ddlCountryAddJurisdiction.addItem(countryBean.getCountryName());
+        }
+    }
+
+    public AddJurisdictionFrame(JurisdictionBean jurisdictionBean) {
+        initComponents();
+        jurisdictionUI = new JurisdictionUIHelper();
+        this.jurisdictionBean = jurisdictionBean;
+        setLocationRelativeTo(null);
+        addUpdateFlag = "update";
+        showRecord(jurisdictionBean);
+        btnSaveAddJurisdiction.setText("Update");
+        btnSaveAddJurisdiction.setEnabled(true);
+    }
+
+    private void fillLabel() {
+        lblJurisdictionIdAddJurisdictionFrameValidation.setText(" ");
+        lblJurisdictionNameAddJurisdictionFrameValidation.setText(" ");
+        lblJurisdictionIFAAddJurisdictionFrameValidation.setText(" ");
+        lblCountryAddJurisdictionFrameValidation.setText(" ");
+        lblRoadTaxAddJurisdictionFrameValidation.setText(" ");
+    }
+
+    public boolean validateJurisdictionId(String str) {
+        if (Validations.isEmpty(str)) {
+            msg = "Left Empty..!";
+            return false;
+        }
+        if (Validations.hasNumerals(str)) {
+            msg = "Only Numerics Allowed..!";
+            return false;
+        }
+        if (Validations.hasSpace(str)) {
+            msg = "Space Not Allowed..!";
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateJurisdictionName(String str) {
+        if (Validations.isEmpty(str)) {
+            msg = "Left Empty..!";
+            return false;
+        }
+        if (Validations.hasAlphabets(str)) {
+            msg = "Only Alphabets Allowed..!";
+            return false;
+        }
+        if (Validations.hasSpace(str)) {
+            msg = "Space Not Allowed..!";
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateJurisdictionIFA(String str) {
+        if (Validations.isEmpty(str)) {
+            msg = "Left Empty..!";
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateJurisdictionCountry(String str) {
+        if (Validations.checkDropDown(str)) {
+            msg = "Choose any option..";
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateJurisdictionRoadTax(String str) {
+        if (Validations.isEmpty(str)) {
+            msg = "Left Empty..!";
+            return false;
+        }
+        if (Validations.hasDecimals(str)) {
+            msg = "Invalid Value..!";
+            return false;
+        }
+        return true;
+    }
+
+    public void showRecord(JurisdictionBean jurisdictionBean) {
+        txtJurisdictionIdAddJurisdiction.setText(String.valueOf(jurisdictionBean.getJurisdictionId()));
+        txtJurisdictionNameAddJurisdiction.setText(jurisdictionBean.getJurisdictionName());
+    }
+
+    public void checkFinalValidation() {
+        if (lblJurisdictionIdAddJurisdictionFrameValidation.getText().equals("")
+                && lblJurisdictionNameAddJurisdictionFrameValidation.getText().equals("")
+                && lblJurisdictionIFAAddJurisdictionFrameValidation.getText().equals("")
+                && lblCountryAddJurisdictionFrameValidation.getText().equals("")
+                && lblRoadTaxAddJurisdictionFrameValidation.getText().equals("")) {
+            btnSaveAddJurisdiction.setEnabled(true);
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        txtJurisdictionIdAddJurisdiction = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtJurisdictionNameAddJurisdiction = new javax.swing.JTextField();
+        btnSaveAddJurisdiction = new javax.swing.JButton();
+        btnCancelAddJurisdiction = new javax.swing.JButton();
+        lblJurisdictionIdAddJurisdictionFrameValidation = new javax.swing.JLabel();
+        lblJurisdictionNameAddJurisdictionFrameValidation = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtJurisdictionIFAAddJurisdiction = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        ddlCountryAddJurisdiction = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        txtRoadTaxAddJurisdiction = new javax.swing.JTextField();
+        lblJurisdictionIFAAddJurisdictionFrameValidation = new javax.swing.JLabel();
+        lblCountryAddJurisdictionFrameValidation = new javax.swing.JLabel();
+        lblRoadTaxAddJurisdictionFrameValidation = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Jurisdiction Id");
+
+        txtJurisdictionIdAddJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtJurisdictionIdAddJurisdictionActionPerformed(evt);
+            }
+        });
+        txtJurisdictionIdAddJurisdiction.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJurisdictionIdAddJurisdictionKeyReleased(evt);
+            }
+        });
+
+        jLabel8.setText("Jurisdiction Name");
+
+        txtJurisdictionNameAddJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtJurisdictionNameAddJurisdictionActionPerformed(evt);
+            }
+        });
+        txtJurisdictionNameAddJurisdiction.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJurisdictionNameAddJurisdictionKeyReleased(evt);
+            }
+        });
+
+        btnSaveAddJurisdiction.setText("Save");
+        btnSaveAddJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveAddJurisdictionActionPerformed(evt);
+            }
+        });
+
+        btnCancelAddJurisdiction.setText("Cancel");
+        btnCancelAddJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelAddJurisdictionActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Jurisdiction IFA");
+
+        txtJurisdictionIFAAddJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtJurisdictionIFAAddJurisdictionActionPerformed(evt);
+            }
+        });
+        txtJurisdictionIFAAddJurisdiction.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJurisdictionIFAAddJurisdictionKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Country");
+
+        ddlCountryAddJurisdiction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
+        ddlCountryAddJurisdiction.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ddlCountryAddJurisdictionItemStateChanged(evt);
+            }
+        });
+
+        jLabel3.setText("Road Tax");
+
+        txtRoadTaxAddJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRoadTaxAddJurisdictionActionPerformed(evt);
+            }
+        });
+        txtRoadTaxAddJurisdiction.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRoadTaxAddJurisdictionKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtRoadTaxAddJurisdiction)
+                            .addComponent(txtJurisdictionIFAAddJurisdiction, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(txtJurisdictionNameAddJurisdiction)
+                            .addComponent(txtJurisdictionIdAddJurisdiction, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(ddlCountryAddJurisdiction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSaveAddJurisdiction, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelAddJurisdiction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblJurisdictionIdAddJurisdictionFrameValidation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblJurisdictionNameAddJurisdictionFrameValidation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblJurisdictionIFAAddJurisdictionFrameValidation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCountryAddJurisdictionFrameValidation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addComponent(lblRoadTaxAddJurisdictionFrameValidation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelAddJurisdiction, btnSaveAddJurisdiction});
+
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblJurisdictionIdAddJurisdictionFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtJurisdictionIdAddJurisdiction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtJurisdictionNameAddJurisdiction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJurisdictionNameAddJurisdictionFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtJurisdictionIFAAddJurisdiction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblJurisdictionIFAAddJurisdictionFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ddlCountryAddJurisdiction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCountryAddJurisdictionFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRoadTaxAddJurisdiction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRoadTaxAddJurisdictionFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSaveAddJurisdiction)
+                    .addComponent(btnCancelAddJurisdiction))
+                .addGap(0, 21, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtJurisdictionIdAddJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJurisdictionIdAddJurisdictionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJurisdictionIdAddJurisdictionActionPerformed
+
+    private void btnCancelAddJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddJurisdictionActionPerformed
+        dispose();
+        jurisdictionUI.disable(true);
+    }//GEN-LAST:event_btnCancelAddJurisdictionActionPerformed
+
+    private void btnSaveAddJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAddJurisdictionActionPerformed
+        String msg = "";
+        if (addUpdateFlag.equals("update")) {
+            msg = jurisdictionUI.update();
+        } else {
+            msg = jurisdictionUI.save();
+        }
+        JOptionPane.showMessageDialog(null, msg);
+        dispose();
+    }//GEN-LAST:event_btnSaveAddJurisdictionActionPerformed
+
+    private void txtJurisdictionIdAddJurisdictionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJurisdictionIdAddJurisdictionKeyReleased
+        JurisdictionDAO jurisdictionDAO = new JurisdictionDAOImpl();
+        List<JurisdictionBean> lstJurisdictions = jurisdictionDAO.getAllJurisdictions("");
+        try {
+            if (validateJurisdictionId(txtJurisdictionIdAddJurisdiction.getText())) {
+                lblJurisdictionIdAddJurisdictionFrameValidation.setText("");
+                for (JurisdictionBean jurisdictionBean : lstJurisdictions) {
+                    if (jurisdictionBean.getJurisdictionId() == Integer.parseInt(txtJurisdictionIdAddJurisdiction.getText().trim())) {
+                        lblJurisdictionIdAddJurisdictionFrameValidation.setText("Already Taken");
+                        btnSaveAddJurisdiction.setEnabled(false);
+                    }
+                }
+            } else {
+                lblJurisdictionIdAddJurisdictionFrameValidation.setText(msg);
+                btnSaveAddJurisdiction.setEnabled(false);
+            }
+            checkFinalValidation();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_txtJurisdictionIdAddJurisdictionKeyReleased
+
+    private void txtJurisdictionNameAddJurisdictionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJurisdictionNameAddJurisdictionKeyReleased
+        JurisdictionDAO jurisdictionDAO = new JurisdictionDAOImpl();
+        List<JurisdictionBean> lstJurisdictions = jurisdictionDAO.getAllJurisdictions("");
+        try {
+            if (validateJurisdictionName(txtJurisdictionNameAddJurisdiction.getText())) {
+                lblJurisdictionNameAddJurisdictionFrameValidation.setText("");
+                for (JurisdictionBean jurisdictionBean : lstJurisdictions) {
+                    if (jurisdictionBean.getJurisdictionName().equals(txtJurisdictionNameAddJurisdiction.getText().trim())) {
+                        lblJurisdictionNameAddJurisdictionFrameValidation.setText("Already Taken");
+                        btnSaveAddJurisdiction.setEnabled(false);
+                    }
+                }
+            } else {
+                lblJurisdictionNameAddJurisdictionFrameValidation.setText(msg);
+                btnSaveAddJurisdiction.setEnabled(false);
+            }
+            checkFinalValidation();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_txtJurisdictionNameAddJurisdictionKeyReleased
+
+    private void txtJurisdictionNameAddJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJurisdictionNameAddJurisdictionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJurisdictionNameAddJurisdictionActionPerformed
+
+    private void txtJurisdictionIFAAddJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJurisdictionIFAAddJurisdictionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJurisdictionIFAAddJurisdictionActionPerformed
+
+    private void txtJurisdictionIFAAddJurisdictionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJurisdictionIFAAddJurisdictionKeyReleased
+        JurisdictionDAO jurisdictionDAO = new JurisdictionDAOImpl();
+        List<JurisdictionBean> lstJurisdictions = jurisdictionDAO.getAllJurisdictions("");
+        try {
+            if (validateJurisdictionIFA(txtJurisdictionIFAAddJurisdiction.getText())) {
+                lblJurisdictionIFAAddJurisdictionFrameValidation.setText("");
+                for (JurisdictionBean jurisdictionBean : lstJurisdictions) {
+                    if (jurisdictionBean.getIFAJurisdiction().equals(txtJurisdictionIFAAddJurisdiction.getText().trim())) {
+                        lblJurisdictionIFAAddJurisdictionFrameValidation.setText("Already Taken");
+                        btnSaveAddJurisdiction.setEnabled(false);
+                    }
+                }
+            } else {
+                lblJurisdictionIFAAddJurisdictionFrameValidation.setText(msg);
+                btnSaveAddJurisdiction.setEnabled(false);
+            }
+            checkFinalValidation();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_txtJurisdictionIFAAddJurisdictionKeyReleased
+
+    private void txtRoadTaxAddJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRoadTaxAddJurisdictionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRoadTaxAddJurisdictionActionPerformed
+
+    private void txtRoadTaxAddJurisdictionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoadTaxAddJurisdictionKeyReleased
+        try {
+            lblRoadTaxAddJurisdictionFrameValidation.setText("");
+            if (!validateJurisdictionRoadTax(txtRoadTaxAddJurisdiction.getText())) {
+                lblRoadTaxAddJurisdictionFrameValidation.setText(msg);
+                btnSaveAddJurisdiction.setEnabled(false);
+            }
+            checkFinalValidation();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_txtRoadTaxAddJurisdictionKeyReleased
+
+    private void ddlCountryAddJurisdictionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddlCountryAddJurisdictionItemStateChanged
+        JurisdictionDAO jurisdictionDAO = new JurisdictionDAOImpl();
+        List<JurisdictionBean> lstJurisdictions = jurisdictionDAO.getAllJurisdictions("");
+        try {
+            if (validateJurisdictionCountry(ddlCountryAddJurisdiction.getSelectedItem().toString())) {
+                lblCountryAddJurisdictionFrameValidation.setText("");
+                for (JurisdictionBean jurisdictionBean : lstJurisdictions) {
+                    if (jurisdictionBean.getCountryId() == lstCountries.get(ddlCountryAddJurisdiction.getSelectedIndex() -1).getCountryId()) {
+                        lblCountryAddJurisdictionFrameValidation.setText("Already Taken");
+                        btnSaveAddJurisdiction.setEnabled(false);
+                        break;
+                    }
+                }
+            } else {
+                lblCountryAddJurisdictionFrameValidation.setText(msg);
+                btnSaveAddJurisdiction.setEnabled(false);
+            }
+            checkFinalValidation();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_ddlCountryAddJurisdictionItemStateChanged
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddJurisdictionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddJurisdictionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddJurisdictionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddJurisdictionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AddJurisdictionFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnCancelAddJurisdiction;
+    public static javax.swing.JButton btnSaveAddJurisdiction;
+    public static javax.swing.JComboBox<String> ddlCountryAddJurisdiction;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblCountryAddJurisdictionFrameValidation;
+    private javax.swing.JLabel lblJurisdictionIFAAddJurisdictionFrameValidation;
+    private javax.swing.JLabel lblJurisdictionIdAddJurisdictionFrameValidation;
+    private javax.swing.JLabel lblJurisdictionNameAddJurisdictionFrameValidation;
+    private javax.swing.JLabel lblRoadTaxAddJurisdictionFrameValidation;
+    public static javax.swing.JTextField txtJurisdictionIFAAddJurisdiction;
+    public static javax.swing.JTextField txtJurisdictionIdAddJurisdiction;
+    public static javax.swing.JTextField txtJurisdictionNameAddJurisdiction;
+    public static javax.swing.JTextField txtRoadTaxAddJurisdiction;
+    // End of variables declaration//GEN-END:variables
+}

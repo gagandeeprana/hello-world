@@ -4,81 +4,166 @@ import dpu.ui.helper.common.ClassUIHelper;
 import dpu.ui.helper.common.DivisionUIHelper;
 import dpu.ui.helper.common.CompanyUIHelper;
 import dpu.beans.admin.DivisionBean;
-import dpu.dao.admin.impl.DivisionDAOImpl;
+import dpu.ui.helper.common.CountryUIHelper;
+import dpu.ui.helper.common.EquipmentUIHelper;
+import dpu.ui.helper.common.JurisdictionUIHelper;
+import dpu.ui.helper.common.RoleUIHelper;
+import dpu.ui.helper.common.TerminalUIHelper;
+import dpu.ui.helper.common.TrackingUIHelper;
+import java.awt.Color;
 import java.awt.Toolkit;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
 
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements ActionListener {
 
-    List<DivisionBean> lstDivisions = null;
     String addUpdateFlag = "";
-    int divisionId = 0;
     ClassUIHelper classUI = null;
     DivisionUIHelper divisionUI = null;
     CompanyUIHelper companyUI = null;
+    EquipmentUIHelper equipmentUI = null;
+    RoleUIHelper roleUI = null;
+    TerminalUIHelper terminalUIHelper = null;
+    TrackingUIHelper trackingUIHelper = null;
+    CountryUIHelper countryUIHelper = null;
+    JurisdictionUIHelper jurisdictionUIHelper = null;
+    List<String> lstTabs = new ArrayList<>();
+    JButton btn = null;
+    JCheckBox[] chkArray = null;
+    JCheckBox chk = null;
 
     public MainFrame() {
         initComponents();
         setResizable(true);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        lstDivisions = new DivisionDAOImpl().getAllDivisions("");
-        tblDivision.setAutoCreateRowSorter(true);
+        readTabFile();
         instantiateUIHelper();
         callGenerateTable();
+        setSettingsIcon();
+        setSettingsPanelBody();
+        showHideTabs();
         try {
-            String latitude = "40.714728";
-            String longitude = "-73.998672";
-            String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
-                    + latitude
-                    + ","
-                    + longitude
-                    + "&zoom=11&size=612x612&scale=2&maptype=roadmap";
-            String destinationFile = "src/dpu/ui/common/image.jpg";
-// read the map image from Google
-// then save it to a local file: image.jpg
-//
-            URL url = new URL(imageUrl);
-            InputStream is = url.openStream();
-            System.out.println("111111111");
-            OutputStream os = new FileOutputStream(destinationFile);
-            System.out.println("2222222222");
-            byte[] b = new byte[2048];
-            int length;
-            while ((length = is.read(b)) != -1) {
-                os.write(b, 0, length);
-            }
-            is.close();
-            os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+//            Browser browser = new Browser();
+//            BrowserView view = new BrowserView(browser);
+//            browser.loadURL("D:\\JavaGit\\hello-world\\DPU\\src\\dpu\\ui\\common\\Demo.html");
+//            JFrame frame = new JFrame();
+//            frame.add(view, BorderLayout.CENTER);
+//            frame.setSize(700, 500);
+//            frame.setVisible(true);
+        } catch (Exception e) {
             System.out.println(e);
-            System.exit(1);
         }
-// create a GUI component that loads the image: image.jpg
-//
-        ImageIcon imageIcon = new ImageIcon((new ImageIcon("src/dpu/ui/common/image.jpg"))
-                .getImage().getScaledInstance(630, 600,
-                        java.awt.Image.SCALE_SMOOTH));
+    }
 
-        mapLabel.setIcon(imageIcon);
+    private void readTabFile() {
+        String msg = "";
+        BufferedReader readFile = null;
+        try {
+            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("src\\dpu\\ui\\common\\tabs.txt")));
+            while ((msg = readFile.readLine()) != null) {
+                lstTabs.add(msg);
+            }
+            readFile.close();
+        } catch (Exception e) {
+            System.out.println("MainFrame : readTabFile() : " + e);
+        }
+    }
+
+    private void writeIntoTabFile(List<String> lstTabs) {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("src\\dpu\\ui\\common\\tabs.txt", false);
+            for (String tab : lstTabs) {
+                fileWriter.write(tab + "\r");
+            }
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("MainFrame : writeIntoTabFile() : " + e);
+        }
+    }
+
+    private void setSettingsPanelBody() {
+        int height = 0;
+        chkArray = new JCheckBox[mainTabbedPane.getTabCount() - 1];
+        for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
+            JLabel lbl = new JLabel(mainTabbedPane.getTitleAt(i));
+            chk = new JCheckBox();
+            chk.setName("chk" + i);
+            lbl.setBounds(200, i * 30, 120, 40);
+            chk.setBounds(420, i * 30, 120, 40);
+            settingsPanel.add(lbl);
+            settingsPanel.add(chk);
+            chkArray[i] = chk;
+            for (String tab : lstTabs) {
+                if (lbl.getText().equals(tab)) {
+                    chk.setSelected(true);
+                }
+            }
+        }
+        height = (mainTabbedPane.getTabCount() - 1) * 30 + 30;
+        btn = new JButton("Save");
+        btn.setBounds(320, height, 120, 40);
+        settingsPanel.add(btn);
+        btn.addActionListener(this);
+    }
+
+    private void showHideTabs() {
+        boolean check = false;
+        System.out.println(lstTabs);
+        for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
+            check = false;
+            
+            for (String tab : lstTabs) {
+                if (mainTabbedPane.getTitleAt(i).equals(tab)) {
+                    check = true;
+                    break;
+                }
+            }
+            if (!check) {
+//                mainTabbedPane.remove(i);
+            }
+        }
+    }
+
+    private void setSettingsIcon() {
+        mainTabbedPane.setTitleAt(mainTabbedPane.getTabCount() - 1, "");
+        ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Settings.png");
+        mainTabbedPane.setIconAt(mainTabbedPane.getTabCount() - 1, imageIcon);
     }
 
     private void instantiateUIHelper() {
         classUI = new ClassUIHelper();
         divisionUI = new DivisionUIHelper();
         companyUI = new CompanyUIHelper();
+        equipmentUI = new EquipmentUIHelper();
+        roleUI = new RoleUIHelper();
+        terminalUIHelper = new TerminalUIHelper();
+        trackingUIHelper = new TrackingUIHelper();
+        countryUIHelper = new CountryUIHelper();
+        jurisdictionUIHelper = new JurisdictionUIHelper();
     }
 
     private void callGenerateTable() {
         classUI.generateTable();
         divisionUI.generateTable();
         companyUI.generateTable();
+        equipmentUI.generateTable();
+        roleUI.generateTable();
+        terminalUIHelper.generateTable();
+        trackingUIHelper.generateTable();
+        countryUIHelper.generateTable();
+        jurisdictionUIHelper.generateTable();
     }
 
     /**
@@ -112,48 +197,57 @@ public class MainFrame extends javax.swing.JFrame {
         btnClearManageCompany = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCompany = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        equipmentPanel = new javax.swing.JPanel();
+        btnAddManageEquipment = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtDivisionName3 = new javax.swing.JTextField();
-        btnAdd3 = new javax.swing.JButton();
-        btnUpdate3 = new javax.swing.JButton();
-        btnClear3 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        txtEquipmentSearch = new javax.swing.JTextField();
+        btnClearManageEquipment = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblEquipment = new javax.swing.JTable();
+        rolePanel = new javax.swing.JPanel();
+        btnAddManageRole = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txtDivisionName4 = new javax.swing.JTextField();
-        btnAdd4 = new javax.swing.JButton();
-        btnUpdate4 = new javax.swing.JButton();
-        btnClear4 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+        txtRoleSearch = new javax.swing.JTextField();
+        btnClearManageRole = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblRole = new javax.swing.JTable();
+        terminalPanel = new javax.swing.JPanel();
+        btnAddManageTerminal = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtDivisionName5 = new javax.swing.JTextField();
-        btnAdd5 = new javax.swing.JButton();
-        btnUpdate5 = new javax.swing.JButton();
-        btnClear5 = new javax.swing.JButton();
-        btnUpdate7 = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        txtTerminalSearch = new javax.swing.JTextField();
+        btnClearManageTerminal = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblTerminal = new javax.swing.JTable();
+        trackingPanel = new javax.swing.JPanel();
+        txtTrackingSearch = new javax.swing.JTextField();
+        btnAddManageTracking = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        txtDivisionName6 = new javax.swing.JTextField();
-        btnAdd6 = new javax.swing.JButton();
-        btnUpdate6 = new javax.swing.JButton();
-        btnClear6 = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
+        btnClearManageTracking = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblTracking = new javax.swing.JTable();
+        powerUnitPanel = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
+        tblPowerUnit = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        txtDivisionName7 = new javax.swing.JTextField();
-        btnAdd7 = new javax.swing.JButton();
-        btnClear7 = new javax.swing.JButton();
+        txtPowerUnitSearch = new javax.swing.JTextField();
+        btnAddManagePowerUnit = new javax.swing.JButton();
+        btnClearManagePowerUnit = new javax.swing.JButton();
         mapPanel = new javax.swing.JPanel();
-        mapLabel = new javax.swing.JLabel();
+        jurisdictionPanel = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblJurisdiction = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        txtJurisdictionSearch = new javax.swing.JTextField();
+        btnAddManageJurisdiction = new javax.swing.JButton();
+        btnClearManageJurisdiction = new javax.swing.JButton();
+        countryPanel = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tblCountry = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        txtCountrySearch = new javax.swing.JTextField();
+        btnAddManageCountry = new javax.swing.JButton();
+        btnClearManageCountry = new javax.swing.JButton();
+        settingsPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -225,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(btnClearManageDivision)
                     .addComponent(btnAddManageDivision))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -375,325 +469,520 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Company", companyPanel);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id", "Title"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable5);
-
-        jLabel4.setText("Equipment Name");
-
-        btnAdd3.setText("Add");
-
-        btnUpdate3.setText("Update");
-
-        btnClear3.setText("Clear");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnAdd3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdate3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear3))
-                    .addComponent(txtDivisionName3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDivisionName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd3)
-                    .addComponent(btnUpdate3)
-                    .addComponent(btnClear3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
-        );
-
-        mainTabbedPane.addTab("Equipment", jPanel4);
-
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id", "Title"
-            }
-        ));
-        jScrollPane6.setViewportView(jTable6);
-
-        jLabel5.setText("Role Name");
-
-        btnAdd4.setText("Add");
-
-        btnUpdate4.setText("Update");
-
-        btnClear4.setText("Clear");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1258, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(btnAdd4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdate4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear4))
-                    .addComponent(txtDivisionName4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtDivisionName4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd4)
-                    .addComponent(btnUpdate4)
-                    .addComponent(btnClear4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
-        );
-
-        mainTabbedPane.addTab("Role", jPanel5);
-
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id", "Title"
-            }
-        ));
-        jScrollPane7.setViewportView(jTable7);
-
-        jLabel6.setText("Terminal Name");
-
-        btnAdd5.setText("Add");
-
-        btnUpdate5.setText("Update");
-
-        btnClear5.setText("Clear");
-
-        btnUpdate7.setText("Save");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(btnAdd5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUpdate5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUpdate7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnClear5))
-                            .addComponent(txtDivisionName5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(773, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDivisionName5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd5)
-                    .addComponent(btnUpdate5)
-                    .addComponent(btnClear5)
-                    .addComponent(btnUpdate7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        mainTabbedPane.addTab("Terminal", jPanel6);
-
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id", "Title"
-            }
-        ));
-        jScrollPane8.setViewportView(jTable8);
-
-        jLabel7.setText("Tracking Name");
-
-        btnAdd6.setText("Add");
-
-        btnUpdate6.setText("Update");
-
-        btnClear6.setText("Clear");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1258, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnAdd6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdate6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear6))
-                    .addComponent(txtDivisionName6, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtDivisionName6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd6)
-                    .addComponent(btnUpdate6)
-                    .addComponent(btnClear6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
-        );
-
-        mainTabbedPane.addTab("Tracking", jPanel7);
-
-        jTable9.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id", "Title"
-            }
-        ));
-        jScrollPane9.setViewportView(jTable9);
-
-        jLabel10.setText("Search");
-
-        btnAdd7.setText("+");
-        btnAdd7.addActionListener(new java.awt.event.ActionListener() {
+        btnAddManageEquipment.setText("+");
+        btnAddManageEquipment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdd7ActionPerformed(evt);
+                btnAddManageEquipmentActionPerformed(evt);
             }
         });
 
-        btnClear7.setText("Clear");
+        jLabel4.setText("Search");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        txtEquipmentSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEquipmentSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEquipmentSearchKeyTyped(evt);
+            }
+        });
+
+        btnClearManageEquipment.setText("Clear");
+        btnClearManageEquipment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageEquipmentActionPerformed(evt);
+            }
+        });
+
+        tblEquipment.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane5.setViewportView(tblEquipment);
+
+        javax.swing.GroupLayout equipmentPanelLayout = new javax.swing.GroupLayout(equipmentPanel);
+        equipmentPanel.setLayout(equipmentPanelLayout);
+        equipmentPanelLayout.setHorizontalGroup(
+            equipmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(equipmentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(btnAdd7)
+                .addGroup(equipmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(equipmentPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageEquipment)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEquipmentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManageEquipment))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(766, Short.MAX_VALUE))
+        );
+        equipmentPanelLayout.setVerticalGroup(
+            equipmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(equipmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManageEquipment)
+                    .addComponent(jLabel4)
+                    .addComponent(btnClearManageEquipment)
+                    .addComponent(txtEquipmentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+
+        mainTabbedPane.addTab("Equipment", equipmentPanel);
+
+        btnAddManageRole.setText("+");
+        btnAddManageRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManageRoleActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Search");
+
+        txtRoleSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRoleSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRoleSearchKeyTyped(evt);
+            }
+        });
+
+        btnClearManageRole.setText("Clear");
+        btnClearManageRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageRoleActionPerformed(evt);
+            }
+        });
+
+        tblRole.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane6.setViewportView(tblRole);
+
+        javax.swing.GroupLayout rolePanelLayout = new javax.swing.GroupLayout(rolePanel);
+        rolePanel.setLayout(rolePanelLayout);
+        rolePanelLayout.setHorizontalGroup(
+            rolePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rolePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rolePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rolePanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageRole)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRoleSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManageRole))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(766, Short.MAX_VALUE))
+        );
+        rolePanelLayout.setVerticalGroup(
+            rolePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rolePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rolePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManageRole)
+                    .addComponent(jLabel5)
+                    .addComponent(btnClearManageRole)
+                    .addComponent(txtRoleSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane6)
+                .addContainerGap())
+        );
+
+        mainTabbedPane.addTab("Role", rolePanel);
+
+        btnAddManageTerminal.setText("+");
+        btnAddManageTerminal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManageTerminalActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Search");
+
+        txtTerminalSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTerminalSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTerminalSearchKeyTyped(evt);
+            }
+        });
+
+        btnClearManageTerminal.setText("Clear");
+        btnClearManageTerminal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageTerminalActionPerformed(evt);
+            }
+        });
+
+        tblTerminal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane7.setViewportView(tblTerminal);
+
+        javax.swing.GroupLayout terminalPanelLayout = new javax.swing.GroupLayout(terminalPanel);
+        terminalPanel.setLayout(terminalPanelLayout);
+        terminalPanelLayout.setHorizontalGroup(
+            terminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(terminalPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(terminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(terminalPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageTerminal)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTerminalSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManageTerminal))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(766, Short.MAX_VALUE))
+        );
+        terminalPanelLayout.setVerticalGroup(
+            terminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, terminalPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(terminalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManageTerminal)
+                    .addComponent(jLabel6)
+                    .addComponent(btnClearManageTerminal)
+                    .addComponent(txtTerminalSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7)
+                .addContainerGap())
+        );
+
+        mainTabbedPane.addTab("Terminal", terminalPanel);
+
+        txtTrackingSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTrackingSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTrackingSearchKeyTyped(evt);
+            }
+        });
+
+        btnAddManageTracking.setText("+");
+        btnAddManageTracking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManageTrackingActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Search");
+
+        btnClearManageTracking.setText("Clear");
+        btnClearManageTracking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageTrackingActionPerformed(evt);
+            }
+        });
+
+        tblTracking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane8.setViewportView(tblTracking);
+
+        javax.swing.GroupLayout trackingPanelLayout = new javax.swing.GroupLayout(trackingPanel);
+        trackingPanel.setLayout(trackingPanelLayout);
+        trackingPanelLayout.setHorizontalGroup(
+            trackingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trackingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(trackingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(trackingPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageTracking)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTrackingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManageTracking))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(766, Short.MAX_VALUE))
+        );
+        trackingPanelLayout.setVerticalGroup(
+            trackingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, trackingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(trackingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddManageTracking)
+                    .addComponent(jLabel7)
+                    .addComponent(btnClearManageTracking)
+                    .addComponent(txtTrackingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane8)
+                .addContainerGap())
+        );
+
+        mainTabbedPane.addTab("Tracking", trackingPanel);
+
+        tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane9.setViewportView(tblPowerUnit);
+
+        jLabel10.setText("Search");
+
+        btnAddManagePowerUnit.setText("+");
+        btnAddManagePowerUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManagePowerUnitActionPerformed(evt);
+            }
+        });
+
+        btnClearManagePowerUnit.setText("Clear");
+
+        javax.swing.GroupLayout powerUnitPanelLayout = new javax.swing.GroupLayout(powerUnitPanel);
+        powerUnitPanel.setLayout(powerUnitPanelLayout);
+        powerUnitPanelLayout.setHorizontalGroup(
+            powerUnitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(powerUnitPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(powerUnitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(powerUnitPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManagePowerUnit)
                         .addGap(11, 11, 11)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDivisionName7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear7)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(btnClearManagePowerUnit)))
+                .addGap(0, 796, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+        powerUnitPanelLayout.setVerticalGroup(
+            powerUnitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, powerUnitPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(powerUnitPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtDivisionName7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear7)
-                    .addComponent(btnAdd7))
+                    .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearManagePowerUnit)
+                    .addComponent(btnAddManagePowerUnit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainTabbedPane.addTab("PowerUnit", jPanel8);
-
-        mapLabel.setText("jLabel1");
+        mainTabbedPane.addTab("PowerUnit", powerUnitPanel);
 
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mapPanelLayout.createSequentialGroup()
-                .addComponent(mapLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 665, Short.MAX_VALUE))
+            .addGap(0, 1258, Short.MAX_VALUE)
         );
         mapPanelLayout.setVerticalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mapLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
 
         mainTabbedPane.addTab("Map", mapPanel);
+
+        tblJurisdiction.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane10.setViewportView(tblJurisdiction);
+
+        jLabel11.setText("Search");
+
+        txtJurisdictionSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJurisdictionSearchKeyReleased(evt);
+            }
+        });
+
+        btnAddManageJurisdiction.setText("+");
+        btnAddManageJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManageJurisdictionActionPerformed(evt);
+            }
+        });
+
+        btnClearManageJurisdiction.setText("Clear");
+        btnClearManageJurisdiction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageJurisdictionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jurisdictionPanelLayout = new javax.swing.GroupLayout(jurisdictionPanel);
+        jurisdictionPanel.setLayout(jurisdictionPanelLayout);
+        jurisdictionPanelLayout.setHorizontalGroup(
+            jurisdictionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jurisdictionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jurisdictionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jurisdictionPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageJurisdiction)
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtJurisdictionSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManageJurisdiction)))
+                .addGap(0, 796, Short.MAX_VALUE))
+        );
+        jurisdictionPanelLayout.setVerticalGroup(
+            jurisdictionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jurisdictionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jurisdictionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtJurisdictionSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearManageJurisdiction)
+                    .addComponent(btnAddManageJurisdiction))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        mainTabbedPane.addTab("Jurisdiction", jurisdictionPanel);
+
+        tblCountry.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Title"
+            }
+        ));
+        jScrollPane11.setViewportView(tblCountry);
+
+        jLabel12.setText("Search");
+
+        txtCountrySearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCountrySearchActionPerformed(evt);
+            }
+        });
+        txtCountrySearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCountrySearchKeyReleased(evt);
+            }
+        });
+
+        btnAddManageCountry.setText("+");
+        btnAddManageCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManageCountryActionPerformed(evt);
+            }
+        });
+
+        btnClearManageCountry.setText("Clear");
+        btnClearManageCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearManageCountryActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout countryPanelLayout = new javax.swing.GroupLayout(countryPanel);
+        countryPanel.setLayout(countryPanelLayout);
+        countryPanelLayout.setHorizontalGroup(
+            countryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(countryPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(countryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(countryPanelLayout.createSequentialGroup()
+                        .addComponent(btnAddManageCountry)
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCountrySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManageCountry)))
+                .addGap(0, 796, Short.MAX_VALUE))
+        );
+        countryPanelLayout.setVerticalGroup(
+            countryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, countryPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(countryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtCountrySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearManageCountry)
+                    .addComponent(btnAddManageCountry))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        mainTabbedPane.addTab("Country", countryPanel);
+
+        javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
+        settingsPanel.setLayout(settingsPanelLayout);
+        settingsPanelLayout.setHorizontalGroup(
+            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1258, Short.MAX_VALUE)
+        );
+        settingsPanelLayout.setVerticalGroup(
+            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 499, Short.MAX_VALUE)
+        );
+
+        mainTabbedPane.addTab("Settings", settingsPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -709,10 +998,121 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAdd7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd7ActionPerformed
+    private void btnClearManageCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCountryActionPerformed
+        txtCountrySearch.setText("");
+        countryUIHelper.generateTable();
+    }//GEN-LAST:event_btnClearManageCountryActionPerformed
+
+    private void btnAddManageCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageCountryActionPerformed
+        // TODO add your handling code here:
+        countryUIHelper.disable(false);
+        AddCountryFrame addCountryFrame = new AddCountryFrame();
+        addCountryFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageCountryActionPerformed
+
+    private void txtCountrySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCountrySearchKeyReleased
+        countryUIHelper.generateTable();
+    }//GEN-LAST:event_txtCountrySearchKeyReleased
+
+    private void txtCountrySearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCountrySearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCountrySearchActionPerformed
+
+    private void btnClearManageJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageJurisdictionActionPerformed
+        txtJurisdictionSearch.setText("");
+        jurisdictionUIHelper.generateTable();
+    }//GEN-LAST:event_btnClearManageJurisdictionActionPerformed
+
+    private void btnAddManageJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageJurisdictionActionPerformed
+        jurisdictionUIHelper.disable(false);
+        AddJurisdictionFrame addJurisdictionFrame = new AddJurisdictionFrame();
+        addJurisdictionFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageJurisdictionActionPerformed
+
+    private void txtJurisdictionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJurisdictionSearchKeyReleased
+        jurisdictionUIHelper.generateTable();
+    }//GEN-LAST:event_txtJurisdictionSearchKeyReleased
+
+    private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
         AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
         addPowerUnitFrame.setVisible(true);
-    }//GEN-LAST:event_btnAdd7ActionPerformed
+    }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
+
+    private void btnClearManageTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageTrackingActionPerformed
+        txtTrackingSearch.setText("");
+        trackingUIHelper.generateTable();
+    }//GEN-LAST:event_btnClearManageTrackingActionPerformed
+
+    private void btnAddManageTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTrackingActionPerformed
+        trackingUIHelper.disable(false);
+        AddTrackingFrame addTrackingFrame = new AddTrackingFrame();
+        addTrackingFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageTrackingActionPerformed
+
+    private void txtTrackingSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrackingSearchKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTrackingSearchKeyTyped
+
+    private void txtTrackingSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrackingSearchKeyReleased
+        trackingUIHelper.generateTable();
+    }//GEN-LAST:event_txtTrackingSearchKeyReleased
+
+    private void btnClearManageTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageTerminalActionPerformed
+        txtTerminalSearch.setText("");
+        terminalUIHelper.generateTable();
+    }//GEN-LAST:event_btnClearManageTerminalActionPerformed
+
+    private void txtTerminalSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalSearchKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTerminalSearchKeyTyped
+
+    private void txtTerminalSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalSearchKeyReleased
+        terminalUIHelper.generateTable();
+    }//GEN-LAST:event_txtTerminalSearchKeyReleased
+
+    private void btnAddManageTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTerminalActionPerformed
+        terminalUIHelper.disable(false);
+        AddTerminalFrame addTerminalFrame = new AddTerminalFrame();
+        addTerminalFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageTerminalActionPerformed
+
+    private void btnClearManageRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageRoleActionPerformed
+        txtRoleSearch.setText("");
+        roleUI.generateTable();
+    }//GEN-LAST:event_btnClearManageRoleActionPerformed
+
+    private void txtRoleSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoleSearchKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRoleSearchKeyTyped
+
+    private void txtRoleSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoleSearchKeyReleased
+        roleUI.generateTable();
+    }//GEN-LAST:event_txtRoleSearchKeyReleased
+
+    private void btnAddManageRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageRoleActionPerformed
+        roleUI.disable(false);
+        AddRoleFrame addRoleFrame = new AddRoleFrame();
+        addRoleFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageRoleActionPerformed
+
+    private void btnClearManageEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageEquipmentActionPerformed
+        txtEquipmentSearch.setText("");
+        equipmentUI.generateTable();
+    }//GEN-LAST:event_btnClearManageEquipmentActionPerformed
+
+    private void txtEquipmentSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipmentSearchKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEquipmentSearchKeyTyped
+
+    private void txtEquipmentSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipmentSearchKeyReleased
+        equipmentUI.generateTable();
+    }//GEN-LAST:event_txtEquipmentSearchKeyReleased
+
+    private void btnAddManageEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageEquipmentActionPerformed
+        equipmentUI.disable(false);
+        AddEquipmentFrame addEquipmentFrame = new AddEquipmentFrame();
+        addEquipmentFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageEquipmentActionPerformed
 
     private void btnClearManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCompanyActionPerformed
         // TODO add your handling code here:
@@ -813,31 +1213,34 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd3;
-    private javax.swing.JButton btnAdd4;
-    private javax.swing.JButton btnAdd5;
-    private javax.swing.JButton btnAdd6;
-    private javax.swing.JButton btnAdd7;
     public static javax.swing.JButton btnAddManageClass;
     public static javax.swing.JButton btnAddManageCompany;
+    public static javax.swing.JButton btnAddManageCountry;
     public static javax.swing.JButton btnAddManageDivision;
-    private javax.swing.JButton btnClear3;
-    private javax.swing.JButton btnClear4;
-    private javax.swing.JButton btnClear5;
-    private javax.swing.JButton btnClear6;
-    private javax.swing.JButton btnClear7;
+    public static javax.swing.JButton btnAddManageEquipment;
+    public static javax.swing.JButton btnAddManageJurisdiction;
+    public static javax.swing.JButton btnAddManagePowerUnit;
+    public static javax.swing.JButton btnAddManageRole;
+    public static javax.swing.JButton btnAddManageTerminal;
+    public static javax.swing.JButton btnAddManageTracking;
     public static javax.swing.JButton btnClearManageClass;
     public static javax.swing.JButton btnClearManageCompany;
+    public static javax.swing.JButton btnClearManageCountry;
     public static javax.swing.JButton btnClearManageDivision;
-    private javax.swing.JButton btnUpdate3;
-    private javax.swing.JButton btnUpdate4;
-    private javax.swing.JButton btnUpdate5;
-    private javax.swing.JButton btnUpdate6;
-    private javax.swing.JButton btnUpdate7;
+    public static javax.swing.JButton btnClearManageEquipment;
+    public static javax.swing.JButton btnClearManageJurisdiction;
+    public static javax.swing.JButton btnClearManagePowerUnit;
+    public static javax.swing.JButton btnClearManageRole;
+    public static javax.swing.JButton btnClearManageTerminal;
+    public static javax.swing.JButton btnClearManageTracking;
     public static javax.swing.JPanel classPanel;
     public static javax.swing.JPanel companyPanel;
+    public static javax.swing.JPanel countryPanel;
     public static javax.swing.JPanel divisionPanel;
+    public static javax.swing.JPanel equipmentPanel;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -845,38 +1248,58 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    public static javax.swing.JScrollPane jScrollPane10;
+    public static javax.swing.JScrollPane jScrollPane11;
     public static javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
+    public static javax.swing.JScrollPane jScrollPane5;
+    public static javax.swing.JScrollPane jScrollPane6;
+    public static javax.swing.JScrollPane jScrollPane7;
+    public static javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTable jTable9;
+    public static javax.swing.JPanel jurisdictionPanel;
     public static javax.swing.JTabbedPane mainTabbedPane;
-    private javax.swing.JLabel mapLabel;
     private javax.swing.JPanel mapPanel;
+    public static javax.swing.JPanel powerUnitPanel;
+    public static javax.swing.JPanel rolePanel;
+    public static javax.swing.JPanel settingsPanel;
     public static javax.swing.JTable tblClass;
     public static javax.swing.JTable tblCompany;
+    public static javax.swing.JTable tblCountry;
     public static javax.swing.JTable tblDivision;
+    public static javax.swing.JTable tblEquipment;
+    public static javax.swing.JTable tblJurisdiction;
+    public static javax.swing.JTable tblPowerUnit;
+    public static javax.swing.JTable tblRole;
+    public static javax.swing.JTable tblTerminal;
+    public static javax.swing.JTable tblTracking;
+    public static javax.swing.JPanel terminalPanel;
+    public static javax.swing.JPanel trackingPanel;
     public static javax.swing.JTextField txtClassSearch;
     public static javax.swing.JTextField txtCompanySearch;
-    private javax.swing.JTextField txtDivisionName3;
-    private javax.swing.JTextField txtDivisionName4;
-    private javax.swing.JTextField txtDivisionName5;
-    private javax.swing.JTextField txtDivisionName6;
-    private javax.swing.JTextField txtDivisionName7;
+    public static javax.swing.JTextField txtCountrySearch;
     public static javax.swing.JTextField txtDivisionSearch;
+    public static javax.swing.JTextField txtEquipmentSearch;
+    public static javax.swing.JTextField txtJurisdictionSearch;
+    public static javax.swing.JTextField txtPowerUnitSearch;
+    public static javax.swing.JTextField txtRoleSearch;
+    public static javax.swing.JTextField txtTerminalSearch;
+    public static javax.swing.JTextField txtTrackingSearch;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source == btn) {
+            List<String> lstTabs = new ArrayList<>();
+            for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
+                if (chkArray[i].isSelected()) {
+                    lstTabs.add(mainTabbedPane.getTitleAt(i));
+                }
+            }
+            writeIntoTabFile(lstTabs);
+        }
+    }
 
 }
