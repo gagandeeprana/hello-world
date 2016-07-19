@@ -1,5 +1,0 @@
-Division
-Class
-Company
-Equipment
-Role

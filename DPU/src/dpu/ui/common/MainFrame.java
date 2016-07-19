@@ -1,36 +1,31 @@
 package dpu.ui.common;
 
 import dpu.ui.helper.common.ClassUIHelper;
-import dpu.ui.helper.common.DivisionUIHelper;
 import dpu.ui.helper.common.CompanyUIHelper;
-import dpu.beans.admin.DivisionBean;
 import dpu.ui.helper.common.CountryUIHelper;
 import dpu.ui.helper.common.EquipmentUIHelper;
 import dpu.ui.helper.common.JurisdictionUIHelper;
 import dpu.ui.helper.common.RoleUIHelper;
 import dpu.ui.helper.common.TerminalUIHelper;
 import dpu.ui.helper.common.TrackingUIHelper;
-import java.awt.Color;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 
-public class MainFrame extends javax.swing.JFrame implements ActionListener {
+public class MainFrame extends javax.swing.JFrame {
 
     String addUpdateFlag = "";
     ClassUIHelper classUI = null;
-    DivisionUIHelper divisionUI = null;
+
     CompanyUIHelper companyUI = null;
     EquipmentUIHelper equipmentUI = null;
     RoleUIHelper roleUI = null;
@@ -38,24 +33,21 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
     TrackingUIHelper trackingUIHelper = null;
     CountryUIHelper countryUIHelper = null;
     JurisdictionUIHelper jurisdictionUIHelper = null;
-    List<String> lstTabs = new ArrayList<>();
-    JButton btn = null;
-    JCheckBox[] chkArray = null;
-    JCheckBox chk = null;
+    static List<String> lstTabs = new ArrayList<>();
+    static List<String> lstPreferences = new ArrayList<>();
+    static Map<String, JPanel> map = new TreeMap<>();
 
     public MainFrame() {
         initComponents();
         setResizable(true);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        readTabFile();
-        instantiateUIHelper();
-        callGenerateTable();
-        setSettingsIcon();
-        setSettingsPanelBody();
+        mainTabbedPane.removeAll();
+        checkPreference();
         showHideTabs();
-
-        mainTabbedPane.add(new TestJPanel(), mainTabbedPane.getTabCount()-1);
-        mainTabbedPane.setTitleAt(mainTabbedPane.getTabCount()-2,"Test Tab");
+        readTabFile();
+//        instantiateUIHelper();
+//        callGenerateTable();
+        setSettingsIcon();
         try {
 //            Browser browser = new Browser();
 //            BrowserView view = new BrowserView(browser);
@@ -83,92 +75,80 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    private void writeIntoTabFile(List<String> lstTabs) {
-        FileWriter fileWriter = null;
+    public static void checkPreference() {
+        String msg = "";
+        BufferedReader readFile = null;
         try {
-            fileWriter = new FileWriter("src\\dpu\\ui\\common\\tabs.txt", false);
-            for (String tab : lstTabs) {
-                fileWriter.write(tab + "\r");
+            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("src\\dpu\\ui\\common\\preferencetabs.txt")));
+            while ((msg = readFile.readLine()) != null) {
+                lstPreferences.add(msg);
+                if (msg.contains("Division")) {
+                    map.put(msg, new TestDivisionPanel());
+                } else if (msg.contains("Class")) {
+                    map.put(msg, new TestClassPanel());
+                } else if (msg.contains("Company")) {
+                    map.put(msg, new TestCompanyPanel());
+                } else if (msg.contains("Equipment")) {
+                    map.put(msg, new TestEquipmentPanel());
+                } else if (msg.contains("Role")) {
+                    map.put(msg, new TestRolePanel());
+                } else if (msg.contains("Terminal")) {
+                    map.put(msg, new TestTerminalPanel());
+                } else if (msg.contains("Tracking")) {
+                    map.put(msg, new TestTrackingPanel());
+                } else if (msg.contains("PowerUnit")) {
+                    map.put(msg, new TestPowerUnitPanel());
+                } else if (msg.contains("Jurisdiction")) {
+                    map.put(msg, new TestJurisdictionPanel());
+                } else if (msg.contains("Country")) {
+                    map.put(msg, new TestCountryPanel());
+                }
             }
-            fileWriter.close();
+            readFile.close();
         } catch (Exception e) {
-            System.out.println("MainFrame : writeIntoTabFile() : " + e);
+            System.out.println("MainFrame : checkPreference() : " + e);
         }
     }
 
-    private void setSettingsPanelBody() {
-        int height = 0;
-        chkArray = new JCheckBox[mainTabbedPane.getTabCount() - 1];
-        for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
-            JLabel lbl = new JLabel(mainTabbedPane.getTitleAt(i));
-            chk = new JCheckBox();
-            chk.setName("chk" + i);
-            lbl.setBounds(200, i * 30, 120, 40);
-            chk.setBounds(420, i * 30, 120, 40);
-            settingsPanel.add(lbl);
-            settingsPanel.add(chk);
-            chkArray[i] = chk;
-            for (String tab : lstTabs) {
-                if (lbl.getText().equals(tab)) {
-                    chk.setSelected(true);
-                }
-            }
-        }
-        height = (mainTabbedPane.getTabCount() - 1) * 30 + 30;
-        btn = new JButton("Save");
-        btn.setBounds(320, height, 120, 40);
-        settingsPanel.add(btn);
-        btn.addActionListener(this);
-    }
-
-    private void showHideTabs() {
-        boolean check = false;
-        System.out.println(lstTabs);
-        for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
-            check = false;
-
-            for (String tab : lstTabs) {
-                if (mainTabbedPane.getTitleAt(i).equals(tab)) {
-                    check = true;
-                    break;
-                }
-            }
-            if (!check) {
-//                mainTabbedPane.remove(i);
-            }
+    public static void showHideTabs() {
+        Set<String> set = map.keySet();
+        Iterator<String> itr = set.iterator();
+        while (itr.hasNext()) {
+            String key = itr.next();
+            JPanel jPanel = map.get(key);
+            mainTabbedPane.add(key, jPanel);
         }
     }
 
-    private void setSettingsIcon() {
+    public static void setSettingsIcon() {
+        mainTabbedPane.add("Settings", new TestSettingsPanel());
         mainTabbedPane.setTitleAt(mainTabbedPane.getTabCount() - 1, "");
         ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Settings.png");
         mainTabbedPane.setIconAt(mainTabbedPane.getTabCount() - 1, imageIcon);
     }
 
-    private void instantiateUIHelper() {
-        classUI = new ClassUIHelper();
-        divisionUI = new DivisionUIHelper();
-        companyUI = new CompanyUIHelper();
-        equipmentUI = new EquipmentUIHelper();
-        roleUI = new RoleUIHelper();
-        terminalUIHelper = new TerminalUIHelper();
-        trackingUIHelper = new TrackingUIHelper();
-        countryUIHelper = new CountryUIHelper();
-        jurisdictionUIHelper = new JurisdictionUIHelper();
-    }
-
-    private void callGenerateTable() {
-        classUI.generateTable();
-        divisionUI.generateTable();
-        companyUI.generateTable();
-        equipmentUI.generateTable();
-        roleUI.generateTable();
-        terminalUIHelper.generateTable();
-        trackingUIHelper.generateTable();
-        countryUIHelper.generateTable();
-        jurisdictionUIHelper.generateTable();
-    }
-
+//    private void instantiateUIHelper() {
+//        classUI = new ClassUIHelper();
+//        divisionUI = new DivisionUIHelper();
+//        companyUI = new CompanyUIHelper();
+//        equipmentUI = new EquipmentUIHelper();
+//        roleUI = new RoleUIHelper();
+//        terminalUIHelper = new TerminalUIHelper();
+//        trackingUIHelper = new TrackingUIHelper();
+//        countryUIHelper = new CountryUIHelper();
+//        jurisdictionUIHelper = new JurisdictionUIHelper();
+//    }
+//    private void callGenerateTable() {
+//        classUI.generateTable();
+//        divisionUI.generateTable();
+//        companyUI.generateTable();
+//        equipmentUI.generateTable();
+//        roleUI.generateTable();
+//        terminalUIHelper.generateTable();
+//        trackingUIHelper.generateTable();
+//        countryUIHelper.generateTable();
+//        jurisdictionUIHelper.generateTable();
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1148,20 +1128,20 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_txtClassSearchKeyReleased
 
     private void btnClearManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageClassActionPerformed
-        txtClassSearch.setText("");
-        classUI.generateTable();
+//        txtClassSearch.setText("");
+//        classUI.generateTable();
     }//GEN-LAST:event_btnClearManageClassActionPerformed
 
     private void btnAddManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageClassActionPerformed
-        classUI.disable(false);
-        AddClassFrame addClassFrame = new AddClassFrame();
-        addClassFrame.setVisible(true);
+//        classUI.disable(false);
+//        AddClassFrame addClassFrame = new AddClassFrame();
+//        addClassFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageClassActionPerformed
 
     private void btnAddManageDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageDivisionActionPerformed
-        divisionUI.disable(false);
-        AddDivisionFrame addDivisionFrame = new AddDivisionFrame();
-        addDivisionFrame.setVisible(true);
+//        divisionUI.disable(false);
+//        AddDivisionFrame addDivisionFrame = new AddDivisionFrame();
+//        addDivisionFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageDivisionActionPerformed
 
     private void txtDivisionSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionSearchKeyTyped
@@ -1169,12 +1149,12 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_txtDivisionSearchKeyTyped
 
     private void txtDivisionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDivisionSearchKeyReleased
-        divisionUI.generateTable();
+//        divisionUI.generateTable();
     }//GEN-LAST:event_txtDivisionSearchKeyReleased
 
     private void btnClearManageDivisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageDivisionActionPerformed
-        txtDivisionSearch.setText("");
-        divisionUI.generateTable();
+//        txtDivisionSearch.setText("");
+//        divisionUI.generateTable();
     }//GEN-LAST:event_btnClearManageDivisionActionPerformed
 
     /**
@@ -1290,19 +1270,5 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
     public static javax.swing.JTextField txtTerminalSearch;
     public static javax.swing.JTextField txtTrackingSearch;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
-        if (source == btn) {
-            List<String> lstTabs = new ArrayList<>();
-            for (int i = 0; i < mainTabbedPane.getTabCount() - 1; i++) {
-                if (chkArray[i].isSelected()) {
-                    lstTabs.add(mainTabbedPane.getTitleAt(i));
-                }
-            }
-            writeIntoTabFile(lstTabs);
-        }
-    }
 
 }

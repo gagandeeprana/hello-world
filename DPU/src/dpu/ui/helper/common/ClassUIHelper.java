@@ -4,8 +4,8 @@ import dpu.beans.admin.ClassBean;
 import dpu.dao.admin.ClassDAO;
 import dpu.dao.admin.impl.ClassDAOImpl;
 import dpu.ui.common.AddClassFrame;
-import dpu.ui.common.MainFrame;
 import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestClassPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,16 +30,16 @@ public class ClassUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtClassSearch.setText("");
+        TestClassPanel.txtClassSearch.setText("");
     }
 
     public void disable(boolean var) {
         mainTabbedPane.setEnabled(var);
-        MainFrame.classPanel.setEnabled(var);
-        MainFrame.tblClass.setEnabled(var);
-        MainFrame.btnAddManageClass.setEnabled(var);
-        MainFrame.btnClearManageClass.setEnabled(var);
-        MainFrame.txtClassSearch.setEnabled(var);
+//        TestClassPanel.classPanel.setEnabled(var);
+        TestClassPanel.tblClass.setEnabled(var);
+        TestClassPanel.btnAddManageClass.setEnabled(var);
+        TestClassPanel.btnClearManageClass.setEnabled(var);
+        TestClassPanel.txtClassSearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -192,9 +192,9 @@ public class ClassUIHelper {
     }
 
     public void generateTable() {
-        lstClasses = classDAO.getAllClasses(MainFrame.txtClassSearch.getText());
+        lstClasses = classDAO.getAllClasses(TestClassPanel.txtClassSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblClass = new JTable(defaultTableModel);
+        TestClassPanel.tblClass = new JTable(defaultTableModel);
         Object[][] data = new Object[lstClasses.size()][4];
         for (int i = 0; i < lstClasses.size(); i++) {
             ClassBean obj = lstClasses.get(i);
@@ -205,11 +205,11 @@ public class ClassUIHelper {
         }
         Object[] cols = {"Class Id", "Class Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblClass.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblClass.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblClass.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblClass.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane3.setViewportView(MainFrame.tblClass);
+        TestClassPanel.tblClass.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestClassPanel.tblClass.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestClassPanel.tblClass.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestClassPanel.tblClass.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestClassPanel.jScrollPane3.setViewportView(TestClassPanel.tblClass);
     }
 
     public String save() {
@@ -220,8 +220,8 @@ public class ClassUIHelper {
         String msg = classDAO.addClass(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.classPanel.setEnabled(true);
+//        TestClassPanel.mainTabbedPane.setEnabled(true);
+//        TestClassPanel.classPanel.setEnabled(true);
         return msg;
     }
 
@@ -230,8 +230,8 @@ public class ClassUIHelper {
         String msg = classDAO.deleteClass(classIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.classPanel.setEnabled(true);
+//        TestClassPanel.mainTabbedPane.setEnabled(true);
+//        TestClassPanel.classPanel.setEnabled(true);
         return msg;
     }
 
@@ -240,8 +240,8 @@ public class ClassUIHelper {
         String msg = divisionDAO.updateClass(classBean);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.classPanel.setEnabled(true);
+//        TestClassPanel.mainTabbedPane.setEnabled(true);
+//        TestClassPanel.classPanel.setEnabled(true);
         return msg;
     }
 }
