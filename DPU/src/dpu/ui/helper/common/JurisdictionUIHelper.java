@@ -6,8 +6,8 @@ import dpu.dao.admin.JurisdictionDAO;
 import dpu.dao.admin.impl.CountryDAOImpl;
 import dpu.dao.admin.impl.JurisdictionDAOImpl;
 import dpu.ui.common.AddJurisdictionFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestJurisdictionPanel;
+//import static dpu.ui.common.TestJurisdictionPanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,16 +33,16 @@ public class JurisdictionUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtJurisdictionSearch.setText("");
+        TestJurisdictionPanel.txtJurisdictionSearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.jurisdictionPanel.setEnabled(var);
-        MainFrame.tblJurisdiction.setEnabled(var);
-        MainFrame.btnAddManageJurisdiction.setEnabled(var);
-        MainFrame.btnClearManageJurisdiction.setEnabled(var);
-        MainFrame.txtJurisdictionSearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestJurisdictionPanel.jurisdictionPanel.setEnabled(var);
+        TestJurisdictionPanel.tblJurisdiction.setEnabled(var);
+        TestJurisdictionPanel.btnAddManageJurisdiction.setEnabled(var);
+        TestJurisdictionPanel.btnClearManageJurisdiction.setEnabled(var);
+        TestJurisdictionPanel.txtJurisdictionSearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -195,9 +195,9 @@ public class JurisdictionUIHelper {
     }
 
     public void generateTable() {
-        lstJurisdictions = jurisdictionDAO.getAllJurisdictions(MainFrame.txtJurisdictionSearch.getText());
+        lstJurisdictions = jurisdictionDAO.getAllJurisdictions(TestJurisdictionPanel.txtJurisdictionSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblJurisdiction = new JTable(defaultTableModel);
+        TestJurisdictionPanel.tblJurisdiction = new JTable(defaultTableModel);
         Object[][] data = new Object[lstJurisdictions.size()][7];
         for (int i = 0; i < lstJurisdictions.size(); i++) {
             JurisdictionBean obj = lstJurisdictions.get(i);
@@ -211,11 +211,11 @@ public class JurisdictionUIHelper {
         }
         Object[] cols = {"Jurisdiction Id", "Jurisdiction Date", "IFA", "Country", "Road Tax", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblJurisdiction.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblJurisdiction.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblJurisdiction.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblJurisdiction.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane10.setViewportView(MainFrame.tblJurisdiction);
+        TestJurisdictionPanel.tblJurisdiction.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestJurisdictionPanel.tblJurisdiction.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestJurisdictionPanel.tblJurisdiction.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestJurisdictionPanel.tblJurisdiction.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestJurisdictionPanel.jScrollPane10.setViewportView(TestJurisdictionPanel.tblJurisdiction);
     }
 
     public String save() {
@@ -229,8 +229,8 @@ public class JurisdictionUIHelper {
         String msg = jurisdictionDAO.addJurisdiction(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.jurisdictionPanel.setEnabled(true);
+//        TestJurisdictionPanel.mainTabbedPane.setEnabled(true);
+//        TestJurisdictionPanel.jurisdictionPanel.setEnabled(true);
         return msg;
     }
 
@@ -239,8 +239,8 @@ public class JurisdictionUIHelper {
         String msg = jurisdictionDAO.deleteJurisdiction(jurisdictionIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.jurisdictionPanel.setEnabled(true);
+//        TestJurisdictionPanel.mainTabbedPane.setEnabled(true);
+//        TestJurisdictionPanel.jurisdictionPanel.setEnabled(true);
         return msg;
     }
 
@@ -255,8 +255,8 @@ public class JurisdictionUIHelper {
         String msg = jurisdictionDAO.updateJurisdiction(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.jurisdictionPanel.setEnabled(true);
+//        TestJurisdictionPanel.mainTabbedPane.setEnabled(true);
+//        TestJurisdictionPanel.jurisdictionPanel.setEnabled(true);
         return msg;
     }
 }

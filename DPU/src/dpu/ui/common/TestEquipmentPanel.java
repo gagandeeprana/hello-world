@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.EquipmentUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,12 @@ public class TestEquipmentPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestEquipmentPanel
      */
+    EquipmentUIHelper equipmentUI = null;
+
     public TestEquipmentPanel() {
         initComponents();
+        equipmentUI = new EquipmentUIHelper();
+        equipmentUI.generateTable();
     }
 
     /**
@@ -106,13 +112,13 @@ public class TestEquipmentPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageEquipmentActionPerformed
-//        equipmentUI.disable(false);
-//        AddEquipmentFrame addEquipmentFrame = new AddEquipmentFrame();
-//        addEquipmentFrame.setVisible(true);
+        equipmentUI.disable(false);
+        AddEquipmentFrame addEquipmentFrame = new AddEquipmentFrame();
+        addEquipmentFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageEquipmentActionPerformed
 
     private void txtEquipmentSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipmentSearchKeyReleased
-//        equipmentUI.generateTable();
+        equipmentUI.generateTable();
     }//GEN-LAST:event_txtEquipmentSearchKeyReleased
 
     private void txtEquipmentSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipmentSearchKeyTyped
@@ -120,8 +126,8 @@ public class TestEquipmentPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEquipmentSearchKeyTyped
 
     private void btnClearManageEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageEquipmentActionPerformed
-//        txtEquipmentSearch.setText("");
-//        equipmentUI.generateTable();
+        txtEquipmentSearch.setText("");
+        equipmentUI.generateTable();
     }//GEN-LAST:event_btnClearManageEquipmentActionPerformed
 
 

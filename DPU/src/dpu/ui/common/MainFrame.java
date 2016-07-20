@@ -1,13 +1,5 @@
 package dpu.ui.common;
 
-import dpu.ui.helper.common.ClassUIHelper;
-import dpu.ui.helper.common.CompanyUIHelper;
-import dpu.ui.helper.common.CountryUIHelper;
-import dpu.ui.helper.common.EquipmentUIHelper;
-import dpu.ui.helper.common.JurisdictionUIHelper;
-import dpu.ui.helper.common.RoleUIHelper;
-import dpu.ui.helper.common.TerminalUIHelper;
-import dpu.ui.helper.common.TrackingUIHelper;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -24,15 +16,7 @@ import javax.swing.JPanel;
 public class MainFrame extends javax.swing.JFrame {
 
     String addUpdateFlag = "";
-    ClassUIHelper classUI = null;
 
-    CompanyUIHelper companyUI = null;
-    EquipmentUIHelper equipmentUI = null;
-    RoleUIHelper roleUI = null;
-    TerminalUIHelper terminalUIHelper = null;
-    TrackingUIHelper trackingUIHelper = null;
-    CountryUIHelper countryUIHelper = null;
-    JurisdictionUIHelper jurisdictionUIHelper = null;
     static List<String> lstTabs = new ArrayList<>();
     static List<String> lstPreferences = new ArrayList<>();
     static Map<String, JPanel> map = new TreeMap<>();
@@ -96,12 +80,12 @@ public class MainFrame extends javax.swing.JFrame {
                     map.put(msg, new TestTerminalPanel());
                 } else if (msg.contains("Tracking")) {
                     map.put(msg, new TestTrackingPanel());
-                } else if (msg.contains("PowerUnit")) {
-                    map.put(msg, new TestPowerUnitPanel());
                 } else if (msg.contains("Jurisdiction")) {
                     map.put(msg, new TestJurisdictionPanel());
                 } else if (msg.contains("Country")) {
                     map.put(msg, new TestCountryPanel());
+                } else if (msg.contains("Resources")) {
+                    map.put(msg, new TestResourcesPanel());
                 }
             }
             readFile.close();
@@ -268,6 +252,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8.setText("Search");
 
         btnAddManageDivision.setText("+");
+        btnAddManageDivision.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddManageDivisionMouseClicked(evt);
+            }
+        });
         btnAddManageDivision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddManageDivisionActionPerformed(evt);
@@ -982,19 +971,19 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClearManageCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCountryActionPerformed
-        txtCountrySearch.setText("");
-        countryUIHelper.generateTable();
+//        txtCountrySearch.setText("");
+//        countryUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageCountryActionPerformed
 
     private void btnAddManageCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageCountryActionPerformed
         // TODO add your handling code here:
-        countryUIHelper.disable(false);
-        AddCountryFrame addCountryFrame = new AddCountryFrame();
-        addCountryFrame.setVisible(true);
+//        countryUIHelper.disable(false);
+//        AddCountryFrame addCountryFrame = new AddCountryFrame();
+//        addCountryFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageCountryActionPerformed
 
     private void txtCountrySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCountrySearchKeyReleased
-        countryUIHelper.generateTable();
+//        countryUIHelper.generateTable();
     }//GEN-LAST:event_txtCountrySearchKeyReleased
 
     private void txtCountrySearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCountrySearchActionPerformed
@@ -1002,34 +991,34 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCountrySearchActionPerformed
 
     private void btnClearManageJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageJurisdictionActionPerformed
-        txtJurisdictionSearch.setText("");
-        jurisdictionUIHelper.generateTable();
+//        txtJurisdictionSearch.setText("");
+//        jurisdictionUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageJurisdictionActionPerformed
 
     private void btnAddManageJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageJurisdictionActionPerformed
-        jurisdictionUIHelper.disable(false);
-        AddJurisdictionFrame addJurisdictionFrame = new AddJurisdictionFrame();
-        addJurisdictionFrame.setVisible(true);
+//        jurisdictionUIHelper.disable(false);
+//        AddJurisdictionFrame addJurisdictionFrame = new AddJurisdictionFrame();
+//        addJurisdictionFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageJurisdictionActionPerformed
 
     private void txtJurisdictionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJurisdictionSearchKeyReleased
-        jurisdictionUIHelper.generateTable();
+//        jurisdictionUIHelper.generateTable();
     }//GEN-LAST:event_txtJurisdictionSearchKeyReleased
 
     private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
-        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
-        addPowerUnitFrame.setVisible(true);
+//        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
+//        addPowerUnitFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
 
     private void btnClearManageTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageTrackingActionPerformed
-        txtTrackingSearch.setText("");
-        trackingUIHelper.generateTable();
+//        txtTrackingSearch.setText("");
+//        trackingUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageTrackingActionPerformed
 
     private void btnAddManageTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTrackingActionPerformed
-        trackingUIHelper.disable(false);
-        AddTrackingFrame addTrackingFrame = new AddTrackingFrame();
-        addTrackingFrame.setVisible(true);
+//        trackingUIHelper.disable(false);
+//        AddTrackingFrame addTrackingFrame = new AddTrackingFrame();
+//        addTrackingFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageTrackingActionPerformed
 
     private void txtTrackingSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrackingSearchKeyTyped
@@ -1037,12 +1026,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTrackingSearchKeyTyped
 
     private void txtTrackingSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrackingSearchKeyReleased
-        trackingUIHelper.generateTable();
+//        trackingUIHelper.generateTable();
     }//GEN-LAST:event_txtTrackingSearchKeyReleased
 
     private void btnClearManageTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageTerminalActionPerformed
-        txtTerminalSearch.setText("");
-        terminalUIHelper.generateTable();
+//        txtTerminalSearch.setText("");
+//        terminalUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageTerminalActionPerformed
 
     private void txtTerminalSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalSearchKeyTyped
@@ -1050,18 +1039,18 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTerminalSearchKeyTyped
 
     private void txtTerminalSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalSearchKeyReleased
-        terminalUIHelper.generateTable();
+//        terminalUIHelper.generateTable();
     }//GEN-LAST:event_txtTerminalSearchKeyReleased
 
     private void btnAddManageTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTerminalActionPerformed
-        terminalUIHelper.disable(false);
-        AddTerminalFrame addTerminalFrame = new AddTerminalFrame();
-        addTerminalFrame.setVisible(true);
+//        terminalUIHelper.disable(false);
+//        AddTerminalFrame addTerminalFrame = new AddTerminalFrame();
+//        addTerminalFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageTerminalActionPerformed
 
     private void btnClearManageRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageRoleActionPerformed
-        txtRoleSearch.setText("");
-        roleUI.generateTable();
+//        txtRoleSearch.setText("");
+//        roleUI.generateTable();
     }//GEN-LAST:event_btnClearManageRoleActionPerformed
 
     private void txtRoleSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoleSearchKeyTyped
@@ -1069,18 +1058,18 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRoleSearchKeyTyped
 
     private void txtRoleSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoleSearchKeyReleased
-        roleUI.generateTable();
+//        roleUI.generateTable();
     }//GEN-LAST:event_txtRoleSearchKeyReleased
 
     private void btnAddManageRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageRoleActionPerformed
-        roleUI.disable(false);
-        AddRoleFrame addRoleFrame = new AddRoleFrame();
-        addRoleFrame.setVisible(true);
+//        roleUI.disable(false);
+//        AddRoleFrame addRoleFrame = new AddRoleFrame();
+//        addRoleFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageRoleActionPerformed
 
     private void btnClearManageEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageEquipmentActionPerformed
-        txtEquipmentSearch.setText("");
-        equipmentUI.generateTable();
+//        txtEquipmentSearch.setText("");
+//        equipmentUI.generateTable();
     }//GEN-LAST:event_btnClearManageEquipmentActionPerformed
 
     private void txtEquipmentSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipmentSearchKeyTyped
@@ -1088,19 +1077,19 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEquipmentSearchKeyTyped
 
     private void txtEquipmentSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquipmentSearchKeyReleased
-        equipmentUI.generateTable();
+//        equipmentUI.generateTable();
     }//GEN-LAST:event_txtEquipmentSearchKeyReleased
 
     private void btnAddManageEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageEquipmentActionPerformed
-        equipmentUI.disable(false);
-        AddEquipmentFrame addEquipmentFrame = new AddEquipmentFrame();
-        addEquipmentFrame.setVisible(true);
+//        equipmentUI.disable(false);
+//        AddEquipmentFrame addEquipmentFrame = new AddEquipmentFrame();
+//        addEquipmentFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageEquipmentActionPerformed
 
     private void btnClearManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCompanyActionPerformed
         // TODO add your handling code here:
-        txtCompanySearch.setText("");
-        companyUI.generateTable();
+//        txtCompanySearch.setText("");
+//        companyUI.generateTable();
     }//GEN-LAST:event_btnClearManageCompanyActionPerformed
 
     private void txtCompanySearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyTyped
@@ -1109,14 +1098,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void txtCompanySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyReleased
         // TODO add your handling code here:
-        companyUI.generateTable();
+//        companyUI.generateTable();
     }//GEN-LAST:event_txtCompanySearchKeyReleased
 
     private void btnAddManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageCompanyActionPerformed
         // TODO add your handling code here:
-        companyUI.disable(false);
-        AddCompanyFrame addCompanyFrame = new AddCompanyFrame();
-        addCompanyFrame.setVisible(true);
+//        companyUI.disable(false);
+//        AddCompanyFrame addCompanyFrame = new AddCompanyFrame();
+//        addCompanyFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageCompanyActionPerformed
 
     private void txtClassSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyTyped
@@ -1124,7 +1113,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtClassSearchKeyTyped
 
     private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
-        classUI.generateTable();
+//        classUI.generateTable();
     }//GEN-LAST:event_txtClassSearchKeyReleased
 
     private void btnClearManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageClassActionPerformed
@@ -1156,6 +1145,10 @@ public class MainFrame extends javax.swing.JFrame {
 //        txtDivisionSearch.setText("");
 //        divisionUI.generateTable();
     }//GEN-LAST:event_btnClearManageDivisionActionPerformed
+
+    private void btnAddManageDivisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManageDivisionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddManageDivisionMouseClicked
 
     /**
      * @param args the command line arguments

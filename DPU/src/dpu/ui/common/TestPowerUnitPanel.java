@@ -35,6 +35,11 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
         tblPowerUnit = new javax.swing.JTable();
 
         btnAddManagePowerUnit.setText("+");
+        btnAddManagePowerUnit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddManagePowerUnitMouseClicked(evt);
+            }
+        });
         btnAddManagePowerUnit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddManagePowerUnitActionPerformed(evt);
@@ -92,9 +97,14 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
-//        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
-//        addPowerUnitFrame.setVisible(true);
+     
     }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
+
+    private void btnAddManagePowerUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitMouseClicked
+        // TODO add your handling code here:
+           AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
+        addPowerUnitFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManagePowerUnitMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

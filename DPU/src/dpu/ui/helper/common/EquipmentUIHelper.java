@@ -4,8 +4,8 @@ import dpu.beans.admin.EquipmentBean;
 import dpu.dao.admin.EquipmentDAO;
 import dpu.dao.admin.impl.EquipmentDAOImpl;
 import dpu.ui.common.AddEquipmentFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestEquipmentPanel;
+//import static dpu.ui.common.TestEquipmentPanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,16 +30,16 @@ public class EquipmentUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtEquipmentSearch.setText("");
+        TestEquipmentPanel.txtEquipmentSearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.equipmentPanel.setEnabled(var);
-        MainFrame.tblEquipment.setEnabled(var);
-        MainFrame.btnAddManageEquipment.setEnabled(var);
-        MainFrame.btnClearManageEquipment.setEnabled(var);
-        MainFrame.txtEquipmentSearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestEquipmentPanel.equipmentPanel.setEnabled(var);
+        TestEquipmentPanel.tblEquipment.setEnabled(var);
+        TestEquipmentPanel.btnAddManageEquipment.setEnabled(var);
+        TestEquipmentPanel.btnClearManageEquipment.setEnabled(var);
+        TestEquipmentPanel.txtEquipmentSearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -192,9 +192,9 @@ public class EquipmentUIHelper {
     }
 
     public void generateTable() {
-        lstEquipments = equipmentDAO.getAllEquipments(MainFrame.txtEquipmentSearch.getText());
+        lstEquipments = equipmentDAO.getAllEquipments(TestEquipmentPanel.txtEquipmentSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblEquipment = new JTable(defaultTableModel);
+        TestEquipmentPanel.tblEquipment = new JTable(defaultTableModel);
         Object[][] data = new Object[lstEquipments.size()][4];
         for (int i = 0; i < lstEquipments.size(); i++) {
             EquipmentBean obj = lstEquipments.get(i);
@@ -205,11 +205,11 @@ public class EquipmentUIHelper {
         }
         Object[] cols = {"Equipment Id", "Equipment Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblEquipment.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblEquipment.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblEquipment.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblEquipment.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane5.setViewportView(MainFrame.tblEquipment);
+        TestEquipmentPanel.tblEquipment.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestEquipmentPanel.tblEquipment.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestEquipmentPanel.tblEquipment.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestEquipmentPanel.tblEquipment.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestEquipmentPanel.jScrollPane5.setViewportView(TestEquipmentPanel.tblEquipment);
     }
 
     public String save() {
@@ -220,8 +220,8 @@ public class EquipmentUIHelper {
         String msg = equipmentDAO.addEquipment(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.equipmentPanel.setEnabled(true);
+//        TestEquipmentPanel.mainTabbedPane.setEnabled(true);
+//        TestEquipmentPanel.equipmentPanel.setEnabled(true);
         return msg;
     }
 
@@ -230,8 +230,8 @@ public class EquipmentUIHelper {
         String msg = equipmentDAO.deleteEquipment(equipmentIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.equipmentPanel.setEnabled(true);
+//        TestEquipmentPanel.mainTabbedPane.setEnabled(true);
+//        TestEquipmentPanel.equipmentPanel.setEnabled(true);
         return msg;
     }
 
@@ -240,8 +240,8 @@ public class EquipmentUIHelper {
         String msg = equipmentDAO.updateEquipment(equipmentBean);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.equipmentPanel.setEnabled(true);
+//        TestEquipmentPanel.mainTabbedPane.setEnabled(true);
+//        TestEquipmentPanel.equipmentPanel.setEnabled(true);
         return msg;
     }
 }

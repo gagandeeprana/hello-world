@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.JurisdictionUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,12 @@ public class TestJurisdictionPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestJurisdictionPanel
      */
+    JurisdictionUIHelper jurisdictionUIHelper = null;
+
     public TestJurisdictionPanel() {
         initComponents();
+        jurisdictionUIHelper = new JurisdictionUIHelper();
+        jurisdictionUIHelper.generateTable();
     }
 
     /**
@@ -103,18 +109,18 @@ public class TestJurisdictionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageJurisdictionActionPerformed
-//        jurisdictionUIHelper.disable(false);
-//        AddJurisdictionFrame addJurisdictionFrame = new AddJurisdictionFrame();
-//        addJurisdictionFrame.setVisible(true);
+        jurisdictionUIHelper.disable(false);
+        AddJurisdictionFrame addJurisdictionFrame = new AddJurisdictionFrame();
+        addJurisdictionFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageJurisdictionActionPerformed
 
     private void txtJurisdictionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJurisdictionSearchKeyReleased
-//        jurisdictionUIHelper.generateTable();
+        jurisdictionUIHelper.generateTable();
     }//GEN-LAST:event_txtJurisdictionSearchKeyReleased
 
     private void btnClearManageJurisdictionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageJurisdictionActionPerformed
-//        txtJurisdictionSearch.setText("");
-//        jurisdictionUIHelper.generateTable();
+        txtJurisdictionSearch.setText("");
+        jurisdictionUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageJurisdictionActionPerformed
 
 

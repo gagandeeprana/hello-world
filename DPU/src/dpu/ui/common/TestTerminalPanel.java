@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.TerminalUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,12 @@ public class TestTerminalPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestTerminalPanel
      */
+    TerminalUIHelper terminalUIHelper = null;
+
     public TestTerminalPanel() {
         initComponents();
+        terminalUIHelper = new TerminalUIHelper();
+        terminalUIHelper.generateTable();
     }
 
     /**
@@ -106,13 +112,13 @@ public class TestTerminalPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTerminalActionPerformed
-//        terminalUIHelper.disable(false);
-//        AddTerminalFrame addTerminalFrame = new AddTerminalFrame();
-//        addTerminalFrame.setVisible(true);
+        terminalUIHelper.disable(false);
+        AddTerminalFrame addTerminalFrame = new AddTerminalFrame();
+        addTerminalFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageTerminalActionPerformed
 
     private void txtTerminalSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalSearchKeyReleased
-//        terminalUIHelper.generateTable();
+        terminalUIHelper.generateTable();
     }//GEN-LAST:event_txtTerminalSearchKeyReleased
 
     private void txtTerminalSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalSearchKeyTyped
@@ -120,8 +126,8 @@ public class TestTerminalPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTerminalSearchKeyTyped
 
     private void btnClearManageTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageTerminalActionPerformed
-//        txtTerminalSearch.setText("");
-//        terminalUIHelper.generateTable();
+        txtTerminalSearch.setText("");
+        terminalUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageTerminalActionPerformed
 
 

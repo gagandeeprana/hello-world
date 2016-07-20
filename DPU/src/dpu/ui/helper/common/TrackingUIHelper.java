@@ -4,8 +4,8 @@ import dpu.beans.admin.TrackingBean;
 import dpu.dao.admin.TrackingDAO;
 import dpu.dao.admin.impl.TrackingDAOImpl;
 import dpu.ui.common.AddTrackingFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestTrackingPanel;
+//import static dpu.ui.common.TestTrackingPanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,16 +31,16 @@ public class TrackingUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtTrackingSearch.setText("");
+        TestTrackingPanel.txtTrackingSearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.trackingPanel.setEnabled(var);
-        MainFrame.tblTracking.setEnabled(var);
-        MainFrame.btnAddManageTracking.setEnabled(var);
-        MainFrame.btnClearManageTracking.setEnabled(var);
-        MainFrame.txtTrackingSearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestTrackingPanel.trackingPanel.setEnabled(var);
+        TestTrackingPanel.tblTracking.setEnabled(var);
+        TestTrackingPanel.btnAddManageTracking.setEnabled(var);
+        TestTrackingPanel.btnClearManageTracking.setEnabled(var);
+        TestTrackingPanel.txtTrackingSearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -193,9 +193,9 @@ public class TrackingUIHelper {
     }
 
     public void generateTable() {
-        lstTrackings = trackingDAO.getAllTrackings(MainFrame.txtTrackingSearch.getText());
+        lstTrackings = trackingDAO.getAllTrackings(TestTrackingPanel.txtTrackingSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblTracking = new JTable(defaultTableModel);
+        TestTrackingPanel.tblTracking = new JTable(defaultTableModel);
         Object[][] data = new Object[lstTrackings.size()][4];
         for (int i = 0; i < lstTrackings.size(); i++) {
             TrackingBean obj = lstTrackings.get(i);
@@ -206,11 +206,11 @@ public class TrackingUIHelper {
         }
         Object[] cols = {"Tracking Id", "Tracking Date", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblTracking.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblTracking.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblTracking.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblTracking.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane8.setViewportView(MainFrame.tblTracking);
+        TestTrackingPanel.tblTracking.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestTrackingPanel.tblTracking.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestTrackingPanel.tblTracking.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestTrackingPanel.tblTracking.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestTrackingPanel.jScrollPane8.setViewportView(TestTrackingPanel.tblTracking);
     }
 
     public String save() {
@@ -227,8 +227,8 @@ public class TrackingUIHelper {
         String msg = trackingDAO.addTracking(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.trackingPanel.setEnabled(true);
+//        TestTrackingPanel.mainTabbedPane.setEnabled(true);
+//        TestTrackingPanel.trackingPanel.setEnabled(true);
         return msg;
     }
 
@@ -237,8 +237,8 @@ public class TrackingUIHelper {
         String msg = trackingDAO.deleteTracking(trackingIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.trackingPanel.setEnabled(true);
+//        TestTrackingPanel.mainTabbedPane.setEnabled(true);
+//        TestTrackingPanel.trackingPanel.setEnabled(true);
         return msg;
     }
 
@@ -255,8 +255,8 @@ public class TrackingUIHelper {
         String msg = trackingDAO.updateTracking(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.trackingPanel.setEnabled(true);
+//        TestTrackingPanel.mainTabbedPane.setEnabled(true);
+//        TestTrackingPanel.trackingPanel.setEnabled(true);
         return msg;
     }
 }

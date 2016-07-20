@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.CountryUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,12 @@ public class TestCountryPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestCountryPanel
      */
+    CountryUIHelper countryUIHelper = null;
+
     public TestCountryPanel() {
         initComponents();
+        countryUIHelper = new CountryUIHelper();
+        countryUIHelper.generateTable();
     }
 
     /**
@@ -108,10 +114,9 @@ public class TestCountryPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageCountryActionPerformed
-        // TODO add your handling code here:
-//        countryUIHelper.disable(false);
-//        AddCountryFrame addCountryFrame = new AddCountryFrame();
-//        addCountryFrame.setVisible(true);
+        countryUIHelper.disable(false);
+        AddCountryFrame addCountryFrame = new AddCountryFrame();
+        addCountryFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageCountryActionPerformed
 
     private void txtCountrySearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCountrySearchActionPerformed
@@ -119,12 +124,12 @@ public class TestCountryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCountrySearchActionPerformed
 
     private void txtCountrySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCountrySearchKeyReleased
-//        countryUIHelper.generateTable();
+        countryUIHelper.generateTable();
     }//GEN-LAST:event_txtCountrySearchKeyReleased
 
     private void btnClearManageCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCountryActionPerformed
-//        txtCountrySearch.setText("");
-//        countryUIHelper.generateTable();
+        txtCountrySearch.setText("");
+        countryUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageCountryActionPerformed
 
 

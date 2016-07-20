@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.TrackingUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,12 @@ public class TestTrackingPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestTrackingPanel
      */
+    TrackingUIHelper trackingUIHelper = null;
+
     public TestTrackingPanel() {
         initComponents();
+        trackingUIHelper = new TrackingUIHelper();
+        trackingUIHelper.generateTable();
     }
 
     /**
@@ -106,13 +112,13 @@ public class TestTrackingPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTrackingActionPerformed
-//        trackingUIHelper.disable(false);
-//        AddTrackingFrame addTrackingFrame = new AddTrackingFrame();
-//        addTrackingFrame.setVisible(true);
+        trackingUIHelper.disable(false);
+        AddTrackingFrame addTrackingFrame = new AddTrackingFrame();
+        addTrackingFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageTrackingActionPerformed
 
     private void txtTrackingSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrackingSearchKeyReleased
-//        trackingUIHelper.generateTable();
+        trackingUIHelper.generateTable();
     }//GEN-LAST:event_txtTrackingSearchKeyReleased
 
     private void txtTrackingSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTrackingSearchKeyTyped
@@ -120,8 +126,8 @@ public class TestTrackingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTrackingSearchKeyTyped
 
     private void btnClearManageTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageTrackingActionPerformed
-//        txtTrackingSearch.setText("");
-//        trackingUIHelper.generateTable();
+        txtTrackingSearch.setText("");
+        trackingUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageTrackingActionPerformed
 
 

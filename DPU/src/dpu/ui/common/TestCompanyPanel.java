@@ -5,6 +5,9 @@
  */
 package dpu.ui.common;
 
+import com.sun.xml.internal.bind.v2.TODO;
+import dpu.ui.helper.common.CompanyUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +17,12 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestCompanyPanel
      */
+    CompanyUIHelper companyUI = null;
+
     public TestCompanyPanel() {
         initComponents();
+        companyUI = new CompanyUIHelper();
+        companyUI.generateTable();
     }
 
     /**
@@ -106,25 +113,21 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageCompanyActionPerformed
-        // TODO add your handling code here:
-//        companyUI.disable(false);
-//        AddCompanyFrame addCompanyFrame = new AddCompanyFrame();
-//        addCompanyFrame.setVisible(true);
+        companyUI.disable(false);
+        AddCompanyFrame addCompanyFrame = new AddCompanyFrame();
+        addCompanyFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageCompanyActionPerformed
 
     private void txtCompanySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyReleased
-        // TODO add your handling code here:
-//        companyUI.generateTable();
+        companyUI.generateTable();
     }//GEN-LAST:event_txtCompanySearchKeyReleased
 
     private void txtCompanySearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtCompanySearchKeyTyped
 
     private void btnClearManageCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageCompanyActionPerformed
-        // TODO add your handling code here:
-//        txtCompanySearch.setText("");
-//        companyUI.generateTable();
+        txtCompanySearch.setText("");
+        companyUI.generateTable();
     }//GEN-LAST:event_btnClearManageCompanyActionPerformed
 
 

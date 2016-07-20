@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.RoleUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,12 @@ public class TestRolePanel extends javax.swing.JPanel {
     /**
      * Creates new form TestRolePanel
      */
+    RoleUIHelper roleUI = null;
+
     public TestRolePanel() {
         initComponents();
+        roleUI = new RoleUIHelper();
+        roleUI.generateTable();
     }
 
     /**
@@ -106,13 +112,13 @@ public class TestRolePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManageRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageRoleActionPerformed
-//        roleUI.disable(false);
-//        AddRoleFrame addRoleFrame = new AddRoleFrame();
-//        addRoleFrame.setVisible(true);
+        roleUI.disable(false);
+        AddRoleFrame addRoleFrame = new AddRoleFrame();
+        addRoleFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageRoleActionPerformed
 
     private void txtRoleSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoleSearchKeyReleased
-//        roleUI.generateTable();
+        roleUI.generateTable();
     }//GEN-LAST:event_txtRoleSearchKeyReleased
 
     private void txtRoleSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoleSearchKeyTyped
@@ -120,8 +126,8 @@ public class TestRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtRoleSearchKeyTyped
 
     private void btnClearManageRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageRoleActionPerformed
-//        txtRoleSearch.setText("");
-//        roleUI.generateTable();
+        txtRoleSearch.setText("");
+        roleUI.generateTable();
     }//GEN-LAST:event_btnClearManageRoleActionPerformed
 
 

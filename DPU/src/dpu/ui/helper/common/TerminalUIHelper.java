@@ -4,8 +4,8 @@ import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.TerminalDAO;
 import dpu.dao.admin.impl.TerminalDAOImpl;
 import dpu.ui.common.AddTerminalFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestTerminalPanel;
+//import static dpu.ui.common.TestTerminalPanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,16 +30,16 @@ public class TerminalUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtTerminalSearch.setText("");
+        TestTerminalPanel.txtTerminalSearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.terminalPanel.setEnabled(var);
-        MainFrame.tblTerminal.setEnabled(var);
-        MainFrame.btnAddManageTerminal.setEnabled(var);
-        MainFrame.btnClearManageTerminal.setEnabled(var);
-        MainFrame.txtTerminalSearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestTerminalPanel.terminalPanel.setEnabled(var);
+        TestTerminalPanel.tblTerminal.setEnabled(var);
+        TestTerminalPanel.btnAddManageTerminal.setEnabled(var);
+        TestTerminalPanel.btnClearManageTerminal.setEnabled(var);
+        TestTerminalPanel.txtTerminalSearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -192,9 +192,9 @@ public class TerminalUIHelper {
     }
 
     public void generateTable() {
-        lstTerminals = terminalDAO.getAllTerminals(MainFrame.txtTerminalSearch.getText());
+        lstTerminals = terminalDAO.getAllTerminals(TestTerminalPanel.txtTerminalSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblTerminal = new JTable(defaultTableModel);
+        TestTerminalPanel.tblTerminal = new JTable(defaultTableModel);
         Object[][] data = new Object[lstTerminals.size()][4];
         for (int i = 0; i < lstTerminals.size(); i++) {
             TerminalBean obj = lstTerminals.get(i);
@@ -205,11 +205,11 @@ public class TerminalUIHelper {
         }
         Object[] cols = {"Terminal Id", "Terminal Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblTerminal.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblTerminal.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblTerminal.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblTerminal.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane7.setViewportView(MainFrame.tblTerminal);
+        TestTerminalPanel.tblTerminal.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestTerminalPanel.tblTerminal.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestTerminalPanel.tblTerminal.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestTerminalPanel.tblTerminal.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestTerminalPanel.jScrollPane7.setViewportView(TestTerminalPanel.tblTerminal);
     }
 
     public String save() {
@@ -220,8 +220,8 @@ public class TerminalUIHelper {
         String msg = terminalDAO.addTerminal(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.terminalPanel.setEnabled(true);
+//        TestTerminalPanel.mainTabbedPane.setEnabled(true);
+//        TestTerminalPanel.terminalPanel.setEnabled(true);
         return msg;
     }
 
@@ -230,8 +230,8 @@ public class TerminalUIHelper {
         String msg = terminalDAO.deleteTerminal(terminalIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.terminalPanel.setEnabled(true);
+//        TestTerminalPanel.mainTabbedPane.setEnabled(true);
+//        TestTerminalPanel.terminalPanel.setEnabled(true);
         return msg;
     }
 
@@ -240,8 +240,8 @@ public class TerminalUIHelper {
         String msg = terminalDAO.updateTerminal(terminalBean);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.terminalPanel.setEnabled(true);
+//        TestTerminalPanel.mainTabbedPane.setEnabled(true);
+//        TestTerminalPanel.terminalPanel.setEnabled(true);
         return msg;
     }
 }

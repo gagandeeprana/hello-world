@@ -10,6 +10,8 @@ import static dpu.ui.common.MainFrame.lstTabs;
 import static dpu.ui.common.MainFrame.mainTabbedPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author gagandeep.rana
  */
-public class TestSettingsPanel extends javax.swing.JPanel implements ActionListener {
+public class TestSettingsPanel extends javax.swing.JPanel implements ActionListener, ItemListener {
 
     /**
      * Creates new form TestSettingsPanel
@@ -31,23 +33,29 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
     JCheckBox[] chkArray = null;
     JCheckBox chk = null;
     JButton btn = null;
+    JCheckBox headCheckBox = null;
 
     public TestSettingsPanel() {
         initComponents();
-        System.out.println("111111111111111111111111111111111111");
         setSettingsPanelBody();
     }
 
     private void setSettingsPanelBody() {
         int height = 0;
-        System.out.println("LST TABS: " + lstTabs);
         chkArray = new JCheckBox[lstTabs.size()];
+        JLabel lblSelectAll = new JLabel("Select All");
+        lblSelectAll.setBounds(360, 10, 120, 40);
+        add(lblSelectAll);
+        headCheckBox = new JCheckBox();
+        headCheckBox.setBounds(420, 10, 120, 40);
+        add(headCheckBox);
+        headCheckBox.addItemListener(this);
         for (int i = 0; i < lstTabs.size(); i++) {
             JLabel lbl = new JLabel(lstTabs.get(i));
             chk = new JCheckBox();
             chk.setName("chk" + i);
-            lbl.setBounds(200, i * 30, 120, 40);
-            chk.setBounds(420, i * 30, 120, 40);
+            lbl.setBounds(200, ((i + 1) * 30) + 10, 120, 40);
+            chk.setBounds(420, ((i + 1) * 30) + 10, 120, 40);
             add(lbl);
             add(chk);
             chkArray[i] = chk;
@@ -57,7 +65,7 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
                 }
             }
         }
-        height = (lstTabs.size()) * 30 + 30;
+        height = (lstTabs.size()) * 30 + 60;
         btn = new JButton("Save");
         btn.setBounds(320, height, 120, 40);
         add(btn);
@@ -81,7 +89,6 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             MainFrame.lstPreferences = new ArrayList<>();
             MainFrame.map = new TreeMap<>();
             MainFrame.checkPreference();
-            System.out.println("PPP:: " + MainFrame.lstPreferences);
             MainFrame.showHideTabs();
             MainFrame.setSettingsIcon();
             setSettingsPanelBody();
@@ -126,6 +133,19 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             .addGap(0, 423, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == 1) {
+            for (int i = 0; i < chkArray.length; i++) {
+                chkArray[i].setSelected(true);
+            }
+        } else {
+            for (int i = 0; i < chkArray.length; i++) {
+                chkArray[i].setSelected(false);
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

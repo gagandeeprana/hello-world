@@ -4,8 +4,8 @@ import dpu.beans.admin.RoleBean;
 import dpu.dao.admin.RoleDAO;
 import dpu.dao.admin.impl.RoleDAOImpl;
 import dpu.ui.common.AddRoleFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestRolePanel;
+//import static dpu.ui.common.TestRolePanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,16 +30,16 @@ public class RoleUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtRoleSearch.setText("");
+        TestRolePanel.txtRoleSearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.rolePanel.setEnabled(var);
-        MainFrame.tblRole.setEnabled(var);
-        MainFrame.btnAddManageRole.setEnabled(var);
-        MainFrame.btnClearManageRole.setEnabled(var);
-        MainFrame.txtRoleSearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestRolePanel.rolePanel.setEnabled(var);
+        TestRolePanel.tblRole.setEnabled(var);
+        TestRolePanel.btnAddManageRole.setEnabled(var);
+        TestRolePanel.btnClearManageRole.setEnabled(var);
+        TestRolePanel.txtRoleSearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -192,9 +192,9 @@ public class RoleUIHelper {
     }
 
     public void generateTable() {
-        lstRoles = roleDAO.getAllRoles(MainFrame.txtRoleSearch.getText());
+        lstRoles = roleDAO.getAllRoles(TestRolePanel.txtRoleSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblRole = new JTable(defaultTableModel);
+        TestRolePanel.tblRole = new JTable(defaultTableModel);
         Object[][] data = new Object[lstRoles.size()][4];
         for (int i = 0; i < lstRoles.size(); i++) {
             RoleBean obj = lstRoles.get(i);
@@ -205,11 +205,11 @@ public class RoleUIHelper {
         }
         Object[] cols = {"Role Id", "Role Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblRole.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblRole.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblRole.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblRole.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane6.setViewportView(MainFrame.tblRole);
+        TestRolePanel.tblRole.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestRolePanel.tblRole.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestRolePanel.tblRole.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestRolePanel.tblRole.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestRolePanel.jScrollPane6.setViewportView(TestRolePanel.tblRole);
     }
 
     public String save() {
@@ -220,8 +220,8 @@ public class RoleUIHelper {
         String msg = roleDAO.addRole(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.rolePanel.setEnabled(true);
+//        TestRolePanel.mainTabbedPane.setEnabled(true);
+//        TestRolePanel.rolePanel.setEnabled(true);
         return msg;
     }
 
@@ -230,8 +230,8 @@ public class RoleUIHelper {
         String msg = roleDAO.deleteRole(roleIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.rolePanel.setEnabled(true);
+//        TestRolePanel.mainTabbedPane.setEnabled(true);
+//        TestRolePanel.rolePanel.setEnabled(true);
         return msg;
     }
 
@@ -240,8 +240,8 @@ public class RoleUIHelper {
         String msg = roleDAO.updateRole(roleBean);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.rolePanel.setEnabled(true);
+//        TestRolePanel.mainTabbedPane.setEnabled(true);
+//        TestRolePanel.rolePanel.setEnabled(true);
         return msg;
     }
 }
