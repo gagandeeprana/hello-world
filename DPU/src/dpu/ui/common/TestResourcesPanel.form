@@ -44,17 +44,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jInternalFrame1" alignment="0" max="32767" attributes="0"/>
+          <Component id="resourceInternalFrame" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jInternalFrame1" alignment="1" max="32767" attributes="0"/>
+          <Component id="resourceInternalFrame" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JInternalFrame" name="jInternalFrame1">
+    <Container class="javax.swing.JInternalFrame" name="resourceInternalFrame">
       <Properties>
         <Property name="visible" type="boolean" value="true"/>
       </Properties>
@@ -87,6 +87,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Straight Truck"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuStraightTruckMouseClicked"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="mnuPowerUnit">
               <Properties>
@@ -101,6 +104,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trailers"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuTrailersMouseClicked"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="mnuChasis">
               <Properties>
@@ -111,11 +117,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Containers"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuContainersMouseClicked"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="mnuACIPassengers">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ACI Passengers"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuACIPassengersMouseClicked"/>
+              </Events>
             </Menu>
           </SubComponents>
         </Menu>

@@ -1,5 +1,8 @@
 package dpu.ui.common;
 
+import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.chromium.swing.BrowserView;
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -32,7 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
 //        instantiateUIHelper();
 //        callGenerateTable();
         setSettingsIcon();
-        try {
+//        try {
 //            Browser browser = new Browser();
 //            BrowserView view = new BrowserView(browser);
 //            browser.loadURL("D:\\JavaGit\\hello-world\\DPU\\src\\dpu\\ui\\common\\Demo.html");
@@ -40,9 +44,9 @@ public class MainFrame extends javax.swing.JFrame {
 //            frame.add(view, BorderLayout.CENTER);
 //            frame.setSize(700, 500);
 //            frame.setVisible(true);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
     }
 
     private void readTabFile() {
@@ -66,26 +70,46 @@ public class MainFrame extends javax.swing.JFrame {
             readFile = new BufferedReader(new InputStreamReader(new FileInputStream("src\\dpu\\ui\\common\\preferencetabs.txt")));
             while ((msg = readFile.readLine()) != null) {
                 lstPreferences.add(msg);
-                if (msg.contains("Division")) {
-                    map.put(msg, new TestDivisionPanel());
-                } else if (msg.contains("Class")) {
+                if (msg.contains("Class")) {
                     map.put(msg, new TestClassPanel());
                 } else if (msg.contains("Company")) {
                     map.put(msg, new TestCompanyPanel());
-                } else if (msg.contains("Equipment")) {
-                    map.put(msg, new TestEquipmentPanel());
                 } else if (msg.contains("Role")) {
                     map.put(msg, new TestRolePanel());
-                } else if (msg.contains("Terminal")) {
-                    map.put(msg, new TestTerminalPanel());
                 } else if (msg.contains("Tracking")) {
                     map.put(msg, new TestTrackingPanel());
                 } else if (msg.contains("Jurisdiction")) {
                     map.put(msg, new TestJurisdictionPanel());
-                } else if (msg.contains("Country")) {
-                    map.put(msg, new TestCountryPanel());
+                } else if (msg.contains("List")) {
+                    map.put(msg, new TestListPanel());
                 } else if (msg.contains("Resources")) {
                     map.put(msg, new TestResourcesPanel());
+                } else if (msg.contains("SalesPerson")) {
+                    map.put(msg, new TestSalesPersonPanel());
+                } else if (msg.contains("StandardCharges")) {
+                    map.put(msg, new TestStandardCharges());
+                } else if (msg.contains("Customers")) {
+                    map.put(msg, new TestCustomerPanel());
+                } else if (msg.contains("Prospects")) {
+                    map.put(msg, new TestProspectPanel());
+                } else if (msg.contains("Shippers")) {
+                    map.put(msg, new TestShippersPanel());
+                } else if (msg.contains("BorderCrossing")) {
+                    map.put(msg, new TestBorderCrossingPanel());
+                } else if (msg.contains("OutsideCarriers")) {
+                    map.put(msg, new TestOutsideCarriersPanel());
+                } else if (msg.contains("MiscVendors")) {
+                    map.put(msg, new TestMiscVendorsPanel());
+                } else if (msg.contains("CustomBrokers")) {
+                    map.put(msg, new TestCustomBrokersPanel());
+                } else if (msg.contains("PayrollSchedules")) {
+                    map.put(msg, new TestPayrollSchedulesPanel());
+                } else if (msg.contains("StandardTemplates")) {
+                    map.put(msg, new TestStandardTemplatesPanel());
+                } else if (msg.contains("MasterOrders")) {
+                    map.put(msg, new TestMasterOrdersPanel());
+                } else if (msg.contains("TravelTimes")) {
+                    map.put(msg, new TestTravelTimesPanel());
                 }
             }
             readFile.close();
@@ -97,10 +121,68 @@ public class MainFrame extends javax.swing.JFrame {
     public static void showHideTabs() {
         Set<String> set = map.keySet();
         Iterator<String> itr = set.iterator();
+        int counter = 0;
         while (itr.hasNext()) {
             String key = itr.next();
             JPanel jPanel = map.get(key);
-            mainTabbedPane.add(key, jPanel);
+            mainTabbedPane.add(key+"    ", jPanel);
+            if (key.equals("OutsideCarriers")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\OutsideCarrier.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("BorderCrossing")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\BorderCrossing.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("PayrollSchedules")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\PayrollSchedules.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Prospects")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Prospects.jpg");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Company")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Company.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Resources")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Resources.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Role")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Roles.jpg");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Customers")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Customers.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("SalesPerson")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\SalesPerson.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Shippers")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Shippers.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("Jurisdiction")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Jurisdiction.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("StandardCharges")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardCharges.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("List")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\List.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            else if (key.equals("MasterOrders")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MasterOrders.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            }
+            counter++;
         }
     }
 

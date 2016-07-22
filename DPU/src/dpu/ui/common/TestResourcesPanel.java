@@ -6,6 +6,7 @@
 package dpu.ui.common;
 
 import java.awt.Container;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,7 +21,9 @@ public class TestResourcesPanel extends javax.swing.JPanel {
 
     public TestResourcesPanel() {
         initComponents();
-        root = jInternalFrame1.getContentPane();
+        root = resourceInternalFrame.getContentPane();
+        resourceInternalFrame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
     }
 
     /**
@@ -36,7 +39,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jRadioButton4 = new javax.swing.JRadioButton();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        resourceInternalFrame = new javax.swing.JInternalFrame();
         jMenuBar2 = new javax.swing.JMenuBar();
         mnuDriver = new javax.swing.JMenu();
         mnuStraightTruck = new javax.swing.JMenu();
@@ -59,7 +62,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
             }
         });
 
-        jInternalFrame1.setVisible(true);
+        resourceInternalFrame.setVisible(true);
 
         mnuDriver.setText("Driver");
         mnuDriver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,6 +78,11 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         jMenuBar2.add(mnuDriver);
 
         mnuStraightTruck.setText("Straight Truck");
+        mnuStraightTruck.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuStraightTruckMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(mnuStraightTruck);
 
         mnuPowerUnit.setText("Power Unit");
@@ -91,27 +99,42 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         jMenuBar2.add(mnuPowerUnit);
 
         mnuTrailers.setText("Trailers");
+        mnuTrailers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuTrailersMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(mnuTrailers);
 
         mnuChasis.setText("Chasis");
         jMenuBar2.add(mnuChasis);
 
         mnuContainers.setText("Containers");
+        mnuContainers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuContainersMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(mnuContainers);
 
         mnuACIPassengers.setText("ACI Passengers");
+        mnuACIPassengers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuACIPassengersMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(mnuACIPassengers);
 
-        jInternalFrame1.setJMenuBar(jMenuBar2);
+        resourceInternalFrame.setJMenuBar(jMenuBar2);
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout resourceInternalFrameLayout = new javax.swing.GroupLayout(resourceInternalFrame.getContentPane());
+        resourceInternalFrame.getContentPane().setLayout(resourceInternalFrameLayout);
+        resourceInternalFrameLayout.setHorizontalGroup(
+            resourceInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 691, Short.MAX_VALUE)
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        resourceInternalFrameLayout.setVerticalGroup(
+            resourceInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 407, Short.MAX_VALUE)
         );
 
@@ -119,11 +142,11 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1)
+            .addComponent(resourceInternalFrame)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(resourceInternalFrame, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,8 +163,12 @@ public class TestResourcesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_mnuDriverActionPerformed
 
     private void mnuDriverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuDriverMouseClicked
-        // TODO add your handling code here:
-
+        root.removeAll();
+        root.setVisible(false);
+        TestDriverPanel testDriverPanel = new TestDriverPanel();
+        testDriverPanel.setBounds(50, 50, 1100, 700);
+        root.add(testDriverPanel);
+        root.setVisible(true);
     }//GEN-LAST:event_mnuDriverMouseClicked
 
     private void mnuPowerUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuPowerUnitMouseClicked
@@ -153,9 +180,45 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         root.setVisible(true);
     }//GEN-LAST:event_mnuPowerUnitMouseClicked
 
+    private void mnuStraightTruckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuStraightTruckMouseClicked
+        root.removeAll();
+        root.setVisible(false);
+        TestStraightTruckPanel testStraightTruckPanel = new TestStraightTruckPanel();
+        testStraightTruckPanel.setBounds(50, 50, 1250, 700);
+        root.add(testStraightTruckPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_mnuStraightTruckMouseClicked
+
+    private void mnuTrailersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuTrailersMouseClicked
+        root.removeAll();
+        root.setVisible(false);
+        TestTrailerPanel testTrailerPanel = new TestTrailerPanel();
+        testTrailerPanel.setBounds(50, 50, 1250, 700);
+        root.add(testTrailerPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_mnuTrailersMouseClicked
+
+    private void mnuContainersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuContainersMouseClicked
+        root.removeAll();
+        root.setVisible(false);
+        TestContainerPanel testContainerPanel = new TestContainerPanel();
+        testContainerPanel.setBounds(50, 50, 1250, 700);
+        root.add(testContainerPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_mnuContainersMouseClicked
+
+    private void mnuACIPassengersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuACIPassengersMouseClicked
+        // TODO add your handling code here:
+        root.removeAll();
+        root.setVisible(false);
+        TestACIPassengerPanel testACIPassengerPanel = new TestACIPassengerPanel();
+        testACIPassengerPanel.setBounds(50, 50, 1250, 700);
+        root.add(testACIPassengerPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_mnuACIPassengersMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -168,5 +231,6 @@ public class TestResourcesPanel extends javax.swing.JPanel {
     private javax.swing.JMenu mnuPowerUnit;
     private javax.swing.JMenu mnuStraightTruck;
     private javax.swing.JMenu mnuTrailers;
+    private javax.swing.JInternalFrame resourceInternalFrame;
     // End of variables declaration//GEN-END:variables
 }

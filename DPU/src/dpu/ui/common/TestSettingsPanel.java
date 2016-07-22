@@ -40,8 +40,24 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
         setSettingsPanelBody();
     }
 
+    private int columns() {
+        int cols = 0;
+        if (lstTabs.size() % 10 == 0) {
+            cols = lstTabs.size() / 10;
+        } else {
+            cols = (lstTabs.size() / 10) + 1;
+        }
+        return cols;
+    }
+
     private void setSettingsPanelBody() {
-        int height = 0;
+        int yForLabel = 0;
+        int count = 0;
+        int start = 0;
+        int end = start + 10;
+        if (end > lstTabs.size()) {
+            end = lstTabs.size();
+        }
         chkArray = new JCheckBox[lstTabs.size()];
         JLabel lblSelectAll = new JLabel("Select All");
         lblSelectAll.setBounds(360, 10, 120, 40);
@@ -50,24 +66,33 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
         headCheckBox.setBounds(420, 10, 120, 40);
         add(headCheckBox);
         headCheckBox.addItemListener(this);
-        for (int i = 0; i < lstTabs.size(); i++) {
-            JLabel lbl = new JLabel(lstTabs.get(i));
-            chk = new JCheckBox();
-            chk.setName("chk" + i);
-            lbl.setBounds(200, ((i + 1) * 30) + 10, 120, 40);
-            chk.setBounds(420, ((i + 1) * 30) + 10, 120, 40);
-            add(lbl);
-            add(chk);
-            chkArray[i] = chk;
-            for (String tab : lstPreferences) {
-                if (lbl.getText().equals(tab)) {
-                    chk.setSelected(true);
+        while (count < columns()) {
+            yForLabel = 0;
+            for (int i = start; i < end; i++) {
+                yForLabel++;
+                JLabel lbl = new JLabel(lstTabs.get(i));
+                chk = new JCheckBox();
+                chk.setName("chk" + i);
+                lbl.setBounds(100 + (count * 300), ((yForLabel + 1) * 30) + 10, 120, 40);
+                chk.setBounds(300 + (count * 300), ((yForLabel + 1) * 30) + 10, 120, 40);
+                add(lbl);
+                add(chk);
+                chkArray[i] = chk;
+                for (String tab : lstPreferences) {
+                    if (lbl.getText().equals(tab)) {
+                        chk.setSelected(true);
+                    }
                 }
             }
+            count++;
+            start = end;
+            end = start + 10;
+            if (end > lstTabs.size()) {
+                end = lstTabs.size();
+            }
         }
-        height = (lstTabs.size()) * 30 + 60;
         btn = new JButton("Save");
-        btn.setBounds(320, height, 120, 40);
+        btn.setBounds(800, 360, 120, 40);
         add(btn);
         btn.addActionListener(this);
         setVisible(true);

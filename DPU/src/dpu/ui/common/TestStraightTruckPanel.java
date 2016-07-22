@@ -27,19 +27,94 @@ public class TestStraightTruckPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnAddManagePowerUnit = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtPowerUnitSearch = new javax.swing.JTextField();
+        btnClearManagePowerUnit = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tblPowerUnit = new javax.swing.JTable();
+
+        btnAddManagePowerUnit.setText("+");
+        btnAddManagePowerUnit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddManagePowerUnitMouseClicked(evt);
+            }
+        });
+        btnAddManagePowerUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddManagePowerUnitActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Search");
+
+        btnClearManagePowerUnit.setText("Clear");
+
+        tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Unit No", "Class", "Equipment Type", "Length", "VIN", "Make", "Model", "Year", "Plate No", "Jurisdiction", "Tare Wgt.", "R.G.W", "Current Odometer", "Reading Taken", "Created By", "Created On", "Division", "Terminal", "Category", "IFTA A/c"
+            }
+        ));
+        jScrollPane9.setViewportView(tblPowerUnit);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane9)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddManagePowerUnit)
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClearManagePowerUnit)
+                        .addGap(0, 925, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClearManagePowerUnit)
+                    .addComponent(btnAddManagePowerUnit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddManagePowerUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitMouseClicked
+        // TODO add your handling code here:
+        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
+        addPowerUnitFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManagePowerUnitMouseClicked
+
+    private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
+
+    }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnAddManagePowerUnit;
+    public static javax.swing.JButton btnClearManagePowerUnit;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JScrollPane jScrollPane9;
+    public static javax.swing.JTable tblPowerUnit;
+    public static javax.swing.JTextField txtPowerUnitSearch;
     // End of variables declaration//GEN-END:variables
 }
