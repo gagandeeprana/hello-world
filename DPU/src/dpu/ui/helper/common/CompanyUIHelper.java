@@ -4,8 +4,8 @@ import dpu.beans.admin.CompanyBean;
 import dpu.dao.admin.CompanyDAO;
 import dpu.dao.admin.impl.CompanyDAOImpl;
 import dpu.ui.common.AddCompanyFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestCompanyPanel;
+//import static dpu.ui.common.TestCompanyPanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,16 +30,16 @@ public class CompanyUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtCompanySearch.setText("");
+        TestCompanyPanel.txtCompanySearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.companyPanel.setEnabled(var);
-        MainFrame.tblCompany.setEnabled(var);
-        MainFrame.btnAddManageCompany.setEnabled(var);
-        MainFrame.btnClearManageCompany.setEnabled(var);
-        MainFrame.txtCompanySearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestCompanyPanel.companyPanel.setEnabled(var);
+        TestCompanyPanel.tblCompany.setEnabled(var);
+        TestCompanyPanel.btnAddManageCompany.setEnabled(var);
+        TestCompanyPanel.btnClearManageCompany.setEnabled(var);
+        TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -192,9 +192,9 @@ public class CompanyUIHelper {
     }
 
     public void generateTable() {
-        lstCompanies = companyDAO.getAllCompanies(MainFrame.txtCompanySearch.getText());
+        lstCompanies = companyDAO.getAllCompanies(TestCompanyPanel.txtCompanySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblCompany = new JTable(defaultTableModel);
+        TestCompanyPanel.tblCompany = new JTable(defaultTableModel);
         Object[][] data = new Object[lstCompanies.size()][4];
         for (int i = 0; i < lstCompanies.size(); i++) {
             CompanyBean obj = lstCompanies.get(i);
@@ -205,11 +205,11 @@ public class CompanyUIHelper {
         }
         Object[] cols = {"Company Id", "Company Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblCompany.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblCompany.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblCompany.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblCompany.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane4.setViewportView(MainFrame.tblCompany);
+        TestCompanyPanel.tblCompany.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestCompanyPanel.tblCompany.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestCompanyPanel.tblCompany.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestCompanyPanel.tblCompany.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestCompanyPanel.jScrollPane4.setViewportView(TestCompanyPanel.tblCompany);
     }
 
     public String save() {
@@ -220,8 +220,8 @@ public class CompanyUIHelper {
         String msg = companyDAO.addCompany(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.companyPanel.setEnabled(true);
+//        TestCompanyPanel.mainTabbedPane.setEnabled(true);
+//        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
 
@@ -230,8 +230,8 @@ public class CompanyUIHelper {
         String msg = companyDAO.deleteCompany(companyIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.companyPanel.setEnabled(true);
+//        TestCompanyPanel.mainTabbedPane.setEnabled(true);
+//        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
 
@@ -240,8 +240,8 @@ public class CompanyUIHelper {
         String msg = companyDAO.updateCompany(companyBean);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.companyPanel.setEnabled(true);
+//        TestCompanyPanel.mainTabbedPane.setEnabled(true);
+//        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
 }

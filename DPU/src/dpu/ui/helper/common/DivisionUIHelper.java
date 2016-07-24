@@ -9,6 +9,7 @@ import static dpu.ui.common.MainFrame.divisionPanel;
 import static dpu.ui.common.MainFrame.mainTabbedPane;
 import static dpu.ui.common.MainFrame.tblDivision;
 import static dpu.ui.common.MainFrame.txtDivisionSearch;
+import dpu.ui.common.TestDivisionPanel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,15 +34,15 @@ public class DivisionUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtDivisionSearch.setText("");
+        TestDivisionPanel.txtDivisionSearch.setText("");
     }
 
     public void disable(boolean var) {
         mainTabbedPane.setEnabled(var);
         divisionPanel.setEnabled(var);
         tblDivision.setEnabled(var);
-        MainFrame.btnAddManageDivision.setEnabled(var);
-        MainFrame.btnClearManageDivision.setEnabled(var);
+        TestDivisionPanel.btnAddManageDivision.setEnabled(var);
+        TestDivisionPanel.btnClearManageDivision.setEnabled(var);
         txtDivisionSearch.setEnabled(var);
     }
 
@@ -197,7 +198,7 @@ public class DivisionUIHelper {
     public void generateTable() {
         lstDivisions = divisionDAO.getAllDivisions(txtDivisionSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblDivision = new JTable(defaultTableModel);
+        TestDivisionPanel.tblDivision = new JTable(defaultTableModel);
         Object[][] data = new Object[lstDivisions.size()][4];
         for (int i = 0; i < lstDivisions.size(); i++) {
             DivisionBean obj = lstDivisions.get(i);
@@ -208,11 +209,11 @@ public class DivisionUIHelper {
         }
         Object[] cols = {"Division Id", "Division Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblDivision.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblDivision.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblDivision.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblDivision.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane2.setViewportView(MainFrame.tblDivision);
+        TestDivisionPanel.tblDivision.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestDivisionPanel.tblDivision.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestDivisionPanel.tblDivision.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestDivisionPanel.tblDivision.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestDivisionPanel.jScrollPane2.setViewportView(TestDivisionPanel.tblDivision);
     }
 
     public String save() {

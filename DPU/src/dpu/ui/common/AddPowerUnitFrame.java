@@ -114,6 +114,11 @@ public class AddPowerUnitFrame extends javax.swing.JFrame {
         btnSaveAddPowerUnit.setText("Save");
 
         btnCancelAddPowerUnit.setText("Cancel");
+        btnCancelAddPowerUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelAddPowerUnitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,6 +248,11 @@ public class AddPowerUnitFrame extends javax.swing.JFrame {
     private void txtUnitNoAddPowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnitNoAddPowerUnitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUnitNoAddPowerUnitActionPerformed
+
+    private void btnCancelAddPowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddPowerUnitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCancelAddPowerUnitActionPerformed
 
     /**
      * @param args the command line arguments

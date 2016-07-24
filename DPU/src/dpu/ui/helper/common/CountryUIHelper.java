@@ -4,8 +4,8 @@ import dpu.beans.admin.CountryBean;
 import dpu.dao.admin.CountryDAO;
 import dpu.dao.admin.impl.CountryDAOImpl;
 import dpu.ui.common.AddCountryFrame;
-import dpu.ui.common.MainFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
+import dpu.ui.common.TestCountryPanel;
+//import static dpu.ui.common.TestCountryPanel.mainTabbedPane;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,16 +30,16 @@ public class CountryUIHelper {
     String msg = "";
 
     public void clear() {
-        MainFrame.txtCountrySearch.setText("");
+        TestCountryPanel.txtCountrySearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
-        MainFrame.countryPanel.setEnabled(var);
-        MainFrame.tblCountry.setEnabled(var);
-        MainFrame.btnAddManageCountry.setEnabled(var);
-        MainFrame.btnClearManageCountry.setEnabled(var);
-        MainFrame.txtCountrySearch.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
+//        TestCountryPanel.countryPanel.setEnabled(var);
+        TestCountryPanel.tblCountry.setEnabled(var);
+        TestCountryPanel.btnAddManageCountry.setEnabled(var);
+        TestCountryPanel.btnClearManageCountry.setEnabled(var);
+        TestCountryPanel.txtCountrySearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -192,9 +192,9 @@ public class CountryUIHelper {
     }
 
     public void generateTable() {
-        lstCompanies = countryDAO.getAllCountries(MainFrame.txtCountrySearch.getText());
+        lstCompanies = countryDAO.getAllCountries(TestCountryPanel.txtCountrySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        MainFrame.tblCountry = new JTable(defaultTableModel);
+        TestCountryPanel.tblCountry = new JTable(defaultTableModel);
         Object[][] data = new Object[lstCompanies.size()][4];
         for (int i = 0; i < lstCompanies.size(); i++) {
             CountryBean obj = lstCompanies.get(i);
@@ -205,11 +205,11 @@ public class CountryUIHelper {
         }
         Object[] cols = {"Country Id", "Country Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
-        MainFrame.tblCountry.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        MainFrame.tblCountry.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        MainFrame.tblCountry.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        MainFrame.tblCountry.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        MainFrame.jScrollPane11.setViewportView(MainFrame.tblCountry);
+        TestCountryPanel.tblCountry.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        TestCountryPanel.tblCountry.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        TestCountryPanel.tblCountry.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        TestCountryPanel.tblCountry.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestCountryPanel.jScrollPane11.setViewportView(TestCountryPanel.tblCountry);
     }
 
     public String save() {
@@ -220,8 +220,8 @@ public class CountryUIHelper {
         String msg = countryDAO.addCountry(obj);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.countryPanel.setEnabled(true);
+//        TestCountryPanel.mainTabbedPane.setEnabled(true);
+//        TestCountryPanel.countryPanel.setEnabled(true);
         return msg;
     }
 
@@ -230,8 +230,8 @@ public class CountryUIHelper {
         String msg = countryDAO.deleteCountry(countryIdToBeDeleted);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.countryPanel.setEnabled(true);
+//        TestCountryPanel.mainTabbedPane.setEnabled(true);
+//        TestCountryPanel.countryPanel.setEnabled(true);
         return msg;
     }
 
@@ -240,8 +240,8 @@ public class CountryUIHelper {
         String msg = countryDAO.updateCountry(countryBean);
         disable(true);
         generateTable();
-        MainFrame.mainTabbedPane.setEnabled(true);
-        MainFrame.countryPanel.setEnabled(true);
+//        TestCountryPanel.mainTabbedPane.setEnabled(true);
+//        TestCountryPanel.countryPanel.setEnabled(true);
         return msg;
     }
 }
