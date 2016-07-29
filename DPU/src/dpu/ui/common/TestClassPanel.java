@@ -33,21 +33,15 @@ public class TestClassPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAddManageClass = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtClassSearch = new javax.swing.JTextField();
         btnClearManageClass = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClass = new javax.swing.JTable();
+        btnAddManageClass = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        btnAddManageClass.setText("+");
-        btnAddManageClass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddManageClassActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Search");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Search.png"))); // NOI18N
 
         txtClassSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -78,6 +72,15 @@ public class TestClassPanel extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblClass);
 
+        btnAddManageClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageClass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddManageClassMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,11 +90,13 @@ public class TestClassPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAddManageClass)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtClassSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtClassSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(90, 90, 90)
                         .addComponent(btnClearManageClass))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -100,24 +105,23 @@ public class TestClassPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAddManageClass)
-                    .addComponent(jLabel2)
                     .addComponent(btnClearManageClass)
-                    .addComponent(txtClassSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtClassSearch)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, txtClassSearch});
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageClassActionPerformed
-        classUIHelper.disable(false);
-        AddClassFrame addClassFrame = new AddClassFrame();
-        addClassFrame.setVisible(true);
-    }//GEN-LAST:event_btnAddManageClassActionPerformed
-
     private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
+
         classUIHelper.generateTable();
     }//GEN-LAST:event_txtClassSearchKeyReleased
 
@@ -130,11 +134,18 @@ public class TestClassPanel extends javax.swing.JPanel {
         classUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageClassActionPerformed
 
+    private void btnAddManageClassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManageClassMouseClicked
+        classUIHelper.disable(false);
+        AddClassFrame addClassFrame = new AddClassFrame();
+        addClassFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddManageClassMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnAddManageClass;
+    public static javax.swing.JLabel btnAddManageClass;
     public static javax.swing.JButton btnClearManageClass;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     public static javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable tblClass;
     public static javax.swing.JTextField txtClassSearch;

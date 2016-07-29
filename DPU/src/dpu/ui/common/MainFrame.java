@@ -1,9 +1,16 @@
 package dpu.ui.common;
 
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.swing.BrowserView;
-import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -14,16 +21,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements MouseMotionListener, MouseListener {
 
     String addUpdateFlag = "";
-
     static List<String> lstTabs = new ArrayList<>();
     static List<String> lstPreferences = new ArrayList<>();
     static Map<String, JPanel> map = new TreeMap<>();
+    private boolean dragging = false;
+    private Image tabImage = null;
+    private Point currentMouseLocation = null;
+    private int draggedTabIndex = 0;
 
     public MainFrame() {
         initComponents();
@@ -33,6 +42,8 @@ public class MainFrame extends javax.swing.JFrame {
         checkPreference();
         showHideTabs();
         readTabFile();
+        mainTabbedPane.addMouseListener(MainFrame.this);
+        mainTabbedPane.addMouseMotionListener(MainFrame.this);
 //        instantiateUIHelper();
 //        callGenerateTable();
         setSettingsIcon();
@@ -125,61 +136,66 @@ public class MainFrame extends javax.swing.JFrame {
         while (itr.hasNext()) {
             String key = itr.next();
             JPanel jPanel = map.get(key);
-            mainTabbedPane.add(key+"    ", jPanel);
+            mainTabbedPane.addTab(key + "    ", jPanel);
             if (key.equals("OutsideCarriers")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\OutsideCarrier.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("BorderCrossing")) {
+            } else if (key.equals("BorderCrossing")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\BorderCrossing.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("PayrollSchedules")) {
+            } else if (key.equals("PayrollSchedules")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\PayrollSchedules.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Prospects")) {
+            } else if (key.equals("Prospects")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Prospects.jpg");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Company")) {
+            } else if (key.equals("Company")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Company.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Resources")) {
+            } else if (key.equals("Resources")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Resources.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Role")) {
+            } else if (key.equals("Role")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Roles.jpg");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Customers")) {
+            } else if (key.equals("Customers")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Customers.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("SalesPerson")) {
+            } else if (key.equals("SalesPerson")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\SalesPerson.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Shippers")) {
+            } else if (key.equals("Shippers")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Shippers.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("Jurisdiction")) {
+            } else if (key.equals("Jurisdiction")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Jurisdiction.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("StandardCharges")) {
+            } else if (key.equals("StandardCharges")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardCharges.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("List")) {
+            } else if (key.equals("List")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\List.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
-            }
-            else if (key.equals("MasterOrders")) {
+            } else if (key.equals("MasterOrders")) {
                 ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MasterOrders.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            } else if (key.equals("MiscVendors")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MiscVendors.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            } else if (key.equals("Tracking")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Tracking.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            } else if (key.equals("TravelTimes")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\TravelTimes.gif");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            } else if (key.equals("CustomBrokers")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\CustomBrokers.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            } else if (key.equals("Class")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Class.png");
+                mainTabbedPane.setIconAt(counter, imageIcon);
+            } else if (key.equals("StandardTemplates")) {
+                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardTemplates.png");
                 mainTabbedPane.setIconAt(counter, imageIcon);
             }
             counter++;
@@ -1345,5 +1361,90 @@ public class MainFrame extends javax.swing.JFrame {
     public static javax.swing.JTextField txtTerminalSearch;
     public static javax.swing.JTextField txtTrackingSearch;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (!dragging) {
+            // Gets the tab index based on the mouse position
+            int tabNumber = mainTabbedPane.getUI().tabForCoordinate(mainTabbedPane, e.getX(), e.getY());
+
+            if (tabNumber >= 0) {
+                draggedTabIndex = tabNumber;
+                Rectangle bounds = mainTabbedPane.getUI().getTabBounds(mainTabbedPane, tabNumber);
+//                System.out.println("BOUNDS: " + bounds);
+                // Paint the tabbed pane to a buffer
+                Image totalImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+//                System.out.println("2nd:aa " + getWidth());
+//                System.out.println("2nd:bb " + getHeight());
+                Graphics totalGraphics = totalImage.getGraphics();
+                totalGraphics.setClip(bounds);
+                mainTabbedPane.setDoubleBuffered(false);
+                // Don't be double buffered when painting to a static image.
+                // Paint just the dragged tab to the buffer
+                tabImage = new BufferedImage(bounds.width, bounds.height, BufferedImage.TYPE_INT_ARGB);
+                Graphics graphics = tabImage.getGraphics();
+                graphics.drawImage(totalImage, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x + bounds.width, bounds.y + bounds.height, MainFrame.this);
+
+                dragging = true;
+            currentMouseLocation = e.getPoint();
+                paintComponent(totalGraphics);
+                repaint();
+            }
+        } else {
+            // Need to repaint
+            repaint();
+        }
+
+    }
+
+    protected void paintComponent(Graphics g) {
+        // Are we dragging?
+//        mainTabbedPane.paintComponents(g);
+            System.out.println(dragging);
+            System.out.println(currentMouseLocation);
+            System.out.println(tabImage);
+        if (dragging && currentMouseLocation != null && tabImage != null) {
+            // Draw the dragged tab
+//                g.drawImage(tabImage, 0, 0, bounds.width, bounds.height, bounds.x, bounds.y, bounds.x + bounds.width, bounds.y + bounds.height, mainTabbedPane);
+            g.drawImage(tabImage, currentMouseLocation.x, currentMouseLocation.y, mainTabbedPane.getTabComponentAt(draggedTabIndex));
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (dragging) {
+            int tabNumber = mainTabbedPane.getUI().tabForCoordinate(mainTabbedPane, e.getX(), e.getY());
+            if (tabNumber >= 0) {
+                Component comp = mainTabbedPane.getComponentAt(draggedTabIndex);
+                String title = mainTabbedPane.getTitleAt(draggedTabIndex);
+                System.out.println("Title At: " + title);
+                mainTabbedPane.removeTabAt(draggedTabIndex);
+                mainTabbedPane.insertTab(title, null, comp, null, tabNumber);
+            }
+        }
+
+        dragging = false;
+        tabImage = null;
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 
 }

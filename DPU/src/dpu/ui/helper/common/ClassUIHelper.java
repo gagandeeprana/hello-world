@@ -4,22 +4,23 @@ import dpu.beans.admin.ClassBean;
 import dpu.dao.admin.ClassDAO;
 import dpu.dao.admin.impl.ClassDAOImpl;
 import dpu.ui.common.AddClassFrame;
-import static dpu.ui.common.MainFrame.mainTabbedPane;
 import dpu.ui.common.TestClassPanel;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class ClassUIHelper {
+public class ClassUIHelper extends DefaultTableCellRenderer {
 
     public String addUpdateFlag = "";
     int classId = 0;
@@ -29,12 +30,24 @@ public class ClassUIHelper {
     int classIdToBeDeleted = 0;
     String msg = "";
 
+//    public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+////        Component returnComp = super.prepareRenderer(renderer, row, column);
+//        Color alternateColor = new Color(252, 242, 206);
+//        Color whiteColor = Color.WHITE;
+//        if (!returnComp.getBackground().equals(getSelectionBackground())) {
+//            Color bg = (row % 2 == 0 ? alternateColor : whiteColor);
+//            returnComp.setBackground(bg);
+//            bg = null;
+//        }
+//        return returnComp;
+//    }
+
     public void clear() {
         TestClassPanel.txtClassSearch.setText("");
     }
 
     public void disable(boolean var) {
-        mainTabbedPane.setEnabled(var);
+//        mainTabbedPane.setEnabled(var);
 //        TestClassPanel.classPanel.setEnabled(var);
         TestClassPanel.tblClass.setEnabled(var);
         TestClassPanel.btnAddManageClass.setEnabled(var);
@@ -51,11 +64,15 @@ public class ClassUIHelper {
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
+                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
                 setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
+//                setBackground(table.getSelectionBackground());
+                setBackground(Color.WHITE);
             } else {
                 setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
+                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
+//                setBackground(UIManager.getColor("Button.background"));
+                setBackground(Color.WHITE);
             }
             setText((value == null) ? "" : value.toString());
             return this;
@@ -84,9 +101,11 @@ public class ClassUIHelper {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
                 button.setBackground(table.getSelectionBackground());
+                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
             } else {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
+                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
             }
             classIdToBeDeleted = lstClasses.get(row).getClassId();
             label = (value == null) ? "" : value.toString();
@@ -123,11 +142,14 @@ public class ClassUIHelper {
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
+                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
                 setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
+                setBackground(Color.WHITE);
             } else {
                 setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
+                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
+//                setBackground(UIManager.getColor("Button.background"));
+                setBackground(Color.WHITE);
             }
             setText((value == null) ? "" : value.toString());
             return this;
@@ -156,9 +178,11 @@ public class ClassUIHelper {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
                 button.setBackground(table.getSelectionBackground());
+                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
             } else {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
+                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
             }
             classIdToBeDeleted = lstClasses.get(row).getClassId();
             classId = lstClasses.get(row).getClassId();
@@ -192,6 +216,7 @@ public class ClassUIHelper {
     }
 
     public void generateTable() {
+
         lstClasses = classDAO.getAllClasses(TestClassPanel.txtClassSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestClassPanel.tblClass = new JTable(defaultTableModel);
@@ -200,8 +225,16 @@ public class ClassUIHelper {
             ClassBean obj = lstClasses.get(i);
             data[i][0] = obj.getClassId();
             data[i][1] = obj.getName();
-            data[i][2] = "Remove";
-            data[i][3] = "Update";
+            data[i][2] = "";
+            data[i][3] = "";
+            TestClassPanel.tblClass.setRowHeight(30);
+            if (i % 2 == 0) {
+                JTable jj = TestClassPanel.tblClass;
+                jj.setBackground(Color.WHITE);
+            } else {
+                JTable jj = TestClassPanel.tblClass;
+                jj.setBackground(Color.red);
+            }
         }
         Object[] cols = {"Class Id", "Class Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
@@ -209,6 +242,8 @@ public class ClassUIHelper {
         TestClassPanel.tblClass.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
         TestClassPanel.tblClass.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
         TestClassPanel.tblClass.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestClassPanel.tblClass.getColumn(" ").setMaxWidth(25);
+        TestClassPanel.tblClass.getColumn("  ").setMaxWidth(25);
         TestClassPanel.jScrollPane3.setViewportView(TestClassPanel.tblClass);
     }
 
