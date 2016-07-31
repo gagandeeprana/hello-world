@@ -32,7 +32,6 @@ public class MainTabbedPane extends JTabbedPane {
     private Image tabImage = null;
     private Point currentMouseLocation = null;
     private int draggedTabIndex = 0;
-    static MainTabbedPane m1 = new MainTabbedPane();
     static List<String> lstTabs = new ArrayList<>();
 
     public MainTabbedPane() {
@@ -93,6 +92,7 @@ public class MainTabbedPane extends JTabbedPane {
                 tabImage = null;
             }
         });
+        readTabFile();
         checkPreference();
     }
 
@@ -263,16 +263,6 @@ public class MainTabbedPane extends JTabbedPane {
         } catch (Exception e) {
             System.out.println("MainTabbedPane : setImageIcon(): " + e);
         }
-    }
-
-    public static void main(String[] args) {
-        JFrame test = new JFrame("Dispatch Processing Unit");
-        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        test.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        readTabFile();
-        m1 = new MainTabbedPane();
-        test.add(m1);
-        test.setVisible(true);
     }
 
     private static void readTabFile() {

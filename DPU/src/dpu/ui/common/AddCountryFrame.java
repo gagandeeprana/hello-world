@@ -12,6 +12,7 @@ import dpu.beans.admin.CountryBean;
 import dpu.dao.admin.CountryDAO;
 import dpu.dao.admin.impl.CountryDAOImpl;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class AddCountryFrame extends javax.swing.JFrame {
@@ -26,6 +27,7 @@ public class AddCountryFrame extends javax.swing.JFrame {
 
     public AddCountryFrame() {
         initComponents();
+        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
         setLocationRelativeTo(null);
         countryUI = new CountryUIHelper();
         btnSaveAddCountry.setEnabled(false);
@@ -34,6 +36,7 @@ public class AddCountryFrame extends javax.swing.JFrame {
 
     public AddCountryFrame(CountryBean countryBean) {
         initComponents();
+        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
         countryUI = new CountryUIHelper();
         this.countryBean = countryBean;
         setLocationRelativeTo(null);

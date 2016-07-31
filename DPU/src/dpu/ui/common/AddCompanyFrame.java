@@ -12,6 +12,7 @@ import dpu.beans.admin.CompanyBean;
 import dpu.dao.admin.CompanyDAO;
 import dpu.dao.admin.impl.CompanyDAOImpl;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class AddCompanyFrame extends javax.swing.JFrame {
@@ -26,6 +27,7 @@ public class AddCompanyFrame extends javax.swing.JFrame {
 
     public AddCompanyFrame() {
         initComponents();
+        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
         setLocationRelativeTo(null);
         companyUI = new CompanyUIHelper();
         btnSaveAddCompany.setEnabled(false);

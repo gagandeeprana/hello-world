@@ -5,6 +5,7 @@
  */
 package dpu.ui.common;
 
+import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.helper.common.ClassUIHelper;
 
 /**
@@ -19,7 +20,9 @@ public class TestClassPanel extends javax.swing.JPanel {
     ClassUIHelper classUIHelper = null;
 
     public TestClassPanel() {
+        
         initComponents();
+        
         classUIHelper = new ClassUIHelper();
         classUIHelper.generateTable();
     }
@@ -39,7 +42,7 @@ public class TestClassPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClass = new javax.swing.JTable();
         btnAddManageClass = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblPrintManageClass = new javax.swing.JLabel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Search.png"))); // NOI18N
 
@@ -79,7 +82,12 @@ public class TestClassPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        lblPrintManageClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        lblPrintManageClass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPrintManageClassMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,7 +103,7 @@ public class TestClassPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(lblPrintManageClass)
                         .addGap(90, 90, 90)
                         .addComponent(btnClearManageClass))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -110,13 +118,13 @@ public class TestClassPanel extends javax.swing.JPanel {
                     .addComponent(btnClearManageClass)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtClassSearch)
-                    .addComponent(jLabel3))
+                    .addComponent(lblPrintManageClass))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, txtClassSearch});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageClass, jLabel2, lblPrintManageClass, txtClassSearch});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,13 +148,17 @@ public class TestClassPanel extends javax.swing.JPanel {
         addClassFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageClassMouseClicked
 
+    private void lblPrintManageClassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrintManageClassMouseClicked
+        JasperReportGenerator.generateReport("ClassReport.jrxml");
+    }//GEN-LAST:event_lblPrintManageClassMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel btnAddManageClass;
     public static javax.swing.JButton btnClearManageClass;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     public static javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblPrintManageClass;
     public static javax.swing.JTable tblClass;
     public static javax.swing.JTextField txtClassSearch;
     // End of variables declaration//GEN-END:variables

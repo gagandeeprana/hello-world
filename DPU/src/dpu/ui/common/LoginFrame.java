@@ -5,6 +5,13 @@
  */
 package dpu.ui.common;
 
+import dpu.dao.admin.UserDAO;
+import dpu.dao.admin.impl.UserDAOImpl;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +21,11 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
+    static MainTabbedPane mainTabbedPane = null;
+
     public LoginFrame() {
         initComponents();
+        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -45,7 +55,12 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        lblForgotPassword.setText("Forgot Password ?");
+        lblForgotPassword.setText("Retrieve Password ?");
+        lblForgotPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblForgotPasswordMouseClicked(evt);
+            }
+        });
 
         btnLogin.setText("Login Here");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +89,7 @@ public class LoginFrame extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblForgotPassword)
                     .addComponent(btnLogin))
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,21 +113,49 @@ public class LoginFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        new MainFrame().setVisible(true);
-        setVisible(false);
+        JFrame test = new JFrame("Dispatch Processing Unit");
+        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        test.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        test.setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
+        mainTabbedPane = new MainTabbedPane();
+        test.add(mainTabbedPane);
+        test.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void lblForgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPasswordMouseClicked
+        String username = txtUsername.getText();
+        if (username.equals("")) {
+            JOptionPane.showMessageDialog(null, "Username Reqd. to retrieve password");
+        } else {
+            UserDAO userDAO = new UserDAOImpl();
+            String msg = userDAO.retrievePassword(username);
+            if (msg.equals("sent")) {
+                JOptionPane.showMessageDialog(null, "Email Sent Successfully");
+            } else if (msg.equals("failed")) {
+                JOptionPane.showMessageDialog(null, "Unable to send Email");
+            } else {
+                JOptionPane.showMessageDialog(null, "Server Error");
+            }
+        }
+    }//GEN-LAST:event_lblForgotPasswordMouseClicked
 
     /**
      * @param args the command line arguments

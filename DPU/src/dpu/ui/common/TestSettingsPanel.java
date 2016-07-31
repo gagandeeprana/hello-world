@@ -131,10 +131,10 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             MainTabbedPane.lstPreferences = new ArrayList<>();
             MainTabbedPane.map = new TreeMap<>();
             System.out.println("Map Size+++++++++++++++1: " + MainTabbedPane.map.size());
-            MainTabbedPane.m1.checkPreference();
-            MainTabbedPane.m1.showHideTabs();
+            LoginFrame.mainTabbedPane.checkPreference();
+            LoginFrame.mainTabbedPane.showHideTabs();
             System.out.println("Map Size+++++++++++++++2: " + MainTabbedPane.map.size());
-            MainTabbedPane.m1.setSettingsIcon();
+            LoginFrame.mainTabbedPane.setSettingsIcon();
             setSettingsPanelBody();
         }
     }

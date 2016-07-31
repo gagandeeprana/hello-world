@@ -26,7 +26,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPrintManageClass" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Component id="btnClearManageClass" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -41,11 +41,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnAddManageClass" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAddManageClass" linkSize="1" min="-2" max="-2" attributes="0"/>
                   <Component id="btnClearManageClass" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" linkSize="1" alignment="1" max="32767" attributes="0"/>
                   <Component id="txtClassSearch" linkSize="1" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jLabel3" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPrintManageClass" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane3" pref="309" max="32767" attributes="0"/>
@@ -121,12 +121,15 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="lblPrintManageClass">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/dpu/ui/common/Print.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblPrintManageClassMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -7,15 +7,19 @@ import dpu.ui.common.AddClassFrame;
 import dpu.ui.common.TestClassPanel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -41,7 +45,6 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
 //        }
 //        return returnComp;
 //    }
-
     public void clear() {
         TestClassPanel.txtClassSearch.setText("");
     }
@@ -216,10 +219,10 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
     }
 
     public void generateTable() {
-
         lstClasses = classDAO.getAllClasses(TestClassPanel.txtClassSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestClassPanel.tblClass = new JTable(defaultTableModel);
+        TestClassPanel.tblClass.setDefaultRenderer(Object.class, new ClassTable());
         Object[][] data = new Object[lstClasses.size()][4];
         for (int i = 0; i < lstClasses.size(); i++) {
             ClassBean obj = lstClasses.get(i);
@@ -228,13 +231,6 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
             data[i][2] = "";
             data[i][3] = "";
             TestClassPanel.tblClass.setRowHeight(30);
-            if (i % 2 == 0) {
-                JTable jj = TestClassPanel.tblClass;
-                jj.setBackground(Color.WHITE);
-            } else {
-                JTable jj = TestClassPanel.tblClass;
-                jj.setBackground(Color.red);
-            }
         }
         Object[] cols = {"Class Id", "Class Name", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
@@ -244,6 +240,8 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
         TestClassPanel.tblClass.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
         TestClassPanel.tblClass.getColumn(" ").setMaxWidth(25);
         TestClassPanel.tblClass.getColumn("  ").setMaxWidth(25);
+        TestClassPanel.tblClass.setIntercellSpacing(new Dimension(0, 0));
+        TestClassPanel.tblClass.setShowGrid(false);
         TestClassPanel.jScrollPane3.setViewportView(TestClassPanel.tblClass);
     }
 
@@ -278,5 +276,30 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
 //        TestClassPanel.mainTabbedPane.setEnabled(true);
 //        TestClassPanel.classPanel.setEnabled(true);
         return msg;
+    }
+
+    class ClassTable implements TableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JTextField editor = new JTextField();
+            editor.setBorder(null);
+            if (value != null) {
+                //here space is given to provide some left margin while showing data on textfield..
+                editor.setText("   " + value.toString());
+            }
+            if (row % 2 == 0) {
+                Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
+                editor.setBorder(border);
+
+            } else {
+                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
+                editor.setBorder(border);
+
+            }
+            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+            return editor;
+        }
+
     }
 }

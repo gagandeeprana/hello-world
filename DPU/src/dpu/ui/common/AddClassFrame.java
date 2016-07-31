@@ -8,10 +8,10 @@ package dpu.ui.common;
 import dpu.ui.helper.common.ClassUIHelper;
 import dpu.Validations;
 import dpu.beans.admin.ClassBean;
-import dpu.beans.admin.DivisionBean;
-import dpu.dao.admin.DivisionDAO;
-import dpu.dao.admin.impl.DivisionDAOImpl;
+import dpu.dao.admin.ClassDAO;
+import dpu.dao.admin.impl.ClassDAOImpl;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class AddClassFrame extends javax.swing.JFrame {
@@ -24,11 +24,12 @@ public class AddClassFrame extends javax.swing.JFrame {
     String addUpdateFlag = "";
     ClassBean classBean;
 
-    public void init(DivisionBean divisionBean) {
+    public void init(ClassBean divisionBean) {
     }
 
     public AddClassFrame() {
         initComponents();
+        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
         setLocationRelativeTo(null);
         classUI = new ClassUIHelper();
         btnSaveAddClass.setEnabled(false);
@@ -218,13 +219,13 @@ public class AddClassFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveAddClassActionPerformed
 
     private void txtClassIdAddClassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassIdAddClassKeyReleased
-        DivisionDAO divisionDAO = new DivisionDAOImpl();
-        List<DivisionBean> lstDivisions = divisionDAO.getAllDivisions("");
+        ClassDAO divisionDAO = new ClassDAOImpl();
+        List<ClassBean> lstClasses = divisionDAO.getAllClasses("");
         try {
             if (validateClassId(txtClassIdAddClass.getText())) {
                 lblClassIdAddClassFrameValidation.setText("");
-                for (DivisionBean divisionBean : lstDivisions) {
-                    if (divisionBean.getDivisionId() == Integer.parseInt(txtClassIdAddClass.getText().trim())) {
+                for (ClassBean divisionBean : lstClasses) {
+                    if (divisionBean.getClassId() == Integer.parseInt(txtClassIdAddClass.getText().trim())) {
                         lblClassIdAddClassFrameValidation.setText("Already Taken");
                         btnSaveAddClass.setEnabled(false);
                     }
@@ -242,13 +243,13 @@ public class AddClassFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtClassIdAddClassKeyReleased
 
     private void txtClassNameAddClassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassNameAddClassKeyReleased
-        DivisionDAO divisionDAO = new DivisionDAOImpl();
-        List<DivisionBean> lstDivisions = divisionDAO.getAllDivisions("");
+        ClassDAO divisionDAO = new ClassDAOImpl();
+        List<ClassBean> lstClasss = divisionDAO.getAllClasses("");
         try {
             if (validateClassName(txtClassNameAddClass.getText())) {
                 lblClassNameAddClassFrameValidation.setText("");
-                for (DivisionBean divisionBean : lstDivisions) {
-                    if (divisionBean.getDivision().equals(txtClassNameAddClass.getText().trim())) {
+                for (ClassBean divisionBean : lstClasss) {
+                    if (divisionBean.getClass().equals(txtClassNameAddClass.getText().trim())) {
                         lblClassNameAddClassFrameValidation.setText("Already Taken");
                         btnSaveAddClass.setEnabled(false);
                     }
