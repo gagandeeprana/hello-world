@@ -7,6 +7,23 @@ package dpu.ui.common;
 
 import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.helper.common.ClassUIHelper;
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -20,9 +37,11 @@ public class TestClassPanel extends javax.swing.JPanel {
     ClassUIHelper classUIHelper = null;
 
     public TestClassPanel() {
-        
+
         initComponents();
-        
+        btnClearManageClass.setContentAreaFilled(false);
+        btnClearManageClass.setAction(new ShowWaitAction(""));
+        btnClearManageClass.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Print.png"));
         classUIHelper = new ClassUIHelper();
         classUIHelper.generateTable();
     }
@@ -42,7 +61,6 @@ public class TestClassPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClass = new javax.swing.JTable();
         btnAddManageClass = new javax.swing.JLabel();
-        lblPrintManageClass = new javax.swing.JLabel();
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Search.png"))); // NOI18N
 
@@ -55,7 +73,10 @@ public class TestClassPanel extends javax.swing.JPanel {
             }
         });
 
-        btnClearManageClass.setText("Clear");
+        btnClearManageClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnClearManageClass.setBorder(null);
+        btnClearManageClass.setBorderPainted(false);
+        btnClearManageClass.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
         btnClearManageClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearManageClassActionPerformed(evt);
@@ -82,13 +103,6 @@ public class TestClassPanel extends javax.swing.JPanel {
             }
         });
 
-        lblPrintManageClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
-        lblPrintManageClass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblPrintManageClassMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,29 +116,29 @@ public class TestClassPanel extends javax.swing.JPanel {
                         .addComponent(txtClassSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblPrintManageClass)
-                        .addGap(90, 90, 90)
-                        .addComponent(btnClearManageClass))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClearManageClass, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnClearManageClass, jLabel2});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAddManageClass)
-                    .addComponent(btnClearManageClass)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnAddManageClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtClassSearch)
-                    .addComponent(lblPrintManageClass))
+                    .addComponent(btnClearManageClass, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageClass, jLabel2, lblPrintManageClass, txtClassSearch});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageClass, btnClearManageClass, jLabel2, txtClassSearch});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,8 +152,6 @@ public class TestClassPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtClassSearchKeyTyped
 
     private void btnClearManageClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearManageClassActionPerformed
-        txtClassSearch.setText("");
-        classUIHelper.generateTable();
     }//GEN-LAST:event_btnClearManageClassActionPerformed
 
     private void btnAddManageClassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManageClassMouseClicked
@@ -148,18 +160,63 @@ public class TestClassPanel extends javax.swing.JPanel {
         addClassFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManageClassMouseClicked
 
-    private void lblPrintManageClassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrintManageClassMouseClicked
-        JasperReportGenerator.generateReport("ClassReport.jrxml");
-    }//GEN-LAST:event_lblPrintManageClassMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel btnAddManageClass;
     public static javax.swing.JButton btnClearManageClass;
     private javax.swing.JLabel jLabel2;
     public static javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblPrintManageClass;
     public static javax.swing.JTable tblClass;
     public static javax.swing.JTextField txtClassSearch;
     // End of variables declaration//GEN-END:variables
+}
+
+class ShowWaitAction extends AbstractAction {
+
+    protected static final long SLEEP_TIME = 2 * 1000;
+
+    public ShowWaitAction(String name) {
+        super(name);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
+
+            @Override
+            protected Void doInBackground() throws Exception {
+                // mimic some long-running process here...
+                Thread.sleep(SLEEP_TIME);
+                return null;
+            }
+        };
+
+        Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
+        final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setUndecorated(true);
+
+        mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("state")) {
+                    if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+                        JasperReportGenerator.generateReport("ClassReport.jrxml");
+                        dialog.dispose();
+                    }
+                }
+            }
+        });
+        mySwingWorker.execute();
+        JProgressBar progressBar = new JProgressBar();
+        progressBar.setIndeterminate(true);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(progressBar, BorderLayout.CENTER);
+        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(win);
+        dialog.setVisible(true);
+
+    }
 }

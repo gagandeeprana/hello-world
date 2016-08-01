@@ -1,3 +1,6 @@
+drop database if exists dpu;
+create database dpu;
+use dpu;
 -- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
 --
 -- Host: localhost    Database: dpu

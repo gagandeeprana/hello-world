@@ -71,11 +71,12 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
                 setForeground(table.getSelectionForeground());
 //                setBackground(table.getSelectionBackground());
                 setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             } else {
                 setForeground(table.getForeground());
                 setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
 //                setBackground(UIManager.getColor("Button.background"));
-                setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             }
             setText((value == null) ? "" : value.toString());
             return this;
@@ -109,6 +110,7 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
                 button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
+
             }
             classIdToBeDeleted = lstClasses.get(row).getClassId();
             label = (value == null) ? "" : value.toString();
@@ -148,11 +150,13 @@ public class ClassUIHelper extends DefaultTableCellRenderer {
                 setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
                 setForeground(table.getSelectionForeground());
                 setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             } else {
                 setForeground(table.getForeground());
                 setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
 //                setBackground(UIManager.getColor("Button.background"));
                 setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             }
             setText((value == null) ? "" : value.toString());
             return this;
