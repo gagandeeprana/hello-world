@@ -5,6 +5,10 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.TrailerUIHelper;
+import java.awt.Color;
+import javax.swing.table.JTableHeader;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +18,15 @@ public class TestTrailerPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestTrailerPanel
      */
+    
+    
+    TrailerUIHelper trailerUIHelper = null;
     public TestTrailerPanel() {
         initComponents();
+        trailerUIHelper = new TrailerUIHelper();
+        btnAddManageTrailer.setContentAreaFilled(false);
+        btnPrintManageTrailer.setContentAreaFilled(false);
+        trailerUIHelper.generateTable();
     }
 
     /**
@@ -27,30 +38,27 @@ public class TestTrailerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAddManagePowerUnit = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtPowerUnitSearch = new javax.swing.JTextField();
-        btnClearManagePowerUnit = new javax.swing.JButton();
+        btnAddManageTrailer = new javax.swing.JButton();
+        txtSearchManageTrailer = new javax.swing.JTextField();
+        btnPrintManageTrailer = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
-        tblPowerUnit = new javax.swing.JTable();
+        tblTrailer = new javax.swing.JTable();
 
-        btnAddManagePowerUnit.setText("+");
-        btnAddManagePowerUnit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAddManageTrailer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageTrailer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddManagePowerUnitMouseClicked(evt);
+                btnAddManageTrailerMouseClicked(evt);
             }
         });
-        btnAddManagePowerUnit.addActionListener(new java.awt.event.ActionListener() {
+        btnAddManageTrailer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddManagePowerUnitActionPerformed(evt);
+                btnAddManageTrailerActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Search");
+        btnPrintManageTrailer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
 
-        btnClearManagePowerUnit.setText("Clear");
-
-        tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
+        tblTrailer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -61,7 +69,7 @@ public class TestTrailerPanel extends javax.swing.JPanel {
                 "Unit No", "Class", "Equipment Type", "Length", "VIN", "Make", "Model", "Year", "Plate No", "Jurisdiction", "Tare Wgt.", "R.G.W", "Current Odometer", "Reading Taken", "Created By", "Created On", "Division", "Terminal", "Category", "IFTA A/c"
             }
         ));
-        jScrollPane9.setViewportView(tblPowerUnit);
+        jScrollPane9.setViewportView(tblTrailer);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,50 +79,49 @@ public class TestTrailerPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane9)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddManagePowerUnit)
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClearManagePowerUnit)
-                        .addGap(0, 924, Short.MAX_VALUE))))
+                        .addComponent(btnAddManageTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSearchManageTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrintManageTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClearManagePowerUnit)
-                    .addComponent(btnAddManagePowerUnit))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddManageTrailer)
+                    .addComponent(txtSearchManageTrailer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrintManageTrailer, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageTrailer, btnPrintManageTrailer, txtSearchManageTrailer});
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddManagePowerUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitMouseClicked
+    private void btnAddManageTrailerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManageTrailerMouseClicked
         // TODO add your handling code here:
         AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
         addPowerUnitFrame.setVisible(true);
-    }//GEN-LAST:event_btnAddManagePowerUnitMouseClicked
+    }//GEN-LAST:event_btnAddManageTrailerMouseClicked
 
-    private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
+    private void btnAddManageTrailerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageTrailerActionPerformed
 
-    }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
+    }//GEN-LAST:event_btnAddManageTrailerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnAddManagePowerUnit;
-    public static javax.swing.JButton btnClearManagePowerUnit;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JScrollPane jScrollPane9;
-    public static javax.swing.JTable tblPowerUnit;
-    public static javax.swing.JTextField txtPowerUnitSearch;
+    public static javax.swing.JButton btnAddManageTrailer;
+    public static javax.swing.JButton btnPrintManageTrailer;
+    public static javax.swing.JScrollPane jScrollPane9;
+    public static javax.swing.JTable tblTrailer;
+    public static javax.swing.JTextField txtSearchManageTrailer;
     // End of variables declaration//GEN-END:variables
 }

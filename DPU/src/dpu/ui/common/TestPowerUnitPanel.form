@@ -19,18 +19,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane9" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnAddManagePowerUnit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane9" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="btnAddManagePowerUnit" min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtSearchManagePowerUnit" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtPowerUnitSearch" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnClearManagePowerUnit" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPrintManagePowerUnit" min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="1053" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,14 +39,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPowerUnitSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnClearManagePowerUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAddManagePowerUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnAddManagePowerUnit" linkSize="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSearchManagePowerUnit" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPrintManagePowerUnit" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane9" min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane9" min="-2" pref="359" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -54,7 +54,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnAddManagePowerUnit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="+"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/dpu/ui/common/Add.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddManagePowerUnitMouseClicked"/>
@@ -64,19 +66,16 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Search"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPowerUnitSearch">
+    <Component class="javax.swing.JTextField" name="txtSearchManagePowerUnit">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnClearManagePowerUnit">
+    <Component class="javax.swing.JButton" name="btnPrintManagePowerUnit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Clear"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/dpu/ui/common/Print.png"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -84,6 +83,7 @@
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane9">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 

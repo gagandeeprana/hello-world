@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.DriverUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,16 @@ public class TestDriverPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestDriverPanel
      */
+    
+      DriverUIHelper driverUIHelper = null;
+    
     public TestDriverPanel() {
         initComponents();
+        driverUIHelper = new DriverUIHelper();
+        btnAddManageDriver.setContentAreaFilled(false);
+        btnPrintManageDriver.setContentAreaFilled(false);
+        driverUIHelper = new DriverUIHelper();
+        driverUIHelper.generateTable();
     }
 
     /**
@@ -27,30 +37,34 @@ public class TestDriverPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAddManagePowerUnit = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtPowerUnitSearch = new javax.swing.JTextField();
-        btnClearManagePowerUnit = new javax.swing.JButton();
+        btnAddManageDriver = new javax.swing.JButton();
+        txtSearchManageDriver = new javax.swing.JTextField();
         jScrollPane9 = new javax.swing.JScrollPane();
-        tblPowerUnit = new javax.swing.JTable();
+        tblDriver = new javax.swing.JTable();
+        btnSearchManageDriver = new javax.swing.JLabel();
+        btnPrintManageDriver = new javax.swing.JButton();
 
-        btnAddManagePowerUnit.setText("+");
-        btnAddManagePowerUnit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAddManageDriver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageDriver.setMaximumSize(new java.awt.Dimension(16, 16));
+        btnAddManageDriver.setMinimumSize(new java.awt.Dimension(16, 16));
+        btnAddManageDriver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddManagePowerUnitMouseClicked(evt);
+                btnAddManageDriverMouseClicked(evt);
             }
         });
-        btnAddManagePowerUnit.addActionListener(new java.awt.event.ActionListener() {
+        btnAddManageDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddManagePowerUnitActionPerformed(evt);
+                btnAddManageDriverActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Search");
+        txtSearchManageDriver.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchManageDriverKeyReleased(evt);
+            }
+        });
 
-        btnClearManagePowerUnit.setText("Clear");
-
-        tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
+        tblDriver.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -61,7 +75,19 @@ public class TestDriverPanel extends javax.swing.JPanel {
                 "Id", "Driver Name", "Def Truck", "Home Phone", "Cellular", "Pager", "Current Status", "Last Trip", "Last ETA", "Last Event", "Last Location", "Last City", "Last State"
             }
         ));
-        jScrollPane9.setViewportView(tblPowerUnit);
+        jScrollPane9.setViewportView(tblDriver);
+
+        btnSearchManageDriver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Search.png"))); // NOI18N
+
+        btnPrintManageDriver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnPrintManageDriver.setBorder(null);
+        btnPrintManageDriver.setBorderPainted(false);
+        btnPrintManageDriver.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnPrintManageDriver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintManageDriverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,50 +97,62 @@ public class TestDriverPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane9)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1158, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddManagePowerUnit)
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel10)
+                        .addComponent(btnAddManageDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearchManageDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClearManagePowerUnit)
-                        .addGap(0, 836, Short.MAX_VALUE))))
+                        .addComponent(btnSearchManageDriver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrintManageDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClearManagePowerUnit)
-                    .addComponent(btnAddManagePowerUnit))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAddManageDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearchManageDriver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearchManageDriver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrintManageDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageDriver, btnPrintManageDriver, btnSearchManageDriver, txtSearchManageDriver});
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddManagePowerUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitMouseClicked
+    private void btnAddManageDriverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManageDriverMouseClicked
         // TODO add your handling code here:
         AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
         addPowerUnitFrame.setVisible(true);
-    }//GEN-LAST:event_btnAddManagePowerUnitMouseClicked
+    }//GEN-LAST:event_btnAddManageDriverMouseClicked
 
-    private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
+    private void btnAddManageDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManageDriverActionPerformed
 
-    }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
+    }//GEN-LAST:event_btnAddManageDriverActionPerformed
+
+    private void btnPrintManageDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintManageDriverActionPerformed
+
+    }//GEN-LAST:event_btnPrintManageDriverActionPerformed
+
+    private void txtSearchManageDriverKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchManageDriverKeyReleased
+        driverUIHelper.generateTable();
+    }//GEN-LAST:event_txtSearchManageDriverKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnAddManagePowerUnit;
-    public static javax.swing.JButton btnClearManagePowerUnit;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JScrollPane jScrollPane9;
-    public static javax.swing.JTable tblPowerUnit;
-    public static javax.swing.JTextField txtPowerUnitSearch;
+    public static javax.swing.JButton btnAddManageDriver;
+    public static javax.swing.JButton btnPrintManageDriver;
+    private javax.swing.JLabel btnSearchManageDriver;
+    public static javax.swing.JScrollPane jScrollPane9;
+    public static javax.swing.JTable tblDriver;
+    public static javax.swing.JTextField txtSearchManageDriver;
     // End of variables declaration//GEN-END:variables
 }

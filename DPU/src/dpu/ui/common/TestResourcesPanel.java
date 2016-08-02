@@ -23,7 +23,6 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         initComponents();
         root = resourceInternalFrame.getContentPane();
         resourceInternalFrame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-
     }
 
     /**
@@ -62,6 +61,8 @@ public class TestResourcesPanel extends javax.swing.JPanel {
             }
         });
 
+        resourceInternalFrame.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        resourceInternalFrame.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Application-Icon.png"))); // NOI18N
         resourceInternalFrame.setVisible(true);
 
         mnuDriver.setText("Driver");
@@ -131,11 +132,11 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         resourceInternalFrame.getContentPane().setLayout(resourceInternalFrameLayout);
         resourceInternalFrameLayout.setHorizontalGroup(
             resourceInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 691, Short.MAX_VALUE)
+            .addGap(0, 705, Short.MAX_VALUE)
         );
         resourceInternalFrameLayout.setVerticalGroup(
             resourceInternalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 407, Short.MAX_VALUE)
+            .addGap(0, 413, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -166,7 +167,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         root.removeAll();
         root.setVisible(false);
         TestDriverPanel testDriverPanel = new TestDriverPanel();
-        testDriverPanel.setBounds(50, 50, 1100, 700);
+        testDriverPanel.setBounds(5, 5, getWidth() - 10, getHeight() - 10);
         root.add(testDriverPanel);
         root.setVisible(true);
     }//GEN-LAST:event_mnuDriverMouseClicked
@@ -175,7 +176,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         root.removeAll();
         root.setVisible(false);
         TestPowerUnitPanel testPowerUnitPanel = new TestPowerUnitPanel();
-        testPowerUnitPanel.setBounds(50, 50, 700, 700);
+        testPowerUnitPanel.setBounds(5, 5, getWidth() - 10, getHeight() - 10);
         root.add(testPowerUnitPanel);
         root.setVisible(true);
     }//GEN-LAST:event_mnuPowerUnitMouseClicked
@@ -184,7 +185,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         root.removeAll();
         root.setVisible(false);
         TestStraightTruckPanel testStraightTruckPanel = new TestStraightTruckPanel();
-        testStraightTruckPanel.setBounds(50, 50, 1250, 700);
+        testStraightTruckPanel.setBounds(5, 5, getWidth() - 10, getHeight() - 10);
         root.add(testStraightTruckPanel);
         root.setVisible(true);
     }//GEN-LAST:event_mnuStraightTruckMouseClicked
@@ -193,7 +194,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         root.removeAll();
         root.setVisible(false);
         TestTrailerPanel testTrailerPanel = new TestTrailerPanel();
-        testTrailerPanel.setBounds(50, 50, 1250, 700);
+        testTrailerPanel.setBounds(5, 5, getWidth() - 10, getHeight() - 10);
         root.add(testTrailerPanel);
         root.setVisible(true);
     }//GEN-LAST:event_mnuTrailersMouseClicked

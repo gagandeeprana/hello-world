@@ -1,11 +1,11 @@
 drop database if exists dpu;
 create database dpu;
 use dpu;
--- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
 -- ------------------------------------------------------
--- Server version	5.5.27
+-- Server version	5.5.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -61,7 +61,7 @@ CREATE TABLE `categorymaster` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `categorymaster` (
 
 LOCK TABLES `categorymaster` WRITE;
 /*!40000 ALTER TABLE `categorymaster` DISABLE KEYS */;
+INSERT INTO `categorymaster` VALUES (1,'sdfsd'),(2,'Cat');
 /*!40000 ALTER TABLE `categorymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +217,7 @@ CREATE TABLE `drivermaster` (
   CONSTRAINT `class_id_drivermaster` FOREIGN KEY (`class_id`) REFERENCES `classmaster` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `division_id_drivermaster` FOREIGN KEY (`division_id`) REFERENCES `divisionmaster` (`division_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `terminal_id_drivermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,6 +226,7 @@ CREATE TABLE `drivermaster` (
 
 LOCK TABLES `drivermaster` WRITE;
 /*!40000 ALTER TABLE `drivermaster` DISABLE KEYS */;
+INSERT INTO `drivermaster` VALUES (1,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(2,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(3,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(4,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(5,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2);
 /*!40000 ALTER TABLE `drivermaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +266,7 @@ CREATE TABLE `equipmentmaster` (
   `title` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`equipment_id`),
   UNIQUE KEY `container_id_UNIQUE` (`equipment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,6 +275,7 @@ CREATE TABLE `equipmentmaster` (
 
 LOCK TABLES `equipmentmaster` WRITE;
 /*!40000 ALTER TABLE `equipmentmaster` DISABLE KEYS */;
+INSERT INTO `equipmentmaster` VALUES (1,'JJJGG');
 /*!40000 ALTER TABLE `equipmentmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +310,7 @@ CREATE TABLE `powerunitmaster` (
   CONSTRAINT `owner_id` FOREIGN KEY (`owner_id`) REFERENCES `companymaster` (`company_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `terminal_id` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tracking_id` FOREIGN KEY (`tracking_id`) REFERENCES `trackingmaster` (`tracking_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,6 +319,7 @@ CREATE TABLE `powerunitmaster` (
 
 LOCK TABLES `powerunitmaster` WRITE;
 /*!40000 ALTER TABLE `powerunitmaster` DISABLE KEYS */;
+INSERT INTO `powerunitmaster` VALUES (1,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(2,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(3,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(4,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(5,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(6,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(7,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(8,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(9,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(10,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1);
 /*!40000 ALTER TABLE `powerunitmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,7 +411,7 @@ CREATE TABLE `straighttruckmaster` (
   CONSTRAINT `category_id_straighttruckmaster` FOREIGN KEY (`category_id`) REFERENCES `categorymaster` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `terminal_id_straighttruckmaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tracking_id_straighttruckmaster` FOREIGN KEY (`tracking_id`) REFERENCES `trackingmaster` (`tracking_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,6 +420,7 @@ CREATE TABLE `straighttruckmaster` (
 
 LOCK TABLES `straighttruckmaster` WRITE;
 /*!40000 ALTER TABLE `straighttruckmaster` DISABLE KEYS */;
+INSERT INTO `straighttruckmaster` VALUES (1,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(2,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(3,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(4,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(5,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(6,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(7,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(8,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(9,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(10,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(11,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(12,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(13,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(14,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(15,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(16,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg');
 /*!40000 ALTER TABLE `straighttruckmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,7 +435,7 @@ CREATE TABLE `terminalmaster` (
   `terminal_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   UNIQUE KEY `terminal_id_UNIQUE` (`terminal_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,6 +444,7 @@ CREATE TABLE `terminalmaster` (
 
 LOCK TABLES `terminalmaster` WRITE;
 /*!40000 ALTER TABLE `terminalmaster` DISABLE KEYS */;
+INSERT INTO `terminalmaster` VALUES (1,'AAA'),(2,'sdfsdf');
 /*!40000 ALTER TABLE `terminalmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,7 +459,7 @@ CREATE TABLE `trackingmaster` (
   `tracking_id` int(11) NOT NULL AUTO_INCREMENT,
   `tracking_date` datetime DEFAULT NULL,
   PRIMARY KEY (`tracking_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,6 +468,7 @@ CREATE TABLE `trackingmaster` (
 
 LOCK TABLES `trackingmaster` WRITE;
 /*!40000 ALTER TABLE `trackingmaster` DISABLE KEYS */;
+INSERT INTO `trackingmaster` VALUES (1,'2016-09-09 00:00:00');
 /*!40000 ALTER TABLE `trackingmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -493,7 +500,7 @@ CREATE TABLE `trailermaster` (
   KEY `class_id_idx` (`class_id`),
   KEY `equipment_id_idx` (`equipment_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `classmaster` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `equipment_id` FOREIGN KEY (`equipment_id`) REFERENCES `equipmaster` (`equipment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `equipment_id` FOREIGN KEY (`equipment_id`) REFERENCES `equipmentmaster` (`equipment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -573,7 +580,7 @@ CREATE TABLE `usermaster` (
 
 LOCK TABLES `usermaster` WRITE;
 /*!40000 ALTER TABLE `usermaster` DISABLE KEYS */;
-INSERT INTO `usermaster` VALUES (1,'jaimal','j4f76g','jaimal20.1990@gmail.com');
+INSERT INTO `usermaster` VALUES (1,'jaimal','j4f76g','gagandeep.rana@cloudsmartz.net');
 /*!40000 ALTER TABLE `usermaster` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -586,4 +593,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-31 23:43:25
+-- Dump completed on 2016-08-02 15:21:34

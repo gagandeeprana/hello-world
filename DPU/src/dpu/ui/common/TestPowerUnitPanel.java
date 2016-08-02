@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.helper.common.PowerUnitUIHelper;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +16,14 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestPowerUnitPanel
      */
+    PowerUnitUIHelper powerUnitUIHelper = null;
+
     public TestPowerUnitPanel() {
         initComponents();
+        powerUnitUIHelper = new PowerUnitUIHelper();
+        btnAddManagePowerUnit.setContentAreaFilled(false);
+        btnPrintManagePowerUnit.setContentAreaFilled(false);
+        powerUnitUIHelper.generateTable();
     }
 
     /**
@@ -28,13 +36,12 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnAddManagePowerUnit = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtPowerUnitSearch = new javax.swing.JTextField();
-        btnClearManagePowerUnit = new javax.swing.JButton();
+        txtSearchManagePowerUnit = new javax.swing.JTextField();
+        btnPrintManagePowerUnit = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         tblPowerUnit = new javax.swing.JTable();
 
-        btnAddManagePowerUnit.setText("+");
+        btnAddManagePowerUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
         btnAddManagePowerUnit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddManagePowerUnitMouseClicked(evt);
@@ -46,9 +53,7 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel10.setText("Search");
-
-        btnClearManagePowerUnit.setText("Clear");
+        btnPrintManagePowerUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
 
         tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,49 +75,50 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddManagePowerUnit)
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel10)
+                        .addComponent(jScrollPane9)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddManagePowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSearchManagePowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClearManagePowerUnit)))
-                .addGap(0, 12, Short.MAX_VALUE))
+                        .addComponent(btnPrintManagePowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 1053, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClearManagePowerUnit)
-                    .addComponent(btnAddManagePowerUnit))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddManagePowerUnit)
+                    .addComponent(txtSearchManagePowerUnit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrintManagePowerUnit, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManagePowerUnit, btnPrintManagePowerUnit, txtSearchManagePowerUnit});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddManagePowerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitActionPerformed
-     
+
     }//GEN-LAST:event_btnAddManagePowerUnitActionPerformed
 
     private void btnAddManagePowerUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnitMouseClicked
         // TODO add your handling code here:
-           AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
+        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
         addPowerUnitFrame.setVisible(true);
     }//GEN-LAST:event_btnAddManagePowerUnitMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnAddManagePowerUnit;
-    public static javax.swing.JButton btnClearManagePowerUnit;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JScrollPane jScrollPane9;
+    public static javax.swing.JButton btnPrintManagePowerUnit;
+    public static javax.swing.JScrollPane jScrollPane9;
     public static javax.swing.JTable tblPowerUnit;
-    public static javax.swing.JTextField txtPowerUnitSearch;
+    public static javax.swing.JTextField txtSearchManagePowerUnit;
     // End of variables declaration//GEN-END:variables
 }
