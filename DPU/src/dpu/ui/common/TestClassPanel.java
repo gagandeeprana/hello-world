@@ -15,13 +15,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -35,9 +32,9 @@ public class TestClassPanel extends javax.swing.JPanel {
      * Creates new form TestClassPanel
      */
     ClassUIHelper classUIHelper = null;
-
+    
     public TestClassPanel() {
-
+        
         initComponents();
         btnClearManageClass.setContentAreaFilled(false);
         btnClearManageClass.setAction(new ShowWaitAction(""));
@@ -143,7 +140,7 @@ public class TestClassPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
-
+        
         classUIHelper.generateTable();
     }//GEN-LAST:event_txtClassSearchKeyReleased
 
@@ -172,17 +169,17 @@ public class TestClassPanel extends javax.swing.JPanel {
 }
 
 class ShowWaitAction extends AbstractAction {
-
+    
     protected static final long SLEEP_TIME = 2 * 1000;
-
+    
     public ShowWaitAction(String name) {
         super(name);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent evt) {
         SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
-
+            
             @Override
             protected Void doInBackground() throws Exception {
                 // mimic some long-running process here...
@@ -190,13 +187,13 @@ class ShowWaitAction extends AbstractAction {
                 return null;
             }
         };
-
+        
         Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
         final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
         dialog.setUndecorated(true);
-
+        
         mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
-
+            
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (evt.getPropertyName().equals("state")) {
@@ -208,15 +205,19 @@ class ShowWaitAction extends AbstractAction {
             }
         });
         mySwingWorker.execute();
-        JProgressBar progressBar = new JProgressBar();
-        progressBar.setIndeterminate(true);
+//        JProgressBar progressBar = new JProgressBar();
+//        progressBar.setIndeterminate(true);
         JPanel panel = new JPanel(new BorderLayout());
-        panel.add(progressBar, BorderLayout.CENTER);
-        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
+//        panel.add(progressBar, BorderLayout.CENTER);
+//        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
+        JLabel jLabel = new JLabel(new ImageIcon("src\\dpu\\ui\\common\\Wait.gif"));
+        panel.add(jLabel);
         dialog.add(panel);
+        TestClassPanel testClassPanel = new TestClassPanel();
+        testClassPanel.setEnabled(false);
         dialog.pack();
         dialog.setLocationRelativeTo(win);
         dialog.setVisible(true);
-
+        
     }
 }
