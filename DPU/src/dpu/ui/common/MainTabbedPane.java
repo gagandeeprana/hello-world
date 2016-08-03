@@ -111,7 +111,7 @@ public class MainTabbedPane extends JTabbedPane {
         String msg = "";
         BufferedReader readFile = null;
         try {
-            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("src\\dpu\\ui\\common\\preferencetabs.txt")));
+            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("DPU\\src\\dpu\\ui\\common\\preferencetabs.txt")));
             while ((msg = readFile.readLine()) != null) {
                 lstPreferences.add(msg);
                 if (msg.contains("Class")) {
@@ -269,7 +269,7 @@ public class MainTabbedPane extends JTabbedPane {
         String msg = "";
         BufferedReader readFile = null;
         try {
-            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("src\\dpu\\ui\\common\\tabs.txt")));
+            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("DPU\\src\\dpu\\ui\\common\\tabs.txt")));
             while ((msg = readFile.readLine()) != null) {
                 lstTabs.add(msg);
             }

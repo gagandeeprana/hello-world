@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 public class ClassDAOImpl implements ClassDAO {
 
     ConnectDB connectDB = ConnectDB.getInstance();
-    Logger logger = Logger.getLogger(ClassDAOImpl.class);
+//    Logger logger = Logger.getLogger(ClassDAOImpl.class);
 
     @Override
     public List<ClassBean> getAllClasses(String name) {
@@ -38,7 +38,7 @@ public class ClassDAOImpl implements ClassDAO {
                 lstClasses.add(obj);
             }
         } catch (Exception e) {
-            logger.error("ClassDAOImpl : getAllClasses : " + e);
+//            logger.error("ClassDAOImpl : getAllClasses : " + e);
         }
         return lstClasses;
     }
@@ -57,7 +57,7 @@ public class ClassDAOImpl implements ClassDAO {
                 return "Class Added";
             }
         } catch (Exception e) {
-            logger.error("ClassDAOImpl : addClass : " + e);
+//            logger.error("ClassDAOImpl : addClass : " + e);
         }
         return "Failed to Add Class";
     }
@@ -76,7 +76,7 @@ public class ClassDAOImpl implements ClassDAO {
                 return "Class Updated";
             }
         } catch (Exception e) {
-            logger.error("ClassDAOImpl : updateClass : " + e);
+//            logger.error("ClassDAOImpl : updateClass : " + e);
         }
         return "Failed to Update Class";
     }
@@ -94,7 +94,7 @@ public class ClassDAOImpl implements ClassDAO {
                 return "Class Deleted";
             }
         } catch (Exception e) {
-            logger.error("ClassDAOImpl : deleteClass : " + e);
+//            logger.error("ClassDAOImpl : deleteClass : " + e);
         }
         return "Failed to Delete Class";
     }

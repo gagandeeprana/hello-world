@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import properties.ReadFromPropertiesFile;
 
 /**
  *
@@ -25,7 +26,8 @@ public class LoginFrame extends javax.swing.JFrame {
 
     public LoginFrame() {
         initComponents();
-        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
+//        setIconImage(new ImageIcon(ReadFromPropertiesFile.applicationPath + "dpu\\ui\\common\\Application-Icon.png").getImage());
+        setIconImage(Toolkit.getDefaultToolkit().getImage(LoginFrame.class.getClassLoader().getResource(ReadFromPropertiesFile.applicationPath + "dpu\\ui\\common\\Application-Icon.png")));
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -133,7 +135,7 @@ public class LoginFrame extends javax.swing.JFrame {
         JFrame test = new JFrame("Dispatch Processing Unit");
         test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         test.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        test.setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
+        test.setIconImage(new ImageIcon("DPU\\src\\dpu\\ui\\common\\Application-Icon.png").getImage());
         mainTabbedPane = new MainTabbedPane();
         test.add(mainTabbedPane);
         test.setVisible(true);
