@@ -19,8 +19,8 @@ import javax.mail.internet.MimeMultipart;
 public class SendSMTP {
 
     String result = "failed";
-    String emailId = "simplegagan1989@gmail.com";
-    String password = "alpha925";
+    String emailId = "";
+    String password = "";
 
     public String sendMail(String toEmailId, String text, String subject) {
         try {
