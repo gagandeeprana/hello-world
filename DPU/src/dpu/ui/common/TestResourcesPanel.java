@@ -62,7 +62,7 @@ public class TestResourcesPanel extends javax.swing.JPanel {
         });
 
         resourceInternalFrame.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        resourceInternalFrame.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Application-Icon.png"))); // NOI18N
+        resourceInternalFrame.setFrameIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Application-Icon.png")); // NOI18N
         resourceInternalFrame.setVisible(true);
 
         mnuDriver.setText("Driver");

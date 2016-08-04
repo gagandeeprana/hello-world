@@ -7,6 +7,7 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.Address;
 import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
@@ -15,6 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import properties.ReadFromPropertiesFile;
 
 public class SendSMTP {
 
@@ -96,48 +98,62 @@ public class SendSMTP {
             //---------------------------------------------------------
             //---------------------------------------------------------
 //            Multipart multipart = new MimeMultipart("related");
-            StringBuffer body
-                    = new StringBuffer("<html>This message contains two inline images.<br>");
-            body.append("The first image is a chart:<br>");
-            body.append("<img src=\"cid:AbcXyz123\"/><br>");
-            body.append("End of message.");
-            body.append("</html>");
-            try {
-
-                Multipart multipart = new MimeMultipart("multipart/related");
-                
+//            StringBuffer body
+//                    = new StringBuffer("<html>This message contains two inline images.<br>");
+//            body.append("The first image is a chart:<br>");
+//            body.append("<img src=\"cid:AbcXyz123\"/><br>");
+//            body.append("End of message.");
+//            body.append("</html>");
+//            try {
+//
+//                Multipart multipart = new MimeMultipart("multipart/related");
 //            String htmlMessage = "<html>Hi there,<br>";
 //            htmlMessage += "See this cool pic: <img src=\"cid:AbcXyz954\" />";
 //            htmlMessage += "</html>";
-                MimeBodyPart bodyPart = new MimeBodyPart();
+//                MimeBodyPart bodyPart = new MimeBodyPart();
 //            bodyPart.setText(body.toString());
 //            messageBodyPart.setContent(body.toString(), "text/html");
-                bodyPart.setContent(body, "text/html");
-                multipart.addBodyPart(bodyPart);
-
-                MimeBodyPart imagePart = new MimeBodyPart();
-                DataSource fds = new FileDataSource("src\\email\\Print.png");
-                imagePart.setDataHandler(new DataHandler(fds));
-                imagePart.setHeader("Content-ID", "cid:AbcXyz123");
-                imagePart.setDisposition(MimeBodyPart.INLINE);
-                multipart.addBodyPart(imagePart);
-                msg.setContent(multipart);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+//                bodyPart.setContent(body, "text/html");
+//                multipart.addBodyPart(bodyPart);
+//                MimeBodyPart imagePart = new MimeBodyPart();
+//                DataSource fds = new FileDataSource("src\\email\\Print.png");
+//                imagePart.setDataHandler(new DataHandler(fds));
+//                imagePart.setHeader("Content-ID", "cid:AbcXyz123");
+//                imagePart.setDisposition(MimeBodyPart.INLINE);
+//                multipart.addBodyPart(imagePart);
+//                msg.setContent(multipart);
+//            } catch (Exception e) {
+//                System.out.println(e);
+//            }
 //            String imageFilePath = "src\\email\\Print.png";
 // attach the image file
 //            imagePart.attachFile("Print.png");
+            //---------------------------------------------------------
+            //---------------------------------------------------------
+            Multipart multipart = new MimeMultipart("related");
+            BodyPart messageBodyPart = new MimeBodyPart();
+            String htmlText = "<html><body><p style='font-size: 30px; background-color: lightblue;width: 23%;'>Dispatch Processing Unit</p><img src=\"cid:image\" /><br/>" + text + "</body></html>";
+            messageBodyPart.setContent(htmlText, "text/html");
+            // add it
+            multipart.addBodyPart(messageBodyPart);
+
+            messageBodyPart = new MimeBodyPart();
+            DataSource fds = new FileDataSource(ReadFromPropertiesFile.imagePath + "Application-Exe.png");
+
+            messageBodyPart.setDataHandler(new DataHandler(fds));
+            messageBodyPart.setHeader("Content-ID", "<image>");
+            multipart.addBodyPart(messageBodyPart);
             //---------------------------------------------------------
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(rec[0]));
             while (count < rec.length) {
                 msg.addRecipients(Message.RecipientType.TO, InternetAddress.parse(rec[count]));
                 count++;
             }
-
             msg.setSentDate(new Date());
             msg.setSubject(subject);
-            msg.setText(body.toString());
+//            msg.setText(body.toString());
+//            msg.setText(text);
+            msg.setContent(multipart);
 
 //--[ Ask the Transport class to send our mail message
             Transport trans = mailSession.getTransport();

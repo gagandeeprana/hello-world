@@ -22,8 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import properties.ReadFromPropertiesFile;
 
 public class TrailerUIHelper extends DefaultTableCellRenderer {
 
@@ -57,14 +57,14 @@ public class TrailerUIHelper extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
-                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
                 setForeground(table.getSelectionForeground());
 //                setBackground(table.getSelectionBackground());
                 setBackground(Color.WHITE);
                 setContentAreaFilled(false);
             } else {
                 setForeground(table.getForeground());
-                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
 //                setBackground(UIManager.getColor("Button.background"));
                 setContentAreaFilled(false);
             }
@@ -95,11 +95,11 @@ public class TrailerUIHelper extends DefaultTableCellRenderer {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
                 button.setBackground(table.getSelectionBackground());
-                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
             } else {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
-                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
 
             }
             trailerIdToBeDeleted = lstTrailers.get(row).getTrailerId();
@@ -137,13 +137,13 @@ public class TrailerUIHelper extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
-                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
                 setForeground(table.getSelectionForeground());
                 setBackground(Color.WHITE);
                 setContentAreaFilled(false);
             } else {
                 setForeground(table.getForeground());
-                setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
 //                setBackground(UIManager.getColor("Button.background"));
                 setBackground(Color.WHITE);
                 setContentAreaFilled(false);
@@ -175,11 +175,11 @@ public class TrailerUIHelper extends DefaultTableCellRenderer {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
                 button.setBackground(table.getSelectionBackground());
-                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             } else {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
-                button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             }
             trailerIdToBeDeleted = lstTrailers.get(row).getTrailerId();
             trailerId = lstTrailers.get(row).getTrailerId();

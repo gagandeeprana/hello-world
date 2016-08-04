@@ -42,7 +42,7 @@ public class TestStraightTruckPanel extends javax.swing.JPanel {
         jScrollPane9 = new javax.swing.JScrollPane();
         tblStraightTruck = new javax.swing.JTable();
 
-        btnAddManageStraightTruck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageStraightTruck.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Add.png")); // NOI18N
         btnAddManageStraightTruck.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddManageStraightTruckMouseClicked(evt);
@@ -60,7 +60,7 @@ public class TestStraightTruckPanel extends javax.swing.JPanel {
             }
         });
 
-        btnPrintManageStraightTruck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnPrintManageStraightTruck.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Print.png")); // NOI18N
 
         tblStraightTruck.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,7 +104,7 @@ public class TestStraightTruckPanel extends javax.swing.JPanel {
                     .addComponent(txtSearchManageStraightTruck, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageStraightTruck, btnPrintManageStraightTruck, txtSearchManageStraightTruck});

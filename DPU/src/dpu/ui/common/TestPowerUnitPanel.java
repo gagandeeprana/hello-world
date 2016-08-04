@@ -41,7 +41,7 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
         jScrollPane9 = new javax.swing.JScrollPane();
         tblPowerUnit = new javax.swing.JTable();
 
-        btnAddManagePowerUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManagePowerUnit.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Add.png")); // NOI18N
         btnAddManagePowerUnit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddManagePowerUnitMouseClicked(evt);
@@ -53,7 +53,7 @@ public class TestPowerUnitPanel extends javax.swing.JPanel {
             }
         });
 
-        btnPrintManagePowerUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnPrintManagePowerUnit.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Print.png")); // NOI18N
 
         tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

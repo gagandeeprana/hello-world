@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                msg = new SendSMTP().sendMail(rs.getString("email"), "Dispatch Processing Unit\nYour Password is:\n" + rs.getString("password"), "Regarding Your Password Recovery");
+                msg = new SendSMTP().sendMail(rs.getString("email"), "Your Password is:<br/>" + rs.getString("password"), "Regarding Your Password Recovery");
             }
         } catch (Exception e) {
             System.out.println("exception in forgotPassword " + e);

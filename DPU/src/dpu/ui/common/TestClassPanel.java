@@ -9,6 +9,7 @@ import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.helper.common.ClassUIHelper;
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
@@ -21,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import properties.ReadFromPropertiesFile;
 
 /**
  *
@@ -32,15 +34,19 @@ public class TestClassPanel extends javax.swing.JPanel {
      * Creates new form TestClassPanel
      */
     ClassUIHelper classUIHelper = null;
-    
+
     public TestClassPanel() {
-        
-        initComponents();
-        btnClearManageClass.setContentAreaFilled(false);
-        btnClearManageClass.setAction(new ShowWaitAction(""));
-        btnClearManageClass.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Print.png"));
-        classUIHelper = new ClassUIHelper();
-        classUIHelper.generateTable();
+        try {
+            initComponents();
+            btnClearManageClass.setContentAreaFilled(false);
+            tblClass.setPreferredSize(new Dimension(300, 300));
+            btnClearManageClass.setAction(new ShowWaitAction(""));
+            btnClearManageClass.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Print.png"));
+            classUIHelper = new ClassUIHelper();
+            classUIHelper.generateTable();
+        } catch (Exception e) {
+            System.out.println("TestClassPanel: " + e);
+        }
     }
 
     /**
@@ -59,7 +65,7 @@ public class TestClassPanel extends javax.swing.JPanel {
         tblClass = new javax.swing.JTable();
         btnAddManageClass = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Search.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Search.png")); // NOI18N
 
         txtClassSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -70,10 +76,9 @@ public class TestClassPanel extends javax.swing.JPanel {
             }
         });
 
-        btnClearManageClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnClearManageClass.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Print.png")); // NOI18N
         btnClearManageClass.setBorder(null);
         btnClearManageClass.setBorderPainted(false);
-        btnClearManageClass.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
         btnClearManageClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearManageClassActionPerformed(evt);
@@ -93,7 +98,7 @@ public class TestClassPanel extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblClass);
 
-        btnAddManageClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageClass.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Add.png")); // NOI18N
         btnAddManageClass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddManageClassMouseClicked(evt);
@@ -107,6 +112,7 @@ public class TestClassPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAddManageClass)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -114,9 +120,9 @@ public class TestClassPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClearManageClass, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnClearManageClass, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 966, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnClearManageClass, jLabel2});
@@ -131,8 +137,8 @@ public class TestClassPanel extends javax.swing.JPanel {
                     .addComponent(txtClassSearch)
                     .addComponent(btnClearManageClass, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddManageClass, btnClearManageClass, jLabel2, txtClassSearch});
@@ -140,7 +146,7 @@ public class TestClassPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtClassSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClassSearchKeyReleased
-        
+
         classUIHelper.generateTable();
     }//GEN-LAST:event_txtClassSearchKeyReleased
 
@@ -169,55 +175,60 @@ public class TestClassPanel extends javax.swing.JPanel {
 }
 
 class ShowWaitAction extends AbstractAction {
-    
+
     protected static final long SLEEP_TIME = 2 * 1000;
-    
+
     public ShowWaitAction(String name) {
         super(name);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent evt) {
-        SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
-            
-            @Override
-            protected Void doInBackground() throws Exception {
-                // mimic some long-running process here...
-                Thread.sleep(SLEEP_TIME);
-                return null;
-            }
-        };
-        
-        Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
-        final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setUndecorated(true);
-        
-        mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
-            
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (evt.getPropertyName().equals("state")) {
-                    if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-                        JasperReportGenerator.generateReport("ClassReport.jrxml");
-                        dialog.dispose();
+        try {
+
+            SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    // mimic some long-running process here...
+                    Thread.sleep(SLEEP_TIME);
+                    return null;
+                }
+            };
+
+            Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
+            final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
+            dialog.setUndecorated(true);
+
+            mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if (evt.getPropertyName().equals("state")) {
+                        if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+                            JasperReportGenerator.generateReport("ClassReport.jrxml");
+                            dialog.dispose();
+                        }
                     }
                 }
-            }
-        });
-        mySwingWorker.execute();
+            });
+            mySwingWorker.execute();
 //        JProgressBar progressBar = new JProgressBar();
 //        progressBar.setIndeterminate(true);
-        JPanel panel = new JPanel(new BorderLayout());
+            JPanel panel = new JPanel(new BorderLayout());
 //        panel.add(progressBar, BorderLayout.CENTER);
 //        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
-        JLabel jLabel = new JLabel(new ImageIcon("src\\dpu\\ui\\common\\Wait.gif"));
-        panel.add(jLabel);
-        dialog.add(panel);
-        TestClassPanel testClassPanel = new TestClassPanel();
-        testClassPanel.setEnabled(false);
-        dialog.pack();
-        dialog.setLocationRelativeTo(win);
-        dialog.setVisible(true);
-        
+            JLabel jLabel = new JLabel(new ImageIcon(ReadFromPropertiesFile.imagePath + "Wait.gif"));
+            panel.add(jLabel);
+            dialog.add(panel);
+            TestClassPanel testClassPanel = new TestClassPanel();
+            testClassPanel.setEnabled(false);
+            dialog.pack();
+            dialog.setLocationRelativeTo(win);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            System.out.println("ShowWaitAction : actionPerformed(): " + e);
+        }
+
     }
 }

@@ -6,8 +6,6 @@
 package dpu.ui.common;
 
 import dpu.ui.helper.common.TrailerUIHelper;
-import java.awt.Color;
-import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -19,8 +17,8 @@ public class TestTrailerPanel extends javax.swing.JPanel {
      * Creates new form TestTrailerPanel
      */
     
-    
     TrailerUIHelper trailerUIHelper = null;
+
     public TestTrailerPanel() {
         initComponents();
         trailerUIHelper = new TrailerUIHelper();
@@ -44,7 +42,7 @@ public class TestTrailerPanel extends javax.swing.JPanel {
         jScrollPane9 = new javax.swing.JScrollPane();
         tblTrailer = new javax.swing.JTable();
 
-        btnAddManageTrailer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageTrailer.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Add.png")); // NOI18N
         btnAddManageTrailer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddManageTrailerMouseClicked(evt);
@@ -56,7 +54,7 @@ public class TestTrailerPanel extends javax.swing.JPanel {
             }
         });
 
-        btnPrintManageTrailer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnPrintManageTrailer.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Print.png")); // NOI18N
 
         tblTrailer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

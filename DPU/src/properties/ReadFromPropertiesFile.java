@@ -5,7 +5,10 @@ import java.util.Properties;
 
 public class ReadFromPropertiesFile {
 
-    public static String applicationPath = "DPU\\src\\";
+    public static String imagePath = "images\\";
+    public static String propertiesPath = "properties\\";
+    public static String filesPath = "users\\";
+    
     static ReadFromPropertiesFile readFromPropertiesFile = null;
     Properties properties = null;
 //    static Logger logger = Logger.getLogger(ReadFromPropertiesFile.class);
@@ -23,7 +26,7 @@ public class ReadFromPropertiesFile {
     public String getProperty(String property) {
         try {
             properties = new Properties();
-            InputStream is = getClass().getResourceAsStream(applicationPath + "properties\\configuration.properties");
+            InputStream is = getClass().getResourceAsStream(propertiesPath + "configuration.properties");
             properties.load(is);
         } catch (Exception e) {
 //            logger.error("ReadFromPropertiesFile : getProperty : " + e);

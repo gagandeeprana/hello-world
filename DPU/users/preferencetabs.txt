@@ -1,1 +1,1 @@
-Class
+ClassCompanyRoleListResources

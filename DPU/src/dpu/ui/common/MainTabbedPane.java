@@ -1,11 +1,11 @@
 package dpu.ui.common;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -23,8 +23,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import properties.ReadFromPropertiesFile;
 
-public class MainTabbedPane extends JTabbedPane {
+public class MainTabbedPane extends JTabbedPane implements ChangeListener {
 
     static List<String> lstPreferences = new ArrayList<>();
     static Map<String, JPanel> map = new TreeMap<>();
@@ -33,8 +36,11 @@ public class MainTabbedPane extends JTabbedPane {
     private Point currentMouseLocation = null;
     private int draggedTabIndex = 0;
     static List<String> lstTabs = new ArrayList<>();
+    JFrame test = null;
 
-    public MainTabbedPane() {
+    public MainTabbedPane(JFrame test) {
+        this.test = test;
+        addChangeListener(this);
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
 
@@ -92,6 +98,7 @@ public class MainTabbedPane extends JTabbedPane {
                 tabImage = null;
             }
         });
+
         readTabFile();
         checkPreference();
     }
@@ -111,7 +118,7 @@ public class MainTabbedPane extends JTabbedPane {
         String msg = "";
         BufferedReader readFile = null;
         try {
-            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("DPU\\src\\dpu\\ui\\common\\preferencetabs.txt")));
+            readFile = new BufferedReader(new InputStreamReader(new FileInputStream(ReadFromPropertiesFile.filesPath + "preferencetabs.txt")));
             while ((msg = readFile.readLine()) != null) {
                 lstPreferences.add(msg);
                 if (msg.contains("Class")) {
@@ -173,6 +180,7 @@ public class MainTabbedPane extends JTabbedPane {
             while (itr.hasNext()) {
                 String key = itr.next();
                 JPanel jPanel = map.get(key);
+                jPanel.setBackground(Color.WHITE);
                 addTab(key + "    ", jPanel);
                 setImageIcon(key, counter);
                 counter++;
@@ -185,13 +193,9 @@ public class MainTabbedPane extends JTabbedPane {
     public void setSettingsIcon() {
         try {
             addTab("Settings", new TestSettingsPanel());
-            System.out.println("1111111111");
             setTitleAt(getTabCount() - 1, "");
-            System.out.println("2222222");
-            ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Settings.png");
-            System.out.println("33333333333");
+            ImageIcon imageIcon = new ImageIcon(ReadFromPropertiesFile.imagePath + "Settings.png");
             setIconAt(getTabCount() - 1, imageIcon);
-            System.out.println("444444444444");
         } catch (Exception e) {
             System.out.println("MainFrame : setSettingsIcon() : " + e);
         }
@@ -199,67 +203,51 @@ public class MainTabbedPane extends JTabbedPane {
 
     public void setImageIcon(String key, int counter) {
         try {
+            ImageIcon imageIcon = null;
+            String imageName = "";
             if (key.contains("OutsideCarriers")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\OutsideCarrier.png");
-                setIconAt(counter, imageIcon);
+                imageName = "OutsideCarriers.png";
             } else if (key.contains("BorderCrossing")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\BorderCrossing.png");
-                setIconAt(counter, imageIcon);
+                imageName = "BorderCrossing.png";
             } else if (key.contains("PayrollSchedules")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\PayrollSchedules.png");
-                setIconAt(counter, imageIcon);
+                imageName = "PayrollSchedules.png";
             } else if (key.contains("Prospects")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Prospects.jpg");
-                setIconAt(counter, imageIcon);
+                imageName = "Prospects.jpg";
             } else if (key.contains("Company")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Company.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Company.png";
             } else if (key.contains("Resources")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Resources.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Resources.png";
             } else if (key.contains("Role")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Roles.jpg");
-                setIconAt(counter, imageIcon);
+                imageName = "Roles.jpg";
             } else if (key.contains("Customers")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Customers.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Customers.png";
             } else if (key.contains("SalesPerson")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\SalesPerson.png");
-                setIconAt(counter, imageIcon);
+                imageName = "SalesPerson.png";
             } else if (key.contains("Shippers")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Shippers.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Shippers.png";
             } else if (key.contains("Jurisdiction")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Jurisdiction.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Jurisdiction.png";
             } else if (key.contains("StandardCharges")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardCharges.png");
-                setIconAt(counter, imageIcon);
+                imageName = "StandardCharges.png";
             } else if (key.contains("List")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\List.png");
-                setIconAt(counter, imageIcon);
+                imageName = "List.png";
             } else if (key.contains("MasterOrders")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MasterOrders.png");
-                setIconAt(counter, imageIcon);
+                imageName = "MasterOrders.png";
             } else if (key.contains("MiscVendors")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MiscVendors.png");
-                setIconAt(counter, imageIcon);
+                imageName = "MiscVendors.png";
             } else if (key.contains("Tracking")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Tracking.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Tracking.png";
             } else if (key.contains("TravelTimes")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\TravelTimes.gif");
-                setIconAt(counter, imageIcon);
+                imageName = "TravelTimes.gif";
             } else if (key.contains("CustomBrokers")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\CustomBrokers.png");
-                setIconAt(counter, imageIcon);
+                imageName = "CustomBrokers.png";
             } else if (key.contains("Class")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Class.png");
-                setIconAt(counter, imageIcon);
+                imageName = "Class.png";
             } else if (key.contains("StandardTemplates")) {
-                ImageIcon imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardTemplates.png");
-                setIconAt(counter, imageIcon);
+                imageName = "StandardTemplates.png";
             }
+            imageIcon = new ImageIcon(ReadFromPropertiesFile.imagePath + imageName);
+            setIconAt(counter, imageIcon);
         } catch (Exception e) {
             System.out.println("MainTabbedPane : setImageIcon(): " + e);
         }
@@ -269,13 +257,22 @@ public class MainTabbedPane extends JTabbedPane {
         String msg = "";
         BufferedReader readFile = null;
         try {
-            readFile = new BufferedReader(new InputStreamReader(new FileInputStream("DPU\\src\\dpu\\ui\\common\\tabs.txt")));
+            readFile = new BufferedReader(new InputStreamReader(new FileInputStream(ReadFromPropertiesFile.filesPath + "tabs.txt")));
             while ((msg = readFile.readLine()) != null) {
                 lstTabs.add(msg);
             }
             readFile.close();
         } catch (Exception e) {
             System.out.println("MainFrame : readTabFile() : " + e);
+        }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        if (getTitleAt(getSelectedIndex()).trim().equals("")) {
+            test.setTitle("DPU (Settings)");
+        } else {
+            test.setTitle("DPU (" + getTitleAt(getSelectedIndex()).trim() + ")");
         }
     }
 }

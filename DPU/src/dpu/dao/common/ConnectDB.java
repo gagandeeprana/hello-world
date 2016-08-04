@@ -34,7 +34,6 @@ public class ConnectDB {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 //            Class.forName("D:\\JavaGit\\hello-world\\DPU\\lib\\mysql\\mysql-connector-java-5.1.23-bin.jar");
-            System.out.println(url + "  " + database + "  " + username + "  " + password);
             conn = DriverManager.getConnection(url + database, username, password);
         } catch (Exception e) {
             System.out.println("connect(): " + e);

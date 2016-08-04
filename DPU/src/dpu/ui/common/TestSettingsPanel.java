@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import properties.ReadFromPropertiesFile;
 
 /**
  *
@@ -61,7 +62,6 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             if (end > lstTabs.size()) {
                 end = lstTabs.size();
             }
-            System.out.println("000000000000000000000000");
             chkArray = new JCheckBox[lstTabs.size()];
             JLabel lblSelectAll = new JLabel("Select All");
             lblSelectAll.setBounds(360, 10, 120, 40);
@@ -70,7 +70,6 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             headCheckBox.setBounds(420, 10, 120, 40);
             add(headCheckBox);
             headCheckBox.addItemListener(this);
-            System.out.println("0000000011111111111111111111111110000000000000000");
             while (count < columns()) {
                 yForLabel = 0;
                 for (int i = start; i < end; i++) {
@@ -101,15 +100,11 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
                     end = lstTabs.size();
                 }
             }
-            System.out.println("00000000222222222222222222220000000000000000");
             btn = new JButton("Save");
             btn.setBounds(800, 360, 120, 40);
             add(btn);
-            System.out.println("00000000666666666666666666666660000000000000000");
             btn.addActionListener(this);
-            System.out.println("00000000666666666666666666666660000000000000000");
             setVisible(true);
-            System.out.println("00000000666666666666666666666660000000000000000");
         } catch (Exception e) {
             System.out.println("setSettingsPanelBody(): " + e);
         }
@@ -127,13 +122,10 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             }
             writeIntoTabFile(lstTabsToBeWritten);
             JOptionPane.showMessageDialog(null, "Changes Done");
-//            mainTabbedPane.removeAll();
             MainTabbedPane.lstPreferences = new ArrayList<>();
             MainTabbedPane.map = new TreeMap<>();
-            System.out.println("Map Size+++++++++++++++1: " + MainTabbedPane.map.size());
             LoginFrame.mainTabbedPane.checkPreference();
             LoginFrame.mainTabbedPane.showHideTabs();
-            System.out.println("Map Size+++++++++++++++2: " + MainTabbedPane.map.size());
             LoginFrame.mainTabbedPane.setSettingsIcon();
             setSettingsPanelBody();
         }
@@ -142,7 +134,7 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
     private void writeIntoTabFile(List<String> lstTabs) {
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("src\\dpu\\ui\\common\\preferencetabs.txt", false);
+            fileWriter = new FileWriter(ReadFromPropertiesFile.filesPath + "preferencetabs.txt", false);
             for (int i = 0; i < lstTabs.size(); i++) {
                 String tab = lstTabs.get(i);
                 if (i != lstTabs.size() - 1) {
@@ -160,49 +152,51 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
     public static ImageIcon setImageIcon(String key, int counter) {
         ImageIcon imageIcon = null;
         try {
+            String imageName = "";
             if (key.contains("OutsideCarriers")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\OutsideCarrier.png");
+                imageName = "OutsideCarrier.png";
             } else if (key.contains("BorderCrossing")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\BorderCrossing.png");
+                imageName = "BorderCrossing.png";
             } else if (key.contains("PayrollSchedules")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\PayrollSchedules.png");
+                imageName = "PayrollSchedules.png";
             } else if (key.contains("Prospects")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Prospects.jpg");
+                imageName = "Prospects.jpg";
             } else if (key.contains("Company")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Company.png");
+                imageName = "Company.png";
             } else if (key.contains("Resources")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Resources.png");
+                imageName = "Resources.png";
             } else if (key.contains("Role")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Roles.jpg");
+                imageName = "Roles.jpg";
             } else if (key.contains("Customers")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Customers.png");
+                imageName = "Customers.png";
             } else if (key.contains("SalesPerson")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\SalesPerson.png");
+                imageName = "SalesPerson.png";
             } else if (key.contains("Shippers")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Shippers.png");
+                imageName = "Shippers.png";
             } else if (key.contains("Jurisdiction")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Jurisdiction.png");
+                imageName = "Jurisdiction.png";
             } else if (key.contains("StandardCharges")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardCharges.png");
+                imageName = "StandardCharges.png";
             } else if (key.contains("List")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\List.png");
+                imageName = "List.png";
             } else if (key.contains("MasterOrders")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MasterOrders.png");
+                imageName = "MasterOrders.png";
             } else if (key.contains("MiscVendors")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\MiscVendors.png");
+                imageName = "MiscVendors.png";
             } else if (key.contains("Tracking")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Tracking.png");
+                imageName = "Tracking.png";
             } else if (key.contains("TravelTimes")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\TravelTimes.gif");
+                imageName = "TravelTimes.gif";
             } else if (key.contains("CustomBrokers")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\CustomBrokers.png");
+                imageName = "CustomBrokers.png";
             } else if (key.contains("Class")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\Class.png");
+                imageName = "Class.png";
             } else if (key.contains("StandardTemplates")) {
-                imageIcon = new ImageIcon("src\\dpu\\ui\\common\\StandardTemplates.png");
+                imageName = "StandardTemplates.png";
             }
+            imageIcon = new ImageIcon(ReadFromPropertiesFile.imagePath + imageName);
         } catch (Exception e) {
-            System.out.println("MainTabbedPane : setImageIcon(): " + e);
+            System.out.println("TestSettingsPanel : setImageIcon(): " + e);
         }
         return imageIcon;
     }

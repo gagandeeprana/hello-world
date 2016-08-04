@@ -1,6 +1,3 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
 -- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
@@ -86,7 +83,7 @@ CREATE TABLE `classmaster` (
   `title` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`class_id`),
   UNIQUE KEY `class_id_UNIQUE` (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +92,7 @@ CREATE TABLE `classmaster` (
 
 LOCK TABLES `classmaster` WRITE;
 /*!40000 ALTER TABLE `classmaster` DISABLE KEYS */;
-INSERT INTO `classmaster` VALUES (1,'CLASSa'),(2,'BB'),(3,'CCC'),(4,'DDDD');
+INSERT INTO `classmaster` VALUES (1,'CLASSa'),(2,'BB'),(3,'CCC');
 /*!40000 ALTER TABLE `classmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +116,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (1,'HH'),(2,'ABCC');
+INSERT INTO `companymaster` VALUES (1,'HH');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,6 +149,30 @@ CREATE TABLE `containermaster` (
 LOCK TABLES `containermaster` WRITE;
 /*!40000 ALTER TABLE `containermaster` DISABLE KEYS */;
 /*!40000 ALTER TABLE `containermaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `countrymaster`
+--
+
+DROP TABLE IF EXISTS `countrymaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `countrymaster` (
+  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`country_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `countrymaster`
+--
+
+LOCK TABLES `countrymaster` WRITE;
+/*!40000 ALTER TABLE `countrymaster` DISABLE KEYS */;
+INSERT INTO `countrymaster` VALUES (1,'CA');
+/*!40000 ALTER TABLE `countrymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -277,6 +298,34 @@ LOCK TABLES `equipmentmaster` WRITE;
 /*!40000 ALTER TABLE `equipmentmaster` DISABLE KEYS */;
 INSERT INTO `equipmentmaster` VALUES (1,'JJJGG');
 /*!40000 ALTER TABLE `equipmentmaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jurisdictionmaster`
+--
+
+DROP TABLE IF EXISTS `jurisdictionmaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jurisdictionmaster` (
+  `jurisdiction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `jurisdiction_name` varchar(30) DEFAULT NULL,
+  `jurisdiction_IFA` varchar(30) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `road_tax` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`jurisdiction_id`),
+  KEY `country_id` (`country_id`),
+  CONSTRAINT `jurisdictionmaster_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countrymaster` (`country_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jurisdictionmaster`
+--
+
+LOCK TABLES `jurisdictionmaster` WRITE;
+/*!40000 ALTER TABLE `jurisdictionmaster` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jurisdictionmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -501,7 +550,7 @@ CREATE TABLE `trailermaster` (
   KEY `equipment_id_idx` (`equipment_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `classmaster` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `equipment_id` FOREIGN KEY (`equipment_id`) REFERENCES `equipmentmaster` (`equipment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -510,6 +559,7 @@ CREATE TABLE `trailermaster` (
 
 LOCK TABLES `trailermaster` WRITE;
 /*!40000 ALTER TABLE `trailermaster` DISABLE KEYS */;
+INSERT INTO `trailermaster` VALUES (1,1,1,345,'sdfsd','gfhfg','sdfsdf',2016,'dfgdfg','3454','3454','345345','sdfsdf','2015-09-09 00:00:00',1,'2016-08-02 15:26:04');
 /*!40000 ALTER TABLE `trailermaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -580,7 +630,7 @@ CREATE TABLE `usermaster` (
 
 LOCK TABLES `usermaster` WRITE;
 /*!40000 ALTER TABLE `usermaster` DISABLE KEYS */;
-INSERT INTO `usermaster` VALUES (1,'jaimal','j4f76g','gagandeep.rana@cloudsmartz.net');
+INSERT INTO `usermaster` VALUES (1,'jaimal','j4f76g','jaimal20.1990@gmail.com');
 /*!40000 ALTER TABLE `usermaster` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -593,4 +643,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-02 15:21:34
+-- Dump completed on 2016-08-04 17:10:24

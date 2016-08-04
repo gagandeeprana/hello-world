@@ -60,7 +60,7 @@
     <Component class="javax.swing.JButton" name="btnAddManageDriver">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/dpu/ui/common/Add.png"/>
+          <Image iconType="2" name="D:\JavaGit\hello-world\DPU\images\Add.png"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[16, 16]"/>
@@ -194,22 +194,19 @@
     <Component class="javax.swing.JLabel" name="btnSearchManageDriver">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/dpu/ui/common/Search.png"/>
+          <Image iconType="2" name="D:\JavaGit\hello-world\DPU\images\Search.png"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrintManageDriver">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/dpu/ui/common/Print.png"/>
+          <Image iconType="2" name="D:\JavaGit\hello-world\DPU\images\Print.png"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
-        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/dpu/ui/common/Print.png"/>
-        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrintManageDriverActionPerformed"/>

@@ -44,7 +44,7 @@ public class TestDriverPanel extends javax.swing.JPanel {
         btnSearchManageDriver = new javax.swing.JLabel();
         btnPrintManageDriver = new javax.swing.JButton();
 
-        btnAddManageDriver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add.png"))); // NOI18N
+        btnAddManageDriver.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Add.png")); // NOI18N
         btnAddManageDriver.setMaximumSize(new java.awt.Dimension(16, 16));
         btnAddManageDriver.setMinimumSize(new java.awt.Dimension(16, 16));
         btnAddManageDriver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -77,12 +77,11 @@ public class TestDriverPanel extends javax.swing.JPanel {
         ));
         jScrollPane9.setViewportView(tblDriver);
 
-        btnSearchManageDriver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Search.png"))); // NOI18N
+        btnSearchManageDriver.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Search.png")); // NOI18N
 
-        btnPrintManageDriver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
+        btnPrintManageDriver.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Print.png")); // NOI18N
         btnPrintManageDriver.setBorder(null);
         btnPrintManageDriver.setBorderPainted(false);
-        btnPrintManageDriver.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Print.png"))); // NOI18N
         btnPrintManageDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintManageDriverActionPerformed(evt);
