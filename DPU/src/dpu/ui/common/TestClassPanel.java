@@ -65,8 +65,6 @@ public class TestClassPanel extends javax.swing.JPanel {
         tblClass = new javax.swing.JTable();
         btnAddManageClass = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Search.png")); // NOI18N
-
         txtClassSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtClassSearchKeyReleased(evt);
@@ -76,7 +74,7 @@ public class TestClassPanel extends javax.swing.JPanel {
             }
         });
 
-        btnClearManageClass.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Print.png")); // NOI18N
+        btnClearManageClass.setIcon(new javax.swing.ImageIcon("E:\\gitrepository\\DPU\\images\\Print.png")); // NOI18N
         btnClearManageClass.setBorder(null);
         btnClearManageClass.setBorderPainted(false);
         btnClearManageClass.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +96,7 @@ public class TestClassPanel extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblClass);
 
-        btnAddManageClass.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Add.png")); // NOI18N
+        btnAddManageClass.setIcon(new javax.swing.ImageIcon("E:\\gitrepository\\DPU\\images\\Add.png")); // NOI18N
         btnAddManageClass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddManageClassMouseClicked(evt);
@@ -121,7 +119,7 @@ public class TestClassPanel extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClearManageClass, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 966, Short.MAX_VALUE)))
+                        .addGap(0, 950, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 

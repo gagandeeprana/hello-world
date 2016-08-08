@@ -74,7 +74,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setIcon(new javax.swing.ImageIcon("D:\\JavaGit\\hello-world\\DPU\\images\\Login.png")); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon("E:\\gitrepository\\DPU\\images\\Login.png")); // NOI18N
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);

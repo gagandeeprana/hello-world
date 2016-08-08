@@ -28,7 +28,7 @@
                       <Component id="jLabel2" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnClearManageClass" linkSize="2" min="-2" pref="27" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="966" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="950" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -54,11 +54,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\JavaGit\hello-world\DPU\images\Search.png"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtClassSearch">
       <Events>
@@ -72,7 +67,7 @@
     <Component class="javax.swing.JButton" name="btnClearManageClass">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\JavaGit\hello-world\DPU\images\Print.png"/>
+          <Image iconType="2" name="E:\gitrepository\DPU\images\Print.png"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
@@ -115,7 +110,7 @@
     <Component class="javax.swing.JLabel" name="btnAddManageClass">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\JavaGit\hello-world\DPU\images\Add.png"/>
+          <Image iconType="2" name="E:\gitrepository\DPU\images\Add.png"/>
         </Property>
       </Properties>
       <Events>
