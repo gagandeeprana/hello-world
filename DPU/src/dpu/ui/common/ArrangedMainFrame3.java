@@ -187,63 +187,63 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel2.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("<html>Master Orders</html>");
 
-        jLabel9.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("<html>Standard Templates</html>");
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel10.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("<html>Custom Brokers</html>");
 
-        jLabel11.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("<html>Payroll Schedules</html>");
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel12.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("<html>Misc Vendors</html>");
 
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel13.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("<html>Outside Carriers</html>");
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel14.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("<html>Border Crossing</html>");
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel15.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("<html> Shippers </html>");
         jLabel15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel16.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
         jLabel16.setText("<html> Customers </html>");
         jLabel16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel17.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("<html>Standard Charges</html>");
 
-        jLabel18.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
         jLabel18.setText("<html>Sales Person</html>");
 
@@ -251,49 +251,49 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jSeparator11.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel19.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(102, 102, 102));
         jLabel19.setText("<html> Resources </html>");
         jLabel19.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator12.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel20.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(102, 102, 102));
         jLabel20.setText("<html> Jurisdiction </html>");
         jLabel20.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator13.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel21.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(102, 102, 102));
         jLabel21.setText("<html> Tracking </html>");
         jLabel21.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator14.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel22.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(102, 102, 102));
         jLabel22.setText("<html> Roles </html>");
         jLabel22.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator15.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel23.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(102, 102, 102));
         jLabel23.setText("<html> Company </html>");
         jLabel23.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator16.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel24.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("<html> List </html>");
         jLabel24.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator17.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel25.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(102, 102, 102));
         jLabel25.setText("<html> Class </html>");
         jLabel25.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -308,14 +308,14 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jSeparator18.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel26.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(102, 102, 102));
         jLabel26.setText("<html>Timings</html>");
         jLabel26.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator19.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel27.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 102, 102));
         jLabel27.setText("<html> Prospects </html>");
         jLabel27.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -557,52 +557,52 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jSeparator40.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel50.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel50.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(102, 102, 102));
         jLabel50.setText("<html>Master Orders</html>");
 
-        jLabel51.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel51.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(102, 102, 102));
         jLabel51.setText("<html>Standard Templates</html>");
 
         jSeparator41.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel52.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel52.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(102, 102, 102));
         jLabel52.setText("<html>Custom Brokers</html>");
 
-        jLabel53.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel53.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(102, 102, 102));
         jLabel53.setText("<html>Payroll Schedules</html>");
 
         jSeparator42.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel54.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel54.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel54.setForeground(new java.awt.Color(102, 102, 102));
         jLabel54.setText("<html>Misc Vendors</html>");
 
         jSeparator43.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel55.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel55.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel55.setForeground(new java.awt.Color(102, 102, 102));
         jLabel55.setText("<html>Outside Carriers</html>");
 
         jSeparator44.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel56.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel56.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel56.setForeground(new java.awt.Color(102, 102, 102));
         jLabel56.setText("<html>Border Crossing</html>");
 
         jSeparator45.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel57.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel57.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel57.setForeground(new java.awt.Color(102, 102, 102));
         jLabel57.setText("<html> Shippers </html>");
         jLabel57.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jSeparator46.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel58.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jLabel58.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel58.setForeground(new java.awt.Color(102, 102, 102));
         jLabel58.setText("<html> Customers </html>");
         jLabel58.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -690,8 +690,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1262, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -718,47 +718,47 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGap(0, 491, Short.MAX_VALUE)
         );
 
         jMenu1.setForeground(new java.awt.Color(51, 51, 51));
         jMenu1.setText("File");
-        jMenu1.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu1);
 
         jMenu2.setForeground(new java.awt.Color(51, 51, 51));
         jMenu2.setText("View");
-        jMenu2.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu2);
 
         jMenu3.setForeground(new java.awt.Color(51, 51, 51));
         jMenu3.setText("Accounting");
-        jMenu3.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu3);
 
         jMenu4.setForeground(new java.awt.Color(51, 51, 51));
         jMenu4.setText("Payroll");
-        jMenu4.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu4.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu4);
 
         jMenu5.setForeground(new java.awt.Color(51, 51, 51));
         jMenu5.setText("Fuel Tax");
-        jMenu5.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu5.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu5);
 
         jMenu6.setForeground(new java.awt.Color(51, 51, 51));
         jMenu6.setText("Compliancy");
-        jMenu6.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu6.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu6);
 
         jMenu7.setForeground(new java.awt.Color(51, 51, 51));
         jMenu7.setText("Reports");
-        jMenu7.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu7.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu7);
 
         jMenu8.setForeground(new java.awt.Color(51, 51, 51));
         jMenu8.setText("Communication");
-        jMenu8.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
+        jMenu8.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu8);
 
         setJMenuBar(jMenuBar1);
@@ -768,7 +768,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jInternalFrame1)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
