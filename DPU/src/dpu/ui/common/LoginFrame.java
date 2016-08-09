@@ -74,7 +74,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setIcon(new javax.swing.ImageIcon("E:\\gitrepository\\DPU\\images\\Login.png")); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Login.png"))); // NOI18N
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -152,15 +152,17 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        JFrame test = new JFrame();
-        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        test.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        test.setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        mainTabbedPane = new MainTabbedPane(test);
-        test.setTitle("DPU (" + mainTabbedPane.getTitleAt(mainTabbedPane.getSelectedIndex()).trim() + ")");
-        test.add(mainTabbedPane);
-        test.setVisible(true);
+//        JFrame test = new JFrame();
+//        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        test.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+//        test.setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+//        mainTabbedPane = new MainTabbedPane(test);
+//        test.setTitle("DPU (" + mainTabbedPane.getTitleAt(mainTabbedPane.getSelectedIndex()).trim() + ")");
+//        test.add(mainTabbedPane);
+//        test.setVisible(true);
         this.setVisible(false);
+            ArrangedMainFrame3 arrangedMainFrame3= new ArrangedMainFrame3();
+            arrangedMainFrame3.setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblForgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPasswordMouseClicked

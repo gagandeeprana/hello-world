@@ -5,9 +5,9 @@ import java.util.Properties;
 
 public class ReadFromPropertiesFile {
 
-    public static String imagePath = "images\\";
+    public static String imagePath = "src\\images\\";
     public static String propertiesPath = "properties\\";
-    public static String filesPath = "users\\";
+    public static String filesPath = "src\\files\\";
     
     static ReadFromPropertiesFile readFromPropertiesFile = null;
     Properties properties = null;
