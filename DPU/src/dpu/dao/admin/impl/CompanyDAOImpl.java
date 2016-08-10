@@ -35,6 +35,22 @@ public class CompanyDAOImpl implements CompanyDAO {
                 CompanyBean obj = new CompanyBean();
                 obj.setCompanyId(rs.getInt("company_id"));
                 obj.setCompanyName(rs.getString("name"));
+                obj.setAddress(rs.getString("address"));
+                obj.setUnitNo(rs.getString("unit_no"));
+                obj.setCity(rs.getString("city"));
+                obj.setProvinceState(rs.getString("province_state"));
+                obj.setZip(rs.getString("zip"));
+                obj.setEmail(rs.getString("email"));
+                obj.setWebsite(rs.getString("website"));
+                obj.setContact(rs.getString("contact"));
+                obj.setPosition(rs.getString("position"));
+                obj.setPhone(rs.getString("phone"));
+                obj.setExt(rs.getString("ext"));
+                obj.setFax(rs.getString("fax"));
+                obj.setPrefix(rs.getString("prefix"));
+                obj.setTollfree(rs.getString("tollfree"));
+                obj.setCellular(rs.getString("cellular"));
+                obj.setPager(rs.getString("pager"));
                 lstCompanies.add(obj);
             }
         } catch (Exception e) {

@@ -48,6 +48,42 @@ LOCK TABLES `acipassengermaster` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `additionalcontactmaster`
+--
+
+DROP TABLE IF EXISTS `additionalcontactmaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `additionalcontactmaster` (
+  `add_contact_id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(30) DEFAULT NULL,
+  `address` varchar(40) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `ext` varchar(30) DEFAULT NULL,
+  `fax` varchar(30) DEFAULT NULL,
+  `prefix` varchar(30) DEFAULT NULL,
+  `province_state` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`add_contact_id`),
+  KEY `company_id` (`company_id`),
+  KEY `province_state` (`province_state`),
+  CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`),
+  CONSTRAINT `additionalcontactmaster_ibfk_2` FOREIGN KEY (`province_state`) REFERENCES `countrymaster` (`country_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `additionalcontactmaster`
+--
+
+LOCK TABLES `additionalcontactmaster` WRITE;
+/*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
+/*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categorymaster`
 --
 
@@ -92,7 +128,7 @@ CREATE TABLE `classmaster` (
 
 LOCK TABLES `classmaster` WRITE;
 /*!40000 ALTER TABLE `classmaster` DISABLE KEYS */;
-INSERT INTO `classmaster` VALUES (1,'CLASSa'),(2,'BB'),(3,'CCC');
+INSERT INTO `classmaster` VALUES (1,'CLASSa'),(2,'BB');
 /*!40000 ALTER TABLE `classmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,8 +142,24 @@ DROP TABLE IF EXISTS `companymaster`;
 CREATE TABLE `companymaster` (
   `company_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(155) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `unit_no` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `province_state` varchar(50) DEFAULT NULL,
+  `zip` varchar(30) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `website` varchar(50) DEFAULT NULL,
+  `contact` varchar(30) DEFAULT NULL,
+  `position` varchar(30) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `ext` varchar(20) DEFAULT NULL,
+  `fax` varchar(40) DEFAULT NULL,
+  `prefix` varchar(30) DEFAULT NULL,
+  `tollfree` varchar(30) DEFAULT NULL,
+  `cellular` varchar(30) DEFAULT NULL,
+  `pager` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +168,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (1,'HH');
+INSERT INTO `companymaster` VALUES (1,'HH',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'dfgd','dfg','fdg','dfg','ert','et','dfgd','fdgdf','tr','sdfs','wer','tyu','vbn','wer','ghjg','qweqw','sdf'),(5,'dfgd','dfg','fdg','dfg','ert','et','dfgd','fdgdf','tr','sdfs','wer','tyu','vbn','wer','ghjg','qweqw','sdf');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +695,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-04 17:10:24
+-- Dump completed on 2016-08-10 18:11:45

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import properties.ReadFromPropertiesFile;
 
 public class CompanyUIHelper {
 
@@ -37,8 +39,8 @@ public class CompanyUIHelper {
 //        mainTabbedPane.setEnabled(var);
 //        TestCompanyPanel.companyPanel.setEnabled(var);
         TestCompanyPanel.tblCompany.setEnabled(var);
-        TestCompanyPanel.btnAddManageCompany.setEnabled(var);
-        TestCompanyPanel.btnClearManageCompany.setEnabled(var);
+        TestCompanyPanel.lblAddManageCompany.setEnabled(var);
+        TestCompanyPanel.lblPrintManageCompany.setEnabled(var);
         TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
 
@@ -52,10 +54,10 @@ public class CompanyUIHelper {
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
             } else {
                 setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
             }
             setText((value == null) ? "" : value.toString());
             return this;
@@ -83,10 +85,10 @@ public class CompanyUIHelper {
                 boolean isSelected, int row, int column) {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
-                button.setBackground(table.getSelectionBackground());
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
             } else {
                 button.setForeground(table.getForeground());
-                button.setBackground(table.getBackground());
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
             }
             companyIdToBeDeleted = lstCompanies.get(row).getCompanyId();
             label = (value == null) ? "" : value.toString();
@@ -124,10 +126,10 @@ public class CompanyUIHelper {
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             } else {
                 setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
+                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             }
             setText((value == null) ? "" : value.toString());
             return this;
@@ -155,10 +157,10 @@ public class CompanyUIHelper {
                 boolean isSelected, int row, int column) {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
-                button.setBackground(table.getSelectionBackground());
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             } else {
                 button.setForeground(table.getForeground());
-                button.setBackground(table.getBackground());
+                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             }
             companyIdToBeDeleted = lstCompanies.get(row).getCompanyId();
             companyId = lstCompanies.get(row).getCompanyId();
@@ -195,15 +197,28 @@ public class CompanyUIHelper {
         lstCompanies = companyDAO.getAllCompanies(TestCompanyPanel.txtCompanySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestCompanyPanel.tblCompany = new JTable(defaultTableModel);
-        Object[][] data = new Object[lstCompanies.size()][4];
+        Object[][] data = new Object[lstCompanies.size()][17];
         for (int i = 0; i < lstCompanies.size(); i++) {
             CompanyBean obj = lstCompanies.get(i);
             data[i][0] = obj.getCompanyId();
             data[i][1] = obj.getCompanyName();
-            data[i][2] = "Remove";
-            data[i][3] = "Update";
+            data[i][2] = obj.getAddress();
+            data[i][3] = obj.getUnitNo();
+            data[i][4] = obj.getCity();
+            data[i][5] = obj.getProvinceState();
+            data[i][6] = obj.getZip();
+            data[i][7] = obj.getEmail();
+            data[i][8] = obj.getWebsite();
+            data[i][9] = obj.getContact();
+            data[i][10] = obj.getPosition();
+            data[i][11] = obj.getPhone();
+            data[i][12] = obj.getExt();
+            data[i][13] = obj.getFax();
+            data[i][14] = obj.getPager();
+            data[i][15] = "";
+            data[i][16] = "";
         }
-        Object[] cols = {"Company Id", "Company Name", " ", "  "};
+        Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager", " ", "  "};
         defaultTableModel.setDataVector(data, cols);
         TestCompanyPanel.tblCompany.getColumn(" ").setCellRenderer(new ButtonRenderer());
         TestCompanyPanel.tblCompany.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
