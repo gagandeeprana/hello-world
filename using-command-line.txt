@@ -6,3 +6,5 @@ firefox - open mozilla firefox from command run
 sysdm.cpl - this command open environment variables directly...
 regedit - it opens registry
 git ls-tree --full-tree -r HEAD    -> This lists all files and folders on git repository
+ping 8.8.8.8 - it will ping to google.com
+ipconfig/all - it shows complete details;
