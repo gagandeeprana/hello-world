@@ -5,6 +5,8 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.CompanyBean;
+import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import properties.ReadFromPropertiesFile;
@@ -18,8 +20,12 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddCustomerFrame
      */
+    
+    CompanyUIHelper companyUIHelper = null;
+    
     public AddCustomerFrame() {
         initComponents();
+        companyUIHelper = new CompanyUIHelper();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -39,10 +45,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        txtEquipmentTypeAddPowerUnit4 = new javax.swing.JTextField();
-        txtModelAddPowerUnit3 = new javax.swing.JTextField();
+        txtZip = new javax.swing.JTextField();
+        txtFax = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtOwnerAddPowerUnit = new javax.swing.JTextField();
+        txtCompanyName = new javax.swing.JTextField();
         jCheckBox4 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -51,38 +57,38 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jCheckBox5 = new javax.swing.JCheckBox();
         jLabel19 = new javax.swing.JLabel();
-        txtEquipmentTypeAddPowerUnit = new javax.swing.JTextField();
-        txtEquipmentTypeAddPowerUnit3 = new javax.swing.JTextField();
-        txtVINAddPowerUnit1 = new javax.swing.JTextField();
+        txtProvinceState = new javax.swing.JTextField();
+        txtPager = new javax.swing.JTextField();
+        txtPosition = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jCheckBox3 = new javax.swing.JCheckBox();
-        txtVINAddPowerUnit2 = new javax.swing.JTextField();
-        txtMakeAddPowerUnit3 = new javax.swing.JTextField();
+        txtContact = new javax.swing.JTextField();
+        txtPrefix = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtModelAddPowerUnit = new javax.swing.JTextField();
-        txtModelAddPowerUnit2 = new javax.swing.JTextField();
+        txtCity = new javax.swing.JTextField();
+        txtCellular = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtMakeAddPowerUnit1 = new javax.swing.JTextField();
-        txtEquipmentTypeAddPowerUnit1 = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        txtWebsite = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        txtModelAddPowerUnit1 = new javax.swing.JTextField();
-        txtMakeAddPowerUnit2 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtExt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        txtEquipmentTypeAddPowerUnit2 = new javax.swing.JTextField();
+        txtTollFree = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        txtVINAddPowerUnit = new javax.swing.JTextField();
-        txtMakeAddPowerUnit = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
+        txtUnitNo = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -100,15 +106,15 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtEquipmentTypeAddPowerUnit4.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtZip.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtModelAddPowerUnit3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtFax.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Customer");
 
-        txtOwnerAddPowerUnit.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtCompanyName.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -144,11 +150,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(51, 51, 51));
         jLabel19.setText("Ext");
 
-        txtEquipmentTypeAddPowerUnit.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtProvinceState.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtEquipmentTypeAddPowerUnit3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtPager.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtVINAddPowerUnit1.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtPosition.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
@@ -168,9 +174,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jCheckBox3.setText("PickUp");
         jCheckBox3.setPreferredSize(new java.awt.Dimension(53, 20));
 
-        txtVINAddPowerUnit2.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtContact.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtMakeAddPowerUnit3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtPrefix.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
@@ -184,9 +190,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Address");
 
-        txtModelAddPowerUnit.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtCity.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtModelAddPowerUnit2.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtCellular.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -212,9 +218,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Unit No.");
 
-        txtMakeAddPowerUnit1.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtPhone.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtEquipmentTypeAddPowerUnit1.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtWebsite.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -228,9 +234,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(51, 51, 51));
         jLabel21.setText("Email Notifications");
 
-        txtModelAddPowerUnit1.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtMakeAddPowerUnit2.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtExt.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
@@ -240,15 +246,15 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(51, 51, 51));
         jLabel15.setText("Province/State");
 
-        txtEquipmentTypeAddPowerUnit2.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtTollFree.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
         jLabel20.setText("Prefix");
 
-        txtVINAddPowerUnit.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtAddress.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtMakeAddPowerUnit.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtUnitNo.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -268,27 +274,27 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addGap(11, 11, 11)
-                            .addComponent(txtEquipmentTypeAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProvinceState, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jLabel14)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtEquipmentTypeAddPowerUnit4))
+                            .addComponent(txtZip))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtModelAddPowerUnit)
-                                    .addComponent(txtMakeAddPowerUnit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtVINAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCity)
+                                    .addComponent(txtUnitNo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(txtOwnerAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtEquipmentTypeAddPowerUnit1)
-                            .addComponent(txtModelAddPowerUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtWebsite)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,12 +317,12 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtVINAddPowerUnit1)
+                    .addComponent(txtPosition)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtEquipmentTypeAddPowerUnit3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPager, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -327,7 +333,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtEquipmentTypeAddPowerUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -339,23 +345,23 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                                         .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtModelAddPowerUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtModelAddPowerUnit3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMakeAddPowerUnit1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtFax, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel20)
                             .addComponent(jLabel19))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMakeAddPowerUnit2)
-                            .addComponent(txtMakeAddPowerUnit3)))
-                    .addComponent(txtVINAddPowerUnit2))
+                            .addComponent(txtExt)
+                            .addComponent(txtPrefix)))
+                    .addComponent(txtContact))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMakeAddPowerUnit, txtModelAddPowerUnit, txtVINAddPowerUnit});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAddress, txtCity, txtUnitNo});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,37 +371,37 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtVINAddPowerUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(txtVINAddPowerUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(txtMakeAddPowerUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19)
-                            .addComponent(txtMakeAddPowerUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(txtModelAddPowerUnit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20)
-                            .addComponent(txtMakeAddPowerUnit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel17)
-                                    .addComponent(txtEquipmentTypeAddPowerUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(txtModelAddPowerUnit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel18)
-                                    .addComponent(txtEquipmentTypeAddPowerUnit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtPager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -412,39 +418,39 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4)
-                                .addComponent(txtOwnerAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtVINAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtMakeAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtUnitNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtModelAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(txtEquipmentTypeAddPowerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProvinceState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)
-                            .addComponent(txtEquipmentTypeAddPowerUnit4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
-                                .addComponent(txtModelAddPowerUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel16)
-                                .addComponent(txtEquipmentTypeAddPowerUnit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtWebsite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSeparator1))
                 .addContainerGap())
@@ -487,6 +493,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save.png"))); // NOI18N
         jLabel23.setToolTipText("Save Customer..");
+        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel23MouseClicked(evt);
+            }
+        });
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
 
@@ -535,6 +546,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        
+        companyUIHelper.save();
+    }//GEN-LAST:event_jLabel23MouseClicked
 
     /**
      * @param args the command line arguments
@@ -609,22 +625,22 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtEquipmentTypeAddPowerUnit;
-    private javax.swing.JTextField txtEquipmentTypeAddPowerUnit1;
-    private javax.swing.JTextField txtEquipmentTypeAddPowerUnit2;
-    private javax.swing.JTextField txtEquipmentTypeAddPowerUnit3;
-    private javax.swing.JTextField txtEquipmentTypeAddPowerUnit4;
-    private javax.swing.JTextField txtMakeAddPowerUnit;
-    private javax.swing.JTextField txtMakeAddPowerUnit1;
-    private javax.swing.JTextField txtMakeAddPowerUnit2;
-    private javax.swing.JTextField txtMakeAddPowerUnit3;
-    private javax.swing.JTextField txtModelAddPowerUnit;
-    private javax.swing.JTextField txtModelAddPowerUnit1;
-    private javax.swing.JTextField txtModelAddPowerUnit2;
-    private javax.swing.JTextField txtModelAddPowerUnit3;
-    private javax.swing.JTextField txtOwnerAddPowerUnit;
-    private javax.swing.JTextField txtVINAddPowerUnit;
-    private javax.swing.JTextField txtVINAddPowerUnit1;
-    private javax.swing.JTextField txtVINAddPowerUnit2;
+    public static javax.swing.JTextField txtAddress;
+    public static javax.swing.JTextField txtCellular;
+    public static javax.swing.JTextField txtCity;
+    public static javax.swing.JTextField txtCompanyName;
+    public static javax.swing.JTextField txtContact;
+    public static javax.swing.JTextField txtEmail;
+    public static javax.swing.JTextField txtExt;
+    public static javax.swing.JTextField txtFax;
+    public static javax.swing.JTextField txtPager;
+    public static javax.swing.JTextField txtPhone;
+    public static javax.swing.JTextField txtPosition;
+    public static javax.swing.JTextField txtPrefix;
+    public static javax.swing.JTextField txtProvinceState;
+    public static javax.swing.JTextField txtTollFree;
+    public static javax.swing.JTextField txtUnitNo;
+    public static javax.swing.JTextField txtWebsite;
+    public static javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables
 }

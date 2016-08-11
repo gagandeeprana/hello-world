@@ -65,9 +65,24 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into companymaster values(?,?)");
-            pstmt.setInt(1, obj.getCompanyId());
-            pstmt.setString(2, obj.getCompanyName());
+            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt.setString(1, obj.getCompanyName());
+            pstmt.setString(2, obj.getAddress());
+            pstmt.setString(3, obj.getUnitNo());
+            pstmt.setString(4, obj.getCity());
+            pstmt.setString(5, obj.getProvinceState());
+            pstmt.setString(6, obj.getZip());
+            pstmt.setString(7, obj.getEmail());
+            pstmt.setString(8, obj.getWebsite());
+            pstmt.setString(9, obj.getContact());
+            pstmt.setString(10, obj.getPosition());
+            pstmt.setString(11, obj.getPhone());
+            pstmt.setString(12, obj.getExt());
+            pstmt.setString(13, obj.getFax());
+            pstmt.setString(14, obj.getPrefix());
+            pstmt.setString(15, obj.getTollfree());
+            pstmt.setString(16, obj.getCellular());
+            pstmt.setString(17, obj.getPager());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Company Added";

@@ -4,6 +4,7 @@ import dpu.beans.admin.CompanyBean;
 import dpu.dao.admin.CompanyDAO;
 import dpu.dao.admin.impl.CompanyDAOImpl;
 import dpu.ui.common.AddCompanyFrame;
+import dpu.ui.common.AddCustomerFrame;
 import dpu.ui.common.TestCompanyPanel;
 import java.awt.Color;
 //import static dpu.ui.common.TestCompanyPanel.mainTabbedPane;
@@ -254,11 +255,26 @@ public class CompanyUIHelper {
     }
     
     public String save() {
-        CompanyBean obj = new CompanyBean();
-        obj.setCompanyId(Integer.parseInt(AddCompanyFrame.txtCompanyIdAddCompany.getText()));
-        obj.setCompanyName(AddCompanyFrame.txtCompanyNameAddCompany.getText());
+        CompanyBean companyBean = new CompanyBean();
+        companyBean.setCompanyName(AddCustomerFrame.txtCompanyName.getText());
+        companyBean.setAddress(AddCustomerFrame.txtAddress.getText());
+        companyBean.setUnitNo(AddCustomerFrame.txtUnitNo.getText());
+        companyBean.setCity(AddCustomerFrame.txtCity.getText());
+        companyBean.setProvinceState(AddCustomerFrame.txtProvinceState.getText());
+        companyBean.setZip(AddCustomerFrame.txtZip.getText());
+        companyBean.setEmail(AddCustomerFrame.txtEmail.getText());
+        companyBean.setWebsite(AddCustomerFrame.txtWebsite.getText());
+        companyBean.setContact(AddCustomerFrame.txtContact.getText());
+        companyBean.setPosition(AddCustomerFrame.txtPosition.getText());
+        companyBean.setPhone(AddCustomerFrame.txtPhone.getText());
+        companyBean.setExt(AddCustomerFrame.txtExt.getText());
+        companyBean.setFax(AddCustomerFrame.txtFax.getText());
+        companyBean.setPrefix(AddCustomerFrame.txtPrefix.getText());
+        companyBean.setTollfree(AddCustomerFrame.txtTollFree.getText());
+        companyBean.setCellular(AddCustomerFrame.txtCellular.getText());
+        companyBean.setPager(AddCustomerFrame.txtPager.getText());
         CompanyDAO companyDAO = new CompanyDAOImpl();
-        String msg = companyDAO.addCompany(obj);
+        String msg = companyDAO.addCompany(companyBean);
         disable(true);
         generateTable();
 //        TestCompanyPanel.mainTabbedPane.setEnabled(true);
