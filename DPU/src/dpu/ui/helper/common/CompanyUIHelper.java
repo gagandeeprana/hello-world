@@ -5,24 +5,30 @@ import dpu.dao.admin.CompanyDAO;
 import dpu.dao.admin.impl.CompanyDAOImpl;
 import dpu.ui.common.AddCompanyFrame;
 import dpu.ui.common.TestCompanyPanel;
+import java.awt.Color;
 //import static dpu.ui.common.TestCompanyPanel.mainTabbedPane;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import properties.ReadFromPropertiesFile;
 
 public class CompanyUIHelper {
-
+    
     public String addUpdateFlag = "";
     int companyId = 0;
     String companyName;
@@ -30,11 +36,11 @@ public class CompanyUIHelper {
     List<CompanyBean> lstCompanies = null;
     int companyIdToBeDeleted = 0;
     String msg = "";
-
+    
     public void clear() {
         TestCompanyPanel.txtCompanySearch.setText("");
     }
-
+    
     public void disable(boolean var) {
 //        mainTabbedPane.setEnabled(var);
 //        TestCompanyPanel.companyPanel.setEnabled(var);
@@ -43,33 +49,36 @@ public class CompanyUIHelper {
         TestCompanyPanel.lblPrintManageCompany.setEnabled(var);
         TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
-
+    
     public class ButtonRenderer extends JButton implements TableCellRenderer {
-
+        
         public ButtonRenderer() {
             setOpaque(true);
         }
-
+        
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+                setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             } else {
                 setForeground(table.getForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+                setContentAreaFilled(false);
             }
             setText((value == null) ? "" : value.toString());
             return this;
         }
     }
-
+    
     public class ButtonEditor extends DefaultCellEditor {
-
+        
         protected JButton button;
         private String label;
         private boolean isPushed;
-
+        
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
             button = new JButton();
@@ -80,7 +89,7 @@ public class CompanyUIHelper {
                 }
             });
         }
-
+        
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
@@ -96,7 +105,7 @@ public class CompanyUIHelper {
             isPushed = true;
             return button;
         }
-
+        
         public Object getCellEditorValue() {
             if (isPushed) {
                 msg = delete();
@@ -105,43 +114,47 @@ public class CompanyUIHelper {
             isPushed = false;
             return new String(label);
         }
-
+        
         public boolean stopCellEditing() {
             isPushed = false;
             return super.stopCellEditing();
         }
-
+        
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
     }
-
+    
     public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
-
+        
         public ButtonRendererUpdate() {
             setOpaque(true);
         }
-
+        
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+                setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             } else {
                 setForeground(table.getForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+                setBackground(Color.WHITE);
+                setContentAreaFilled(false);
             }
             setText((value == null) ? "" : value.toString());
             return this;
         }
     }
-
+    
     public class ButtonEditorUpdate extends DefaultCellEditor {
-
+        
         protected JButton button;
         private String label;
         private boolean isPushed;
-
+        
         public ButtonEditorUpdate(JCheckBox checkBox) {
             super(checkBox);
             button = new JButton();
@@ -152,7 +165,7 @@ public class CompanyUIHelper {
                 }
             });
         }
-
+        
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
@@ -170,7 +183,7 @@ public class CompanyUIHelper {
             isPushed = true;
             return button;
         }
-
+        
         public Object getCellEditorValue() {
             if (isPushed) {
                 CompanyBean companyBean = new CompanyBean();
@@ -182,21 +195,23 @@ public class CompanyUIHelper {
             isPushed = false;
             return new String(label);
         }
-
+        
         public boolean stopCellEditing() {
             isPushed = false;
             return super.stopCellEditing();
         }
-
+        
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
     }
-
+    
     public void generateTable() {
         lstCompanies = companyDAO.getAllCompanies(TestCompanyPanel.txtCompanySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestCompanyPanel.tblCompany = new JTable(defaultTableModel);
+        TestCompanyPanel.tblCompany.getTableHeader().setBackground(Color.red);
+        TestCompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
         Object[][] data = new Object[lstCompanies.size()][17];
         for (int i = 0; i < lstCompanies.size(); i++) {
             CompanyBean obj = lstCompanies.get(i);
@@ -217,16 +232,27 @@ public class CompanyUIHelper {
             data[i][14] = obj.getPager();
             data[i][15] = "";
             data[i][16] = "";
+            TestCompanyPanel.tblCompany.setRowHeight(30);
         }
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager", " ", "  "};
+        
         defaultTableModel.setDataVector(data, cols);
+        TestCompanyPanel.tblCompany.getTableHeader().setBackground(Color.red);
+        
+        TestCompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        TestCompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
         TestCompanyPanel.tblCompany.getColumn(" ").setCellRenderer(new ButtonRenderer());
         TestCompanyPanel.tblCompany.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
         TestCompanyPanel.tblCompany.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
         TestCompanyPanel.tblCompany.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        TestCompanyPanel.tblCompany.getColumn(" ").setMaxWidth(25);
+        TestCompanyPanel.tblCompany.getColumn("  ").setMaxWidth(25);
+        TestCompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
+        TestCompanyPanel.tblCompany.setShowGrid(false);
         TestCompanyPanel.jScrollPane4.setViewportView(TestCompanyPanel.tblCompany);
+        
     }
-
+    
     public String save() {
         CompanyBean obj = new CompanyBean();
         obj.setCompanyId(Integer.parseInt(AddCompanyFrame.txtCompanyIdAddCompany.getText()));
@@ -239,7 +265,7 @@ public class CompanyUIHelper {
 //        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
-
+    
     public String delete() {
         CompanyDAO companyDAO = new CompanyDAOImpl();
         String msg = companyDAO.deleteCompany(companyIdToBeDeleted);
@@ -249,7 +275,7 @@ public class CompanyUIHelper {
 //        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
-
+    
     public String update(CompanyBean companyBean) {
         CompanyDAO companyDAO = new CompanyDAOImpl();
         String msg = companyDAO.updateCompany(companyBean);
@@ -258,5 +284,31 @@ public class CompanyUIHelper {
 //        TestCompanyPanel.mainTabbedPane.setEnabled(true);
 //        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
+    }
+    
+    class CompanyTable implements TableCellRenderer {
+        
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JTextField editor = new JTextField();
+            editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
+            editor.setBorder(null);
+            if (value != null) {
+                //here space is given to provide some left margin while showing data on textfield..
+                editor.setText("   " + value.toString());
+            }
+            if (row % 2 == 0) {
+                Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
+                editor.setBorder(border);
+                
+            } else {
+                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
+                editor.setBorder(border);
+                
+            }
+            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+            return editor;
+        }
+        
     }
 }

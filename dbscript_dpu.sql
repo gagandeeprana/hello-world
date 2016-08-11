@@ -159,7 +159,7 @@ CREATE TABLE `companymaster` (
   `cellular` varchar(30) DEFAULT NULL,
   `pager` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (1,'HH',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'dfgd','dfg','fdg','dfg','ert','et','dfgd','fdgdf','tr','sdfs','wer','tyu','vbn','wer','ghjg','qweqw','sdf'),(5,'dfgd','dfg','fdg','dfg','ert','et','dfgd','fdgdf','tr','sdfs','wer','tyu','vbn','wer','ghjg','qweqw','sdf');
+INSERT INTO `companymaster` VALUES (1,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(2,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(3,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(4,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(5,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(6,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(7,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(8,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(9,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(10,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(11,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(12,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(13,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(14,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(15,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(16,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(17,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(18,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,7 +420,6 @@ CREATE TABLE `powerunitmaster` (
 
 LOCK TABLES `powerunitmaster` WRITE;
 /*!40000 ALTER TABLE `powerunitmaster` DISABLE KEYS */;
-INSERT INTO `powerunitmaster` VALUES (1,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(2,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(3,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(4,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(5,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(6,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(7,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(8,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(9,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1),(10,'df','sdf',1,'tyui','2016','234fdg',2017,'435435','rrr',1345433,'234234',1,'345341','fgdgdfg',1);
 /*!40000 ALTER TABLE `powerunitmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -695,4 +694,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-10 18:11:45
+-- Dump completed on 2016-08-11 18:08:10
