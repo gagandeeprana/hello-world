@@ -6,6 +6,8 @@ import java.util.List;
 public interface CompanyDAO {
 
     List<CompanyBean> getAllCompanies(String name);
+    
+    CompanyBean getCompanyInfoById(int companyId);
 
     String addCompany(CompanyBean obj);
 

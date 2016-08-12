@@ -3,7 +3,6 @@ package dpu.ui.helper.common;
 import dpu.beans.admin.CompanyBean;
 import dpu.dao.admin.CompanyDAO;
 import dpu.dao.admin.impl.CompanyDAOImpl;
-import dpu.ui.common.AddCompanyFrame;
 import dpu.ui.common.AddCustomerFrame;
 import dpu.ui.common.TestCompanyPanel;
 import java.awt.Color;
@@ -24,39 +23,36 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import properties.ReadFromPropertiesFile;
 
 public class CompanyUIHelper {
-    
+
     public String addUpdateFlag = "";
-    int companyId = 0;
-    String companyName;
+    static int companyId = 0;
     CompanyDAO companyDAO = new CompanyDAOImpl();
     List<CompanyBean> lstCompanies = null;
     int companyIdToBeDeleted = 0;
     String msg = "";
-    
+    CompanyBean companyBean = null;
+
     public void clear() {
         TestCompanyPanel.txtCompanySearch.setText("");
     }
-    
+
     public void disable(boolean var) {
-//        mainTabbedPane.setEnabled(var);
-//        TestCompanyPanel.companyPanel.setEnabled(var);
         TestCompanyPanel.tblCompany.setEnabled(var);
         TestCompanyPanel.lblAddManageCompany.setEnabled(var);
         TestCompanyPanel.lblPrintManageCompany.setEnabled(var);
         TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
-    
+
     public class ButtonRenderer extends JButton implements TableCellRenderer {
-        
+
         public ButtonRenderer() {
             setOpaque(true);
         }
-        
+
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
@@ -73,13 +69,13 @@ public class CompanyUIHelper {
             return this;
         }
     }
-    
+
     public class ButtonEditor extends DefaultCellEditor {
-        
+
         protected JButton button;
         private String label;
         private boolean isPushed;
-        
+
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
             button = new JButton();
@@ -90,7 +86,7 @@ public class CompanyUIHelper {
                 }
             });
         }
-        
+
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
@@ -106,7 +102,7 @@ public class CompanyUIHelper {
             isPushed = true;
             return button;
         }
-        
+
         public Object getCellEditorValue() {
             if (isPushed) {
                 msg = delete();
@@ -115,23 +111,23 @@ public class CompanyUIHelper {
             isPushed = false;
             return new String(label);
         }
-        
+
         public boolean stopCellEditing() {
             isPushed = false;
             return super.stopCellEditing();
         }
-        
+
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
     }
-    
+
     public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
-        
+
         public ButtonRendererUpdate() {
             setOpaque(true);
         }
-        
+
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
@@ -149,13 +145,13 @@ public class CompanyUIHelper {
             return this;
         }
     }
-    
+
     public class ButtonEditorUpdate extends DefaultCellEditor {
-        
+
         protected JButton button;
         private String label;
         private boolean isPushed;
-        
+
         public ButtonEditorUpdate(JCheckBox checkBox) {
             super(checkBox);
             button = new JButton();
@@ -166,7 +162,7 @@ public class CompanyUIHelper {
                 }
             });
         }
-        
+
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
@@ -178,35 +174,34 @@ public class CompanyUIHelper {
             }
             companyIdToBeDeleted = lstCompanies.get(row).getCompanyId();
             companyId = lstCompanies.get(row).getCompanyId();
-            companyName = lstCompanies.get(row).getCompanyName();
+            companyBean = companyDAO.getCompanyInfoById(companyId);
             label = (value == null) ? "" : value.toString();
             button.setText(label);
             isPushed = true;
             return button;
         }
-        
+
         public Object getCellEditorValue() {
             if (isPushed) {
-                CompanyBean companyBean = new CompanyBean();
-                companyBean.setCompanyId(companyId);
-                companyBean.setCompanyName(companyName);
-                AddCompanyFrame addCompanyFrame = new AddCompanyFrame(companyBean);
-                addCompanyFrame.setVisible(true);
+                addUpdateFlag = "update";
+                AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
+                addCustomerFrame.setVisible(true);
+                disable(false);
             }
             isPushed = false;
             return new String(label);
         }
-        
+
         public boolean stopCellEditing() {
             isPushed = false;
             return super.stopCellEditing();
         }
-        
+
         protected void fireEditingStopped() {
             super.fireEditingStopped();
         }
     }
-    
+
     public void generateTable() {
         lstCompanies = companyDAO.getAllCompanies(TestCompanyPanel.txtCompanySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
@@ -236,10 +231,10 @@ public class CompanyUIHelper {
             TestCompanyPanel.tblCompany.setRowHeight(30);
         }
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager", " ", "  "};
-        
+
         defaultTableModel.setDataVector(data, cols);
         TestCompanyPanel.tblCompany.getTableHeader().setBackground(Color.red);
-        
+
         TestCompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         TestCompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
         TestCompanyPanel.tblCompany.getColumn(" ").setCellRenderer(new ButtonRenderer());
@@ -251,9 +246,9 @@ public class CompanyUIHelper {
         TestCompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
         TestCompanyPanel.tblCompany.setShowGrid(false);
         TestCompanyPanel.jScrollPane4.setViewportView(TestCompanyPanel.tblCompany);
-        
+
     }
-    
+
     public String save() {
         CompanyBean companyBean = new CompanyBean();
         companyBean.setCompanyName(AddCustomerFrame.txtCompanyName.getText());
@@ -274,14 +269,21 @@ public class CompanyUIHelper {
         companyBean.setCellular(AddCustomerFrame.txtCellular.getText());
         companyBean.setPager(AddCustomerFrame.txtPager.getText());
         CompanyDAO companyDAO = new CompanyDAOImpl();
-        String msg = companyDAO.addCompany(companyBean);
+
+        String msg = "";
+        if (addUpdateFlag.equals("add")) {
+            msg = companyDAO.addCompany(companyBean);
+        } else {
+            companyBean.setCompanyId(companyId);
+            msg = companyDAO.updateCompany(companyBean);
+        }
         disable(true);
         generateTable();
 //        TestCompanyPanel.mainTabbedPane.setEnabled(true);
 //        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
-    
+
     public String delete() {
         CompanyDAO companyDAO = new CompanyDAOImpl();
         String msg = companyDAO.deleteCompany(companyIdToBeDeleted);
@@ -291,7 +293,7 @@ public class CompanyUIHelper {
 //        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
-    
+
     public String update(CompanyBean companyBean) {
         CompanyDAO companyDAO = new CompanyDAOImpl();
         String msg = companyDAO.updateCompany(companyBean);
@@ -301,9 +303,9 @@ public class CompanyUIHelper {
 //        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
-    
+
     class CompanyTable implements TableCellRenderer {
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JTextField editor = new JTextField();
@@ -316,15 +318,15 @@ public class CompanyUIHelper {
             if (row % 2 == 0) {
                 Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
                 editor.setBorder(border);
-                
+
             } else {
                 Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
                 editor.setBorder(border);
-                
+
             }
             editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
             return editor;
         }
-        
+
     }
 }

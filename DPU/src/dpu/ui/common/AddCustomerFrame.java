@@ -5,10 +5,18 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.CompanyBean;
 import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -20,9 +28,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddCustomerFrame
      */
-    
     CompanyUIHelper companyUIHelper = null;
-    
+    CompanyBean companyBean = null;
+    JMenuItem menuItem1 = null;
+    public static List<AdditionalContactBean> lstAdditionalContacts = new ArrayList<>();
+
     public AddCustomerFrame() {
         initComponents();
         companyUIHelper = new CompanyUIHelper();
@@ -31,7 +41,51 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setBackground(Color.WHITE);
-        
+
+    }
+
+    private void clickEventOnMenuItem() {
+        menuItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddAdditionalContact addAdditionalContact = new AddAdditionalContact();
+                addAdditionalContact.setVisible(true);
+            }
+        });
+
+    }
+
+    public AddCustomerFrame(CompanyBean companyBean) {
+        initComponents();
+        this.companyBean = companyBean;
+        showDataOnScreen();
+        companyUIHelper = new CompanyUIHelper();
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setBackground(Color.WHITE);
+
+    }
+
+    private void showDataOnScreen() {
+        txtCompanyName.setText(companyBean.getCompanyName());
+        txtContact.setText(companyBean.getCompanyName());
+        txtAddress.setText(companyBean.getCompanyName());
+        txtPosition.setText(companyBean.getCompanyName());
+        txtUnitNo.setText(companyBean.getCompanyName());
+        txtPhone.setText(companyBean.getCompanyName());
+        txtExt.setText(companyBean.getCompanyName());
+        txtCity.setText(companyBean.getCompanyName());
+        txtFax.setText(companyBean.getCompanyName());
+        txtPrefix.setText(companyBean.getCompanyName());
+        txtProvinceState.setText(companyBean.getCompanyName());
+        txtZip.setText(companyBean.getCompanyName());
+        txtTollFree.setText(companyBean.getCompanyName());
+        txtEmail.setText(companyBean.getCompanyName());
+        txtCellular.setText(companyBean.getCompanyName());
+        txtWebsite.setText(companyBean.getCompanyName());
+        txtPager.setText(companyBean.getCompanyName());
     }
 
     /**
@@ -43,6 +97,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtZip = new javax.swing.JTextField();
@@ -93,7 +148,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblAdditionalContacts = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -473,7 +528,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Billing Locations", jScrollPane1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblAdditionalContacts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -484,7 +539,12 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 "Contact Name", "Phone No", "Extension", "Cell Phone No", "Email Address", "Position", "Fax No", "Pager No"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tblAdditionalContacts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblAdditionalContactsMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblAdditionalContacts);
 
         jTabbedPane1.addTab("Additional Contacts", jScrollPane2);
 
@@ -548,9 +608,37 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        
-        companyUIHelper.save();
+        String msg = companyUIHelper.save();
+        JOptionPane.showMessageDialog(null, msg);
+        dispose();
     }//GEN-LAST:event_jLabel23MouseClicked
+
+    private void tblAdditionalContactsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdditionalContactsMouseReleased
+        // TODO add your handling code here:
+        jPopupMenu1 = new JPopupMenu();
+        menuItem1 = new JMenuItem("Add Contact");
+        menuItem1.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
+        menuItem1.setIconTextGap(5);
+        JMenuItem menuItem2 = new JMenuItem("Edit Selected Contact");
+        menuItem2.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+        menuItem2.setIconTextGap(5);
+        JMenuItem menuItem3 = new JMenuItem("Email Selected Contact");
+        menuItem3.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Email.png"));
+        menuItem3.setIconTextGap(5);
+        JMenuItem menuItem4 = new JMenuItem("Delete Selected Contact");
+        menuItem4.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+        menuItem4.setIconTextGap(5);
+        JMenuItem menuItem5 = new JMenuItem("Hide Inactive Contacts");
+        jPopupMenu1.add(menuItem1);
+        jPopupMenu1.add(menuItem2);
+        jPopupMenu1.add(menuItem3);
+        jPopupMenu1.add(menuItem4);
+        jPopupMenu1.add(menuItem5);
+        if (evt.getButton() == 3) {
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            clickEventOnMenuItem();
+        }
+    }//GEN-LAST:event_tblAdditionalContactsMouseReleased
 
     /**
      * @param args the command line arguments
@@ -619,12 +707,13 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tblAdditionalContacts;
     public static javax.swing.JTextField txtAddress;
     public static javax.swing.JTextField txtCellular;
     public static javax.swing.JTextField txtCity;

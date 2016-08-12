@@ -167,9 +167,10 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCompanySearchKeyTyped
 
     private void lblAddManageCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMouseClicked
+        companyUI.addUpdateFlag = "add";
         AddCustomerFrame addCustomerFrame = new AddCustomerFrame();
-        
         addCustomerFrame.setVisible(true);
+        companyUI.disable(false);
     }//GEN-LAST:event_lblAddManageCompanyMouseClicked
 
 
