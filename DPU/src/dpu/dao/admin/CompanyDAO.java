@@ -8,6 +8,8 @@ public interface CompanyDAO {
     List<CompanyBean> getAllCompanies(String name);
     
     CompanyBean getCompanyInfoById(int companyId);
+    
+    int getMaxCompanyId();
 
     String addCompany(CompanyBean obj);
 

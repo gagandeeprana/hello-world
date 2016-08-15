@@ -13,9 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRootPane;
 import javax.swing.Timer;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -37,23 +35,16 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
     public ArrangedMainFrame3() {
         initComponents();
-        setVisiblity(false);
+//        setVisiblity(false);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         jInternalFrame1.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
         jInternalFrame1.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         jLayeredPane1.setVisible(false);
         jPanel4.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
-        //jPanel3.setVisible(false);
-//        jPanel5.setVisible(false);
         root = getContentPane();
         jInternalFrame1.setVisible(false);
         jInternalFrame1.setBorder(null);
-//        jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-//        jLabel30.setText("<html>" + "Master Orders" + "</html>");
-//        border.setOpaque(true);
-//        timer = new Timer(30, new AddButton());
-
     }
 
     class AddButton extends JButton implements ActionListener {
@@ -176,6 +167,9 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
             }
         });
 
@@ -327,11 +321,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        jPanel3.setVisible(true);
 //            Container root = jPanel1.getRootPane();
-            Datamaintenance datamaintenance = new Datamaintenance();
-            datamaintenance.setBounds(0, 0, getWidth(), getHeight());
-            jLayeredPane1.add(datamaintenance);
-            jLayeredPane1.setVisible(true);
-            datamaintenance.setVisible(true);
+
 //        jPanel5.setVisible(false);
     }//GEN-LAST:event_jLabel1MouseClicked
 
@@ -344,6 +334,15 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 //        jPanel5.setVisible(true);
 //        jPanel3.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+        Datamaintenance datamaintenance = new Datamaintenance();
+        datamaintenance.setBounds(0, 0, getWidth(), getHeight());
+        jLayeredPane1.add(datamaintenance);
+        jLayeredPane1.setVisible(true);
+        datamaintenance.setVisible(true);
+    }//GEN-LAST:event_jLabel1MousePressed
 
     private void setVisiblity(boolean val) {
 //        border.setVisible(val);

@@ -38,6 +38,10 @@ public class MainTabbedPane extends JTabbedPane implements ChangeListener {
     static List<String> lstTabs = new ArrayList<>();
     JFrame test = null;
 
+    public static void main(String[] args) {
+        
+//        new MainTabbedPane(test)
+    }
     public MainTabbedPane(JFrame test) {
         this.test = test;
         addChangeListener(this);

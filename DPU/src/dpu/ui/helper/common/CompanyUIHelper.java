@@ -1,7 +1,13 @@
 package dpu.ui.helper.common;
 
+import dpu.beans.admin.AdditionalContactBean;
+import dpu.beans.admin.BillingLocationBean;
 import dpu.beans.admin.CompanyBean;
+import dpu.dao.admin.AdditionalContactDAO;
+import dpu.dao.admin.BillingLocationDAO;
 import dpu.dao.admin.CompanyDAO;
+import dpu.dao.admin.impl.AdditionalContactDAOImpl;
+import dpu.dao.admin.impl.BillingLocationDAOImpl;
 import dpu.dao.admin.impl.CompanyDAOImpl;
 import dpu.ui.common.AddCustomerFrame;
 import dpu.ui.common.TestCompanyPanel;
@@ -28,7 +34,7 @@ import properties.ReadFromPropertiesFile;
 
 public class CompanyUIHelper {
 
-    public String addUpdateFlag = "";
+    static public String addUpdateFlag = "";
     static int companyId = 0;
     CompanyDAO companyDAO = new CompanyDAOImpl();
     List<CompanyBean> lstCompanies = null;
@@ -43,7 +49,7 @@ public class CompanyUIHelper {
     public void disable(boolean var) {
         TestCompanyPanel.tblCompany.setEnabled(var);
         TestCompanyPanel.lblAddManageCompany.setEnabled(var);
-        TestCompanyPanel.lblPrintManageCompany.setEnabled(var);
+        TestCompanyPanel.btnPrint.setEnabled(var);
         TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
 
@@ -269,10 +275,27 @@ public class CompanyUIHelper {
         companyBean.setCellular(AddCustomerFrame.txtCellular.getText());
         companyBean.setPager(AddCustomerFrame.txtPager.getText());
         CompanyDAO companyDAO = new CompanyDAOImpl();
+        AdditionalContactDAO additionalContactDAO = new AdditionalContactDAOImpl();
+        BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
 
         String msg = "";
         if (addUpdateFlag.equals("add")) {
             msg = companyDAO.addCompany(companyBean);
+            if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
+                int contactId = companyDAO.getMaxCompanyId();
+                for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
+                    additionalContactBean.setContactId(contactId);
+                    additionalContactDAO.addAdditionalContact(additionalContactBean);
+                }
+            }
+            if (AddCustomerFrame.lstBillingLocations.size() > 0) {
+                int contactId = companyDAO.getMaxCompanyId();
+                for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
+                    billingLocationBean.setCompanyId(contactId);
+                    billingLocationDAO.addBillingLocation(billingLocationBean);
+                }
+            }
+
         } else {
             companyBean.setCompanyId(companyId);
             msg = companyDAO.updateCompany(companyBean);

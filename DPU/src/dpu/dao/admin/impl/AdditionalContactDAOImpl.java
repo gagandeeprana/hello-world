@@ -74,6 +74,7 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 return "AdditionalContact Added";
             }
         } catch (Exception e) {
+            System.out.println("AdditionalContactDAOImpl : addAdditionalContact : " + e);
 //            logger.error("AdditionalContactDAOImpl : addAdditionalContact : " + e);
         }
         return "Failed to Add AdditionalContact";

@@ -5,8 +5,26 @@
  */
 package dpu.ui.common;
 
+import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.helper.common.CompanyUIHelper;
+import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import properties.ReadFromPropertiesFile;
 
 /**
  *
@@ -18,12 +36,14 @@ public class TestCompanyPanel extends javax.swing.JPanel {
      * Creates new form TestCompanyPanel
      */
     CompanyUIHelper companyUI = null;
-
+    
     public TestCompanyPanel() {
         initComponents();
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         companyUI = new CompanyUIHelper();
         companyUI.generateTable();
+        btnPrint.setAction(new ShowWaitAction(""));
+        btnPrint.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Print.png"));
     }
 
     /**
@@ -39,10 +59,10 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         txtCompanySearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        lblPrintManageCompany = new javax.swing.JLabel();
         lblAddManageCompany = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCompany = new javax.swing.JTable();
+        btnPrint = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1265, 539));
@@ -84,12 +104,13 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        lblPrintManageCompany.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Print.png"))); // NOI18N
-
         lblAddManageCompany.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Add.png"))); // NOI18N
         lblAddManageCompany.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAddManageCompanyMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblAddManageCompanyMousePressed(evt);
             }
         });
 
@@ -115,6 +136,11 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         tblCompany.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane4.setViewportView(tblCompany);
 
+        btnPrint.setBackground(new java.awt.Color(135, 192, 248));
+        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Print.png"))); // NOI18N
+        btnPrint.setBorder(null);
+        btnPrint.setBorderPainted(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -124,8 +150,8 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 .addComponent(lblAddManageCompany)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblPrintManageCompany)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrint)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
         );
@@ -133,17 +159,18 @@ public class TestCompanyPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(lblAddManageCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblPrintManageCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lblAddManageCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrint))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnPrint, jPanel1});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -167,21 +194,84 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCompanySearchKeyTyped
 
     private void lblAddManageCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMouseClicked
-        companyUI.addUpdateFlag = "add";
+     
+    }//GEN-LAST:event_lblAddManageCompanyMouseClicked
+
+    private void lblAddManageCompanyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMousePressed
+        // TODO add your handling code here:
+           companyUI.addUpdateFlag = "add";
         AddCustomerFrame addCustomerFrame = new AddCustomerFrame();
         addCustomerFrame.setVisible(true);
         companyUI.disable(false);
-    }//GEN-LAST:event_lblAddManageCompanyMouseClicked
+    }//GEN-LAST:event_lblAddManageCompanyMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnPrint;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JScrollPane jScrollPane4;
     public static javax.swing.JLabel lblAddManageCompany;
-    public static javax.swing.JLabel lblPrintManageCompany;
     public static javax.swing.JTable tblCompany;
     public static javax.swing.JTextField txtCompanySearch;
     // End of variables declaration//GEN-END:variables
+class ShowWaitAction extends AbstractAction {
+        
+        protected static final long SLEEP_TIME = 2 * 1000;
+        
+        public ShowWaitAction(String name) {
+            super(name);
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                
+                SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
+                    
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        // mimic some long-running process here...
+                        Thread.sleep(SLEEP_TIME);
+                        return null;
+                    }
+                };
+                
+                Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
+                final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
+                dialog.setUndecorated(true);
+                
+                mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+                    
+                    @Override
+                    public void propertyChange(PropertyChangeEvent evt) {
+                        if (evt.getPropertyName().equals("state")) {
+                            if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+                                JasperReportGenerator.generateReport("CustomerReport.jrxml");
+                                dialog.dispose();
+                            }
+                        }
+                    }
+                });
+                mySwingWorker.execute();
+//        JProgressBar progressBar = new JProgressBar();
+//        progressBar.setIndeterminate(true);
+                JPanel panel = new JPanel(new BorderLayout());
+//        panel.add(progressBar, BorderLayout.CENTER);
+//        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
+                JLabel jLabel = new JLabel(new ImageIcon(ReadFromPropertiesFile.imagePath + "Wait.gif"));
+                panel.add(jLabel);
+                dialog.add(panel);
+                TestClassPanel testClassPanel = new TestClassPanel();
+                testClassPanel.setEnabled(false);
+                dialog.pack();
+                dialog.setLocationRelativeTo(win);
+                dialog.setVisible(true);
+            } catch (Exception e) {
+                System.out.println("ShowWaitAction : actionPerformed(): " + e);
+            }
+            
+        }
+    }
 }

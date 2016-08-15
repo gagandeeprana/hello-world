@@ -1,11 +1,8 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
--- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
+-- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
 --
 -- Host: localhost    Database: dpu
 -- ------------------------------------------------------
--- Server version	5.5.45
+-- Server version	5.5.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -72,9 +69,8 @@ CREATE TABLE `additionalcontactmaster` (
   PRIMARY KEY (`add_contact_id`),
   KEY `company_id` (`company_id`),
   KEY `province_state` (`province_state`),
-  CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`),
-  CONSTRAINT `additionalcontactmaster_ibfk_2` FOREIGN KEY (`province_state`) REFERENCES `countrymaster` (`country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +79,52 @@ CREATE TABLE `additionalcontactmaster` (
 
 LOCK TABLES `additionalcontactmaster` WRITE;
 /*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
+INSERT INTO `additionalcontactmaster` VALUES (1,19,'nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn',0,0,'nnnnnn');
 /*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `billinglocationmaster`
+--
+
+DROP TABLE IF EXISTS `billinglocationmaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `billinglocationmaster` (
+  `billing_location_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  `address` varchar(30) DEFAULT NULL,
+  `unit_no` varchar(30) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `province_state` varchar(30) DEFAULT NULL,
+  `zip` varchar(30) DEFAULT NULL,
+  `ar_cdn` varchar(30) DEFAULT NULL,
+  `ar_us` varchar(30) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `contact` varchar(30) DEFAULT NULL,
+  `position` varchar(30) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `attention` varchar(30) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+  `ext` varchar(30) DEFAULT NULL,
+  `fax` varchar(30) DEFAULT NULL,
+  `prefix` varchar(30) DEFAULT NULL,
+  `tollfree` varchar(30) DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`billing_location_id`),
+  KEY `company_id` (`company_id`),
+  CONSTRAINT `billinglocationmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `billinglocationmaster`
+--
+
+LOCK TABLES `billinglocationmaster` WRITE;
+/*!40000 ALTER TABLE `billinglocationmaster` DISABLE KEYS */;
+INSERT INTO `billinglocationmaster` VALUES (1,'hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh',0,'hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh',20);
+/*!40000 ALTER TABLE `billinglocationmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -162,7 +203,7 @@ CREATE TABLE `companymaster` (
   `cellular` varchar(30) DEFAULT NULL,
   `pager` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +212,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (1,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(2,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(3,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(4,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(5,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(6,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(7,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(8,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(9,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(10,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(11,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(12,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(13,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(14,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(15,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(16,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(17,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(18,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs');
+INSERT INTO `companymaster` VALUES (1,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(2,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(3,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(4,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(5,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(6,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(7,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(8,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(9,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(10,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(11,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(12,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(13,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(14,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(15,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(16,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(17,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(18,'df','sdf','sdf','sdf','dsf','sdf','sdf','sdfsd','sdfsdf','dsfsdf','sdfsdf','sdfsd','sdfsd','sdfsd','sdfsd','sdfsd','sdfs'),(19,'nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn'),(20,'pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -697,4 +738,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-11 18:08:10
+-- Dump completed on 2016-08-15 23:36:23

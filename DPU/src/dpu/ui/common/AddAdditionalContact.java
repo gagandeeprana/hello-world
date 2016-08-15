@@ -226,9 +226,17 @@ public class AddAdditionalContact extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel23MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel23MousePressed(evt);
+            }
         });
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
+        jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel25MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -274,9 +282,19 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
+        
+    }//GEN-LAST:event_jLabel23MouseClicked
+
+    private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jLabel25MousePressed
+
+    private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
+        // TODO add your handling code here:
         additionalContactUIHelper.saveToList();
         dispose();
-    }//GEN-LAST:event_jLabel23MouseClicked
+    }//GEN-LAST:event_jLabel23MousePressed
 
     /**
      * @param args the command line arguments

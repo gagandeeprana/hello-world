@@ -185,4 +185,22 @@ public class CompanyDAOImpl implements CompanyDAO {
         }
         return obj;
     }
+
+    @Override
+    public int getMaxCompanyId() {
+        Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("select max(company_id) from companymaster");
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            logger.error("CompanyDAOImpl : getMaxCompanyId : " + e);
+        }
+        return 0;
+    }
 }

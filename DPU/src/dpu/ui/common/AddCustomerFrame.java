@@ -6,11 +6,14 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.AdditionalContactBean;
+import dpu.beans.admin.BillingLocationBean;
 import dpu.beans.admin.CompanyBean;
+import dpu.ui.helper.common.BillingLocationUIHelper;
 import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -31,11 +34,16 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     CompanyUIHelper companyUIHelper = null;
     CompanyBean companyBean = null;
     JMenuItem menuItem1 = null;
+    JMenuItem menuItem3 = null;
+    JMenuItem menuItem6 = null;
+    BillingLocationUIHelper billingLocationUIHelper = null;
     public static List<AdditionalContactBean> lstAdditionalContacts = new ArrayList<>();
+    public static List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
 
     public AddCustomerFrame() {
         initComponents();
         companyUIHelper = new CompanyUIHelper();
+        billingLocationUIHelper = new BillingLocationUIHelper();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -52,7 +60,16 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 addAdditionalContact.setVisible(true);
             }
         });
+    }
 
+    private void clickEventOnMenuItemForBilling() {
+        menuItem3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddBillingLocation addBillingLocation = new AddBillingLocation();
+                addBillingLocation.setVisible(true);
+            }
+        });
     }
 
     public AddCustomerFrame(CompanyBean companyBean) {
@@ -98,7 +115,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jPanel2 = new javax.swing.JPanel();
+        AddCustomerPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtZip = new javax.swing.JTextField();
         txtFax = new javax.swing.JTextField();
@@ -144,10 +161,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         txtUnitNo = new javax.swing.JTextField();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        customerTabbedPane = new javax.swing.JTabbedPane();
+        ScrollPaneForBillingLocations = new javax.swing.JScrollPane();
+        tblBillingLocations = new javax.swing.JTable();
+        ScrollPanetblAdditionalContacts = new javax.swing.JScrollPane();
         tblAdditionalContacts = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -156,7 +173,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        AddCustomerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -511,9 +528,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        customerTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBillingLocations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -524,9 +541,14 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 "Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax No"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblBillingLocations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblBillingLocationsMouseReleased(evt);
+            }
+        });
+        ScrollPaneForBillingLocations.setViewportView(tblBillingLocations);
 
-        jTabbedPane1.addTab("Billing Locations", jScrollPane1);
+        customerTabbedPane.addTab("Billing Locations", ScrollPaneForBillingLocations);
 
         tblAdditionalContacts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -544,9 +566,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 tblAdditionalContactsMouseReleased(evt);
             }
         });
-        jScrollPane2.setViewportView(tblAdditionalContacts);
+        ScrollPanetblAdditionalContacts.setViewportView(tblAdditionalContacts);
 
-        jTabbedPane1.addTab("Additional Contacts", jScrollPane2);
+        customerTabbedPane.addTab("Additional Contacts", ScrollPanetblAdditionalContacts);
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Notes.png"))); // NOI18N
         jLabel22.setToolTipText("Add Notes...");
@@ -557,60 +579,66 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel23MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel23MousePressed(evt);
+            }
         });
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel24MousePressed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout AddCustomerPanelLayout = new javax.swing.GroupLayout(AddCustomerPanel);
+        AddCustomerPanel.setLayout(AddCustomerPanelLayout);
+        AddCustomerPanelLayout.setHorizontalGroup(
+            AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddCustomerPanelLayout.createSequentialGroup()
+                .addGroup(AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AddCustomerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel24))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(customerTabbedPane, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        AddCustomerPanelLayout.setVerticalGroup(
+            AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddCustomerPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
                     .addComponent(jLabel22)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel22, jLabel23, jLabel24});
+        AddCustomerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel22, jLabel23, jLabel24});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(AddCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(AddCustomerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        String msg = companyUIHelper.save();
-        JOptionPane.showMessageDialog(null, msg);
-        dispose();
+
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void tblAdditionalContactsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdditionalContactsMouseReleased
@@ -638,7 +666,71 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
             clickEventOnMenuItem();
         }
+        if (lstAdditionalContacts.size() == 0) {
+            menuItem2.setEnabled(false);
+            menuItem3.setEnabled(false);
+            menuItem4.setEnabled(false);
+            menuItem5.setEnabled(false);
+        }
     }//GEN-LAST:event_tblAdditionalContactsMouseReleased
+
+    private void jLabel24MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MousePressed
+        // TODO add your handling code here:
+        dispose();
+        AddCustomerFrame.lstAdditionalContacts = new ArrayList<>();
+        AddCustomerFrame.lstBillingLocations = new ArrayList<>();
+        companyUIHelper.disable(true);
+    }//GEN-LAST:event_jLabel24MousePressed
+
+    private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
+        // TODO add your handling code here:
+        String msg = companyUIHelper.save();
+        JOptionPane.showMessageDialog(null, msg);
+        dispose();
+    }//GEN-LAST:event_jLabel23MousePressed
+
+    private void tblBillingLocationsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillingLocationsMouseReleased
+        jPopupMenu1 = new JPopupMenu();
+        final MouseEvent evt1 = evt;
+        menuItem1 = new JMenuItem("Find Billing Location");
+        menuItem1.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
+        menuItem1.setIconTextGap(5);
+        JMenuItem menuItem2 = new JMenuItem("Copy Customer to Billing Location");
+        menuItem2.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+        menuItem2.setIconTextGap(5);
+        menuItem3 = new JMenuItem("Add New Billing Location");
+        menuItem3.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Email.png"));
+        menuItem3.setIconTextGap(5);
+        JMenuItem menuItem4 = new JMenuItem("Edit Billing Location");
+        menuItem4.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+        menuItem4.setIconTextGap(5);
+        JMenuItem menuItem5 = new JMenuItem("Email Selected Location");
+        menuItem6 = new JMenuItem("Remove Billing Location");
+        jPopupMenu1.add(menuItem1);
+        jPopupMenu1.add(menuItem2);
+        jPopupMenu1.add(menuItem3);
+        jPopupMenu1.add(menuItem4);
+        jPopupMenu1.add(menuItem5);
+        jPopupMenu1.add(menuItem6);
+        if (evt.getButton() == 3) {
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            clickEventOnMenuItemForBilling();
+        }
+        if (lstBillingLocations.size() == 0) {
+            menuItem1.setEnabled(false);
+            menuItem2.setEnabled(false);
+            menuItem4.setEnabled(false);
+            menuItem5.setEnabled(false);
+            menuItem6.setEnabled(false);
+        }
+        menuItem6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                billingLocationUIHelper.generateTable();
+            }
+        });
+    }//GEN-LAST:event_tblBillingLocationsMouseReleased
 
     /**
      * @param args the command line arguments
@@ -676,6 +768,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JPanel AddCustomerPanel;
+    public static javax.swing.JScrollPane ScrollPaneForBillingLocations;
+    public static javax.swing.JScrollPane ScrollPanetblAdditionalContacts;
+    public static javax.swing.JTabbedPane customerTabbedPane;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -706,14 +802,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable tblAdditionalContacts;
+    public static javax.swing.JTable tblAdditionalContacts;
+    public static javax.swing.JTable tblBillingLocations;
     public static javax.swing.JTextField txtAddress;
     public static javax.swing.JTextField txtCellular;
     public static javax.swing.JTextField txtCity;

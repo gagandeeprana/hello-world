@@ -203,50 +203,41 @@ public class AdditionalContactUIHelper {
     }
 
     public void generateTable() {
-        lstAdditionalContacts = AddCustomerFrame.lstAdditionalContacts;
+//        lstAdditionalContacts = AddCustomerFrame.lstAdditionalContacts;
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-//        TestAdditionalContactPanel.tblAdditionalContact = new JTable(defaultTableModel);
-//        TestAdditionalContactPanel.tblAdditionalContact.getTableHeader().setBackground(Color.red);
-//        TestAdditionalContactPanel.tblAdditionalContact.setDefaultRenderer(Object.class, new AdditionalContactUIHelper.AdditionalContactTable());
-//        Object[][] data = new Object[lstCompanies.size()][17];
-//        for (int i = 0; i < lstCompanies.size(); i++) {
-//            AdditionalContactBean obj = lstCompanies.get(i);
-//            data[i][0] = obj.getAdditionalContactId();
-////            data[i][1] = obj.getAdditionalContactName();
-////            data[i][2] = obj.getAddress();
-////            data[i][3] = obj.getUnitNo();
-////            data[i][4] = obj.getCity();
-////            data[i][5] = obj.getProvinceState();
-////            data[i][6] = obj.getZip();
-////            data[i][7] = obj.getEmail();
-////            data[i][8] = obj.getWebsite();
-////            data[i][9] = obj.getContact();
-////            data[i][10] = obj.getPosition();
-////            data[i][11] = obj.getPhone();
-////            data[i][12] = obj.getExt();
-////            data[i][13] = obj.getFax();
-////            data[i][14] = obj.getPager();
-//            data[i][15] = "";
-//            data[i][16] = "";
-//            TestAdditionalContactPanel.tblAdditionalContact.setRowHeight(30);
-//        }
-//        Object[] cols = {"AdditionalContact Id", "AdditionalContact Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager", " ", "  "};
-//
-//        defaultTableModel.setDataVector(data, cols);
-//        TestAdditionalContactPanel.tblAdditionalContact.getTableHeader().setBackground(Color.red);
-//
-//        TestAdditionalContactPanel.tblAdditionalContact.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-//        TestAdditionalContactPanel.tblAdditionalContact.getTableHeader().setForeground(Color.DARK_GRAY);
-//        TestAdditionalContactPanel.tblAdditionalContact.getColumn(" ").setCellRenderer(new ButtonRenderer());
-//        TestAdditionalContactPanel.tblAdditionalContact.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-//        TestAdditionalContactPanel.tblAdditionalContact.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-//        TestAdditionalContactPanel.tblAdditionalContact.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-//        TestAdditionalContactPanel.tblAdditionalContact.getColumn(" ").setMaxWidth(25);
-//        TestAdditionalContactPanel.tblAdditionalContact.getColumn("  ").setMaxWidth(25);
-//        TestAdditionalContactPanel.tblAdditionalContact.setIntercellSpacing(new Dimension(0, 0));
-//        TestAdditionalContactPanel.tblAdditionalContact.setShowGrid(false);
-//        TestAdditionalContactPanel.jScrollPane4.setViewportView(TestAdditionalContactPanel.tblAdditionalContact);
+//        AddCustomerFrame.tblAdditionalContacts = new JTable(defaultTableModel);
+        AddCustomerFrame.tblAdditionalContacts.setModel(defaultTableModel);
+        AddCustomerFrame.tblAdditionalContacts.getTableHeader().setBackground(Color.red);
+        AddCustomerFrame.tblAdditionalContacts.setDefaultRenderer(Object.class, new AdditionalContactUIHelper.AdditionalContactTable());
+        Object[][] data = new Object[AddCustomerFrame.lstAdditionalContacts.size()][17];
+        for (int i = 0; i < AddCustomerFrame.lstAdditionalContacts.size(); i++) {
+            AdditionalContactBean obj = AddCustomerFrame.lstAdditionalContacts.get(i);
+            data[i][0] = obj.getCustomerName();
+            data[i][1] = obj.getPhone();
+            data[i][2] = obj.getExt();
+            data[i][3] = obj.getPhone();
+            data[i][4] = obj.getEmail();
+            data[i][5] = obj.getFax();
+            data[i][6] = "";
+            data[i][7] = "";
+            AddCustomerFrame.tblAdditionalContacts.setRowHeight(30);
+        }
+        Object[] cols = {"Customer Name", "Phone", "Ext", "Cell Phone", "Email", "Fax", " ", "  "};
 
+        defaultTableModel.setDataVector(data, cols);
+        AddCustomerFrame.tblAdditionalContacts.getTableHeader().setBackground(Color.red);
+
+        AddCustomerFrame.tblAdditionalContacts.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        AddCustomerFrame.tblAdditionalContacts.getTableHeader().setForeground(Color.DARK_GRAY);
+        AddCustomerFrame.tblAdditionalContacts.getColumn(" ").setCellRenderer(new ButtonRenderer());
+        AddCustomerFrame.tblAdditionalContacts.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+        AddCustomerFrame.tblAdditionalContacts.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+        AddCustomerFrame.tblAdditionalContacts.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+        AddCustomerFrame.tblAdditionalContacts.getColumn(" ").setMaxWidth(25);
+        AddCustomerFrame.tblAdditionalContacts.getColumn("  ").setMaxWidth(25);
+        AddCustomerFrame.tblAdditionalContacts.setIntercellSpacing(new Dimension(0, 0));
+        AddCustomerFrame.tblAdditionalContacts.setShowGrid(false);
+        AddCustomerFrame.ScrollPanetblAdditionalContacts.setViewportView(AddCustomerFrame.tblAdditionalContacts);
     }
 
     public String save() {
@@ -305,6 +296,7 @@ public class AdditionalContactUIHelper {
         }
         additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
         AddCustomerFrame.lstAdditionalContacts.add(additionalContactBean);
+        generateTable();
     }
 
     public String delete() {

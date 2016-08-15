@@ -394,6 +394,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel23MouseClicked"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel23MousePressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel25">
@@ -402,6 +403,9 @@
               <Image iconType="3" name="/images/Cancel.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel25MousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
