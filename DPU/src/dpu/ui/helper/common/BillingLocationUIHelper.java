@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
@@ -31,7 +32,7 @@ public class BillingLocationUIHelper {
     public String addUpdateFlag = "";
     static int billingLocationId = 0;
     BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
-    List<BillingLocationBean> lstBillingLocations = null;
+    List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
     int billingLocationIdToBeDeleted = 0;
     String msg = "";
     BillingLocationBean billingLocationBean = null;
@@ -203,39 +204,69 @@ public class BillingLocationUIHelper {
     }
 
     public void generateTable() {
-//        lstBillingLocations = AddCustomerFrame.lstBillingLocations;
+        Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax", " ", "  "};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-//        AddCustomerFrame.tblBillingLocations = new JTable(defaultTableModel);
         AddCustomerFrame.tblBillingLocations.setModel(defaultTableModel);
-        AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
         AddCustomerFrame.tblBillingLocations.setDefaultRenderer(Object.class, new BillingLocationUIHelper.BillingLocationTable());
-        Object[][] data = new Object[AddCustomerFrame.lstBillingLocations.size()][9];
-        for (int i = 0; i < AddCustomerFrame.lstBillingLocations.size(); i++) {
-            BillingLocationBean obj = AddCustomerFrame.lstBillingLocations.get(i);
-            data[i][0] = obj.getName();
-            data[i][1] = obj.getAddress();
-            data[i][2] = obj.getCity() + " , " + obj.getProvinceState();
-            data[i][3] = obj.getPhone();
-            data[i][4] = obj.getContact();
-            data[i][5] = obj.getZip();
-            data[i][6] = obj.getFax();
-            data[i][7] = "";
-            data[i][8] = "";
+        if (AddCustomerFrame.lstBillingLocations.size() > 0) {
+//        lstBillingLocations = AddCustomerFrame.lstBillingLocations;
+//        AddCustomerFrame.tblBillingLocations = new JTable(defaultTableModel);
+//            AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
+            Object[][] data = new Object[AddCustomerFrame.lstBillingLocations.size()][9];
+            for (int i = 0; i < AddCustomerFrame.lstBillingLocations.size(); i++) {
+                BillingLocationBean obj = AddCustomerFrame.lstBillingLocations.get(i);
+                data[i][0] = obj.getName();
+                data[i][1] = obj.getAddress();
+                data[i][2] = obj.getCity() + " , " + obj.getProvinceState();
+                data[i][3] = obj.getPhone();
+                data[i][4] = obj.getContact();
+                data[i][5] = obj.getZip();
+                data[i][6] = obj.getFax();
+                data[i][7] = "";
+                data[i][8] = "";
+                AddCustomerFrame.tblBillingLocations.setRowHeight(30);
+            }
+
+            defaultTableModel.setDataVector(data, cols);
+            AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
+
+            AddCustomerFrame.tblBillingLocations.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            AddCustomerFrame.tblBillingLocations.getTableHeader().setForeground(Color.DARK_GRAY);
+            AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellRenderer(new ButtonRenderer());
+            AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+            AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+            AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+            AddCustomerFrame.tblBillingLocations.getColumn(" ").setMaxWidth(25);
+            AddCustomerFrame.tblBillingLocations.getColumn("  ").setMaxWidth(25);
+            AddCustomerFrame.tblBillingLocations.setIntercellSpacing(new Dimension(0, 0));
+            AddCustomerFrame.tblBillingLocations.setShowGrid(false);
+            AddCustomerFrame.ScrollPaneForBillingLocations.setViewportView(AddCustomerFrame.tblBillingLocations);
+        } else {
+//            AddCustomerFrame.tblBillingLocations = new JTable(new Object[][]{}, cols);
+            generateEmptyTable();
+        }
+    }
+
+    public void generateEmptyTable() {
+        Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax"};
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        AddCustomerFrame.tblBillingLocations.setModel(defaultTableModel);
+        AddCustomerFrame.tblBillingLocations.setDefaultRenderer(Object.class, new BillingLocationUIHelper.BillingLocationTable());
+        Object[][] data = new Object[7][7];
+        for (int i = 0; i < 7; i++) {
+            data[i][0] = "";
+            data[i][1] = "";
+            data[i][2] = "";
+            data[i][3] = "";
+            data[i][4] = "";
+            data[i][5] = "";
+            data[i][6] = "";
             AddCustomerFrame.tblBillingLocations.setRowHeight(30);
         }
-        Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax", " ", "  "};
-
         defaultTableModel.setDataVector(data, cols);
         AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
-
         AddCustomerFrame.tblBillingLocations.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         AddCustomerFrame.tblBillingLocations.getTableHeader().setForeground(Color.DARK_GRAY);
-        AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        AddCustomerFrame.tblBillingLocations.getColumn(" ").setMaxWidth(25);
-        AddCustomerFrame.tblBillingLocations.getColumn("  ").setMaxWidth(25);
         AddCustomerFrame.tblBillingLocations.setIntercellSpacing(new Dimension(0, 0));
         AddCustomerFrame.tblBillingLocations.setShowGrid(false);
         AddCustomerFrame.ScrollPaneForBillingLocations.setViewportView(AddCustomerFrame.tblBillingLocations);

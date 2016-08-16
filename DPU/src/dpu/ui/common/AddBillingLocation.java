@@ -23,6 +23,26 @@ public class AddBillingLocation extends javax.swing.JFrame {
         billingLocationUIHelper = new BillingLocationUIHelper();
     }
 
+    private void showData() {
+//        AddBillingLocation.txtName.setText());
+//        AddBillingLocation.txtAddress.setText());
+//        AddBillingLocation.txtUnitNo.setText());
+//        AddBillingLocation.txtCity.setText());
+//        AddBillingLocation.txtProvinceState.setText());
+//        AddBillingLocation.txtZip.setText());
+//        dBillingLocation.txtArCDN.setText());
+//        BillingLocation.txtArUS.setText());
+//        AddBillingLocation.txtContact.setText());
+//        (AddBillingLocation.txtPosition.setText());
+//        dBillingLocation.txtEmail.setText());
+//        n(AddBillingLocation.txtAttention.setText());
+//        dBillingLocation.txtPhone.setText());
+//        illingLocation.txtExt.setText());
+//        illingLocation.txtFax.setText());
+//        ddBillingLocation.txtPrefix.setText());
+//        (AddBillingLocation.txtTollFree.setText());
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

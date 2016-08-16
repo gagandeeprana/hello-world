@@ -49,6 +49,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setBackground(Color.WHITE);
+        billingLocationUIHelper.generateEmptyTable();
 
     }
 
@@ -535,12 +536,22 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
                 "Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax No"
             }
         ));
+        tblBillingLocations.setDropMode(javax.swing.DropMode.ON_OR_INSERT_ROWS);
+        tblBillingLocations.setGridColor(new java.awt.Color(255, 255, 255));
         tblBillingLocations.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tblBillingLocationsMouseReleased(evt);
@@ -728,6 +739,14 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
                 billingLocationUIHelper.generateTable();
+                
+            }
+        });
+        menuItem4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddBillingLocation addBillingLocation = new AddBillingLocation();
+                addBillingLocation.setVisible(true);
             }
         });
     }//GEN-LAST:event_tblBillingLocationsMouseReleased
