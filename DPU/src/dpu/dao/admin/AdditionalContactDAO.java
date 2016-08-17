@@ -9,6 +9,8 @@ public interface AdditionalContactDAO {
     
     AdditionalContactBean getAdditionalContactInfoById(int additionalContactId);
 
+    List<AdditionalContactBean> getAllAdditionalContactsByCompanyId(int id);
+    
     String addAdditionalContact(AdditionalContactBean obj);
 
     String updateAdditionalContact(AdditionalContactBean obj);

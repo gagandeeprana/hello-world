@@ -8,6 +8,11 @@ package dpu.ui.common;
 import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.BillingLocationBean;
 import dpu.beans.admin.CompanyBean;
+import dpu.dao.admin.AdditionalContactDAO;
+import dpu.dao.admin.BillingLocationDAO;
+import dpu.dao.admin.impl.AdditionalContactDAOImpl;
+import dpu.dao.admin.impl.BillingLocationDAOImpl;
+import dpu.ui.helper.common.AdditionalContactUIHelper;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.Color;
@@ -37,20 +42,47 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     JMenuItem menuItem3 = null;
     JMenuItem menuItem6 = null;
     BillingLocationUIHelper billingLocationUIHelper = null;
+    BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
+    AdditionalContactDAO additionalContactDAO = new AdditionalContactDAOImpl();
+    AdditionalContactUIHelper additionalContactUIHelper = null;
     public static List<AdditionalContactBean> lstAdditionalContacts = new ArrayList<>();
     public static List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
+    public static List<BillingLocationBean> lstBillingLocationsFromDb = new ArrayList<>();
+    public static List<AdditionalContactBean> lstAdditionalContactsFromDb = new ArrayList<>();
 
     public AddCustomerFrame() {
         initComponents();
         companyUIHelper = new CompanyUIHelper();
         billingLocationUIHelper = new BillingLocationUIHelper();
+        additionalContactUIHelper = new AdditionalContactUIHelper();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setBackground(Color.WHITE);
         billingLocationUIHelper.generateEmptyTable();
+        additionalContactUIHelper.generateEmptyTable();
 
+    }
+
+    public AddCustomerFrame(CompanyBean companyBean) {
+        initComponents();
+        this.companyBean = companyBean;
+        showDataOnScreen();
+        companyUIHelper = new CompanyUIHelper();
+        billingLocationUIHelper = new BillingLocationUIHelper();
+        additionalContactUIHelper = new AdditionalContactUIHelper();
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setBackground(Color.WHITE);
+        lstBillingLocations = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
+        lstBillingLocationsFromDb = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
+        lstAdditionalContacts = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
+        lstAdditionalContactsFromDb = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
+        billingLocationUIHelper.generateTable();
+        additionalContactUIHelper.generateTable();
     }
 
     private void clickEventOnMenuItem() {
@@ -64,6 +96,8 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }
 
     private void clickEventOnMenuItemForBilling() {
+        BillingLocationUIHelper.addUpdateFlag = "add";
+
         menuItem3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,37 +107,24 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         });
     }
 
-    public AddCustomerFrame(CompanyBean companyBean) {
-        initComponents();
-        this.companyBean = companyBean;
-        showDataOnScreen();
-        companyUIHelper = new CompanyUIHelper();
-        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setBackground(Color.WHITE);
-
-    }
-
     private void showDataOnScreen() {
         txtCompanyName.setText(companyBean.getCompanyName());
-        txtContact.setText(companyBean.getCompanyName());
-        txtAddress.setText(companyBean.getCompanyName());
-        txtPosition.setText(companyBean.getCompanyName());
-        txtUnitNo.setText(companyBean.getCompanyName());
-        txtPhone.setText(companyBean.getCompanyName());
-        txtExt.setText(companyBean.getCompanyName());
-        txtCity.setText(companyBean.getCompanyName());
-        txtFax.setText(companyBean.getCompanyName());
-        txtPrefix.setText(companyBean.getCompanyName());
-        txtProvinceState.setText(companyBean.getCompanyName());
-        txtZip.setText(companyBean.getCompanyName());
-        txtTollFree.setText(companyBean.getCompanyName());
-        txtEmail.setText(companyBean.getCompanyName());
-        txtCellular.setText(companyBean.getCompanyName());
-        txtWebsite.setText(companyBean.getCompanyName());
-        txtPager.setText(companyBean.getCompanyName());
+        txtContact.setText(companyBean.getContact());
+        txtAddress.setText(companyBean.getAddress());
+        txtPosition.setText(companyBean.getPosition());
+        txtUnitNo.setText(companyBean.getUnitNo());
+        txtPhone.setText(companyBean.getPhone());
+        txtExt.setText(companyBean.getExt());
+        txtCity.setText(companyBean.getCity());
+        txtFax.setText(companyBean.getFax());
+        txtPrefix.setText(companyBean.getPrefix());
+        txtProvinceState.setText(companyBean.getProvinceState());
+        txtZip.setText(companyBean.getZip());
+        txtTollFree.setText(companyBean.getTollfree());
+        txtEmail.setText(companyBean.getEmail());
+        txtCellular.setText(companyBean.getCellular());
+        txtWebsite.setText(companyBean.getWebsite());
+        txtPager.setText(companyBean.getPager());
     }
 
     /**
@@ -566,12 +587,19 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Contact Name", "Phone No", "Extension", "Cell Phone No", "Email Address", "Position", "Fax No", "Pager No"
             }
         ));
+        tblAdditionalContacts.setGridColor(new java.awt.Color(255, 255, 255));
         tblAdditionalContacts.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tblAdditionalContactsMouseReleased(evt);
@@ -654,6 +682,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
     private void tblAdditionalContactsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdditionalContactsMouseReleased
         // TODO add your handling code here:
+        final MouseEvent evt1 = evt;
         jPopupMenu1 = new JPopupMenu();
         menuItem1 = new JMenuItem("Add Contact");
         menuItem1.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
@@ -683,6 +712,33 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             menuItem4.setEnabled(false);
             menuItem5.setEnabled(false);
         }
+        menuItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdditionalContactUIHelper.addUpdateFlag = "update";
+                AdditionalContactBean additionalContactBean = new AdditionalContactBean();
+                additionalContactBean = lstAdditionalContacts.get(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                AddAdditionalContact addAdditionalContact = new AddAdditionalContact(tblBillingLocations.rowAtPoint(evt1.getPoint()), additionalContactBean);
+                addAdditionalContact.setVisible(true);
+            }
+        });
+        menuItem4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdditionalContactBean additionalContactBean = lstAdditionalContacts.get(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                for (int i = 0; i < lstAdditionalContactsFromDb.size(); i++) {
+                    if (lstAdditionalContactsFromDb.get(i).getAdditionalContactId() == additionalContactBean.getAdditionalContactId()) {
+                        lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                        additionalContactUIHelper.delete(additionalContactBean.getAdditionalContactId());
+                        break;
+                    } else {
+                        lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                        additionalContactUIHelper.generateTable();
+                        break;
+                    }
+                }
+            }
+        });
     }//GEN-LAST:event_tblAdditionalContactsMouseReleased
 
     private void jLabel24MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MousePressed
@@ -737,15 +793,27 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         menuItem6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
-                billingLocationUIHelper.generateTable();
-                
+                BillingLocationBean billingLocationBean = lstBillingLocations.get(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                for (int i = 0; i < lstBillingLocationsFromDb.size(); i++) {
+                    if (lstBillingLocationsFromDb.get(i).getBillingLocationId() == billingLocationBean.getBillingLocationId()) {
+                        lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                        billingLocationUIHelper.delete(billingLocationBean.getBillingLocationId());
+                        break;
+                    } else {
+                        lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                        billingLocationUIHelper.generateTable();
+                        break;
+                    }
+                }
             }
         });
         menuItem4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddBillingLocation addBillingLocation = new AddBillingLocation();
+                BillingLocationUIHelper.addUpdateFlag = "update";
+                BillingLocationBean billingLocationBean = new BillingLocationBean();
+                billingLocationBean = lstBillingLocations.get(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                AddBillingLocation addBillingLocation = new AddBillingLocation(tblBillingLocations.rowAtPoint(evt1.getPoint()), billingLocationBean);
                 addBillingLocation.setVisible(true);
             }
         });

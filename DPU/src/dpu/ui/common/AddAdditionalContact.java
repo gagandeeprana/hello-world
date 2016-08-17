@@ -6,7 +6,12 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.AdditionalContactBean;
+import dpu.beans.admin.BillingLocationBean;
+import dpu.dao.admin.AdditionalContactDAO;
+import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.ui.helper.common.AdditionalContactUIHelper;
+import static dpu.ui.helper.common.AdditionalContactUIHelper.addUpdateFlag;
+import dpu.ui.helper.common.BillingLocationUIHelper;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -22,6 +27,8 @@ public class AddAdditionalContact extends javax.swing.JFrame {
      * Creates new form AddAdditionalContact
      */
     AdditionalContactUIHelper additionalContactUIHelper = null;
+    AdditionalContactBean additionalContactBean = null;
+    int index = 0;
 
     public AddAdditionalContact() {
         initComponents();
@@ -32,6 +39,35 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         setResizable(false);
 //        setBackground(Color.WHITE);
     }
+
+    public AddAdditionalContact(int index, AdditionalContactBean additionalContactBean) {
+        initComponents();
+        lblSave.setText("Update");
+        this.additionalContactBean = additionalContactBean;
+        this.index = index;
+        additionalContactUIHelper = new AdditionalContactUIHelper();
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+        showData();
+    }
+
+       private void showData() {
+        AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
+        AddAdditionalContact.txtAddress.setText(additionalContactBean.getAddress());
+        AddAdditionalContact.txtPhone.setText(additionalContactBean.getPhone());
+        AddAdditionalContact.txtExt.setText(additionalContactBean.getExt());
+        AddAdditionalContact.txtFax.setText(additionalContactBean.getFax());
+        AddAdditionalContact.txtPrefix.setText(additionalContactBean.getPrefix());
+        AddAdditionalContact.ddlProvinceState.setSelectedIndex(additionalContactBean.getProvinceState());
+        AddAdditionalContact.ddlProvinceState.setSelectedIndex(additionalContactBean.getProvinceState());
+        AddAdditionalContact.ddlStatus.setSelectedIndex(additionalContactBean.getStatus());
+        AddAdditionalContact.txtEmail.setText(additionalContactBean.getEmail());
+    }
+        
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +104,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         ddlStatus = new javax.swing.JComboBox<>();
         ddlProvinceState = new javax.swing.JComboBox<>();
-        jLabel23 = new javax.swing.JLabel();
+        lblSave = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -220,14 +256,14 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save.png"))); // NOI18N
-        jLabel23.setToolTipText("Save Customer..");
-        jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save.png"))); // NOI18N
+        lblSave.setToolTipText("Save Customer..");
+        lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel23MouseClicked(evt);
+                lblSaveMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel23MousePressed(evt);
+                lblSaveMousePressed(evt);
             }
         });
 
@@ -247,7 +283,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel23)
+                .addComponent(lblSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
                 .addContainerGap())
@@ -259,7 +295,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(lblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -281,20 +317,24 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel23MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseClicked
-        
-    }//GEN-LAST:event_jLabel23MouseClicked
+    private void lblSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMouseClicked
+
+    }//GEN-LAST:event_lblSaveMouseClicked
 
     private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jLabel25MousePressed
 
-    private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
-        // TODO add your handling code here:
-        additionalContactUIHelper.saveToList();
+    private void lblSaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMousePressed
+        if (AdditionalContactUIHelper.addUpdateFlag.equals("add")) {
+            additionalContactUIHelper.saveToList(AddCustomerFrame.lstAdditionalContacts.size());
+        } else {
+            AddCustomerFrame.lstAdditionalContacts.remove(additionalContactBean);
+            additionalContactUIHelper.saveToList(index);
+        }
         dispose();
-    }//GEN-LAST:event_jLabel23MousePressed
+    }//GEN-LAST:event_lblSaveMousePressed
 
     /**
      * @param args the command line arguments
@@ -345,7 +385,6 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel4;
@@ -353,6 +392,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblSave;
     public static javax.swing.JTextField txtAddress;
     public static javax.swing.JTextField txtCustomer;
     public static javax.swing.JTextField txtEmail;

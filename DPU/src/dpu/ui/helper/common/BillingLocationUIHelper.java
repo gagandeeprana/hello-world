@@ -29,7 +29,7 @@ import properties.ReadFromPropertiesFile;
 
 public class BillingLocationUIHelper {
 
-    public String addUpdateFlag = "";
+    public static String addUpdateFlag = "add";
     static int billingLocationId = 0;
     BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
     List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
@@ -106,7 +106,7 @@ public class BillingLocationUIHelper {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                msg = delete();
+                delete(0);
                 JOptionPane.showMessageDialog(null, msg);
             }
             isPushed = false;
@@ -204,46 +204,51 @@ public class BillingLocationUIHelper {
     }
 
     public void generateTable() {
-        Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax", " ", "  "};
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
-        AddCustomerFrame.tblBillingLocations.setModel(defaultTableModel);
-        AddCustomerFrame.tblBillingLocations.setDefaultRenderer(Object.class, new BillingLocationUIHelper.BillingLocationTable());
-        if (AddCustomerFrame.lstBillingLocations.size() > 0) {
+        try {
+
+            Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax", " ", "  "};
+            DefaultTableModel defaultTableModel = new DefaultTableModel();
+            AddCustomerFrame.tblBillingLocations.setModel(defaultTableModel);
+            AddCustomerFrame.tblBillingLocations.setDefaultRenderer(Object.class, new BillingLocationUIHelper.BillingLocationTable());
+            if (AddCustomerFrame.lstBillingLocations.size() > 0) {
 //        lstBillingLocations = AddCustomerFrame.lstBillingLocations;
 //        AddCustomerFrame.tblBillingLocations = new JTable(defaultTableModel);
 //            AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
-            Object[][] data = new Object[AddCustomerFrame.lstBillingLocations.size()][9];
-            for (int i = 0; i < AddCustomerFrame.lstBillingLocations.size(); i++) {
-                BillingLocationBean obj = AddCustomerFrame.lstBillingLocations.get(i);
-                data[i][0] = obj.getName();
-                data[i][1] = obj.getAddress();
-                data[i][2] = obj.getCity() + " , " + obj.getProvinceState();
-                data[i][3] = obj.getPhone();
-                data[i][4] = obj.getContact();
-                data[i][5] = obj.getZip();
-                data[i][6] = obj.getFax();
-                data[i][7] = "";
-                data[i][8] = "";
-                AddCustomerFrame.tblBillingLocations.setRowHeight(30);
-            }
+                Object[][] data = new Object[AddCustomerFrame.lstBillingLocations.size()][9];
+                for (int i = 0; i < AddCustomerFrame.lstBillingLocations.size(); i++) {
+                    BillingLocationBean obj = AddCustomerFrame.lstBillingLocations.get(i);
+                    data[i][0] = obj.getName();
+                    data[i][1] = obj.getAddress();
+                    data[i][2] = obj.getCity() + " , " + obj.getProvinceState();
+                    data[i][3] = obj.getPhone();
+                    data[i][4] = obj.getContact();
+                    data[i][5] = obj.getZip();
+                    data[i][6] = obj.getFax();
+                    data[i][7] = "";
+                    data[i][8] = "";
+                    AddCustomerFrame.tblBillingLocations.setRowHeight(30);
+                }
 
-            defaultTableModel.setDataVector(data, cols);
-            AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
+                defaultTableModel.setDataVector(data, cols);
+                AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
 
-            AddCustomerFrame.tblBillingLocations.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-            AddCustomerFrame.tblBillingLocations.getTableHeader().setForeground(Color.DARK_GRAY);
-            AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellRenderer(new ButtonRenderer());
-            AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-            AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-            AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-            AddCustomerFrame.tblBillingLocations.getColumn(" ").setMaxWidth(25);
-            AddCustomerFrame.tblBillingLocations.getColumn("  ").setMaxWidth(25);
-            AddCustomerFrame.tblBillingLocations.setIntercellSpacing(new Dimension(0, 0));
-            AddCustomerFrame.tblBillingLocations.setShowGrid(false);
-            AddCustomerFrame.ScrollPaneForBillingLocations.setViewportView(AddCustomerFrame.tblBillingLocations);
-        } else {
+                AddCustomerFrame.tblBillingLocations.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+                AddCustomerFrame.tblBillingLocations.getTableHeader().setForeground(Color.DARK_GRAY);
+                AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellRenderer(new ButtonRenderer());
+                AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+                AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+                AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+                AddCustomerFrame.tblBillingLocations.getColumn(" ").setMaxWidth(25);
+                AddCustomerFrame.tblBillingLocations.getColumn("  ").setMaxWidth(25);
+                AddCustomerFrame.tblBillingLocations.setIntercellSpacing(new Dimension(0, 0));
+                AddCustomerFrame.tblBillingLocations.setShowGrid(false);
+                AddCustomerFrame.ScrollPaneForBillingLocations.setViewportView(AddCustomerFrame.tblBillingLocations);
+            } else {
 //            AddCustomerFrame.tblBillingLocations = new JTable(new Object[][]{}, cols);
-            generateEmptyTable();
+                generateEmptyTable();
+            }
+        } catch (Exception e) {
+            System.out.println("BillingLocationUIHelper : generateTable() : " + e);
         }
     }
 
@@ -312,7 +317,7 @@ public class BillingLocationUIHelper {
         return msg;
     }
 
-    public void saveToList() {
+    public void saveToList(int index) {
         BillingLocationBean billingLocationBean = new BillingLocationBean();
 //        billingLocationBean.setContactId(AddBillingLocation.txtCustomer.getText());
         billingLocationBean.setName(AddBillingLocation.txtName.getText());
@@ -337,18 +342,18 @@ public class BillingLocationUIHelper {
         } else {
             billingLocationBean.setStatus(1);
         }
-        AddCustomerFrame.lstBillingLocations.add(billingLocationBean);
+        AddCustomerFrame.lstBillingLocations.add(index, billingLocationBean);
         generateTable();
     }
 
-    public String delete() {
+    public void delete(int billingLocationIdToBeDeleted) {
         BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
         String msg = billingLocationDAO.deleteBillingLocation(billingLocationIdToBeDeleted);
-        disable(true);
+//        disable(true);
         generateTable();
 //        TestBillingLocationPanel.mainTabbedPane.setEnabled(true);
 //        TestBillingLocationPanel.billingLocationPanel.setEnabled(true);
-        return msg;
+//        return msg;
     }
 
     public String update(BillingLocationBean billingLocationBean) {

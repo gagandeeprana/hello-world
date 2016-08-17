@@ -143,6 +143,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 return "Company Deleted";
             }
         } catch (Exception e) {
+            System.out.println("CompanyDAOImpl : deleteCompany : " + e);
             logger.error("CompanyDAOImpl : deleteCompany : " + e);
         }
         return "Failed to Delete Company";

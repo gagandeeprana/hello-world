@@ -5,6 +5,7 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.BillingLocationBean;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 
 /**
@@ -17,30 +18,43 @@ public class AddBillingLocation extends javax.swing.JFrame {
      * Creates new form AddBillingLocation
      */
     BillingLocationUIHelper billingLocationUIHelper = null;
+    BillingLocationBean billingLocationBean = null;
+    int index = 0;
 
     public AddBillingLocation() {
         initComponents();
         billingLocationUIHelper = new BillingLocationUIHelper();
     }
 
+    public AddBillingLocation(int index, BillingLocationBean billingLocationBean) {
+        initComponents();
+        btnSave.setText("Update");
+        this.billingLocationBean = billingLocationBean;
+        this.index = index;
+        billingLocationUIHelper = new BillingLocationUIHelper();
+        showData();
+    }
+
     private void showData() {
-//        AddBillingLocation.txtName.setText());
-//        AddBillingLocation.txtAddress.setText());
-//        AddBillingLocation.txtUnitNo.setText());
-//        AddBillingLocation.txtCity.setText());
-//        AddBillingLocation.txtProvinceState.setText());
-//        AddBillingLocation.txtZip.setText());
-//        dBillingLocation.txtArCDN.setText());
-//        BillingLocation.txtArUS.setText());
-//        AddBillingLocation.txtContact.setText());
-//        (AddBillingLocation.txtPosition.setText());
-//        dBillingLocation.txtEmail.setText());
-//        n(AddBillingLocation.txtAttention.setText());
-//        dBillingLocation.txtPhone.setText());
-//        illingLocation.txtExt.setText());
-//        illingLocation.txtFax.setText());
-//        ddBillingLocation.txtPrefix.setText());
-//        (AddBillingLocation.txtTollFree.setText());
+
+        AddBillingLocation.txtName.setText(billingLocationBean.getName());
+        AddBillingLocation.txtAddress.setText(billingLocationBean.getAddress());
+        AddBillingLocation.txtUnitNo.setText(billingLocationBean.getUnitNo());
+        AddBillingLocation.txtCity.setText(billingLocationBean.getCity());
+        AddBillingLocation.txtProvinceState.setText(billingLocationBean.getProvinceState());
+        AddBillingLocation.txtZip.setText(billingLocationBean.getZip());
+        AddBillingLocation.txtArCDN.setText(billingLocationBean.getArCDN());
+        AddBillingLocation.txtArUS.setText(billingLocationBean.getArUS());
+        AddBillingLocation.txtContact.setText(billingLocationBean.getContact());
+        AddBillingLocation.txtPosition.setText(billingLocationBean.getPosition());
+        AddBillingLocation.txtEmail.setText(billingLocationBean.getEmail());
+        AddBillingLocation.txtAttention.setText(billingLocationBean.getAttention());
+        AddBillingLocation.txtPhone.setText(billingLocationBean.getPhone());
+        AddBillingLocation.txtExt.setText(billingLocationBean.getExt());
+        AddBillingLocation.txtFax.setText(billingLocationBean.getFax());
+        AddBillingLocation.txtPrefix.setText(billingLocationBean.getPrefix());
+        AddBillingLocation.txtTollFree.setText(billingLocationBean.getTollfree());
+
     }
 
     /**
@@ -383,8 +397,12 @@ public class AddBillingLocation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        billingLocationUIHelper.saveToList();
+        if (BillingLocationUIHelper.addUpdateFlag.equals("add")) {
+            billingLocationUIHelper.saveToList(AddCustomerFrame.lstBillingLocations.size());
+        } else {
+            AddCustomerFrame.lstBillingLocations.remove(billingLocationBean);
+            billingLocationUIHelper.saveToList(index);
+        }
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

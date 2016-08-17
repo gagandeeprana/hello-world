@@ -156,4 +156,37 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
         }
         return obj;
     }
+
+    @Override
+    public List<AdditionalContactBean> getAllAdditionalContactsByCompanyId(int id) {
+        List<AdditionalContactBean> lstAdditionalContacts = new ArrayList<>();
+        Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("select * from additionalcontactmaster where company_id = ?");
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                AdditionalContactBean obj = new AdditionalContactBean();
+                obj.setAdditionalContactId(rs.getInt("add_contact_id"));
+                obj.setContactId(rs.getInt("company_id"));
+                obj.setCustomerName(rs.getString("customer_name"));
+                obj.setAddress(rs.getString("address"));
+                obj.setPhone(rs.getString("phone"));
+                obj.setExt(rs.getString("ext"));
+                obj.setFax(rs.getString("fax"));
+                obj.setPrefix(rs.getString("prefix"));
+                obj.setProvinceState(rs.getInt("province_state"));
+                obj.setStatus(rs.getInt("status"));
+                obj.setEmail(rs.getString("email"));
+                lstAdditionalContacts.add(obj);
+            }
+        } catch (Exception e) {
+            System.out.println("AdditionalContactDAOImpl : getAllAdditionalContactsByCompanyId : " + e);
+//            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
+        }
+        return lstAdditionalContacts;
+    }
 }

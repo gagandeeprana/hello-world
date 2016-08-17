@@ -140,13 +140,14 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("delete from billinglocationmaster where billingLocation_id = ?");
+            pstmt = conn.prepareStatement("delete from billinglocationmaster where billing_location_id = ?");
             pstmt.setInt(1, billingLocationId);
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "BillingLocation Deleted";
             }
         } catch (Exception e) {
+            System.out.println("BillingLocationDAOImpl : deleteBillingLocation : " + e);
             logger.error("BillingLocationDAOImpl : deleteBillingLocation : " + e);
         }
         return "Failed to Delete BillingLocation";
@@ -190,5 +191,46 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
             logger.error("BillingLocationDAOImpl : getBillingLocationById : " + e);
         }
         return obj;
+    }
+
+    @Override
+    public List<BillingLocationBean> getBillingLocationsByCompanyId(int id) {
+        List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
+        Connection conn = null;
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("select * from billinglocationmaster where company_id = ?");
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                BillingLocationBean obj = new BillingLocationBean();
+                obj.setBillingLocationId(rs.getInt("billing_location_id"));
+                obj.setName(rs.getString("name"));
+                obj.setAddress(rs.getString("address"));
+                obj.setUnitNo(rs.getString("unit_no"));
+                obj.setCity(rs.getString("city"));
+                obj.setProvinceState(rs.getString("province_state"));
+                obj.setZip(rs.getString("zip"));
+                obj.setArCDN(rs.getString("ar_cdn"));
+                obj.setArUS(rs.getString("ar_us"));
+                obj.setStatus(rs.getInt("status"));
+                obj.setContact(rs.getString("contact"));
+                obj.setPosition(rs.getString("position"));
+                obj.setEmail(rs.getString("email"));
+                obj.setAttention(rs.getString("attention"));
+                obj.setPhone(rs.getString("phone"));
+                obj.setExt(rs.getString("ext"));
+                obj.setFax(rs.getString("fax"));
+                obj.setPrefix(rs.getString("prefix"));
+                obj.setTollfree(rs.getString("tollfree"));
+                obj.setCompanyId(rs.getInt("company_id"));
+                lstBillingLocations.add(obj);
+            }
+        } catch (Exception e) {
+            logger.error("BillingLocationDAOImpl : getBillingLocationsByCompanyId : " + e);
+        }
+        return lstBillingLocations;
     }
 }

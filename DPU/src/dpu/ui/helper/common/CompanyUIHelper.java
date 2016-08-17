@@ -299,6 +299,33 @@ public class CompanyUIHelper {
         } else {
             companyBean.setCompanyId(companyId);
             msg = companyDAO.updateCompany(companyBean);
+            if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
+                for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
+                    for (int i = 0; i < AddCustomerFrame.lstAdditionalContactsFromDb.size(); i++) {
+                        if (additionalContactBean.getAdditionalContactId() == AddCustomerFrame.lstAdditionalContactsFromDb.get(i).getAdditionalContactId()) {
+                            int contactId = companyId;
+                            additionalContactBean.setContactId(contactId);
+                            additionalContactDAO.updateAdditionalContact(additionalContactBean);
+                        } 
+                    }
+                }
+                for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
+                    for (int i = 0; i < AddCustomerFrame.lstAdditionalContactsFromDb.size(); i++) {
+                        if (additionalContactBean.getAdditionalContactId() == AddCustomerFrame.lstAdditionalContactsFromDb.get(i).getAdditionalContactId()) {
+                            int contactId = companyId;
+                            additionalContactBean.setContactId(contactId);
+                            additionalContactDAO.updateAdditionalContact(additionalContactBean);
+                        } 
+                    }
+                }
+            }
+            if (AddCustomerFrame.lstBillingLocations.size() > 0) {
+                int contactId = companyId;
+                for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
+                    billingLocationBean.setCompanyId(contactId);
+                    billingLocationDAO.updateBillingLocation(billingLocationBean);
+                }
+            }
         }
         disable(true);
         generateTable();
