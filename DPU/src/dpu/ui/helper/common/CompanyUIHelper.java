@@ -300,22 +300,17 @@ public class CompanyUIHelper {
             companyBean.setCompanyId(companyId);
             msg = companyDAO.updateCompany(companyBean);
             if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
+                int contactId = companyId;
                 for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
-                    for (int i = 0; i < AddCustomerFrame.lstAdditionalContactsFromDb.size(); i++) {
-                        if (additionalContactBean.getAdditionalContactId() == AddCustomerFrame.lstAdditionalContactsFromDb.get(i).getAdditionalContactId()) {
-                            int contactId = companyId;
-                            additionalContactBean.setContactId(contactId);
-                            additionalContactDAO.updateAdditionalContact(additionalContactBean);
-                        } 
-                    }
-                }
-                for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
-                    for (int i = 0; i < AddCustomerFrame.lstAdditionalContactsFromDb.size(); i++) {
-                        if (additionalContactBean.getAdditionalContactId() == AddCustomerFrame.lstAdditionalContactsFromDb.get(i).getAdditionalContactId()) {
-                            int contactId = companyId;
-                            additionalContactBean.setContactId(contactId);
-                            additionalContactDAO.updateAdditionalContact(additionalContactBean);
-                        } 
+                    additionalContactBean.setContactId(contactId);
+                    if (additionalContactBean.getAdditionalContactId() != 0) {
+                        for (int i = 0; i < AddCustomerFrame.lstAdditionalContactsFromDb.size(); i++) {
+                            if (additionalContactBean.getAdditionalContactId() == AddCustomerFrame.lstAdditionalContactsFromDb.get(i).getAdditionalContactId()) {
+                                additionalContactDAO.updateAdditionalContact(additionalContactBean);
+                            }
+                        }
+                    } else {
+                        additionalContactDAO.addAdditionalContact(additionalContactBean);
                     }
                 }
             }
@@ -323,7 +318,15 @@ public class CompanyUIHelper {
                 int contactId = companyId;
                 for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
                     billingLocationBean.setCompanyId(contactId);
-                    billingLocationDAO.updateBillingLocation(billingLocationBean);
+                    if (billingLocationBean.getBillingLocationId() != 0) {
+                        for (int i = 0; i < AddCustomerFrame.lstBillingLocationsFromDb.size(); i++) {
+                            if (billingLocationBean.getBillingLocationId() == AddCustomerFrame.lstBillingLocationsFromDb.get(i).getBillingLocationId()) {
+                                billingLocationDAO.updateBillingLocation(billingLocationBean);
+                            }
+                        }
+                    } else {
+                        billingLocationDAO.addBillingLocation(billingLocationBean);
+                    }
                 }
             }
         }

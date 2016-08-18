@@ -53,7 +53,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         showData();
     }
 
-       private void showData() {
+    private void showData() {
         AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
         AddAdditionalContact.txtAddress.setText(additionalContactBean.getAddress());
         AddAdditionalContact.txtPhone.setText(additionalContactBean.getPhone());
@@ -65,9 +65,6 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         AddAdditionalContact.ddlStatus.setSelectedIndex(additionalContactBean.getStatus());
         AddAdditionalContact.txtEmail.setText(additionalContactBean.getEmail());
     }
-        
-    
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -328,10 +325,10 @@ public class AddAdditionalContact extends javax.swing.JFrame {
 
     private void lblSaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMousePressed
         if (AdditionalContactUIHelper.addUpdateFlag.equals("add")) {
-            additionalContactUIHelper.saveToList(AddCustomerFrame.lstAdditionalContacts.size());
+            additionalContactUIHelper.saveToList(AddCustomerFrame.lstAdditionalContacts.size(),additionalContactBean);
         } else {
-            AddCustomerFrame.lstAdditionalContacts.remove(additionalContactBean);
-            additionalContactUIHelper.saveToList(index);
+//            AddCustomerFrame.lstAdditionalContacts.remove(additionalContactBean);
+            additionalContactUIHelper.saveToList(index, additionalContactBean);
         }
         dispose();
     }//GEN-LAST:event_lblSaveMousePressed

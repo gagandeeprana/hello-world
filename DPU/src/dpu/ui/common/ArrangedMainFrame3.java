@@ -32,7 +32,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     BufferedImage buttonImage = null;
     boolean flag = true;
     Container root = null;
-
+    
     public ArrangedMainFrame3() {
         initComponents();
 //        setVisiblity(false);
@@ -46,9 +46,9 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jInternalFrame1.setBorder(null);
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
     }
-
+    
     class AddButton extends JButton implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!timer.isRunning()) {
@@ -62,7 +62,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
                 alpha = 1.0f;
             }
         }
-
+        
     }
 
 //    public void paint(Graphics g) {
@@ -136,7 +136,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 399, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -151,8 +151,9 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         try {
@@ -228,6 +229,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
                 .addGap(2, 2, 2))
             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -337,13 +340,14 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
+        jLayeredPane1.setBounds(0, 0, getWidth(), getHeight());
         Datamaintenance datamaintenance = new Datamaintenance();
         datamaintenance.setBounds(0, 0, getWidth(), getHeight());
         jLayeredPane1.add(datamaintenance);
         jLayeredPane1.setVisible(true);
         datamaintenance.setVisible(true);
     }//GEN-LAST:event_jLabel1MousePressed
-
+    
     private void setVisiblity(boolean val) {
 //        border.setVisible(val);
 //        jLabel11.setVisible(val);

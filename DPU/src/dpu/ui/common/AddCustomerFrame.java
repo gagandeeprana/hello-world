@@ -618,6 +618,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel23MouseClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel23MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel23MousePressed(evt);
             }
@@ -718,7 +721,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 AdditionalContactUIHelper.addUpdateFlag = "update";
                 AdditionalContactBean additionalContactBean = new AdditionalContactBean();
                 additionalContactBean = lstAdditionalContacts.get(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
-                AddAdditionalContact addAdditionalContact = new AddAdditionalContact(tblBillingLocations.rowAtPoint(evt1.getPoint()), additionalContactBean);
+                AddAdditionalContact addAdditionalContact = new AddAdditionalContact(tblAdditionalContacts.rowAtPoint(evt1.getPoint()), additionalContactBean);
                 addAdditionalContact.setVisible(true);
             }
         });
@@ -726,16 +729,12 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AdditionalContactBean additionalContactBean = lstAdditionalContacts.get(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
-                for (int i = 0; i < lstAdditionalContactsFromDb.size(); i++) {
-                    if (lstAdditionalContactsFromDb.get(i).getAdditionalContactId() == additionalContactBean.getAdditionalContactId()) {
-                        lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
-                        additionalContactUIHelper.delete(additionalContactBean.getAdditionalContactId());
-                        break;
-                    } else {
-                        lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
-                        additionalContactUIHelper.generateTable();
-                        break;
-                    }
+                if (additionalContactBean.getAdditionalContactId() != 0) {
+                    lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                    additionalContactUIHelper.delete(additionalContactBean.getAdditionalContactId());
+                } else {
+                    lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                    additionalContactUIHelper.generateTable();
                 }
             }
         });
@@ -794,16 +793,12 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BillingLocationBean billingLocationBean = lstBillingLocations.get(tblBillingLocations.rowAtPoint(evt1.getPoint()));
-                for (int i = 0; i < lstBillingLocationsFromDb.size(); i++) {
-                    if (lstBillingLocationsFromDb.get(i).getBillingLocationId() == billingLocationBean.getBillingLocationId()) {
-                        lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
-                        billingLocationUIHelper.delete(billingLocationBean.getBillingLocationId());
-                        break;
-                    } else {
-                        lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
-                        billingLocationUIHelper.generateTable();
-                        break;
-                    }
+                if (billingLocationBean.getBillingLocationId() != 0) {
+                    lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                    billingLocationUIHelper.delete(billingLocationBean.getBillingLocationId());
+                } else {
+                    lstBillingLocations.remove(tblBillingLocations.rowAtPoint(evt1.getPoint()));
+                    billingLocationUIHelper.generateTable();
                 }
             }
         });
@@ -818,6 +813,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_tblBillingLocationsMouseReleased
+
+    private void jLabel23MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel23MouseExited
 
     /**
      * @param args the command line arguments

@@ -1,10 +1,13 @@
 package dpu.ui.helper.common;
 
+import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.BillingLocationBean;
 import dpu.dao.admin.BillingLocationDAO;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
 import dpu.ui.common.AddBillingLocation;
 import dpu.ui.common.AddCustomerFrame;
+import static dpu.ui.common.AddCustomerFrame.lstBillingLocations;
+import static dpu.ui.common.AddCustomerFrame.tblBillingLocations;
 import java.awt.Color;
 //import static dpu.ui.common.TestBillingLocationPanel.mainTabbedPane;
 import java.awt.Component;
@@ -76,6 +79,7 @@ public class BillingLocationUIHelper {
         protected JButton button;
         private String label;
         private boolean isPushed;
+        int row = 0;
 
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
@@ -91,6 +95,7 @@ public class BillingLocationUIHelper {
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
+                this.row = row;
                 button.setForeground(table.getSelectionForeground());
                 button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
             } else {
@@ -106,7 +111,15 @@ public class BillingLocationUIHelper {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                delete(0);
+                BillingLocationBean billingLocationBean = AddCustomerFrame.lstBillingLocations.get(row);
+                if (billingLocationBean.getBillingLocationId() != 0) {
+                    AddCustomerFrame.lstBillingLocations.remove(row);
+                    msg = delete(billingLocationBean.getBillingLocationId());
+                } else {
+                    AddCustomerFrame.lstBillingLocations.remove(row);
+                    msg = "Billing Location Deleted Successfully";
+                    generateTable();
+                }
                 JOptionPane.showMessageDialog(null, msg);
             }
             isPushed = false;
@@ -152,6 +165,7 @@ public class BillingLocationUIHelper {
         protected JButton button;
         private String label;
         private boolean isPushed;
+        int row = 0;
 
         public ButtonEditorUpdate(JCheckBox checkBox) {
             super(checkBox);
@@ -167,15 +181,13 @@ public class BillingLocationUIHelper {
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
+                this.row = row;
                 button.setForeground(table.getSelectionForeground());
                 button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             } else {
                 button.setForeground(table.getForeground());
                 button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             }
-            billingLocationIdToBeDeleted = lstBillingLocations.get(row).getBillingLocationId();
-            billingLocationId = lstBillingLocations.get(row).getBillingLocationId();
-            billingLocationBean = billingLocationDAO.getBillingLocationById(billingLocationId);
             label = (value == null) ? "" : value.toString();
             button.setText(label);
             isPushed = true;
@@ -185,8 +197,10 @@ public class BillingLocationUIHelper {
         public Object getCellEditorValue() {
             if (isPushed) {
                 addUpdateFlag = "update";
-//                AddBillingLocation addCustomerFrame = new AddBillingLocation(billingLocationBean);
-//                addCustomerFrame.setVisible(true);
+                BillingLocationBean billingLocationBean = new BillingLocationBean();
+                billingLocationBean = AddCustomerFrame.lstBillingLocations.get(row);
+                AddBillingLocation addBillingLocation = new AddBillingLocation(row, billingLocationBean);
+                addBillingLocation.setVisible(true);
                 disable(false);
             }
             isPushed = false;
@@ -317,43 +331,98 @@ public class BillingLocationUIHelper {
         return msg;
     }
 
-    public void saveToList(int index) {
-        BillingLocationBean billingLocationBean = new BillingLocationBean();
-//        billingLocationBean.setContactId(AddBillingLocation.txtCustomer.getText());
-        billingLocationBean.setName(AddBillingLocation.txtName.getText());
-        billingLocationBean.setAddress(AddBillingLocation.txtAddress.getText());
-        billingLocationBean.setUnitNo(AddBillingLocation.txtUnitNo.getText());
-        billingLocationBean.setCity(AddBillingLocation.txtCity.getText());
-        billingLocationBean.setProvinceState(AddBillingLocation.txtProvinceState.getText());
-        billingLocationBean.setZip(AddBillingLocation.txtZip.getText());
-        billingLocationBean.setArCDN(AddBillingLocation.txtArCDN.getText());
-        billingLocationBean.setArUS(AddBillingLocation.txtArUS.getText());
-        billingLocationBean.setContact(AddBillingLocation.txtContact.getText());
-        billingLocationBean.setPosition(AddBillingLocation.txtPosition.getText());
-        billingLocationBean.setEmail(AddBillingLocation.txtEmail.getText());
-        billingLocationBean.setAttention(AddBillingLocation.txtAttention.getText());
-        billingLocationBean.setPhone(AddBillingLocation.txtPhone.getText());
-        billingLocationBean.setExt(AddBillingLocation.txtExt.getText());
-        billingLocationBean.setFax(AddBillingLocation.txtFax.getText());
-        billingLocationBean.setPrefix(AddBillingLocation.txtPrefix.getText());
-        billingLocationBean.setTollfree(AddBillingLocation.txtTollFree.getText());
-        if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
-            billingLocationBean.setStatus(0);
+    public void saveToList(int index, BillingLocationBean billingLocationBean) {
+        if (index == AddCustomerFrame.lstBillingLocations.size()) {
+            billingLocationBean = new BillingLocationBean();
+            billingLocationBean.setName(AddBillingLocation.txtName.getText());
+            billingLocationBean.setAddress(AddBillingLocation.txtAddress.getText());
+            billingLocationBean.setUnitNo(AddBillingLocation.txtUnitNo.getText());
+            billingLocationBean.setCity(AddBillingLocation.txtCity.getText());
+            billingLocationBean.setProvinceState(AddBillingLocation.txtProvinceState.getText());
+            billingLocationBean.setZip(AddBillingLocation.txtZip.getText());
+            billingLocationBean.setArCDN(AddBillingLocation.txtArCDN.getText());
+            billingLocationBean.setArUS(AddBillingLocation.txtArUS.getText());
+            billingLocationBean.setContact(AddBillingLocation.txtContact.getText());
+            billingLocationBean.setPosition(AddBillingLocation.txtPosition.getText());
+            billingLocationBean.setEmail(AddBillingLocation.txtEmail.getText());
+            billingLocationBean.setAttention(AddBillingLocation.txtAttention.getText());
+            billingLocationBean.setPhone(AddBillingLocation.txtPhone.getText());
+            billingLocationBean.setExt(AddBillingLocation.txtExt.getText());
+            billingLocationBean.setFax(AddBillingLocation.txtFax.getText());
+            billingLocationBean.setPrefix(AddBillingLocation.txtPrefix.getText());
+            billingLocationBean.setTollfree(AddBillingLocation.txtTollFree.getText());
+            if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
+                billingLocationBean.setStatus(0);
+            } else {
+                billingLocationBean.setStatus(1);
+            }
+            AddCustomerFrame.lstBillingLocations.add(index, billingLocationBean);
+        } else if (billingLocationBean.getBillingLocationId() != 0) {
+            for (BillingLocationBean billingLocationBeanFromLst : AddCustomerFrame.lstBillingLocations) {
+                if (billingLocationBeanFromLst.getBillingLocationId() == billingLocationBean.getBillingLocationId()) {
+                    billingLocationBeanFromLst.setName(AddBillingLocation.txtName.getText());
+                    billingLocationBeanFromLst.setAddress(AddBillingLocation.txtAddress.getText());
+                    billingLocationBeanFromLst.setUnitNo(AddBillingLocation.txtUnitNo.getText());
+                    billingLocationBeanFromLst.setCity(AddBillingLocation.txtCity.getText());
+                    billingLocationBeanFromLst.setProvinceState(AddBillingLocation.txtProvinceState.getText());
+                    billingLocationBeanFromLst.setZip(AddBillingLocation.txtZip.getText());
+                    billingLocationBeanFromLst.setArCDN(AddBillingLocation.txtArCDN.getText());
+                    billingLocationBeanFromLst.setArUS(AddBillingLocation.txtArUS.getText());
+                    billingLocationBeanFromLst.setContact(AddBillingLocation.txtContact.getText());
+                    billingLocationBeanFromLst.setPosition(AddBillingLocation.txtPosition.getText());
+                    billingLocationBeanFromLst.setEmail(AddBillingLocation.txtEmail.getText());
+                    billingLocationBeanFromLst.setAttention(AddBillingLocation.txtAttention.getText());
+                    billingLocationBeanFromLst.setPhone(AddBillingLocation.txtPhone.getText());
+                    billingLocationBeanFromLst.setExt(AddBillingLocation.txtExt.getText());
+                    billingLocationBeanFromLst.setFax(AddBillingLocation.txtFax.getText());
+                    billingLocationBeanFromLst.setPrefix(AddBillingLocation.txtPrefix.getText());
+                    billingLocationBeanFromLst.setTollfree(AddBillingLocation.txtTollFree.getText());
+                    if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
+                        billingLocationBeanFromLst.setStatus(0);
+                    } else {
+                        billingLocationBeanFromLst.setStatus(1);
+                    }
+                }
+            }
         } else {
-            billingLocationBean.setStatus(1);
+            AddCustomerFrame.lstBillingLocations.remove(index);
+            billingLocationBean = new BillingLocationBean();
+            billingLocationBean.setName(AddBillingLocation.txtName.getText());
+            billingLocationBean.setAddress(AddBillingLocation.txtAddress.getText());
+            billingLocationBean.setUnitNo(AddBillingLocation.txtUnitNo.getText());
+            billingLocationBean.setCity(AddBillingLocation.txtCity.getText());
+            billingLocationBean.setProvinceState(AddBillingLocation.txtProvinceState.getText());
+            billingLocationBean.setZip(AddBillingLocation.txtZip.getText());
+            billingLocationBean.setArCDN(AddBillingLocation.txtArCDN.getText());
+            billingLocationBean.setArUS(AddBillingLocation.txtArUS.getText());
+            billingLocationBean.setContact(AddBillingLocation.txtContact.getText());
+            billingLocationBean.setPosition(AddBillingLocation.txtPosition.getText());
+            billingLocationBean.setEmail(AddBillingLocation.txtEmail.getText());
+            billingLocationBean.setAttention(AddBillingLocation.txtAttention.getText());
+            billingLocationBean.setPhone(AddBillingLocation.txtPhone.getText());
+            billingLocationBean.setExt(AddBillingLocation.txtExt.getText());
+            billingLocationBean.setFax(AddBillingLocation.txtFax.getText());
+            billingLocationBean.setPrefix(AddBillingLocation.txtPrefix.getText());
+            billingLocationBean.setTollfree(AddBillingLocation.txtTollFree.getText());
+            if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
+                billingLocationBean.setStatus(0);
+            } else {
+                billingLocationBean.setStatus(1);
+            }
+            System.out.println("NAME::   " + billingLocationBean.getName());
+            AddCustomerFrame.lstBillingLocations.add(index, billingLocationBean);
         }
-        AddCustomerFrame.lstBillingLocations.add(index, billingLocationBean);
         generateTable();
     }
 
-    public void delete(int billingLocationIdToBeDeleted) {
+    public String delete(int billingLocationIdToBeDeleted) {
         BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
         String msg = billingLocationDAO.deleteBillingLocation(billingLocationIdToBeDeleted);
 //        disable(true);
         generateTable();
 //        TestBillingLocationPanel.mainTabbedPane.setEnabled(true);
 //        TestBillingLocationPanel.billingLocationPanel.setEnabled(true);
-//        return msg;
+        return msg;
     }
 
     public String update(BillingLocationBean billingLocationBean) {
@@ -364,6 +433,7 @@ public class BillingLocationUIHelper {
 //        TestBillingLocationPanel.mainTabbedPane.setEnabled(true);
 //        TestBillingLocationPanel.billingLocationPanel.setEnabled(true);
         return msg;
+
     }
 
     class BillingLocationTable implements TableCellRenderer {

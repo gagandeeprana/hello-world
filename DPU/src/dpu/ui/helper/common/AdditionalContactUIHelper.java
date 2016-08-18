@@ -1,10 +1,13 @@
 package dpu.ui.helper.common;
 
 import dpu.beans.admin.AdditionalContactBean;
+import dpu.beans.admin.BillingLocationBean;
 import dpu.dao.admin.AdditionalContactDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.ui.common.AddAdditionalContact;
 import dpu.ui.common.AddCustomerFrame;
+import static dpu.ui.common.AddCustomerFrame.lstAdditionalContacts;
+import static dpu.ui.common.AddCustomerFrame.tblAdditionalContacts;
 import java.awt.Color;
 //import static dpu.ui.common.TestAdditionalContactPanel.mainTabbedPane;
 import java.awt.Component;
@@ -75,6 +78,7 @@ public class AdditionalContactUIHelper {
         protected JButton button;
         private String label;
         private boolean isPushed;
+        int row = 0;
 
         public ButtonEditor(JCheckBox checkBox) {
             super(checkBox);
@@ -105,7 +109,15 @@ public class AdditionalContactUIHelper {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                delete(0);
+                AdditionalContactBean additionalContactBean = AddCustomerFrame.lstAdditionalContacts.get(row);
+                if (additionalContactBean.getAdditionalContactId() != 0) {
+                    AddCustomerFrame.lstAdditionalContacts.remove(row);
+                    msg = delete(additionalContactBean.getAdditionalContactId());
+                } else {
+                    AddCustomerFrame.lstAdditionalContacts.remove(row);
+                    msg = "Additional Contact Deleted Successfully";
+                    generateTable();
+                }
                 JOptionPane.showMessageDialog(null, msg);
             }
             isPushed = false;
@@ -151,6 +163,7 @@ public class AdditionalContactUIHelper {
         protected JButton button;
         private String label;
         private boolean isPushed;
+        int row = 0;
 
         public ButtonEditorUpdate(JCheckBox checkBox) {
             super(checkBox);
@@ -166,15 +179,14 @@ public class AdditionalContactUIHelper {
         public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             if (isSelected) {
+                this.row = row;
                 button.setForeground(table.getSelectionForeground());
                 button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             } else {
                 button.setForeground(table.getForeground());
                 button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
             }
-            additionalContactIdToBeDeleted = lstAdditionalContacts.get(row).getAdditionalContactId();
-            additionalContactId = lstAdditionalContacts.get(row).getAdditionalContactId();
-            additionalContactBean = additionalContactDAO.getAdditionalContactInfoById(additionalContactId);
+
             label = (value == null) ? "" : value.toString();
             button.setText(label);
             isPushed = true;
@@ -184,8 +196,10 @@ public class AdditionalContactUIHelper {
         public Object getCellEditorValue() {
             if (isPushed) {
                 addUpdateFlag = "update";
-//                AddAdditionalContact addCustomerFrame = new AddAdditionalContact(additionalContactBean);
-//                addCustomerFrame.setVisible(true);
+                AdditionalContactBean additionalContactBean = new AdditionalContactBean();
+                additionalContactBean = AddCustomerFrame.lstAdditionalContacts.get(row);
+                AddAdditionalContact addAdditionalContact = new AddAdditionalContact(row, additionalContactBean);
+                addAdditionalContact.setVisible(true);
                 disable(false);
             }
             isPushed = false;
@@ -302,26 +316,72 @@ public class AdditionalContactUIHelper {
         return msg;
     }
 
-    public void saveToList(int index) {
-        AdditionalContactBean additionalContactBean = new AdditionalContactBean();
-        additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
-        additionalContactBean.setAddress(AddAdditionalContact.txtAddress.getText());
-        additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
-        additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
-        additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
-        additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
-        if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
-            additionalContactBean.setProvinceState(0);
+    public void saveToList(int index, AdditionalContactBean additionalContactBean) {
+        if (index == AddCustomerFrame.lstAdditionalContacts.size()) {
+            additionalContactBean = new AdditionalContactBean();
+            additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
+            additionalContactBean.setAddress(AddAdditionalContact.txtAddress.getText());
+            additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
+            additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
+            additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
+            additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
+            if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
+                additionalContactBean.setProvinceState(0);
+            } else {
+                additionalContactBean.setProvinceState(1);
+            }
+            if (AddAdditionalContact.ddlStatus.getSelectedIndex() == 0) {
+                additionalContactBean.setStatus(0);
+            } else {
+                additionalContactBean.setStatus(1);
+            }
+            additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
+            AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
+        } else if (additionalContactBean.getAdditionalContactId() != 0) {
+            for (AdditionalContactBean additionalContactBeanFromLst : AddCustomerFrame.lstAdditionalContacts) {
+                if (additionalContactBeanFromLst.getAdditionalContactId() == additionalContactBean.getAdditionalContactId()) {
+                    additionalContactBeanFromLst.setCustomerName(AddAdditionalContact.txtCustomer.getText());
+                    additionalContactBeanFromLst.setAddress(AddAdditionalContact.txtAddress.getText());
+                    additionalContactBeanFromLst.setPhone(AddAdditionalContact.txtPhone.getText());
+                    additionalContactBeanFromLst.setExt(AddAdditionalContact.txtExt.getText());
+                    additionalContactBeanFromLst.setFax(AddAdditionalContact.txtFax.getText());
+                    additionalContactBeanFromLst.setPrefix(AddAdditionalContact.txtPrefix.getText());
+                    if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
+                        additionalContactBeanFromLst.setProvinceState(0);
+                    } else {
+                        additionalContactBeanFromLst.setProvinceState(1);
+                    }
+                    if (AddAdditionalContact.ddlStatus.getSelectedIndex() == 0) {
+                        additionalContactBeanFromLst.setStatus(0);
+                    } else {
+                        additionalContactBeanFromLst.setStatus(1);
+                    }
+                    additionalContactBeanFromLst.setEmail(AddAdditionalContact.txtEmail.getText());
+                }
+            }
         } else {
-            additionalContactBean.setProvinceState(1);
+            AddCustomerFrame.lstAdditionalContacts.remove(index);
+            additionalContactBean = new AdditionalContactBean();
+            additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
+            additionalContactBean.setAddress(AddAdditionalContact.txtAddress.getText());
+            additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
+            additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
+            additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
+            additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
+            if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
+                additionalContactBean.setProvinceState(0);
+            } else {
+                additionalContactBean.setProvinceState(1);
+            }
+            if (AddAdditionalContact.ddlStatus.getSelectedIndex() == 0) {
+                additionalContactBean.setStatus(0);
+            } else {
+                additionalContactBean.setStatus(1);
+            }
+            additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
+            AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
+
         }
-        if (AddAdditionalContact.ddlStatus.getSelectedIndex() == 0) {
-            additionalContactBean.setStatus(0);
-        } else {
-            additionalContactBean.setStatus(1);
-        }
-        additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
-        AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
         generateTable();
     }
 

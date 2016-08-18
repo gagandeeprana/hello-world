@@ -398,10 +398,9 @@ public class AddBillingLocation extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (BillingLocationUIHelper.addUpdateFlag.equals("add")) {
-            billingLocationUIHelper.saveToList(AddCustomerFrame.lstBillingLocations.size());
+            billingLocationUIHelper.saveToList(AddCustomerFrame.lstBillingLocations.size(), billingLocationBean);
         } else {
-            AddCustomerFrame.lstBillingLocations.remove(billingLocationBean);
-            billingLocationUIHelper.saveToList(index);
+            billingLocationUIHelper.saveToList(index, billingLocationBean);
         }
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
