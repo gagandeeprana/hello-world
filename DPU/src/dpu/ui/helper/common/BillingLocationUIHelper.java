@@ -59,6 +59,7 @@ public class BillingLocationUIHelper {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
+            setToolTipText("Delete Billing Location...");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
@@ -144,6 +145,7 @@ public class BillingLocationUIHelper {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
+            setToolTipText("Edit Billing Location...");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));

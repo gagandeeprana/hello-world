@@ -51,6 +51,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 obj.setTollfree(rs.getString("tollfree"));
                 obj.setCellular(rs.getString("cellular"));
                 obj.setPager(rs.getString("pager"));
+                obj.setNotes(rs.getString("customer_notes"));
                 lstCompanies.add(obj);
             }
         } catch (Exception e) {
@@ -65,7 +66,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager,customer_notes) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, obj.getCompanyName());
             pstmt.setString(2, obj.getAddress());
             pstmt.setString(3, obj.getUnitNo());
@@ -83,12 +84,13 @@ public class CompanyDAOImpl implements CompanyDAO {
             pstmt.setString(15, obj.getTollfree());
             pstmt.setString(16, obj.getCellular());
             pstmt.setString(17, obj.getPager());
+            pstmt.setString(18, obj.getNotes());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Company Added";
             }
         } catch (Exception e) {
-
+            System.out.println("CompanyDAOImpl : addCompany : " + e);
             logger.error("CompanyDAOImpl : addCompany : " + e);
         }
         return "Failed to Add Company";
@@ -100,7 +102,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update companymaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,email=?,website=?,contact=?,position=?,phone=?,ext=?,fax=?,prefix = ?,tollfree=?,cellular=?,pager=? where company_id = ?");
+            pstmt = conn.prepareStatement("update companymaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,email=?,website=?,contact=?,position=?,phone=?,ext=?,fax=?,prefix = ?,tollfree=?,cellular=?,pager=?,customer_notes=? where company_id = ?");
             pstmt.setString(1, obj.getCompanyName());
             pstmt.setString(2, obj.getAddress());
             pstmt.setString(3, obj.getUnitNo());
@@ -118,7 +120,8 @@ public class CompanyDAOImpl implements CompanyDAO {
             pstmt.setString(15, obj.getTollfree());
             pstmt.setString(16, obj.getCellular());
             pstmt.setString(17, obj.getPager());
-            pstmt.setInt(18, obj.getCompanyId());
+            pstmt.setString(18, obj.getNotes());
+            pstmt.setInt(19, obj.getCompanyId());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Company Updated";
@@ -180,6 +183,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 obj.setTollfree(rs.getString("tollfree"));
                 obj.setCellular(rs.getString("cellular"));
                 obj.setPager(rs.getString("pager"));
+                obj.setNotes(rs.getString("customer_notes"));
             }
         } catch (Exception e) {
             logger.error("CompanyDAOImpl : getCompanyInfoById : " + e);

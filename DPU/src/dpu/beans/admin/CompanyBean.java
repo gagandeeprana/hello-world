@@ -20,6 +20,15 @@ public class CompanyBean {
     private String tollfree;
     private String cellular;
     private String pager;
+    private String notes;
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     public String getAddress() {
         return address;

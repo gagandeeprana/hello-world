@@ -5,6 +5,13 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.CompanyBean;
+import dpu.ui.helper.common.CompanyUIHelper;
+import java.util.Date;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import properties.ReadFromPropertiesFile;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +21,50 @@ public class AddCustomerNotes extends javax.swing.JFrame {
     /**
      * Creates new form AddCustomerNotes
      */
+    CompanyBean companyBean = null;
+
     public AddCustomerNotes() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setResizable(false);
+        notesPanel.setBorder(BorderFactory.createTitledBorder("Notes For Customer : " + AddCustomerFrame.txtCompanyName.getText()));
+        showData();
+    }
+
+    public AddCustomerNotes(CompanyBean companyBean) {
+        initComponents();
+        setResizable(false);
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        this.companyBean = companyBean;
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        notesPanel.setBorder(BorderFactory.createTitledBorder("Notes For Customer : " + companyBean.getCompanyName()));
+        showDataFromBean();
+    }
+
+    private void showData() {
+        if (CompanyUIHelper.companyBean.getNotes() != null) {
+            taNotes.setText(CompanyUIHelper.companyBean.getNotes());
+        }
+        lblContact.setText(AddCustomerFrame.txtContact.getText());
+        lblPosition.setText(AddCustomerFrame.txtPosition.getText());
+        lblPhone.setText(AddCustomerFrame.txtPhone.getText());
+        lblTollFree.setText(AddCustomerFrame.txtTollFree.getText());
+        lblEmail.setText(AddCustomerFrame.txtEmail.getText());
+        lblExt.setText(AddCustomerFrame.txtExt.getText());
+    }
+
+    private void showDataFromBean() {
+        taNotes.setText(companyBean.getNotes());
+        lblContact.setText(companyBean.getContact());
+        lblPosition.setText(companyBean.getPosition());
+        lblPhone.setText(companyBean.getPhone());
+        lblTollFree.setText(companyBean.getTollfree());
+        lblEmail.setText(companyBean.getEmail());
+        lblExt.setText(companyBean.getExt());
     }
 
     /**
@@ -27,126 +76,148 @@ public class AddCustomerNotes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        notesPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblExt = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblPosition = new javax.swing.JLabel();
+        lblTollFree = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
+        lblContact = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        taNotes = new javax.swing.JTextArea();
+        btnDateTime = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Notes For Customer"));
+        notesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Notes For Customer"));
 
         jLabel4.setText("Toll Free:");
 
         jLabel10.setText("Ext:");
 
-        jLabel11.setText("1043");
+        lblExt.setText("1043");
 
         jLabel2.setText("Position:");
 
         jLabel1.setText("Contact:");
 
-        jLabel12.setText("abc@gmail.com");
+        lblEmail.setText("abc@gmail.com");
 
         jLabel3.setText("Phone:");
 
-        jLabel7.setText("IT Networking");
+        lblPosition.setText("IT Networking");
 
-        jLabel9.setText("18009090");
+        lblTollFree.setText("18009090");
 
-        jLabel8.setText("9888912345");
+        lblPhone.setText("9888912345");
 
-        jLabel6.setText("John Camry");
+        lblContact.setText("John Camry");
 
         jLabel5.setText("E-Mail:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout notesPanelLayout = new javax.swing.GroupLayout(notesPanel);
+        notesPanel.setLayout(notesPanelLayout);
+        notesPanelLayout.setHorizontalGroup(
+            notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(notesPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblContact))
+                    .addGroup(notesPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPosition))
+                    .addGroup(notesPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
+                        .addComponent(lblPhone)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblExt))
+                    .addGroup(notesPanelLayout.createSequentialGroup()
+                        .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel9))))
+                        .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail)
+                            .addComponent(lblTollFree))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        notesPanelLayout.setVerticalGroup(
+            notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel6))
+                    .addComponent(lblContact))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel7))
+                    .addComponent(lblPosition))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel8)
+                    .addComponent(lblPhone)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(lblExt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel9))
+                    .addComponent(lblTollFree))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(notesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel12))
+                    .addComponent(lblEmail))
                 .addContainerGap())
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        taNotes.setColumns(20);
+        taNotes.setLineWrap(true);
+        taNotes.setRows(5);
+        taNotes.setWrapStyleWord(true);
+        taNotes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                taNotesKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(taNotes);
 
-        jButton1.setText("Date Time");
+        btnDateTime.setText("Date Time");
+        btnDateTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDateTimeActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Print");
 
-        jButton3.setText("Save");
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Cancel");
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,35 +230,55 @@ public class AddCustomerNotes extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDateTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(notesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnDateTime)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btnSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(btnCancel)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnDateTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDateTimeActionPerformed
+        Date date = new Date();
+        taNotes.setText(date + " : ");
+        btnDateTime.setEnabled(false);
+    }//GEN-LAST:event_btnDateTimeActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        CompanyUIHelper.companyBean.setNotes(taNotes.getText());
+        dispose();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void taNotesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_taNotesKeyReleased
+        btnDateTime.setEnabled(false);
+    }//GEN-LAST:event_taNotesKeyReleased
 
     /**
      * @param args the command line arguments
@@ -225,24 +316,24 @@ public class AddCustomerNotes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDateTime;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblContact;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblExt;
+    private javax.swing.JLabel lblPhone;
+    private javax.swing.JLabel lblPosition;
+    private javax.swing.JLabel lblTollFree;
+    private javax.swing.JPanel notesPanel;
+    private javax.swing.JTextArea taNotes;
     // End of variables declaration//GEN-END:variables
 }

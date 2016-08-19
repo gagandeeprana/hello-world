@@ -37,11 +37,13 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
+        setTitle("Add New Additional Contact");
 //        setBackground(Color.WHITE);
     }
 
     public AddAdditionalContact(int index, AdditionalContactBean additionalContactBean) {
         initComponents();
+        
         lblSave.setText("Update");
         this.additionalContactBean = additionalContactBean;
         this.index = index;
@@ -49,6 +51,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Edit Additional Contact");
         setResizable(false);
         showData();
     }
@@ -145,6 +148,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         jCheckBox2.setPreferredSize(new java.awt.Dimension(53, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        jLabel2.setToolTipText("Send an Email to this contact using Outlook...");
 
         jLabel15.setText("Province/State");
 
@@ -254,7 +258,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         );
 
         lblSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save.png"))); // NOI18N
-        lblSave.setToolTipText("Save Customer..");
+        lblSave.setToolTipText("Save Additional Contact...");
         lblSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblSaveMouseClicked(evt);
@@ -265,6 +269,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         });
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
+        jLabel25.setToolTipText("Close Window...");
         jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel25MousePressed(evt);

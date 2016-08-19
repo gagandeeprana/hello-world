@@ -40,17 +40,17 @@ public class CompanyUIHelper {
     List<CompanyBean> lstCompanies = null;
     int companyIdToBeDeleted = 0;
     String msg = "";
-    CompanyBean companyBean = null;
+    public static CompanyBean companyBean = new CompanyBean();
 
     public void clear() {
         TestCompanyPanel.txtCompanySearch.setText("");
     }
 
     public void disable(boolean var) {
-        TestCompanyPanel.tblCompany.setEnabled(var);
-        TestCompanyPanel.lblAddManageCompany.setEnabled(var);
-        TestCompanyPanel.btnPrint.setEnabled(var);
-        TestCompanyPanel.txtCompanySearch.setEnabled(var);
+//        TestCompanyPanel.tblCompany.setEnabled(var);
+//        TestCompanyPanel.lblAddManageCompany.setEnabled(var);
+//        TestCompanyPanel.btnPrint.setEnabled(var);
+//        TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
 
     public class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -61,6 +61,7 @@ public class CompanyUIHelper {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
+            setToolTipText("Delete Company...");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
@@ -136,6 +137,7 @@ public class CompanyUIHelper {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
+            setToolTipText("Edit Company...");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
@@ -212,8 +214,10 @@ public class CompanyUIHelper {
         lstCompanies = companyDAO.getAllCompanies(TestCompanyPanel.txtCompanySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestCompanyPanel.tblCompany = new JTable(defaultTableModel);
-        TestCompanyPanel.tblCompany.getTableHeader().setBackground(Color.red);
+        TestCompanyPanel.tblCompany.setAutoCreateRowSorter(true);
         TestCompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
+        TestCompanyPanel.tblCompany.setRequestFocusEnabled(false);
+        TestCompanyPanel.tblCompany.setRowSelectionAllowed(false);
         Object[][] data = new Object[lstCompanies.size()][17];
         for (int i = 0; i < lstCompanies.size(); i++) {
             CompanyBean obj = lstCompanies.get(i);
@@ -236,6 +240,7 @@ public class CompanyUIHelper {
             data[i][16] = "";
             TestCompanyPanel.tblCompany.setRowHeight(30);
         }
+        TestCompanyPanel.tblCompany.setColumnSelectionAllowed(false);
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager", " ", "  "};
 
         defaultTableModel.setDataVector(data, cols);
@@ -256,7 +261,6 @@ public class CompanyUIHelper {
     }
 
     public String save() {
-        CompanyBean companyBean = new CompanyBean();
         companyBean.setCompanyName(AddCustomerFrame.txtCompanyName.getText());
         companyBean.setAddress(AddCustomerFrame.txtAddress.getText());
         companyBean.setUnitNo(AddCustomerFrame.txtUnitNo.getText());
@@ -363,6 +367,7 @@ public class CompanyUIHelper {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JTextField editor = new JTextField();
             editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
+            editor.setEditable(false);
             editor.setBorder(null);
             if (value != null) {
                 //here space is given to provide some left margin while showing data on textfield..

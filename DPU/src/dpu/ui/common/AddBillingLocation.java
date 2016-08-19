@@ -7,6 +7,8 @@ package dpu.ui.common;
 
 import dpu.beans.admin.BillingLocationBean;
 import dpu.ui.helper.common.BillingLocationUIHelper;
+import javax.swing.ImageIcon;
+import properties.ReadFromPropertiesFile;
 
 /**
  *
@@ -23,11 +25,22 @@ public class AddBillingLocation extends javax.swing.JFrame {
 
     public AddBillingLocation() {
         initComponents();
+                setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setLocationRelativeTo(null);
+
+         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setTitle("Add Billing Location");
         billingLocationUIHelper = new BillingLocationUIHelper();
     }
 
     public AddBillingLocation(int index, BillingLocationBean billingLocationBean) {
         initComponents();
+                setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);        setLocationRelativeTo(null);
+
+        setTitle("Edit Billing Location");
         btnSave.setText("Update");
         this.billingLocationBean = billingLocationBean;
         this.index = index;
@@ -132,12 +145,14 @@ public class AddBillingLocation extends javax.swing.JFrame {
         jLabel14.setText("Zip");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/New-Customer.png"))); // NOI18N
+        jLabel2.setToolTipText("A/R Canada...");
 
         jLabel10.setText("Contact");
 
         jLabel4.setText("Name");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/New-Customer.png"))); // NOI18N
+        jLabel3.setToolTipText("A/R USA...");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -178,6 +193,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
         ddlStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        jLabel19.setToolTipText("Send an Email to this contact using Outlook...");
 
         jLabel20.setText("Ext");
 

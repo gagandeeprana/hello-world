@@ -58,6 +58,7 @@ public class AdditionalContactUIHelper {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
+            setToolTipText("Delete Additional Contact...");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
@@ -142,6 +143,7 @@ public class AdditionalContactUIHelper {
 
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
+            setToolTipText("Edit Additional Contact...");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));

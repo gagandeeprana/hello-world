@@ -43,6 +43,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         companyUI = new CompanyUIHelper();
         companyUI.generateTable();
         btnPrint.setAction(new ShowWaitAction(""));
+        btnPrint.setToolTipText("Print Company Report...");
         btnPrint.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Print.png"));
     }
 
@@ -71,8 +72,10 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setToolTipText("Type Company Name to Search...");
 
         txtCompanySearch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCompanySearch.setToolTipText("Type Company Name To Search...");
         txtCompanySearch.setBorder(null);
         txtCompanySearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -85,6 +88,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/SearchIcon24.png"))); // NOI18N
+        jLabel2.setToolTipText("Type Company Name To Search...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,6 +109,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         );
 
         lblAddManageCompany.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Add.png"))); // NOI18N
+        lblAddManageCompany.setToolTipText("Add New Company...");
         lblAddManageCompany.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAddManageCompanyMouseClicked(evt);
@@ -114,6 +119,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane4.setToolTipText("Company Listing...");
         jScrollPane4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         tblCompany.setAutoCreateRowSorter(true);
@@ -133,11 +139,13 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 "Id", "Title", "address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"
             }
         ));
+        tblCompany.setToolTipText("Company Listing...");
         tblCompany.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane4.setViewportView(tblCompany);
 
         btnPrint.setBackground(new java.awt.Color(135, 192, 248));
         btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Print.png"))); // NOI18N
+        btnPrint.setToolTipText("Print Company Report...");
         btnPrint.setBorder(null);
         btnPrint.setBorderPainted(false);
 
@@ -151,7 +159,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrint)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
         );
@@ -194,12 +202,12 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCompanySearchKeyTyped
 
     private void lblAddManageCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMouseClicked
-     
+        
     }//GEN-LAST:event_lblAddManageCompanyMouseClicked
 
     private void lblAddManageCompanyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMousePressed
         // TODO add your handling code here:
-           companyUI.addUpdateFlag = "add";
+        companyUI.addUpdateFlag = "add";
         AddCustomerFrame addCustomerFrame = new AddCustomerFrame();
         addCustomerFrame.setVisible(true);
         companyUI.disable(false);

@@ -164,7 +164,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BorderCrossing.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Datamaintenance.png"))); // NOI18N
+        jLabel1.setToolTipText("Datamaintenance...");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -229,8 +230,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
                 .addGap(2, 2, 2))
             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -340,7 +339,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
-        jLayeredPane1.setBounds(0, 0, getWidth(), getHeight());
+//        jLayeredPane1.setBounds(0, 0, getWidth(), getHeight());
         Datamaintenance datamaintenance = new Datamaintenance();
         datamaintenance.setBounds(0, 0, getWidth(), getHeight());
         jLayeredPane1.add(datamaintenance);

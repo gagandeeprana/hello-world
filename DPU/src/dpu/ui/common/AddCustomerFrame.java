@@ -49,7 +49,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     public static List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
     public static List<BillingLocationBean> lstBillingLocationsFromDb = new ArrayList<>();
     public static List<AdditionalContactBean> lstAdditionalContactsFromDb = new ArrayList<>();
-
+    
     public AddCustomerFrame() {
         initComponents();
         companyUIHelper = new CompanyUIHelper();
@@ -57,17 +57,20 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         additionalContactUIHelper = new AdditionalContactUIHelper();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
+        setTitle("Add New Customer");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setBackground(Color.WHITE);
         billingLocationUIHelper.generateEmptyTable();
         additionalContactUIHelper.generateEmptyTable();
-
+        lblNotes.setVisible(false);
+        
     }
-
+    
     public AddCustomerFrame(CompanyBean companyBean) {
         initComponents();
         this.companyBean = companyBean;
+        setTitle("Edit Customer");
         showDataOnScreen();
         companyUIHelper = new CompanyUIHelper();
         billingLocationUIHelper = new BillingLocationUIHelper();
@@ -84,7 +87,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         billingLocationUIHelper.generateTable();
         additionalContactUIHelper.generateTable();
     }
-
+    
     private void clickEventOnMenuItem() {
         menuItem1.addActionListener(new ActionListener() {
             @Override
@@ -94,10 +97,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void clickEventOnMenuItemForBilling() {
         BillingLocationUIHelper.addUpdateFlag = "add";
-
+        
         menuItem3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,7 +109,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void showDataOnScreen() {
         txtCompanyName.setText(companyBean.getCompanyName());
         txtContact.setText(companyBean.getContact());
@@ -188,7 +191,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         tblBillingLocations = new javax.swing.JTable();
         ScrollPanetblAdditionalContacts = new javax.swing.JScrollPane();
         tblAdditionalContacts = new javax.swing.JTable();
-        jLabel22 = new javax.swing.JLabel();
+        lblNotes = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
 
@@ -209,6 +212,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel4.setText("Customer");
 
         txtCompanyName.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtCompanyName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCompanyNameKeyReleased(evt);
+            }
+        });
 
         jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -219,6 +227,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Website.png"))); // NOI18N
+        jLabel3.setToolTipText("Open this Url on Web Browser...");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -319,6 +328,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        jLabel2.setToolTipText("Send an Email to this contact using Outlook...");
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
@@ -571,6 +581,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 "Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax No"
             }
         ));
+        tblBillingLocations.setToolTipText("Billing Location Listing...");
         tblBillingLocations.setDropMode(javax.swing.DropMode.ON_OR_INSERT_ROWS);
         tblBillingLocations.setGridColor(new java.awt.Color(255, 255, 255));
         tblBillingLocations.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -599,6 +610,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 "Contact Name", "Phone No", "Extension", "Cell Phone No", "Email Address", "Position", "Fax No", "Pager No"
             }
         ));
+        tblAdditionalContacts.setToolTipText("Additional Contacts Listing...");
         tblAdditionalContacts.setGridColor(new java.awt.Color(255, 255, 255));
         tblAdditionalContacts.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -609,8 +621,13 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         customerTabbedPane.addTab("Additional Contacts", ScrollPanetblAdditionalContacts);
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Notes.png"))); // NOI18N
-        jLabel22.setToolTipText("Add Notes...");
+        lblNotes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Notes.png"))); // NOI18N
+        lblNotes.setToolTipText("Add Notes...");
+        lblNotes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblNotesMousePressed(evt);
+            }
+        });
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Save.png"))); // NOI18N
         jLabel23.setToolTipText("Save Customer..");
@@ -627,6 +644,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         });
 
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
+        jLabel24.setToolTipText("Close Window...");
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel24MousePressed(evt);
@@ -640,7 +658,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             .addGroup(AddCustomerPanelLayout.createSequentialGroup()
                 .addGroup(AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(AddCustomerPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -659,11 +677,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
-                    .addComponent(jLabel22)
+                    .addComponent(lblNotes)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        AddCustomerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel22, jLabel23, jLabel24});
+        AddCustomerPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel23, jLabel24, lblNotes});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -749,7 +767,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
-        // TODO add your handling code here:
         String msg = companyUIHelper.save();
         JOptionPane.showMessageDialog(null, msg);
         dispose();
@@ -818,6 +835,26 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel23MouseExited
 
+    private void lblNotesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNotesMousePressed
+        AddCustomerNotes addCustomerNotes = null;
+        if (CompanyUIHelper.addUpdateFlag.equals("add")) {
+            addCustomerNotes = new AddCustomerNotes();
+        } else {
+            addCustomerNotes = new AddCustomerNotes(companyBean);
+        }
+        addCustomerNotes.setVisible(true);
+    }//GEN-LAST:event_lblNotesMousePressed
+
+    private void txtCompanyNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanyNameKeyReleased
+        // TODO add your handling code here:
+        String companyName = txtCompanyName.getText();
+        if (companyName.equals("")) {
+            lblNotes.setVisible(false);
+        } else {
+            lblNotes.setVisible(true);
+        }
+    }//GEN-LAST:event_txtCompanyNameKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -877,7 +914,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
@@ -890,6 +926,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblNotes;
     public static javax.swing.JTable tblAdditionalContacts;
     public static javax.swing.JTable tblBillingLocations;
     public static javax.swing.JTextField txtAddress;
