@@ -46,7 +46,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 obj.setContact(rs.getString("contact"));
                 obj.setPosition(rs.getString("position"));
                 obj.setEmail(rs.getString("email"));
-                obj.setAttention(rs.getString("attention"));
+                obj.setCellular(rs.getString("cellular"));
                 obj.setPhone(rs.getString("phone"));
                 obj.setExt(rs.getString("ext"));
                 obj.setFax(rs.getString("fax"));
@@ -68,7 +68,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into billinglocationmaster (name,address,unit_no,city,province_state,zip,ar_cdn,ar_us,status,contact,position,email,attention,phone,ext,fax,prefix,tollfree,company_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt = conn.prepareStatement("insert into billinglocationmaster (name,address,unit_no,city,province_state,zip,ar_cdn,ar_us,status,contact,position,email,cellular,phone,ext,fax,prefix,tollfree,company_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, obj.getName());
             pstmt.setString(2, obj.getAddress());
             pstmt.setString(3, obj.getUnitNo());
@@ -81,7 +81,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
             pstmt.setString(10, obj.getContact());
             pstmt.setString(11, obj.getPosition());
             pstmt.setString(12, obj.getEmail());
-            pstmt.setString(13, obj.getAttention());
+            pstmt.setString(13, obj.getCellular());
             pstmt.setString(14, obj.getPhone());
             pstmt.setString(15, obj.getExt());
             pstmt.setString(16, obj.getFax());
@@ -105,7 +105,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update billinglocationmaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,ar_cdn=?,ar_us=?,status=?,contact=?,position=?,email=?,attention=?,phone=?,ext=?,fax=?,prefix=?,tollfree=?,company_id=? where billing_location_id = ?");
+            pstmt = conn.prepareStatement("update billinglocationmaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,ar_cdn=?,ar_us=?,status=?,contact=?,position=?,email=?,cellular=?,phone=?,ext=?,fax=?,prefix=?,tollfree=?,company_id=? where billing_location_id = ?");
             pstmt.setString(1, obj.getName());
             pstmt.setString(2, obj.getAddress());
             pstmt.setString(3, obj.getUnitNo());
@@ -118,7 +118,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
             pstmt.setString(10, obj.getContact());
             pstmt.setString(11, obj.getPosition());
             pstmt.setString(12, obj.getEmail());
-            pstmt.setString(13, obj.getAttention());
+            pstmt.setString(13, obj.getCellular());
             pstmt.setString(14, obj.getPhone());
             pstmt.setString(15, obj.getExt());
             pstmt.setString(16, obj.getFax());
@@ -182,7 +182,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 obj.setContact(rs.getString("contact"));
                 obj.setPosition(rs.getString("position"));
                 obj.setEmail(rs.getString("email"));
-                obj.setAttention(rs.getString("attention"));
+                obj.setCellular(rs.getString("cellular"));
                 obj.setPhone(rs.getString("phone"));
                 obj.setExt(rs.getString("ext"));
                 obj.setFax(rs.getString("fax"));
@@ -223,7 +223,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 obj.setContact(rs.getString("contact"));
                 obj.setPosition(rs.getString("position"));
                 obj.setEmail(rs.getString("email"));
-                obj.setAttention(rs.getString("attention"));
+                obj.setCellular(rs.getString("cellular"));
                 obj.setPhone(rs.getString("phone"));
                 obj.setExt(rs.getString("ext"));
                 obj.setFax(rs.getString("fax"));

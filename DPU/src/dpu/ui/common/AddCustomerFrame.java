@@ -22,9 +22,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -41,6 +44,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     JMenuItem menuItem1 = null;
     JMenuItem menuItem3 = null;
     JMenuItem menuItem6 = null;
+    MaskFormatter mask = null;
     BillingLocationUIHelper billingLocationUIHelper = null;
     BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
     AdditionalContactDAO additionalContactDAO = new AdditionalContactDAOImpl();
@@ -49,45 +53,128 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     public static List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
     public static List<BillingLocationBean> lstBillingLocationsFromDb = new ArrayList<>();
     public static List<AdditionalContactBean> lstAdditionalContactsFromDb = new ArrayList<>();
-    
+
     public AddCustomerFrame() {
-        initComponents();
-        companyUIHelper = new CompanyUIHelper();
-        billingLocationUIHelper = new BillingLocationUIHelper();
-        additionalContactUIHelper = new AdditionalContactUIHelper();
-        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        setLocationRelativeTo(null);
-        setTitle("Add New Customer");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setBackground(Color.WHITE);
-        billingLocationUIHelper.generateEmptyTable();
-        additionalContactUIHelper.generateEmptyTable();
-        lblNotes.setVisible(false);
-        
+        try {
+            initComponents();
+            companyUIHelper = new CompanyUIHelper();
+            mask = new MaskFormatter("(###) ###-####");
+            mask.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtTollFree.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtPager.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtAfterHours.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            billingLocationUIHelper = new BillingLocationUIHelper();
+            additionalContactUIHelper = new AdditionalContactUIHelper();
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setLocationRelativeTo(null);
+            setTitle("Add New Customer");
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            setBackground(Color.WHITE);
+            billingLocationUIHelper.generateEmptyTable();
+            additionalContactUIHelper.generateEmptyTable();
+            lblNotes.setVisible(false);
+        } catch (Exception e) {
+            System.out.println("AddCustomerFrame(): " + e);
+        }
     }
-    
+
     public AddCustomerFrame(CompanyBean companyBean) {
-        initComponents();
-        this.companyBean = companyBean;
-        setTitle("Edit Customer");
-        showDataOnScreen();
-        companyUIHelper = new CompanyUIHelper();
-        billingLocationUIHelper = new BillingLocationUIHelper();
-        additionalContactUIHelper = new AdditionalContactUIHelper();
-        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setBackground(Color.WHITE);
-        lstBillingLocations = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
-        lstBillingLocationsFromDb = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
-        lstAdditionalContacts = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
-        lstAdditionalContactsFromDb = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
-        billingLocationUIHelper.generateTable();
-        additionalContactUIHelper.generateTable();
+        try {
+            initComponents();
+            this.companyBean = companyBean;
+            mask = new MaskFormatter("(###) ###-####");
+            mask.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtTollFree.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtPager.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtAfterHours.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            showDataOnScreen();
+            setTitle("Edit Customer");
+            companyUIHelper = new CompanyUIHelper();
+            billingLocationUIHelper = new BillingLocationUIHelper();
+            additionalContactUIHelper = new AdditionalContactUIHelper();
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            setBackground(Color.WHITE);
+            lstBillingLocations = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
+            lstBillingLocationsFromDb = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
+            lstAdditionalContacts = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
+            lstAdditionalContactsFromDb = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
+            billingLocationUIHelper.generateTable();
+            additionalContactUIHelper.generateTable();
+        } catch (Exception e) {
+            System.out.println("AddCustomerFrame(CompanyBean companyBean): " + e);
+        }
     }
-    
+
     private void clickEventOnMenuItem() {
         menuItem1.addActionListener(new ActionListener() {
             @Override
@@ -97,10 +184,10 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void clickEventOnMenuItemForBilling() {
         BillingLocationUIHelper.addUpdateFlag = "add";
-        
+
         menuItem3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,7 +196,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void showDataOnScreen() {
         txtCompanyName.setText(companyBean.getCompanyName());
         txtContact.setText(companyBean.getContact());
@@ -144,7 +231,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         AddCustomerPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtZip = new javax.swing.JTextField();
-        txtFax = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtCompanyName = new javax.swing.JTextField();
         jCheckBox4 = new javax.swing.JCheckBox();
@@ -156,7 +242,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jCheckBox5 = new javax.swing.JCheckBox();
         jLabel19 = new javax.swing.JLabel();
         txtProvinceState = new javax.swing.JTextField();
-        txtPager = new javax.swing.JTextField();
         txtPosition = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -168,13 +253,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
-        txtCellular = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel16 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
         txtWebsite = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -183,12 +266,16 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         txtExt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        txtTollFree = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         txtUnitNo = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        txtAfterHours = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JFormattedTextField();
+        txtFax = new javax.swing.JFormattedTextField();
+        txtAfterHours = new javax.swing.JFormattedTextField();
+        txtTollFree = new javax.swing.JFormattedTextField();
+        txtCellular = new javax.swing.JFormattedTextField();
+        txtPager = new javax.swing.JFormattedTextField();
         customerTabbedPane = new javax.swing.JTabbedPane();
         ScrollPaneForBillingLocations = new javax.swing.JScrollPane();
         tblBillingLocations = new javax.swing.JTable();
@@ -207,8 +294,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtZip.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-
-        txtFax.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -258,8 +343,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         txtProvinceState.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtPager.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-
         txtPosition.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -298,8 +381,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         txtCity.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        txtCellular.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-
         jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(51, 51, 51));
@@ -323,8 +404,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Unit No.");
-
-        txtPhone.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
         txtWebsite.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
@@ -353,8 +432,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(51, 51, 51));
         jLabel15.setText("Province/State");
 
-        txtTollFree.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-
         jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
         jLabel20.setText("Prefix");
@@ -367,7 +444,83 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
         jLabel22.setText("After Hours");
 
-        txtAfterHours.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        txtPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyTyped(evt);
+            }
+        });
+
+        txtFax.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtFax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFaxKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFaxKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFaxKeyTyped(evt);
+            }
+        });
+
+        txtAfterHours.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtAfterHours.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAfterHoursKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAfterHoursKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAfterHoursKeyTyped(evt);
+            }
+        });
+
+        txtTollFree.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtTollFree.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTollFreeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTollFreeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTollFreeKeyTyped(evt);
+            }
+        });
+
+        txtCellular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtCellular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCellularKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCellularKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCellularKeyTyped(evt);
+            }
+        });
+
+        txtPager.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtPager.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPagerKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPagerKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPagerKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -430,66 +583,63 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPosition)
+                            .addComponent(txtContact)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtFax, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 108, Short.MAX_VALUE)
+                                        .addComponent(jLabel20))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtPhone)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel19)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel19))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtExt, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                    .addComponent(txtPrefix)))
-                            .addComponent(txtContact)))
+                                    .addComponent(txtExt, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                    .addComponent(txtPrefix)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel11)
                                             .addComponent(jLabel18))
-                                        .addGap(12, 12, 12))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPager, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
+                                        .addGap(2, 2, 2)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(0, 0, Short.MAX_VALUE))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtPager, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(176, 176, 176))))
+                                                .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAfterHours, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAfterHours)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addGap(12, 12, 12))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAddress, txtCity, txtUnitNo});
@@ -553,35 +703,37 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel19)
-                                    .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel20)
-                                    .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel22)
                                     .addComponent(txtAfterHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel17)
-                                            .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel11)
-                                            .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel18)
-                                            .addComponent(txtPager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel18))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtPager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel21)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel21)
+                                            .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -592,7 +744,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                                             .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(32, Short.MAX_VALUE))))
+                        .addContainerGap(11, Short.MAX_VALUE))))
         );
 
         customerTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
@@ -708,7 +860,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             .addGroup(AddCustomerPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customerTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddCustomerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
@@ -722,7 +874,9 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(AddCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(AddCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -890,6 +1044,78 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCompanyNameKeyReleased
 
+    private void txtPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneKeyReleased
+
+    private void txtPhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneKeyPressed
+
+    private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
+   
+    }//GEN-LAST:event_txtPhoneKeyTyped
+
+    private void txtFaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFaxKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFaxKeyPressed
+
+    private void txtFaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFaxKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFaxKeyReleased
+
+    private void txtFaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFaxKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFaxKeyTyped
+
+    private void txtAfterHoursKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAfterHoursKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAfterHoursKeyPressed
+
+    private void txtAfterHoursKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAfterHoursKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAfterHoursKeyReleased
+
+    private void txtAfterHoursKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAfterHoursKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAfterHoursKeyTyped
+
+    private void txtTollFreeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTollFreeKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTollFreeKeyPressed
+
+    private void txtTollFreeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTollFreeKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTollFreeKeyReleased
+
+    private void txtTollFreeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTollFreeKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTollFreeKeyTyped
+
+    private void txtCellularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCellularKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCellularKeyPressed
+
+    private void txtCellularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCellularKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCellularKeyReleased
+
+    private void txtCellularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCellularKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCellularKeyTyped
+
+    private void txtPagerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagerKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagerKeyPressed
+
+    private void txtPagerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagerKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagerKeyReleased
+
+    private void txtPagerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagerKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPagerKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -966,20 +1192,20 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     public static javax.swing.JTable tblAdditionalContacts;
     public static javax.swing.JTable tblBillingLocations;
     public static javax.swing.JTextField txtAddress;
-    public static javax.swing.JTextField txtAfterHours;
-    public static javax.swing.JTextField txtCellular;
+    public static javax.swing.JFormattedTextField txtAfterHours;
+    public static javax.swing.JFormattedTextField txtCellular;
     public static javax.swing.JTextField txtCity;
     public static javax.swing.JTextField txtCompanyName;
     public static javax.swing.JTextField txtContact;
     public static javax.swing.JTextField txtEmail;
     public static javax.swing.JTextField txtExt;
-    public static javax.swing.JTextField txtFax;
-    public static javax.swing.JTextField txtPager;
-    public static javax.swing.JTextField txtPhone;
+    public static javax.swing.JFormattedTextField txtFax;
+    public static javax.swing.JFormattedTextField txtPager;
+    public static javax.swing.JFormattedTextField txtPhone;
     public static javax.swing.JTextField txtPosition;
     public static javax.swing.JTextField txtPrefix;
     public static javax.swing.JTextField txtProvinceState;
-    public static javax.swing.JTextField txtTollFree;
+    public static javax.swing.JFormattedTextField txtTollFree;
     public static javax.swing.JTextField txtUnitNo;
     public static javax.swing.JTextField txtWebsite;
     public static javax.swing.JTextField txtZip;

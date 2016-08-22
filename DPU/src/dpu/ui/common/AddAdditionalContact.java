@@ -58,11 +58,12 @@ public class AddAdditionalContact extends javax.swing.JFrame {
 
     private void showData() {
         AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
-        AddAdditionalContact.txtPosition.setText(additionalContactBean.getAddress());
+        AddAdditionalContact.txtPosition.setText(additionalContactBean.getPosition());
         AddAdditionalContact.txtPhone.setText(additionalContactBean.getPhone());
         AddAdditionalContact.txtExt.setText(additionalContactBean.getExt());
         AddAdditionalContact.txtFax.setText(additionalContactBean.getFax());
         AddAdditionalContact.txtPrefix.setText(additionalContactBean.getPrefix());
+        AddAdditionalContact.txtCellular.setText(additionalContactBean.getCellular());
 //        AddAdditionalContact.ddlProvinceState.setSelectedIndex(additionalContactBean.getProvinceState());
         if (additionalContactBean.getStatus() == 0) {
             ddlStatus.setSelectedIndex(1);

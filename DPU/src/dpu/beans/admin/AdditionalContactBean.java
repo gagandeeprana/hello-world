@@ -14,14 +14,30 @@ public class AdditionalContactBean {
     private int additionalContactId;
     private int contactId;
     private String customerName;
-    private String address;
+    private String position;
     private String phone;
     private String ext;
     private String fax;
     private String prefix;
-    private int provinceState;
+    private String cellular;
     private int status;
     private String email;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getCellular() {
+        return cellular;
+    }
+
+    public void setCellular(String cellular) {
+        this.cellular = cellular;
+    }
 
     public int getAdditionalContactId() {
         return additionalContactId;
@@ -45,14 +61,6 @@ public class AdditionalContactBean {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPhone() {
@@ -85,14 +93,6 @@ public class AdditionalContactBean {
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
-    }
-
-    public int getProvinceState() {
-        return provinceState;
-    }
-
-    public void setProvinceState(int provinceState) {
-        this.provinceState = provinceState;
     }
 
     public int getStatus() {

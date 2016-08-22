@@ -24,7 +24,7 @@ public class BillingLocationBean {
     private String contact;
     private String position;
     private String email;
-    private String attention;
+    private String cellular;
     private String phone;
     private String ext;
     private String fax;
@@ -136,12 +136,12 @@ public class BillingLocationBean {
         this.email = email;
     }
 
-    public String getAttention() {
-        return attention;
+    public String getCellular() {
+        return cellular;
     }
 
-    public void setAttention(String attention) {
-        this.attention = attention;
+    public void setCellular(String cellular) {
+        this.cellular = cellular;
     }
 
     public String getPhone() {

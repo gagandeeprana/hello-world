@@ -287,11 +287,12 @@ public class AdditionalContactUIHelper {
         AdditionalContactBean additionalContactBean = new AdditionalContactBean();
 //        additionalContactBean.setContactId(AddAdditionalContact.txtCustomer.getText());
         additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
-        additionalContactBean.setAddress(AddAdditionalContact.txtPosition.getText());
+        additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());
         additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
         additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
         additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
         additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
+        additionalContactBean.setCellular(AddAdditionalContact.txtCellular.getText());
 //        if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
 //            additionalContactBean.setProvinceState(0);
 //        } else {
@@ -322,11 +323,12 @@ public class AdditionalContactUIHelper {
         if (index == AddCustomerFrame.lstAdditionalContacts.size()) {
             additionalContactBean = new AdditionalContactBean();
             additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
-            additionalContactBean.setAddress(AddAdditionalContact.txtPosition.getText());
+            additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());
             additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
             additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
             additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
             additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
+            additionalContactBean.setCellular(AddAdditionalContact.txtCellular.getText());
 //            if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
 //                additionalContactBean.setProvinceState(0);
 //            } else {
@@ -343,11 +345,12 @@ public class AdditionalContactUIHelper {
             for (AdditionalContactBean additionalContactBeanFromLst : AddCustomerFrame.lstAdditionalContacts) {
                 if (additionalContactBeanFromLst.getAdditionalContactId() == additionalContactBean.getAdditionalContactId()) {
                     additionalContactBeanFromLst.setCustomerName(AddAdditionalContact.txtCustomer.getText());
-                    additionalContactBeanFromLst.setAddress(AddAdditionalContact.txtPosition.getText());
+                    additionalContactBeanFromLst.setPosition(AddAdditionalContact.txtPosition.getText());
                     additionalContactBeanFromLst.setPhone(AddAdditionalContact.txtPhone.getText());
                     additionalContactBeanFromLst.setExt(AddAdditionalContact.txtExt.getText());
                     additionalContactBeanFromLst.setFax(AddAdditionalContact.txtFax.getText());
                     additionalContactBeanFromLst.setPrefix(AddAdditionalContact.txtPrefix.getText());
+                    additionalContactBeanFromLst.setCellular(AddAdditionalContact.txtCellular.getText());
 //                    if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
 //                        additionalContactBeanFromLst.setProvinceState(0);
 //                    } else {
@@ -365,11 +368,13 @@ public class AdditionalContactUIHelper {
             AddCustomerFrame.lstAdditionalContacts.remove(index);
             additionalContactBean = new AdditionalContactBean();
             additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
-            additionalContactBean.setAddress(AddAdditionalContact.txtPosition.getText());
+            additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());
             additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
             additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
             additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
             additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
+            additionalContactBean.setCellular(AddAdditionalContact.txtCellular.getText());
+
 //            if (AddAdditionalContact.ddlProvinceState.getSelectedIndex() == 0) {
 //                additionalContactBean.setProvinceState(0);
 //            } else {

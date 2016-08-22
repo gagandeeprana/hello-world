@@ -308,7 +308,7 @@ public class BillingLocationUIHelper {
         billingLocationBean.setContact(AddBillingLocation.txtContact.getText());
         billingLocationBean.setPosition(AddBillingLocation.txtPosition.getText());
         billingLocationBean.setEmail(AddBillingLocation.txtEmail.getText());
-        billingLocationBean.setAttention(AddBillingLocation.txtAttention.getText());
+        billingLocationBean.setCellular(AddBillingLocation.txtCellular.getText());
         billingLocationBean.setPhone(AddBillingLocation.txtPhone.getText());
         billingLocationBean.setExt(AddBillingLocation.txtExt.getText());
         billingLocationBean.setFax(AddBillingLocation.txtFax.getText());
@@ -348,7 +348,7 @@ public class BillingLocationUIHelper {
             billingLocationBean.setContact(AddBillingLocation.txtContact.getText());
             billingLocationBean.setPosition(AddBillingLocation.txtPosition.getText());
             billingLocationBean.setEmail(AddBillingLocation.txtEmail.getText());
-            billingLocationBean.setAttention(AddBillingLocation.txtAttention.getText());
+            billingLocationBean.setCellular(AddBillingLocation.txtCellular.getText());
             billingLocationBean.setPhone(AddBillingLocation.txtPhone.getText());
             billingLocationBean.setExt(AddBillingLocation.txtExt.getText());
             billingLocationBean.setFax(AddBillingLocation.txtFax.getText());
@@ -374,7 +374,7 @@ public class BillingLocationUIHelper {
                     billingLocationBeanFromLst.setContact(AddBillingLocation.txtContact.getText());
                     billingLocationBeanFromLst.setPosition(AddBillingLocation.txtPosition.getText());
                     billingLocationBeanFromLst.setEmail(AddBillingLocation.txtEmail.getText());
-                    billingLocationBeanFromLst.setAttention(AddBillingLocation.txtAttention.getText());
+                    billingLocationBeanFromLst.setCellular(AddBillingLocation.txtCellular.getText());
                     billingLocationBeanFromLst.setPhone(AddBillingLocation.txtPhone.getText());
                     billingLocationBeanFromLst.setExt(AddBillingLocation.txtExt.getText());
                     billingLocationBeanFromLst.setFax(AddBillingLocation.txtFax.getText());
@@ -401,7 +401,7 @@ public class BillingLocationUIHelper {
             billingLocationBean.setContact(AddBillingLocation.txtContact.getText());
             billingLocationBean.setPosition(AddBillingLocation.txtPosition.getText());
             billingLocationBean.setEmail(AddBillingLocation.txtEmail.getText());
-            billingLocationBean.setAttention(AddBillingLocation.txtAttention.getText());
+            billingLocationBean.setCellular(AddBillingLocation.txtCellular.getText());
             billingLocationBean.setPhone(AddBillingLocation.txtPhone.getText());
             billingLocationBean.setExt(AddBillingLocation.txtExt.getText());
             billingLocationBean.setFax(AddBillingLocation.txtFax.getText());

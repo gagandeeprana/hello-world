@@ -36,12 +36,12 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 obj.setAdditionalContactId(rs.getInt("add_contact_id"));
                 obj.setContactId(rs.getInt("company_id"));
                 obj.setCustomerName(rs.getString("customer_name"));
-                obj.setAddress(rs.getString("address"));
+                obj.setPosition(rs.getString("position"));
                 obj.setPhone(rs.getString("phone"));
                 obj.setExt(rs.getString("ext"));
                 obj.setFax(rs.getString("fax"));
                 obj.setPrefix(rs.getString("prefix"));
-                obj.setProvinceState(rs.getInt("province_state"));
+                obj.setCellular(rs.getString("cellular"));
                 obj.setStatus(rs.getInt("status"));
                 obj.setEmail(rs.getString("email"));
                 lstAdditionalContacts.add(obj);
@@ -59,15 +59,15 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into additionalcontactmaster (company_id,customer_name,address,phone,ext,fax,prefix,province_state,status,email) values(?,?,?,?,?,?,?,?,?,?)");
+            pstmt = conn.prepareStatement("insert into additionalcontactmaster (company_id,customer_name,position,phone,ext,fax,prefix,cellular,status,email) values(?,?,?,?,?,?,?,?,?,?)");
             pstmt.setInt(1, obj.getContactId());
             pstmt.setString(2, obj.getCustomerName());
-            pstmt.setString(3, obj.getAddress());
+            pstmt.setString(3, obj.getPosition());
             pstmt.setString(4, obj.getPhone());
             pstmt.setString(5, obj.getExt());
             pstmt.setString(6, obj.getFax());
             pstmt.setString(7, obj.getPrefix());
-            pstmt.setInt(8, obj.getProvinceState());
+            pstmt.setString(8, obj.getCellular());
             pstmt.setInt(9, obj.getStatus());
             pstmt.setString(10, obj.getEmail());
             int i = pstmt.executeUpdate();
@@ -87,15 +87,15 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update additionalcontactmaster set company_id = ?,customer_name = ?,address=?,phone=?,ext=?,fax=?,prefix=?,province_state=?,status=?,email=? where add_contact_id = ?");
+            pstmt = conn.prepareStatement("update additionalcontactmaster set company_id = ?,customer_name = ?,position=?,phone=?,ext=?,fax=?,prefix=?,cellular=?,status=?,email=? where add_contact_id = ?");
             pstmt.setInt(1, obj.getContactId());
             pstmt.setString(2, obj.getCustomerName());
-            pstmt.setString(3, obj.getAddress());
+            pstmt.setString(3, obj.getPosition());
             pstmt.setString(4, obj.getPhone());
             pstmt.setString(5, obj.getExt());
             pstmt.setString(6, obj.getFax());
             pstmt.setString(7, obj.getPrefix());
-            pstmt.setInt(8, obj.getProvinceState());
+            pstmt.setString(8, obj.getCellular());
             pstmt.setInt(9, obj.getStatus());
             pstmt.setString(10, obj.getEmail());
             pstmt.setInt(11, obj.getAdditionalContactId());
@@ -145,12 +145,12 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 obj.setAdditionalContactId(rs.getInt("add_contact_id"));
                 obj.setContactId(rs.getInt("company_id"));
                 obj.setCustomerName(rs.getString("customer_name"));
-                obj.setAddress(rs.getString("address"));
+                obj.setPosition(rs.getString("position"));
                 obj.setPhone(rs.getString("phone"));
                 obj.setExt(rs.getString("ext"));
                 obj.setFax(rs.getString("fax"));
                 obj.setPrefix(rs.getString("prefix"));
-                obj.setProvinceState(rs.getInt("province_state"));
+                obj.setCellular(rs.getString("cellular"));
                 obj.setStatus(rs.getInt("status"));
                 obj.setEmail(rs.getString("email"));
             }
@@ -176,12 +176,12 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 obj.setAdditionalContactId(rs.getInt("add_contact_id"));
                 obj.setContactId(rs.getInt("company_id"));
                 obj.setCustomerName(rs.getString("customer_name"));
-                obj.setAddress(rs.getString("address"));
+                obj.setPosition(rs.getString("position"));
                 obj.setPhone(rs.getString("phone"));
                 obj.setExt(rs.getString("ext"));
                 obj.setFax(rs.getString("fax"));
                 obj.setPrefix(rs.getString("prefix"));
-                obj.setProvinceState(rs.getInt("province_state"));
+                obj.setCellular(rs.getString("cellular"));
                 obj.setStatus(rs.getInt("status"));
                 obj.setEmail(rs.getString("email"));
                 lstAdditionalContacts.add(obj);

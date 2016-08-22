@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import properties.ReadFromPropertiesFile;
@@ -320,6 +321,7 @@ public class CompanyUIHelper {
         companyBean.setTollfree(AddCustomerFrame.txtTollFree.getText());
         companyBean.setCellular(AddCustomerFrame.txtCellular.getText());
         companyBean.setPager(AddCustomerFrame.txtPager.getText());
+        companyBean.setAfterHours(AddCustomerFrame.txtAfterHours.getText());
         CompanyDAO companyDAO = new CompanyDAOImpl();
         AdditionalContactDAO additionalContactDAO = new AdditionalContactDAOImpl();
         BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
@@ -403,7 +405,7 @@ public class CompanyUIHelper {
         return msg;
     }
 
-    class CompanyTable implements TableCellRenderer {
+    class CompanyTable extends DefaultTableCellRenderer {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -412,7 +414,6 @@ public class CompanyUIHelper {
             editor.setEditable(false);
             editor.setBorder(null);
             if (value != null) {
-                //here space is given to provide some left margin while showing data on textfield..
                 editor.setText("   " + value.toString());
             }
             if (row % 2 == 0) {
@@ -422,11 +423,14 @@ public class CompanyUIHelper {
             } else {
                 Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
                 editor.setBorder(border);
-
             }
             editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+            if (isSelected) {
+                Border border = BorderFactory.createLineBorder(Color.CYAN, 4);
+                editor.setBorder(border);
+                editor.setBackground(Color.CYAN);
+            }
             return editor;
         }
-
     }
 }
