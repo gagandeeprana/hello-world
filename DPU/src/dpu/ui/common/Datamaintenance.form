@@ -21,10 +21,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel3" pref="1293" max="32767" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel3" min="-2" pref="1316" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -48,11 +45,12 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="lblCustomers" min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                  <Component id="btnCustomers" min="-2" pref="82" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="jLabel9" min="-2" pref="53" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -135,23 +133,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jSeparator15" alignment="0" pref="30" max="32767" attributes="0"/>
-                          <Component id="jSeparator14" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSeparator13" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSeparator12" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSeparator11" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jSeparator10" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator3" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator4" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator5" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator6" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator7" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator8" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator9" alignment="1" max="32767" attributes="0"/>
-                      </Group>
                       <Component id="jSeparator18" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jSeparator19" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel59" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -159,14 +140,32 @@
                           <Component id="jLabel17" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jLabel18" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="btnCustomers" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jSeparator15" alignment="0" pref="30" max="32767" attributes="0"/>
+                              <Component id="jSeparator14" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jSeparator13" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jSeparator12" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jSeparator11" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jSeparator10" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator3" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator4" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator5" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator6" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator7" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator8" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jSeparator9" alignment="1" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -206,11 +205,11 @@
                       </Group>
                       <Component id="jSeparator16" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jSeparator17" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="lblCustomers" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jLabel28" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -226,17 +225,6 @@
         <Component class="javax.swing.JSeparator" name="jSeparator2">
           <Properties>
             <Property name="orientation" type="int" value="1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;Standard Templates&lt;/html&gt;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
@@ -330,26 +318,14 @@
             <Property name="text" type="java.lang.String" value="&lt;html&gt; Shippers &lt;/html&gt;"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel15MousePressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator8">
           <Properties>
             <Property name="orientation" type="int" value="1"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblCustomers">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt; Customers &lt;/html&gt;"/>
-            <Property name="verticalTextPosition" type="int" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCustomersMouseClicked"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator9">
           <Properties>
@@ -566,6 +542,28 @@
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&lt;html&gt;Master Orders&lt;/html&gt;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCustomers">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;Customers&lt;/html&gt;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCustomersActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jButton1"/>
           </Properties>
         </Component>
       </SubComponents>

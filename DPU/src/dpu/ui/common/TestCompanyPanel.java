@@ -5,25 +5,35 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.CompanyBean;
 import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.ActionMap;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import properties.ImageConstants;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -36,6 +46,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
      * Creates new form TestCompanyPanel
      */
     CompanyUIHelper companyUI = null;
+    String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
     
     public TestCompanyPanel() {
         initComponents();
@@ -44,8 +55,12 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         companyUI.generateTable();
         btnPrint.setAction(new ShowWaitAction(""));
         btnPrint.setToolTipText("Print Company Report...");
-        btnPrint.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Print.png"));
+        btnPrint.setIcon(new ImageIcon(printImage));
+        btnPrint.setContentAreaFilled(false);
+        btnDelete.setContentAreaFilled(false);
+        btnUpdate.setContentAreaFilled(false);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +71,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtCompanySearch = new javax.swing.JTextField();
@@ -64,6 +80,8 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCompany = new javax.swing.JTable();
         btnPrint = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1265, 539));
@@ -141,6 +159,11 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         ));
         tblCompany.setToolTipText("Company Listing...");
         tblCompany.setGridColor(new java.awt.Color(255, 255, 255));
+        tblCompany.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblCompanyMouseReleased(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblCompany);
 
         btnPrint.setBackground(new java.awt.Color(135, 192, 248));
@@ -148,6 +171,33 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         btnPrint.setToolTipText("Print Company Report...");
         btnPrint.setBorder(null);
         btnPrint.setBorderPainted(false);
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(135, 192, 248));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Delete.png"))); // NOI18N
+        btnDelete.setToolTipText("Print Company Report...");
+        btnDelete.setBorder(null);
+        btnDelete.setBorderPainted(false);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(135, 192, 248));
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update.png"))); // NOI18N
+        btnUpdate.setToolTipText("Print Company Report...");
+        btnUpdate.setBorder(null);
+        btnUpdate.setBorderPainted(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -160,6 +210,10 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
         );
@@ -167,12 +221,14 @@ public class TestCompanyPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(lblAddManageCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPrint))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -202,7 +258,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCompanySearchKeyTyped
 
     private void lblAddManageCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMouseClicked
-        
+
     }//GEN-LAST:event_lblAddManageCompanyMouseClicked
 
     private void lblAddManageCompanyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMousePressed
@@ -213,12 +269,104 @@ public class TestCompanyPanel extends javax.swing.JPanel {
         companyUI.disable(false);
     }//GEN-LAST:event_lblAddManageCompanyMousePressed
 
+    private void tblCompanyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCompanyMouseReleased
+        // TODO add your handling code here:
+        final MouseEvent evt1 = evt;
+        jPopupMenu1 = new JPopupMenu();
+        JMenuItem menuItem1 = new JMenuItem("Add New Customer");
+        menuItem1.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
+        menuItem1.setIconTextGap(5);
+        JMenuItem menuItem2 = new JMenuItem("Print Company Report");
+        menuItem2.setIcon(new ImageIcon(printImage));
+        menuItem2.setIconTextGap(5);
+        JMenuItem menuItem3 = new JMenuItem("Edit Customer");
+        menuItem3.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
+        menuItem3.setIconTextGap(5);
+        JMenuItem menuItem4 = new JMenuItem("Delete Customer");
+        
+        menuItem4.setIcon(
+                new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+        menuItem4.setIconTextGap(
+                5);
+        jPopupMenu1.add(menuItem1);
+        
+        jPopupMenu1.add(menuItem2);
+        
+        jPopupMenu1.add(menuItem3);
+        
+        jPopupMenu1.add(menuItem4);
+        
+        if (evt.getButton()
+                == 3) {
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+        
+        menuItem1.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                CompanyUIHelper.addUpdateFlag = "add";
+                AddCustomerFrame addCustomerFrame = new AddCustomerFrame();
+                addCustomerFrame.setVisible(true);
+            }
+        }
+        );
+        
+        menuItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JasperReportGenerator.generateReport("CustomerReport.jrxml");
+            }
+        });
+        
+        menuItem3.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                CompanyUIHelper.addUpdateFlag = "update";
+                CompanyBean companyBean = new CompanyBean();
+                companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
+                CompanyUIHelper.companyId = companyBean.getCompanyId();
+                AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
+                addCustomerFrame.setVisible(true);
+            }
+        }
+        );
+        menuItem4.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                CompanyBean companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
+                companyUI.delete(companyBean.getCompanyId());
+            }
+        }
+        );
+    }//GEN-LAST:event_tblCompanyMouseReleased
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnDelete;
     public static javax.swing.JButton btnPrint;
+    public static javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     public static javax.swing.JScrollPane jScrollPane4;
     public static javax.swing.JLabel lblAddManageCompany;
     public static javax.swing.JTable tblCompany;
@@ -235,7 +383,6 @@ class ShowWaitAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent evt) {
             try {
-                
                 SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
                     
                     @Override

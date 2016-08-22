@@ -8,6 +8,7 @@ import dpu.ui.common.AddBillingLocation;
 import dpu.ui.common.AddCustomerFrame;
 import static dpu.ui.common.AddCustomerFrame.lstBillingLocations;
 import static dpu.ui.common.AddCustomerFrame.tblBillingLocations;
+import dpu.ui.common.TestCompanyPanel;
 import java.awt.Color;
 //import static dpu.ui.common.TestBillingLocationPanel.mainTabbedPane;
 import java.awt.Component;
@@ -51,186 +52,186 @@ public class BillingLocationUIHelper {
 //        TestBillingLocationPanel.txtBillingLocationSearch.setEnabled(var);
     }
 
-    public class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            setToolTipText("Delete Billing Location...");
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-                setBackground(Color.WHITE);
-                setContentAreaFilled(false);
-            } else {
-                setForeground(table.getForeground());
-                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-                setContentAreaFilled(false);
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    public class ButtonEditor extends DefaultCellEditor {
-
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-        int row = 0;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            if (isSelected) {
-                this.row = row;
-                button.setForeground(table.getSelectionForeground());
-                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-            } else {
-                button.setForeground(table.getForeground());
-                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-            }
-//            billingLocationIdToBeDeleted = lstCompanies.get(row).getBillingLocationId();
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                BillingLocationBean billingLocationBean = AddCustomerFrame.lstBillingLocations.get(row);
-                if (billingLocationBean.getBillingLocationId() != 0) {
-                    AddCustomerFrame.lstBillingLocations.remove(row);
-                    msg = delete(billingLocationBean.getBillingLocationId());
-                } else {
-                    AddCustomerFrame.lstBillingLocations.remove(row);
-                    msg = "Billing Location Deleted Successfully";
-                    generateTable();
-                }
-                JOptionPane.showMessageDialog(null, msg);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-    }
-
-    public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
-
-        public ButtonRendererUpdate() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            setToolTipText("Edit Billing Location...");
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-                setBackground(Color.WHITE);
-                setContentAreaFilled(false);
-            } else {
-                setForeground(table.getForeground());
-                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-                setBackground(Color.WHITE);
-                setContentAreaFilled(false);
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    public class ButtonEditorUpdate extends DefaultCellEditor {
-
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-        int row = 0;
-
-        public ButtonEditorUpdate(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            if (isSelected) {
-                this.row = row;
-                button.setForeground(table.getSelectionForeground());
-                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-            } else {
-                button.setForeground(table.getForeground());
-                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-            }
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                addUpdateFlag = "update";
-                BillingLocationBean billingLocationBean = new BillingLocationBean();
-                billingLocationBean = AddCustomerFrame.lstBillingLocations.get(row);
-                AddBillingLocation addBillingLocation = new AddBillingLocation(row, billingLocationBean);
-                addBillingLocation.setVisible(true);
-                disable(false);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-    }
-
+//    public class ButtonRenderer extends JButton implements TableCellRenderer {
+//
+//        public ButtonRenderer() {
+//            setOpaque(true);
+//        }
+//
+//        public Component getTableCellRendererComponent(JTable table, Object value,
+//                boolean isSelected, boolean hasFocus, int row, int column) {
+//            setToolTipText("Delete Billing Location...");
+//            if (isSelected) {
+//                setForeground(table.getSelectionForeground());
+//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+//                setBackground(Color.WHITE);
+//                setContentAreaFilled(false);
+//            } else {
+//                setForeground(table.getForeground());
+//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+//                setContentAreaFilled(false);
+//            }
+//            setText((value == null) ? "" : value.toString());
+//            return this;
+//        }
+//    }
+//
+//    public class ButtonEditor extends DefaultCellEditor {
+//
+//        protected JButton button;
+//        private String label;
+//        private boolean isPushed;
+//        int row = 0;
+//
+//        public ButtonEditor(JCheckBox checkBox) {
+//            super(checkBox);
+//            button = new JButton();
+//            button.setOpaque(true);
+//            button.addActionListener(new ActionListener() {
+//                public void actionPerformed(ActionEvent e) {
+//                    fireEditingStopped();
+//                }
+//            });
+//        }
+//
+//        public Component getTableCellEditorComponent(JTable table, Object value,
+//                boolean isSelected, int row, int column) {
+//            if (isSelected) {
+//                this.row = row;
+//                button.setForeground(table.getSelectionForeground());
+//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+//            } else {
+//                button.setForeground(table.getForeground());
+//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+//            }
+////            billingLocationIdToBeDeleted = lstCompanies.get(row).getBillingLocationId();
+//            label = (value == null) ? "" : value.toString();
+//            button.setText(label);
+//            isPushed = true;
+//            return button;
+//        }
+//
+//        public Object getCellEditorValue() {
+//            if (isPushed) {
+//                BillingLocationBean billingLocationBean = AddCustomerFrame.lstBillingLocations.get(row);
+//                if (billingLocationBean.getBillingLocationId() != 0) {
+//                    AddCustomerFrame.lstBillingLocations.remove(row);
+//                    msg = delete(billingLocationBean.getBillingLocationId());
+//                } else {
+//                    AddCustomerFrame.lstBillingLocations.remove(row);
+//                    msg = "Billing Location Deleted Successfully";
+//                    generateTable();
+//                }
+//                JOptionPane.showMessageDialog(null, msg);
+//            }
+//            isPushed = false;
+//            return new String(label);
+//        }
+//
+//        public boolean stopCellEditing() {
+//            isPushed = false;
+//            return super.stopCellEditing();
+//        }
+//
+//        protected void fireEditingStopped() {
+//            super.fireEditingStopped();
+//        }
+//    }
+//
+//    public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
+//
+//        public ButtonRendererUpdate() {
+//            setOpaque(true);
+//        }
+//
+//        public Component getTableCellRendererComponent(JTable table, Object value,
+//                boolean isSelected, boolean hasFocus, int row, int column) {
+//            setToolTipText("Edit Billing Location...");
+//            if (isSelected) {
+//                setForeground(table.getSelectionForeground());
+//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+//                setBackground(Color.WHITE);
+//                setContentAreaFilled(false);
+//            } else {
+//                setForeground(table.getForeground());
+//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+//                setBackground(Color.WHITE);
+//                setContentAreaFilled(false);
+//            }
+//            setText((value == null) ? "" : value.toString());
+//            return this;
+//        }
+//    }
+//
+//    public class ButtonEditorUpdate extends DefaultCellEditor {
+//
+//        protected JButton button;
+//        private String label;
+//        private boolean isPushed;
+//        int row = 0;
+//
+//        public ButtonEditorUpdate(JCheckBox checkBox) {
+//            super(checkBox);
+//            button = new JButton();
+//            button.setOpaque(true);
+//            button.addActionListener(new ActionListener() {
+//                public void actionPerformed(ActionEvent e) {
+//                    fireEditingStopped();
+//                }
+//            });
+//        }
+//
+//        public Component getTableCellEditorComponent(JTable table, Object value,
+//                boolean isSelected, int row, int column) {
+//            if (isSelected) {
+//                this.row = row;
+//                button.setForeground(table.getSelectionForeground());
+//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+//            } else {
+//                button.setForeground(table.getForeground());
+//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
+//            }
+//            label = (value == null) ? "" : value.toString();
+//            button.setText(label);
+//            isPushed = true;
+//            return button;
+//        }
+//
+//        public Object getCellEditorValue() {
+//            if (isPushed) {
+//                addUpdateFlag = "update";
+//                BillingLocationBean billingLocationBean = new BillingLocationBean();
+//                billingLocationBean = AddCustomerFrame.lstBillingLocations.get(row);
+//                AddBillingLocation addBillingLocation = new AddBillingLocation(row, billingLocationBean);
+//                addBillingLocation.setVisible(true);
+//                disable(false);
+//            }
+//            isPushed = false;
+//            return new String(label);
+//        }
+//
+//        public boolean stopCellEditing() {
+//            isPushed = false;
+//            return super.stopCellEditing();
+//        }
+//
+//        protected void fireEditingStopped() {
+//            super.fireEditingStopped();
+//        }
+//    }
     public void generateTable() {
         try {
 
-            Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax", " ", "  "};
+            Object[] cols = {"Company Name", "Address", "City, P/S", "Phone No", "Contact", "Zip", "Fax"};
             DefaultTableModel defaultTableModel = new DefaultTableModel();
             AddCustomerFrame.tblBillingLocations.setModel(defaultTableModel);
+            AddCustomerFrame.tblBillingLocations.setAutoCreateRowSorter(true);
             AddCustomerFrame.tblBillingLocations.setDefaultRenderer(Object.class, new BillingLocationUIHelper.BillingLocationTable());
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
 //        lstBillingLocations = AddCustomerFrame.lstBillingLocations;
 //        AddCustomerFrame.tblBillingLocations = new JTable(defaultTableModel);
 //            AddCustomerFrame.tblBillingLocations.getTableHeader().setBackground(Color.red);
-                Object[][] data = new Object[AddCustomerFrame.lstBillingLocations.size()][9];
+                Object[][] data = new Object[AddCustomerFrame.lstBillingLocations.size()][7];
                 for (int i = 0; i < AddCustomerFrame.lstBillingLocations.size(); i++) {
                     BillingLocationBean obj = AddCustomerFrame.lstBillingLocations.get(i);
                     data[i][0] = obj.getName();
@@ -240,8 +241,8 @@ public class BillingLocationUIHelper {
                     data[i][4] = obj.getContact();
                     data[i][5] = obj.getZip();
                     data[i][6] = obj.getFax();
-                    data[i][7] = "";
-                    data[i][8] = "";
+//                    data[i][7] = "";
+//                    data[i][8] = "";
                     AddCustomerFrame.tblBillingLocations.setRowHeight(30);
                 }
 
@@ -250,12 +251,12 @@ public class BillingLocationUIHelper {
 
                 AddCustomerFrame.tblBillingLocations.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
                 AddCustomerFrame.tblBillingLocations.getTableHeader().setForeground(Color.DARK_GRAY);
-                AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellRenderer(new ButtonRenderer());
-                AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-                AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-                AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-                AddCustomerFrame.tblBillingLocations.getColumn(" ").setMaxWidth(25);
-                AddCustomerFrame.tblBillingLocations.getColumn("  ").setMaxWidth(25);
+//                AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellRenderer(new ButtonRenderer());
+//                AddCustomerFrame.tblBillingLocations.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
+//                AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
+//                AddCustomerFrame.tblBillingLocations.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
+//                AddCustomerFrame.tblBillingLocations.getColumn(" ").setMaxWidth(25);
+//                AddCustomerFrame.tblBillingLocations.getColumn("  ").setMaxWidth(25);
                 AddCustomerFrame.tblBillingLocations.setIntercellSpacing(new Dimension(0, 0));
                 AddCustomerFrame.tblBillingLocations.setShowGrid(false);
                 AddCustomerFrame.ScrollPaneForBillingLocations.setViewportView(AddCustomerFrame.tblBillingLocations);
@@ -314,9 +315,9 @@ public class BillingLocationUIHelper {
         billingLocationBean.setPrefix(AddBillingLocation.txtPrefix.getText());
         billingLocationBean.setTollfree(AddBillingLocation.txtTollFree.getText());
         if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
-            billingLocationBean.setStatus(0);
-        } else {
             billingLocationBean.setStatus(1);
+        } else {
+            billingLocationBean.setStatus(0);
         }
         BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
         String msg = "";
@@ -354,9 +355,9 @@ public class BillingLocationUIHelper {
             billingLocationBean.setPrefix(AddBillingLocation.txtPrefix.getText());
             billingLocationBean.setTollfree(AddBillingLocation.txtTollFree.getText());
             if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
-                billingLocationBean.setStatus(0);
-            } else {
                 billingLocationBean.setStatus(1);
+            } else {
+                billingLocationBean.setStatus(0);
             }
             AddCustomerFrame.lstBillingLocations.add(index, billingLocationBean);
         } else if (billingLocationBean.getBillingLocationId() != 0) {
@@ -380,9 +381,9 @@ public class BillingLocationUIHelper {
                     billingLocationBeanFromLst.setPrefix(AddBillingLocation.txtPrefix.getText());
                     billingLocationBeanFromLst.setTollfree(AddBillingLocation.txtTollFree.getText());
                     if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
-                        billingLocationBeanFromLst.setStatus(0);
-                    } else {
                         billingLocationBeanFromLst.setStatus(1);
+                    } else {
+                        billingLocationBeanFromLst.setStatus(0);
                     }
                 }
             }
@@ -407,11 +408,10 @@ public class BillingLocationUIHelper {
             billingLocationBean.setPrefix(AddBillingLocation.txtPrefix.getText());
             billingLocationBean.setTollfree(AddBillingLocation.txtTollFree.getText());
             if (AddBillingLocation.ddlStatus.getSelectedIndex() == 0) {
-                billingLocationBean.setStatus(0);
-            } else {
                 billingLocationBean.setStatus(1);
+            } else {
+                billingLocationBean.setStatus(0);
             }
-            System.out.println("NAME::   " + billingLocationBean.getName());
             AddCustomerFrame.lstBillingLocations.add(index, billingLocationBean);
         }
         generateTable();

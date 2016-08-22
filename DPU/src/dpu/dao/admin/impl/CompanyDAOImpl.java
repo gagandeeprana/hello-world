@@ -52,9 +52,11 @@ public class CompanyDAOImpl implements CompanyDAO {
                 obj.setCellular(rs.getString("cellular"));
                 obj.setPager(rs.getString("pager"));
                 obj.setNotes(rs.getString("customer_notes"));
+                obj.setAfterHours(rs.getString("after_hours"));
                 lstCompanies.add(obj);
             }
         } catch (Exception e) {
+            System.out.println("CompanyDAOImpl : getAllCompanies : " + e);
             logger.error("CompanyDAOImpl : getAllCompanies : " + e);
         }
         return lstCompanies;
@@ -66,7 +68,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager,customer_notes) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager,customer_notes,after_hours) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, obj.getCompanyName());
             pstmt.setString(2, obj.getAddress());
             pstmt.setString(3, obj.getUnitNo());
@@ -85,6 +87,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             pstmt.setString(16, obj.getCellular());
             pstmt.setString(17, obj.getPager());
             pstmt.setString(18, obj.getNotes());
+            pstmt.setString(19, obj.getAfterHours());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Company Added";
@@ -102,7 +105,7 @@ public class CompanyDAOImpl implements CompanyDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update companymaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,email=?,website=?,contact=?,position=?,phone=?,ext=?,fax=?,prefix = ?,tollfree=?,cellular=?,pager=?,customer_notes=? where company_id = ?");
+            pstmt = conn.prepareStatement("update companymaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,email=?,website=?,contact=?,position=?,phone=?,ext=?,fax=?,prefix = ?,tollfree=?,cellular=?,pager=?,customer_notes=?,after_hours = ? where company_id = ?");
             pstmt.setString(1, obj.getCompanyName());
             pstmt.setString(2, obj.getAddress());
             pstmt.setString(3, obj.getUnitNo());
@@ -121,13 +124,14 @@ public class CompanyDAOImpl implements CompanyDAO {
             pstmt.setString(16, obj.getCellular());
             pstmt.setString(17, obj.getPager());
             pstmt.setString(18, obj.getNotes());
-            pstmt.setInt(19, obj.getCompanyId());
+            pstmt.setString(19, obj.getAfterHours());
+            pstmt.setInt(20, obj.getCompanyId());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "Company Updated";
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("CompanyDAOImpl : updateCompany : " + e);
             logger.error("CompanyDAOImpl : updateCompany : " + e);
         }
         return "Failed to Update Company";
@@ -184,8 +188,10 @@ public class CompanyDAOImpl implements CompanyDAO {
                 obj.setCellular(rs.getString("cellular"));
                 obj.setPager(rs.getString("pager"));
                 obj.setNotes(rs.getString("customer_notes"));
+                obj.setAfterHours(rs.getString("after_hours"));
             }
         } catch (Exception e) {
+            System.out.println("CompanyDAOImpl : getCompanyInfoById : " + e);
             logger.error("CompanyDAOImpl : getCompanyInfoById : " + e);
         }
         return obj;
@@ -204,6 +210,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
+            System.out.println("CompanyDAOImpl : getMaxCompanyId : " + e);
             logger.error("CompanyDAOImpl : getMaxCompanyId : " + e);
         }
         return 0;

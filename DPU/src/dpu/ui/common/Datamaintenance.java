@@ -5,6 +5,7 @@
  */
 package dpu.ui.common;
 
+import dpu.ui.shipper.TestShipperPannel;
 import java.awt.Container;
 import javax.swing.JRootPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -20,6 +21,11 @@ public class Datamaintenance extends javax.swing.JPanel {
      */
     public Datamaintenance() {
         initComponents();
+        setButtonContentArea();
+    }
+
+    private void setButtonContentArea() {
+        btnCustomers.setContentAreaFilled(false);
     }
 
     /**
@@ -34,7 +40,6 @@ public class Datamaintenance extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -47,7 +52,6 @@ public class Datamaintenance extends javax.swing.JPanel {
         jSeparator7 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        lblCustomers = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -72,6 +76,8 @@ public class Datamaintenance extends javax.swing.JPanel {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
+        btnCustomers = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -81,10 +87,6 @@ public class Datamaintenance extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("<html>Standard Templates</html>");
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -120,18 +122,13 @@ public class Datamaintenance extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("<html> Shippers </html>");
         jLabel15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        lblCustomers.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblCustomers.setForeground(new java.awt.Color(102, 102, 102));
-        lblCustomers.setText("<html> Customers </html>");
-        lblCustomers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lblCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCustomersMouseClicked(evt);
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel15MousePressed(evt);
             }
         });
+
+        jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -230,16 +227,29 @@ public class Datamaintenance extends javax.swing.JPanel {
         jLabel59.setForeground(new java.awt.Color(102, 102, 102));
         jLabel59.setText("<html>Master Orders</html>");
 
+        btnCustomers.setBackground(new java.awt.Color(255, 255, 255));
+        btnCustomers.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCustomers.setForeground(new java.awt.Color(102, 102, 102));
+        btnCustomers.setText("<html>Customers</html>");
+        btnCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomersActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(lblCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -320,34 +330,34 @@ public class Datamaintenance extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                        .addComponent(jSeparator14, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator13, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator12, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator11, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator10)
-                        .addComponent(jSeparator1)
-                        .addComponent(jSeparator2)
-                        .addComponent(jSeparator3)
-                        .addComponent(jSeparator4)
-                        .addComponent(jSeparator5)
-                        .addComponent(jSeparator6)
-                        .addComponent(jSeparator7)
-                        .addComponent(jSeparator8)
-                        .addComponent(jSeparator9))
                     .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jSeparator15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jSeparator14, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator13, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator12, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator10)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addComponent(jSeparator3)
+                            .addComponent(jSeparator4)
+                            .addComponent(jSeparator5)
+                            .addComponent(jSeparator6)
+                            .addComponent(jSeparator7)
+                            .addComponent(jSeparator8)
+                            .addComponent(jSeparator9))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,10 +389,10 @@ public class Datamaintenance extends javax.swing.JPanel {
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -390,39 +400,13 @@ public class Datamaintenance extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1293, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1316, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void lblCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCustomersMouseClicked
-        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
-        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
-        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
-        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
-        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
-        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
-        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
-        bi.setNorthPane(null);
-        bi.setEastPane(null);
-        bi.setWestPane(null);
-        bi.setSouthPane(null);
-        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
-        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
-        root.setVisible(false);
-        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
-        testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
-        root.add(testCompanyPanel);
-        root.setVisible(true);
-    }//GEN-LAST:event_lblCustomersMouseClicked
 
     private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
         ArrangedMainFrame3.jInternalFrame1.setVisible(true);
@@ -457,8 +441,62 @@ public class Datamaintenance extends javax.swing.JPanel {
         jPanel3.setVisible(false);
     }//GEN-LAST:event_jLabel28MouseClicked
 
+    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
+        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
+        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
+        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
+        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
+        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
+//        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
+        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
+        bi.setNorthPane(null);
+        bi.setEastPane(null);
+        bi.setWestPane(null);
+        bi.setSouthPane(null);
+        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
+        root.setVisible(false);
+        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
+        testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(testCompanyPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_btnCustomersActionPerformed
+
+    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+        System.out.println("111111111111");
+        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
+        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
+        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
+        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
+        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
+        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
+        System.out.println("2222222222");
+        bi.setNorthPane(null);
+        bi.setEastPane(null);
+        bi.setWestPane(null);
+        bi.setSouthPane(null);
+        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
+        root.setVisible(false);
+        TestShipperPannel testShippersPanel = new TestShipperPannel();
+        System.out.println("33333333");
+        testShippersPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(testShippersPanel);
+        root.setVisible(true);
+        System.out.println("44444444");
+    }//GEN-LAST:event_jLabel15MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCustomers;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -478,7 +516,6 @@ public class Datamaintenance extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
@@ -499,6 +536,5 @@ public class Datamaintenance extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JLabel lblCustomers;
     // End of variables declaration//GEN-END:variables
 }

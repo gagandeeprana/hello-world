@@ -5,6 +5,7 @@
  */
 package dpu.ui.common;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -13,7 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JRootPane;
 import javax.swing.Timer;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -32,7 +35,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     BufferedImage buttonImage = null;
     boolean flag = true;
     Container root = null;
-    
+
     public ArrangedMainFrame3() {
         initComponents();
 //        setVisiblity(false);
@@ -44,11 +47,37 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         root = getContentPane();
         jInternalFrame1.setVisible(false);
         jInternalFrame1.setBorder(null);
+        setButtonContentArea();
+        InternalFrameSetting();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
     }
-    
+
+    private void InternalFrameSetting() {
+//        SubListingInternalFrame.setBackground(Color.WHITE);
+//        SubListingInternalFrame.setVisible(true);
+//        SubListingInternalFrame.setTitle("DPU - Customers");
+//        SubListingInternalFrame.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+//        SubListingInternalFrame.setMaximizable(false);
+//        SubListingInternalFrame.setIconifiable(false);
+//        SubListingInternalFrame.setClosable(false);
+////        SubListingInternalFrame.getContentPane().setVisible(false);
+//        SubListingInternalFrame.getContentPane().removeAll();
+//        SubListingInternalFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+//        BasicInternalFrameUI bi = (BasicInternalFrameUI) SubListingInternalFrame.getUI();
+//        bi.setNorthPane(null);
+//        bi.setEastPane(null);
+//        bi.setWestPane(null);
+//        bi.setSouthPane(null);
+////        SubListingInternalFrame.setBorder(null);
+//        SubListingInternalFrame.setVisible(true);
+    }
+
+    private void setButtonContentArea() {
+        btnDatamaintenance.setContentAreaFilled(false);
+    }
+
     class AddButton extends JButton implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!timer.isRunning()) {
@@ -62,7 +91,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
                 alpha = 1.0f;
             }
         }
-        
+
     }
 
 //    public void paint(Graphics g) {
@@ -97,13 +126,13 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnDatamaintenance = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -136,7 +165,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 399, Short.MAX_VALUE)
+            .addGap(0, 391, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -151,9 +180,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         try {
@@ -163,17 +191,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         }
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Datamaintenance.png"))); // NOI18N
-        jLabel1.setToolTipText("Datamaintenance...");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
-            }
-        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Class.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -197,14 +214,22 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/List.png"))); // NOI18N
 
+        btnDatamaintenance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Datamaintenance.png"))); // NOI18N
+        btnDatamaintenance.setToolTipText("Datamaintenance...");
+        btnDatamaintenance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatamaintenanceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDatamaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -216,30 +241,32 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(1102, Short.MAX_VALUE))
+                .addContainerGap(1092, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(2, 2, 2))
             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(btnDatamaintenance)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1280, Short.MAX_VALUE)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 41, Short.MAX_VALUE)
+            .addGap(0, 43, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -319,14 +346,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-//        jPanel3.setVisible(true);
-//            Container root = jPanel1.getRootPane();
-
-//        jPanel5.setVisible(false);
-    }//GEN-LAST:event_jLabel1MouseClicked
-
     private void jLabel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel4KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4KeyPressed
@@ -337,16 +356,14 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 //        jPanel3.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        // TODO add your handling code here:
-//        jLayeredPane1.setBounds(0, 0, getWidth(), getHeight());
+    private void btnDatamaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatamaintenanceActionPerformed
         Datamaintenance datamaintenance = new Datamaintenance();
         datamaintenance.setBounds(0, 0, getWidth(), getHeight());
         jLayeredPane1.add(datamaintenance);
         jLayeredPane1.setVisible(true);
         datamaintenance.setVisible(true);
-    }//GEN-LAST:event_jLabel1MousePressed
-    
+    }//GEN-LAST:event_btnDatamaintenanceActionPerformed
+
     private void setVisiblity(boolean val) {
 //        border.setVisible(val);
 //        jLabel11.setVisible(val);
@@ -412,8 +429,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDatamaintenance;
     public static javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -56,6 +56,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 lstBillingLocations.add(obj);
             }
         } catch (Exception e) {
+            System.out.println("BillingLocationDAOImpl : getAllBillingLocations : " + e);
             logger.error("BillingLocationDAOImpl : getAllBillingLocations : " + e);
         }
         return lstBillingLocations;
@@ -92,6 +93,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 return "BillingLocation Added";
             }
         } catch (Exception e) {
+            System.out.println("BillingLocationDAOImpl : addBillingLocation : " + e);
             logger.error("BillingLocationDAOImpl : addBillingLocation : " + e);
         }
         return "Failed to Add BillingLocation";
@@ -129,6 +131,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 return "BillingLocation Updated";
             }
         } catch (Exception e) {
+            System.out.println("BillingLocationDAOImpl : updateBillingLocation : " + e);
             logger.error("BillingLocationDAOImpl : updateBillingLocation : " + e);
         }
         return "Failed to Update BillingLocation";
@@ -188,6 +191,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 obj.setCompanyId(rs.getInt("company_id"));
             }
         } catch (Exception e) {
+            System.out.println("BillingLocationDAOImpl : getBillingLocationById : " + e);
             logger.error("BillingLocationDAOImpl : getBillingLocationById : " + e);
         }
         return obj;
@@ -229,6 +233,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
                 lstBillingLocations.add(obj);
             }
         } catch (Exception e) {
+            System.out.println("BillingLocationDAOImpl : getBillingLocationsByCompanyId : " + e);
             logger.error("BillingLocationDAOImpl : getBillingLocationsByCompanyId : " + e);
         }
         return lstBillingLocations;

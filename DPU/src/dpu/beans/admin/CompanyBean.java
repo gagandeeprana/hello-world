@@ -21,6 +21,15 @@ public class CompanyBean {
     private String cellular;
     private String pager;
     private String notes;
+    private String afterHours;
+
+    public String getAfterHours() {
+        return afterHours;
+    }
+
+    public void setAfterHours(String afterHours) {
+        this.afterHours = afterHours;
+    }
 
     public String getNotes() {
         return notes;

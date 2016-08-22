@@ -25,10 +25,10 @@ public class AddBillingLocation extends javax.swing.JFrame {
 
     public AddBillingLocation() {
         initComponents();
-                setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
 
-         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setTitle("Add Billing Location");
         billingLocationUIHelper = new BillingLocationUIHelper();
@@ -36,9 +36,10 @@ public class AddBillingLocation extends javax.swing.JFrame {
 
     public AddBillingLocation(int index, BillingLocationBean billingLocationBean) {
         initComponents();
-                setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);        setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
 
         setTitle("Edit Billing Location");
         btnSave.setText("Update");
@@ -58,6 +59,11 @@ public class AddBillingLocation extends javax.swing.JFrame {
         AddBillingLocation.txtZip.setText(billingLocationBean.getZip());
         AddBillingLocation.txtArCDN.setText(billingLocationBean.getArCDN());
         AddBillingLocation.txtArUS.setText(billingLocationBean.getArUS());
+        if (billingLocationBean.getStatus() == 0) {
+            ddlStatus.setSelectedIndex(1);
+        } else {
+            ddlStatus.setSelectedIndex(0);
+        }
         AddBillingLocation.txtContact.setText(billingLocationBean.getContact());
         AddBillingLocation.txtPosition.setText(billingLocationBean.getPosition());
         AddBillingLocation.txtEmail.setText(billingLocationBean.getEmail());
@@ -99,7 +105,6 @@ public class AddBillingLocation extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         txtFax = new javax.swing.JTextField();
         txtCity = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -157,8 +162,6 @@ public class AddBillingLocation extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel17.setText("Phone");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/New-Customer.png"))); // NOI18N
 
         jLabel16.setText("A/R (U.S)");
 
@@ -239,17 +242,14 @@ public class AddBillingLocation extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jLabel14)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtZip))
+                                                .addComponent(txtZip, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                     .addComponent(txtUnitNo)
-                                                    .addComponent(txtCity))))
+                                                    .addComponent(txtCity)
+                                                    .addComponent(txtName))))
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(11, 11, 11)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,13 +346,9 @@ public class AddBillingLocation extends javax.swing.JFrame {
                                     .addComponent(jLabel18)
                                     .addComponent(txtTollFree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
@@ -465,7 +461,6 @@ public class AddBillingLocation extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     public static javax.swing.JComboBox<String> ddlStatus;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

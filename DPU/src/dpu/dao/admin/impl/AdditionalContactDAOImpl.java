@@ -47,6 +47,7 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 lstAdditionalContacts.add(obj);
             }
         } catch (Exception e) {
+            System.out.println("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
 //            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
         }
         return lstAdditionalContacts;
@@ -103,6 +104,7 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 return "AdditionalContact Updated";
             }
         } catch (Exception e) {
+            System.out.println("AdditionalContactDAOImpl : updateAdditionalContact : " + e);
 //            logger.error("AdditionalContactDAOImpl : updateAdditionalContact : " + e);
         }
         return "Failed to Update AdditionalContact";
@@ -121,6 +123,7 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 return "AdditionalContact Deleted";
             }
         } catch (Exception e) {
+            System.out.println("AdditionalContactDAOImpl : deleteAdditionalContact : " + e);
 //            logger.error("AdditionalContactDAOImpl : deleteAdditionalContact : " + e);
         }
         return "Failed to Delete AdditionalContact";
@@ -152,7 +155,7 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
                 obj.setEmail(rs.getString("email"));
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("AdditionalContactDAOImpl : getAdditionalContactInfoById : " + e);
         }
         return obj;
     }

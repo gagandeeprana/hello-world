@@ -1,11 +1,8 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
--- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
+-- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
 --
 -- Host: localhost    Database: dpu
 -- ------------------------------------------------------
--- Server version	5.5.45
+-- Server version	5.5.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -72,8 +69,8 @@ CREATE TABLE `additionalcontactmaster` (
   PRIMARY KEY (`add_contact_id`),
   KEY `company_id` (`company_id`),
   KEY `province_state` (`province_state`),
-  CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +79,7 @@ CREATE TABLE `additionalcontactmaster` (
 
 LOCK TABLES `additionalcontactmaster` WRITE;
 /*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
-INSERT INTO `additionalcontactmaster` VALUES (1,19,'nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn',0,0,'nnnnnn'),(2,21,'new contact','new contact','new contact','new contact','new contact','new contact',0,0,'new contact');
+INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',0,0,'JJJJJJJJJJJ');
 /*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,8 +113,8 @@ CREATE TABLE `billinglocationmaster` (
   `company_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`billing_location_id`),
   KEY `company_id` (`company_id`),
-  CONSTRAINT `billinglocationmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  CONSTRAINT `billinglocationmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +123,6 @@ CREATE TABLE `billinglocationmaster` (
 
 LOCK TABLES `billinglocationmaster` WRITE;
 /*!40000 ALTER TABLE `billinglocationmaster` DISABLE KEYS */;
-INSERT INTO `billinglocationmaster` VALUES (1,'hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh',0,'hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh','hhhh',20),(8,'SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS',0,'SSSSSS','SSSSSS','SSSSSS','SSSSSSSSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS',27);
 /*!40000 ALTER TABLE `billinglocationmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,8 +201,10 @@ CREATE TABLE `companymaster` (
   `tollfree` varchar(30) DEFAULT NULL,
   `cellular` varchar(30) DEFAULT NULL,
   `pager` varchar(30) DEFAULT NULL,
+  `customer_notes` varchar(500) DEFAULT NULL,
+  `after_hours` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +213,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (19,'nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn','nnnnnn'),(20,'pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp','pppp'),(21,'new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus','new cus'),(27,'SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS','SSSSSS'),(28,'QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ','QQQQQQQQQ');
+INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL);
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -741,4 +739,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-17 17:07:52
+-- Dump completed on 2016-08-21 22:52:39
