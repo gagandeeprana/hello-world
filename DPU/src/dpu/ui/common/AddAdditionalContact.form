@@ -54,13 +54,15 @@
                           <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                          <Component id="btnWorkingHours" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblSave" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,9 +71,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel25" min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="lblSave" min="-2" pref="53" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel25" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="lblSave" min="-2" pref="53" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnWorkingHours" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -402,6 +407,14 @@
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel25MousePressed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnWorkingHours">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Working Hrs"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWorkingHoursActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -1,6 +1,3 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
 -- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
 --
 -- Host: localhost    Database: dpu
@@ -89,48 +86,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `billinglocationmaster`
 --
-DROP TABLE IF EXISTS `shippermaster`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `shippermaster` (
-  `shipper_id` int(11) NOT NULL AUTO_INCREMENT,
-  `company` varchar(40) DEFAULT NULL,
-  `Address` varchar(100) DEFAULT NULL,
-  `unit` varchar(40) DEFAULT NULL,
-  `city` varchar(40) DEFAULT NULL,
-  `prov_state` varchar(40) DEFAULT NULL,
-  `postal_zip` varchar(40) DEFAULT NULL,
-  `zone` varchar(40) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `lead_time` varchar(40) DEFAULT NULL,
-  `time_zone` varchar(40) DEFAULT NULL,
-  `internam_notes` varchar(100) DEFAULT NULL,
-  `contact` varchar(40) DEFAULT NULL,
-  `position` varchar(40) DEFAULT NULL,
-  `phone` varchar(40) DEFAULT NULL,
-  `fax` varchar(40) DEFAULT NULL,
-  `toll_free` varchar(40) DEFAULT NULL,
-  `ext` varchar(40) DEFAULT NULL,
-  `prefix` varchar(40) DEFAULT NULL,
-  `plant` varchar(40) DEFAULT NULL,
-  `email` varchar(40) DEFAULT NULL,
-  `importer` varchar(40) DEFAULT NULL,
-  `standard_notes` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`shipper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `shippermaster`
---
-
-LOCK TABLES `shippermaster` WRITE;
-/*!40000 ALTER TABLE `shippermaster` DISABLE KEYS */;
-INSERT INTO `shippermaster` VALUES (1,'hj','fghj','fgh','hjg','j','45','gh',0,' gj','Item 2','fghjkl','678','gh','87687','8767','567','jh','6786','fg','dfgh','ghjk','fghjkl');
-/*!40000 ALTER TABLE `shippermaster` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
 
 DROP TABLE IF EXISTS `billinglocationmaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -568,6 +523,51 @@ LOCK TABLES `salespersonmaster` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `shippermaster`
+--
+
+DROP TABLE IF EXISTS `shippermaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shippermaster` (
+  `shipper_id` int(11) NOT NULL AUTO_INCREMENT,
+  `company` varchar(40) DEFAULT NULL,
+  `Address` varchar(100) DEFAULT NULL,
+  `unit` varchar(40) DEFAULT NULL,
+  `city` varchar(40) DEFAULT NULL,
+  `prov_state` varchar(40) DEFAULT NULL,
+  `postal_zip` varchar(40) DEFAULT NULL,
+  `zone` varchar(40) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `lead_time` varchar(40) DEFAULT NULL,
+  `time_zone` varchar(40) DEFAULT NULL,
+  `internam_notes` varchar(100) DEFAULT NULL,
+  `contact` varchar(40) DEFAULT NULL,
+  `position` varchar(40) DEFAULT NULL,
+  `phone` varchar(40) DEFAULT NULL,
+  `fax` varchar(40) DEFAULT NULL,
+  `toll_free` varchar(40) DEFAULT NULL,
+  `ext` varchar(40) DEFAULT NULL,
+  `prefix` varchar(40) DEFAULT NULL,
+  `plant` varchar(40) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `importer` varchar(40) DEFAULT NULL,
+  `standard_notes` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`shipper_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shippermaster`
+--
+
+LOCK TABLES `shippermaster` WRITE;
+/*!40000 ALTER TABLE `shippermaster` DISABLE KEYS */;
+INSERT INTO `shippermaster` VALUES (1,'hj','fghj','fgh','hjg','j','45','gh',0,' gj','Item 2','fghjkl','678','gh','87687','8767','567','jh','6786','fg','dfgh','ghjk','fghjkl');
+/*!40000 ALTER TABLE `shippermaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `straighttruckmaster`
 --
 
@@ -774,6 +774,37 @@ LOCK TABLES `usermaster` WRITE;
 INSERT INTO `usermaster` VALUES (1,'jaimal','j4f76g','jaimal20.1990@gmail.com');
 /*!40000 ALTER TABLE `usermaster` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `working_hours_additionalcontact`
+--
+
+DROP TABLE IF EXISTS `working_hours_additionalcontact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `working_hours_additionalcontact` (
+  `working_id` int(11) NOT NULL AUTO_INCREMENT,
+  `working_day` varchar(20) DEFAULT NULL,
+  `open1` varchar(20) DEFAULT NULL,
+  `close1` varchar(20) DEFAULT NULL,
+  `open2` varchar(20) DEFAULT NULL,
+  `close2` varchar(20) DEFAULT NULL,
+  `is24Hr` int(11) DEFAULT NULL,
+  `additional_contact_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`working_id`),
+  KEY `additional_contact_id` (`additional_contact_id`),
+  CONSTRAINT `working_hours_additionalcontact_ibfk_1` FOREIGN KEY (`additional_contact_id`) REFERENCES `additionalcontactmaster` (`add_contact_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `working_hours_additionalcontact`
+--
+
+LOCK TABLES `working_hours_additionalcontact` WRITE;
+/*!40000 ALTER TABLE `working_hours_additionalcontact` DISABLE KEYS */;
+/*!40000 ALTER TABLE `working_hours_additionalcontact` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -784,4 +815,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-21 22:52:39
+-- Dump completed on 2016-08-24  0:13:48

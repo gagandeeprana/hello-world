@@ -5,8 +5,11 @@
  */
 package dpu.ui.helper.common;
 
+import dpu.beans.admin.WorkingHoursAdditionalContactBean;
 import dpu.ui.common.AdditionalContactWorkingHours;
 import static dpu.ui.common.AdditionalContactWorkingHours.txtSunOpen1;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
 import properties.TimeConstants;
@@ -18,6 +21,7 @@ import properties.TimeConstants;
 public class AdditionalContactWorkingHoursUIHelper {
 
     public static MaskFormatter mask = null;
+    public static List<WorkingHoursAdditionalContactBean> lstWorkingHours = new ArrayList();
 
     public AdditionalContactWorkingHoursUIHelper() {
         try {
@@ -352,5 +356,92 @@ public class AdditionalContactWorkingHoursUIHelper {
         AdditionalContactWorkingHours.txtThurClose2.setText(str);
         AdditionalContactWorkingHours.txtFriClose2.setText(str);
         AdditionalContactWorkingHours.txtSatClose2.setText(str);
+    }
+
+    public void saveToList() {
+        if (AdditionalContactWorkingHours.chkSun.isSelected()) {
+            String workingDay = "Sun";
+            String open1 = AdditionalContactWorkingHours.txtSunOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtSunClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtSunOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtSunClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
+        if (AdditionalContactWorkingHours.chkMon.isSelected()) {
+            String workingDay = "Mon";
+            String open1 = AdditionalContactWorkingHours.txtMonOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtMonClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtMonOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtMonClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
+        if (AdditionalContactWorkingHours.chkTue.isSelected()) {
+            String workingDay = "Tue";
+            String open1 = AdditionalContactWorkingHours.txtTueOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtTueClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtTueOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtTueClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
+        if (AdditionalContactWorkingHours.chkWed.isSelected()) {
+            String workingDay = "Wed";
+            String open1 = AdditionalContactWorkingHours.txtWedOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtWedClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtWedOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtWedClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
+        if (AdditionalContactWorkingHours.chkThur.isSelected()) {
+            String workingDay = "Thur";
+            String open1 = AdditionalContactWorkingHours.txtThurOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtThurClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtThurOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtThurClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
+        if (AdditionalContactWorkingHours.chkFri.isSelected()) {
+            String workingDay = "Fri";
+            String open1 = AdditionalContactWorkingHours.txtFriOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtFriClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtFriOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtFriClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
+        if (AdditionalContactWorkingHours.chkSat.isSelected()) {
+            String workingDay = "Sat";
+            String open1 = AdditionalContactWorkingHours.txtSatOpen1.getText();
+            String close1 = AdditionalContactWorkingHours.txtSatClose1.getText();
+            String open2 = AdditionalContactWorkingHours.txtSatOpen2.getText();
+            String close2 = AdditionalContactWorkingHours.txtSatClose2.getText();
+            int is24Hr = 0;
+            if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
+                is24Hr = 1;
+            }
+            lstWorkingHours.add(new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr));
+        }
     }
 }
