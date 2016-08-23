@@ -5,6 +5,17 @@
  */
 package dpu.ui.common;
 
+import static dpu.ui.common.AddCustomerFrame.txtPhone;
+import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
+import static dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper.mask;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.DateFormatter;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import properties.TimeConstants;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +25,19 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
     /**
      * Creates new form AdditionalContactWorkingHours
      */
+    AdditionalContactWorkingHoursUIHelper additionalContactWorkingHoursUIHelper = null;
+
     public AdditionalContactWorkingHours() {
-        initComponents();
+        try {
+            initComponents();
+            additionalContactWorkingHoursUIHelper = new AdditionalContactWorkingHoursUIHelper();
+            additionalContactWorkingHoursUIHelper.disable(false);
+            additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
+            additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
+
+        } catch (Exception e) {
+            System.out.println("AdditionalContactWorkingHours() : " + e);
+        }
     }
 
     /**
@@ -27,80 +49,120 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jCheckBox15 = new javax.swing.JCheckBox();
-        jCheckBox16 = new javax.swing.JCheckBox();
-        jCheckBox17 = new javax.swing.JCheckBox();
+        chkSun = new javax.swing.JCheckBox();
+        chkMon = new javax.swing.JCheckBox();
+        chkTue = new javax.swing.JCheckBox();
+        chkWed = new javax.swing.JCheckBox();
+        chkThur = new javax.swing.JCheckBox();
+        chkFri = new javax.swing.JCheckBox();
+        chkSat = new javax.swing.JCheckBox();
+        chkSame = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btn24Hr3 = new javax.swing.JButton();
-        txtSunClose1 = new javax.swing.JTextField();
-        txtSunOpen1 = new javax.swing.JTextField();
-        txtMonOpen1 = new javax.swing.JTextField();
-        txtMonClose1 = new javax.swing.JTextField();
         btn24Hr4 = new javax.swing.JButton();
         btn24Hr6 = new javax.swing.JButton();
         btn24Hr2 = new javax.swing.JButton();
         btn24Hr5 = new javax.swing.JButton();
-        txtWedOpen1 = new javax.swing.JTextField();
-        txtTueOpen1 = new javax.swing.JTextField();
-        txtTueClose1 = new javax.swing.JTextField();
-        txtWedClose1 = new javax.swing.JTextField();
-        txtThurOpen1 = new javax.swing.JTextField();
-        txtFriOpen1 = new javax.swing.JTextField();
-        txtSatOpen1 = new javax.swing.JTextField();
-        txtSameOpen1 = new javax.swing.JTextField();
-        txtSameClose1 = new javax.swing.JTextField();
-        txtSatClose1 = new javax.swing.JTextField();
-        txtFriClose1 = new javax.swing.JTextField();
-        txtThurClose1 = new javax.swing.JTextField();
         btn24Hr1 = new javax.swing.JButton();
         btn24Hr7 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtFriClose2 = new javax.swing.JTextField();
-        txtFriOpen2 = new javax.swing.JTextField();
-        txtMonOpen2 = new javax.swing.JTextField();
-        txtThurClose2 = new javax.swing.JTextField();
-        txtSatClose2 = new javax.swing.JTextField();
-        txtSunClose2 = new javax.swing.JTextField();
-        txtSameOpen2 = new javax.swing.JTextField();
-        txtSameClose2 = new javax.swing.JTextField();
-        txtWedClose2 = new javax.swing.JTextField();
-        txtThurOpen2 = new javax.swing.JTextField();
-        txtSatOpen2 = new javax.swing.JTextField();
-        txtSunOpen2 = new javax.swing.JTextField();
-        txtTueClose2 = new javax.swing.JTextField();
-        txtWedOpen2 = new javax.swing.JTextField();
-        txtTueOpen2 = new javax.swing.JTextField();
-        txtMonClose2 = new javax.swing.JTextField();
         btn24Hr8 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        txtSunOpen1 = new javax.swing.JFormattedTextField();
+        txtSunClose1 = new javax.swing.JFormattedTextField();
+        txtMonOpen1 = new javax.swing.JFormattedTextField();
+        txtMonClose1 = new javax.swing.JFormattedTextField();
+        txtTueOpen1 = new javax.swing.JFormattedTextField();
+        txtTueClose1 = new javax.swing.JFormattedTextField();
+        txtWedOpen1 = new javax.swing.JFormattedTextField();
+        txtWedClose1 = new javax.swing.JFormattedTextField();
+        txtThurOpen1 = new javax.swing.JFormattedTextField();
+        txtThurClose1 = new javax.swing.JFormattedTextField();
+        txtFriOpen1 = new javax.swing.JFormattedTextField();
+        txtFriClose1 = new javax.swing.JFormattedTextField();
+        txtSatOpen1 = new javax.swing.JFormattedTextField();
+        txtSatClose1 = new javax.swing.JFormattedTextField();
+        txtSameOpen1 = new javax.swing.JFormattedTextField();
+        txtSameClose1 = new javax.swing.JFormattedTextField();
+        txtThurClose2 = new javax.swing.JFormattedTextField();
+        txtThurOpen2 = new javax.swing.JFormattedTextField();
+        txtFriClose2 = new javax.swing.JFormattedTextField();
+        txtFriOpen2 = new javax.swing.JFormattedTextField();
+        txtSatOpen2 = new javax.swing.JFormattedTextField();
+        txtSatClose2 = new javax.swing.JFormattedTextField();
+        txtSameOpen2 = new javax.swing.JFormattedTextField();
+        txtSameClose2 = new javax.swing.JFormattedTextField();
+        txtSunClose2 = new javax.swing.JFormattedTextField();
+        txtSunOpen2 = new javax.swing.JFormattedTextField();
+        txtWedOpen2 = new javax.swing.JFormattedTextField();
+        txtWedClose2 = new javax.swing.JFormattedTextField();
+        txtTueOpen2 = new javax.swing.JFormattedTextField();
+        txtTueClose2 = new javax.swing.JFormattedTextField();
+        txtMonOpen2 = new javax.swing.JFormattedTextField();
+        txtMonClose2 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jCheckBox1.setText("Sun");
+        chkSun.setText("Sun");
+        chkSun.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkSunStateChanged(evt);
+            }
+        });
 
-        jCheckBox11.setText("Mon");
+        chkMon.setText("Mon");
+        chkMon.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkMonStateChanged(evt);
+            }
+        });
 
-        jCheckBox12.setText("Tue");
+        chkTue.setText("Tue");
+        chkTue.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkTueStateChanged(evt);
+            }
+        });
 
-        jCheckBox13.setText("Wed");
+        chkWed.setText("Wed");
+        chkWed.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkWedStateChanged(evt);
+            }
+        });
 
-        jCheckBox14.setText("Thu");
+        chkThur.setText("Thu");
+        chkThur.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkThurStateChanged(evt);
+            }
+        });
 
-        jCheckBox15.setText("Fri");
+        chkFri.setText("Fri");
+        chkFri.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkFriStateChanged(evt);
+            }
+        });
 
-        jCheckBox16.setText("Sat");
+        chkSat.setText("Sat");
+        chkSat.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkSatStateChanged(evt);
+            }
+        });
 
-        jCheckBox17.setText("Same");
+        chkSame.setText("Copy To All");
+        chkSame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSameActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Open");
 
@@ -113,24 +175,53 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
         jLabel5.setText("24 Hr");
 
         btn24Hr3.setText("<");
+        btn24Hr3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24Hr3ActionPerformed(evt);
+            }
+        });
 
         btn24Hr4.setText("<");
+        btn24Hr4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24Hr4ActionPerformed(evt);
+            }
+        });
 
         btn24Hr6.setText("<");
+        btn24Hr6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24Hr6ActionPerformed(evt);
+            }
+        });
 
         btn24Hr2.setText("<");
+        btn24Hr2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24Hr2ActionPerformed(evt);
+            }
+        });
 
         btn24Hr5.setText("<");
-
-        txtFriClose1.addActionListener(new java.awt.event.ActionListener() {
+        btn24Hr5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFriClose1ActionPerformed(evt);
+                btn24Hr5ActionPerformed(evt);
             }
         });
 
         btn24Hr1.setText("<");
+        btn24Hr1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24Hr1ActionPerformed(evt);
+            }
+        });
 
         btn24Hr7.setText("<");
+        btn24Hr7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn24Hr7ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel6.setText("Add Working Hours");
@@ -138,15 +229,78 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("Choose when this place is open");
 
-        txtSatClose2.addActionListener(new java.awt.event.ActionListener() {
+        btn24Hr8.setText("<");
+        btn24Hr8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSatClose2ActionPerformed(evt);
+                btn24Hr8ActionPerformed(evt);
             }
         });
 
-        btn24Hr8.setText("<");
-
         btnSave.setText("Save");
+
+        txtSunOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSunClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtMonOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtMonClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtTueOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtTueClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtWedOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtWedClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtThurOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtThurClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtFriOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtFriClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSatOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSatClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSameOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSameClose1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtThurClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtThurOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtFriClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtFriOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSatOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSatClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSameOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSameClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSunClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtSunOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtWedOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtWedClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtTueOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtTueClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtMonOpen2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
+
+        txtMonClose2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,138 +314,142 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(83, 83, 83)
-                                    .addComponent(jLabel1)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(jLabel2)
-                                    .addGap(51, 51, 51)
-                                    .addComponent(jLabel3)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jCheckBox1)
-                                                        .addGap(22, 22, 22))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jCheckBox11)
-                                                        .addGap(20, 20, 20)))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(txtMonOpen1)
-                                                    .addComponent(txtSunOpen1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(txtMonClose1)
-                                                    .addComponent(txtSunClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jCheckBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                                .addComponent(txtTueOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtTueClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                    .addComponent(jCheckBox13)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(txtWedOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(txtWedClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addComponent(jCheckBox14)
-                                                                .addGap(22, 22, 22))
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jCheckBox15)
-                                                                .addGap(28, 28, 28)))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(jCheckBox16)
-                                                            .addGap(24, 24, 24)))
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(txtSatOpen1)
-                                                        .addComponent(txtFriOpen1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(txtThurOpen1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGap(6, 6, 6)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(txtFriClose1)
-                                                        .addComponent(txtSatClose1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(txtThurClose1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jCheckBox17)
-                                                .addGap(14, 14, 14)
-                                                .addComponent(txtSameOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtSameClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(txtSunOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(txtSunClose2))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(txtSameOpen2)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(txtSameClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(18, 18, 18)
-                                            .addComponent(btn24Hr8))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(txtThurOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(txtThurClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 2, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chkWed)
+                                            .addComponent(chkFri)
+                                            .addComponent(chkSat)
+                                            .addComponent(chkTue, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(32, 32, 32))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chkSun)
+                                            .addComponent(chkMon)
+                                            .addComponent(chkThur))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel1)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(jLabel2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(txtMonOpen2)
+                                                        .addComponent(txtWedOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(txtMonClose2))
+                                                        .addComponent(txtWedClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(txtThurOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(txtFriOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(txtSatOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addComponent(txtThurClose1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                                            .addComponent(txtFriClose1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                                            .addComponent(txtSatClose1))))
+                                                .addGap(10, 10, 10))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(txtTueOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(txtTueClose1))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(txtSunOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGap(1, 1, 1)
+                                                            .addComponent(txtMonOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(txtSunClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtMonClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtSunOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGap(1, 1, 1)
+                                                        .addComponent(txtMonOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtSunClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtMonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(txtTueOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtTueClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                                .addComponent(txtTueOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(txtWedOpen2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                    .addComponent(txtThurOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addComponent(txtFriOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addComponent(txtSatOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(txtTueClose2))
-                                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                                .addComponent(txtWedOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(txtWedClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(txtSatOpen2)
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(txtSatClose2))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(txtFriOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(txtFriClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(btn24Hr6)
-                                                    .addComponent(btn24Hr5))
-                                                .addComponent(btn24Hr3)
-                                                .addComponent(btn24Hr2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn24Hr4)
-                                                .addComponent(btn24Hr7)))
-                                        .addComponent(btn24Hr1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(btnSave, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                    .addComponent(txtThurClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addComponent(txtFriClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(txtSameOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(txtSameClose2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(txtWedClose2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtSatClose2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btn24Hr8))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btn24Hr7))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btn24Hr4)
+                                                    .addComponent(btn24Hr5)
+                                                    .addComponent(btn24Hr3)
+                                                    .addComponent(btn24Hr2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btn24Hr6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(btn24Hr1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(chkSame)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSameOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSameClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(236, 236, 236)
+                                        .addComponent(jLabel3)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel4)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(jLabel5)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(38, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtFriClose1, txtFriClose2, txtFriOpen1, txtFriOpen2, txtMonClose1, txtMonClose2, txtMonOpen1, txtMonOpen2, txtSameClose1, txtSameClose2, txtSameOpen1, txtSatClose1, txtSatClose2, txtSatOpen1, txtSatOpen2, txtSunClose1, txtSunClose2, txtSunOpen1, txtThurClose1, txtThurClose2, txtThurOpen1, txtThurOpen2, txtTueClose1, txtTueClose2, txtTueOpen1, txtTueOpen2, txtWedClose1, txtWedClose2, txtWedOpen1, txtWedOpen2});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -299,150 +457,322 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))))
-                                .addGap(6, 6, 6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtMonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtMonOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(58, 58, 58)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtTueClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtTueOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btn24Hr3)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox1)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtSunClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtSunOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtMonClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtMonOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jCheckBox11)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(33, 33, 33)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtTueClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtTueOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jCheckBox12))))))
+                                .addComponent(chkSun)
+                                .addGap(6, 6, 6)
+                                .addComponent(chkMon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chkTue)
                                 .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtWedOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jCheckBox13)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(1, 1, 1)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(txtWedOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtWedClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addComponent(jCheckBox14))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(7, 7, 7)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                            .addComponent(txtThurClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtThurOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtThurClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtThurOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGap(6, 6, 6)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jCheckBox15)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(txtFriClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtFriOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(6, 6, 6)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jCheckBox16)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(1, 1, 1)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(txtSatOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(txtSatClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtSatOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(btn24Hr7))
-                                                            .addComponent(txtSatClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(txtWedClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btn24Hr4)))
+                                        .addGap(112, 112, 112)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(chkSame)
+                                            .addComponent(txtSameOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSameClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSameOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSameClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btn24Hr8)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(chkWed)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(chkFri)
                                         .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBox17)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(txtSameClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtSameOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtSameClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtSameOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(btn24Hr8)))))))
+                                        .addComponent(chkSat))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(btn24Hr1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn24Hr2)
-                                .addGap(64, 64, 64)
-                                .addComponent(btn24Hr5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(4, 4, 4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtFriClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtFriOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btn24Hr6)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(112, 112, 112)
+                                        .addComponent(btn24Hr5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(82, 82, 82)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtWedOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtWedClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btn24Hr4))
+                                        .addGap(7, 7, 7)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtThurOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtThurClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(6, 6, 6)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtFriOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtFriClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btn24Hr6))
+                                        .addGap(4, 4, 4)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtSatOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSatClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btn24Hr7)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtSunOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSunClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btn24Hr1))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(5, 5, 5)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(txtMonOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtMonClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btn24Hr2)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(32, 32, 32)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(txtTueOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtTueClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btn24Hr3)))))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSunOpen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSunClose2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel2)))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSunOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSunClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMonOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMonClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTueOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTueClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtWedOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWedClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtThurOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtThurClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkThur))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFriOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFriClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSatOpen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSatClose1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSave)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn24Hr1, txtFriClose1, txtFriClose2, txtFriOpen1, txtFriOpen2, txtMonClose1, txtMonClose2, txtMonOpen1, txtMonOpen2, txtSameClose1, txtSameClose2, txtSameOpen1, txtSameOpen2, txtSatClose1, txtSatClose2, txtSatOpen1, txtSatOpen2, txtSunClose1, txtSunClose2, txtSunOpen1, txtSunOpen2, txtThurClose1, txtThurClose2, txtThurOpen1, txtThurOpen2, txtTueClose1, txtTueClose2, txtTueOpen1, txtTueOpen2, txtWedClose1, txtWedClose2, txtWedOpen1, txtWedOpen2});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFriClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFriClose1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFriClose1ActionPerformed
+    private void btn24Hr1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr1ActionPerformed
+        chkSun.setSelected(true);
+        txtSunOpen1.setText(TimeConstants.open1);
+        txtSunOpen2.setText(TimeConstants.open2);
+        txtSunClose1.setText(TimeConstants.close1);
+        txtSunClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr1ActionPerformed
 
-    private void txtSatClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSatClose2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSatClose2ActionPerformed
+    private void chkSunStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkSunStateChanged
+        if (chkSun.isSelected()) {
+            txtSunOpen1.setEditable(true);
+            txtSunOpen2.setEditable(true);
+            txtSunClose1.setEditable(true);
+            txtSunClose2.setEditable(true);
+        } else {
+            txtSunOpen1.setEditable(false);
+            txtSunOpen2.setEditable(false);
+            txtSunClose1.setEditable(false);
+            txtSunClose2.setEditable(false);
+        }
+    }//GEN-LAST:event_chkSunStateChanged
+
+    private void btn24Hr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr2ActionPerformed
+        chkMon.setSelected(true);
+        txtMonOpen1.setText(TimeConstants.open1);
+        txtMonOpen2.setText(TimeConstants.open2);
+        txtMonClose1.setText(TimeConstants.close1);
+        txtMonClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr2ActionPerformed
+
+    private void chkMonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkMonStateChanged
+        if (chkMon.isSelected()) {
+            txtMonOpen1.setEditable(true);
+            txtMonOpen2.setEditable(true);
+            txtMonClose1.setEditable(true);
+            txtMonClose2.setEditable(true);
+        } else {
+            txtMonOpen1.setEditable(false);
+            txtMonOpen2.setEditable(false);
+            txtMonClose1.setEditable(false);
+            txtMonClose2.setEditable(false);
+
+        }
+    }//GEN-LAST:event_chkMonStateChanged
+
+    private void btn24Hr3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr3ActionPerformed
+        chkTue.setSelected(true);
+        txtTueOpen1.setText(TimeConstants.open1);
+        txtTueOpen2.setText(TimeConstants.open2);
+        txtTueClose1.setText(TimeConstants.close1);
+        txtTueClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr3ActionPerformed
+
+    private void chkTueStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkTueStateChanged
+        if (chkTue.isSelected()) {
+            txtTueOpen1.setEditable(true);
+            txtTueOpen2.setEditable(true);
+            txtTueClose1.setEditable(true);
+            txtTueClose2.setEditable(true);
+        } else {
+            txtTueOpen1.setEditable(false);
+            txtTueOpen2.setEditable(false);
+            txtTueClose1.setEditable(false);
+            txtTueClose2.setEditable(false);
+        }
+    }//GEN-LAST:event_chkTueStateChanged
+
+    private void btn24Hr4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr4ActionPerformed
+        chkWed.setSelected(true);
+        txtWedOpen1.setText(TimeConstants.open1);
+        txtWedOpen2.setText(TimeConstants.open2);
+        txtWedClose1.setText(TimeConstants.close1);
+        txtWedClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr4ActionPerformed
+
+    private void chkWedStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkWedStateChanged
+        if (chkWed.isSelected()) {
+            txtWedOpen1.setEditable(true);
+            txtWedOpen2.setEditable(true);
+            txtWedClose1.setEditable(true);
+            txtWedClose2.setEditable(true);
+        } else {
+            txtWedOpen1.setEditable(false);
+            txtWedOpen2.setEditable(false);
+            txtWedClose1.setEditable(false);
+            txtWedClose2.setEditable(false);
+
+        }
+    }//GEN-LAST:event_chkWedStateChanged
+
+    private void btn24Hr5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr5ActionPerformed
+        chkThur.setSelected(true);
+        txtThurOpen1.setText(TimeConstants.open1);
+        txtThurOpen2.setText(TimeConstants.open2);
+        txtThurClose1.setText(TimeConstants.close1);
+        txtThurClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr5ActionPerformed
+
+    private void chkThurStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkThurStateChanged
+        if (chkThur.isSelected()) {
+            txtThurOpen1.setEditable(true);
+            txtThurOpen2.setEditable(true);
+            txtThurClose1.setEditable(true);
+            txtThurClose2.setEditable(true);
+        } else {
+            txtThurOpen1.setEditable(false);
+            txtThurOpen2.setEditable(false);
+            txtThurClose1.setEditable(false);
+            txtThurClose2.setEditable(false);
+
+        }
+    }//GEN-LAST:event_chkThurStateChanged
+
+    private void btn24Hr6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr6ActionPerformed
+        chkFri.setSelected(true);
+        txtFriOpen1.setText(TimeConstants.open1);
+        txtFriOpen2.setText(TimeConstants.open2);
+        txtFriClose1.setText(TimeConstants.close1);
+        txtFriClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr6ActionPerformed
+
+    private void chkFriStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkFriStateChanged
+        if (chkFri.isSelected()) {
+            txtFriOpen1.setEditable(true);
+            txtFriOpen2.setEditable(true);
+            txtFriClose1.setEditable(true);
+            txtFriClose2.setEditable(true);
+        } else {
+            txtFriOpen1.setEditable(false);
+            txtFriOpen2.setEditable(false);
+            txtFriClose1.setEditable(false);
+            txtFriClose2.setEditable(false);
+
+        }
+    }//GEN-LAST:event_chkFriStateChanged
+
+    private void btn24Hr7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr7ActionPerformed
+        chkSat.setSelected(true);
+        txtSatOpen1.setText(TimeConstants.open1);
+        txtSatOpen2.setText(TimeConstants.open2);
+        txtSatClose1.setText(TimeConstants.close1);
+        txtSatClose2.setText(TimeConstants.close2);
+    }//GEN-LAST:event_btn24Hr7ActionPerformed
+
+    private void chkSatStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkSatStateChanged
+        if (chkSat.isSelected()) {
+            txtSatOpen1.setEditable(true);
+            txtSatOpen2.setEditable(true);
+            txtSatClose1.setEditable(true);
+            txtSatClose2.setEditable(true);
+        } else {
+            txtSatOpen1.setEditable(false);
+            txtSatOpen2.setEditable(false);
+            txtSatClose1.setEditable(false);
+            txtSatClose2.setEditable(false);
+
+        }
+    }//GEN-LAST:event_chkSatStateChanged
+
+    private void btn24Hr8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24Hr8ActionPerformed
+        chkSame.setSelected(true);
+        txtSameOpen1.setText(TimeConstants.open1);
+        txtSameOpen2.setText(TimeConstants.open2);
+        txtSameClose1.setText(TimeConstants.close1);
+        txtSameClose2.setText(TimeConstants.close2);
+        additionalContactWorkingHoursUIHelper.setText();
+    }//GEN-LAST:event_btn24Hr8ActionPerformed
+
+    private void chkSameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSameActionPerformed
+        if (chkSame.isSelected()) {
+            additionalContactWorkingHoursUIHelper.setChecked(true);
+            String open1 = txtSameOpen1.getText();
+            String open2 = txtSameOpen2.getText();
+            String close1 = txtSameClose1.getText();
+            String close2 = txtSameClose2.getText();
+            if (!open1.equals("") && !open2.equals("") && !close1.equals("") && !close2.equals("")) {
+                additionalContactWorkingHoursUIHelper.setOpen1Text(open1);
+                additionalContactWorkingHoursUIHelper.setOpen2Text(open2);
+                additionalContactWorkingHoursUIHelper.setClose1Text(close1);
+                additionalContactWorkingHoursUIHelper.setClose2Text(close2);
+            }
+        } else {
+            String open1 = txtSameOpen1.getText();
+            String open2 = txtSameOpen2.getText();
+            String close1 = txtSameClose1.getText();
+            String close2 = txtSameClose2.getText();
+            additionalContactWorkingHoursUIHelper.setChecked(false);
+            if (!open1.equals("") && !open2.equals("") && !close1.equals("") && !close2.equals("")) {
+                additionalContactWorkingHoursUIHelper.setOpen1Text("");
+                additionalContactWorkingHoursUIHelper.setOpen2Text("");
+                additionalContactWorkingHoursUIHelper.setClose1Text("");
+                additionalContactWorkingHoursUIHelper.setClose2Text("");
+                additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
+                additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
+            }
+        }
+    }//GEN-LAST:event_chkSameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -489,14 +819,14 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
     private javax.swing.JButton btn24Hr7;
     private javax.swing.JButton btn24Hr8;
     private javax.swing.JButton btnSave;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox15;
-    private javax.swing.JCheckBox jCheckBox16;
-    private javax.swing.JCheckBox jCheckBox17;
+    public static javax.swing.JCheckBox chkFri;
+    public static javax.swing.JCheckBox chkMon;
+    public static javax.swing.JCheckBox chkSame;
+    public static javax.swing.JCheckBox chkSat;
+    public static javax.swing.JCheckBox chkSun;
+    public static javax.swing.JCheckBox chkThur;
+    public static javax.swing.JCheckBox chkTue;
+    public static javax.swing.JCheckBox chkWed;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -504,37 +834,37 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField txtFriClose1;
-    private javax.swing.JTextField txtFriClose2;
-    public static javax.swing.JTextField txtFriOpen1;
-    private javax.swing.JTextField txtFriOpen2;
-    private javax.swing.JTextField txtMonClose1;
-    private javax.swing.JTextField txtMonClose2;
-    public static javax.swing.JTextField txtMonOpen1;
-    private javax.swing.JTextField txtMonOpen2;
-    private javax.swing.JTextField txtSameClose1;
-    private javax.swing.JTextField txtSameClose2;
-    private javax.swing.JTextField txtSameOpen1;
-    private javax.swing.JTextField txtSameOpen2;
-    private javax.swing.JTextField txtSatClose1;
-    private javax.swing.JTextField txtSatClose2;
-    public static javax.swing.JTextField txtSatOpen1;
-    private javax.swing.JTextField txtSatOpen2;
-    private javax.swing.JTextField txtSunClose1;
-    private javax.swing.JTextField txtSunClose2;
-    public static javax.swing.JTextField txtSunOpen1;
-    private javax.swing.JTextField txtSunOpen2;
-    private javax.swing.JTextField txtThurClose1;
-    private javax.swing.JTextField txtThurClose2;
-    public static javax.swing.JTextField txtThurOpen1;
-    private javax.swing.JTextField txtThurOpen2;
-    private javax.swing.JTextField txtTueClose1;
-    private javax.swing.JTextField txtTueClose2;
-    public static javax.swing.JTextField txtTueOpen1;
-    private javax.swing.JTextField txtTueOpen2;
-    private javax.swing.JTextField txtWedClose1;
-    private javax.swing.JTextField txtWedClose2;
-    public static javax.swing.JTextField txtWedOpen1;
-    private javax.swing.JTextField txtWedOpen2;
+    public static javax.swing.JFormattedTextField txtFriClose1;
+    public static javax.swing.JFormattedTextField txtFriClose2;
+    public static javax.swing.JFormattedTextField txtFriOpen1;
+    public static javax.swing.JFormattedTextField txtFriOpen2;
+    public static javax.swing.JFormattedTextField txtMonClose1;
+    public static javax.swing.JFormattedTextField txtMonClose2;
+    public static javax.swing.JFormattedTextField txtMonOpen1;
+    public static javax.swing.JFormattedTextField txtMonOpen2;
+    public static javax.swing.JFormattedTextField txtSameClose1;
+    public static javax.swing.JFormattedTextField txtSameClose2;
+    public static javax.swing.JFormattedTextField txtSameOpen1;
+    public static javax.swing.JFormattedTextField txtSameOpen2;
+    public static javax.swing.JFormattedTextField txtSatClose1;
+    public static javax.swing.JFormattedTextField txtSatClose2;
+    public static javax.swing.JFormattedTextField txtSatOpen1;
+    public static javax.swing.JFormattedTextField txtSatOpen2;
+    public static javax.swing.JFormattedTextField txtSunClose1;
+    public static javax.swing.JFormattedTextField txtSunClose2;
+    public static javax.swing.JFormattedTextField txtSunOpen1;
+    public static javax.swing.JFormattedTextField txtSunOpen2;
+    public static javax.swing.JFormattedTextField txtThurClose1;
+    public static javax.swing.JFormattedTextField txtThurClose2;
+    public static javax.swing.JFormattedTextField txtThurOpen1;
+    public static javax.swing.JFormattedTextField txtThurOpen2;
+    public static javax.swing.JFormattedTextField txtTueClose1;
+    public static javax.swing.JFormattedTextField txtTueClose2;
+    public static javax.swing.JFormattedTextField txtTueOpen1;
+    public static javax.swing.JFormattedTextField txtTueOpen2;
+    public static javax.swing.JFormattedTextField txtWedClose1;
+    public static javax.swing.JFormattedTextField txtWedClose2;
+    public static javax.swing.JFormattedTextField txtWedOpen1;
+    public static javax.swing.JFormattedTextField txtWedOpen2;
     // End of variables declaration//GEN-END:variables
 }
