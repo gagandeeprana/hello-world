@@ -323,6 +323,7 @@ public class CompanyUIHelper {
         BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
 
         String msg = "";
+        int maxAdditionalContactId = 0;
         if (addUpdateFlag.equals("add")) {
             msg = companyDAO.addCompany(companyBean);
             if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
@@ -330,6 +331,7 @@ public class CompanyUIHelper {
                 for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
                     additionalContactBean.setContactId(contactId);
                     additionalContactDAO.addAdditionalContact(additionalContactBean);
+                    maxAdditionalContactId = additionalContactDAO.getMaxAdditionalContactId();
                 }
             }
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
@@ -345,7 +347,7 @@ public class CompanyUIHelper {
                 while (mapIterator.hasNext()) {
                     String workingDay = mapIterator.next();
                     WorkingHoursAdditionalContactBean work = mapWorkingHours.get(workingDay);
-                    work.setAdditionalContactId(companyId);
+                    work.setAdditionalContactId(maxAdditionalContactId);
                     workDAO.addWorkingHours(work);
                 }
             }

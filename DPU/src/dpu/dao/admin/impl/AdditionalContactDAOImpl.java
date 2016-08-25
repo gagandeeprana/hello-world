@@ -6,7 +6,6 @@
 package dpu.dao.admin.impl;
 
 import dpu.beans.admin.AdditionalContactBean;
-import dpu.beans.admin.AdditionalContactBean;
 import dpu.dao.admin.AdditionalContactDAO;
 import dpu.dao.common.ConnectDB;
 import java.sql.Connection;
@@ -14,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 public class AdditionalContactDAOImpl implements AdditionalContactDAO {
 
@@ -197,10 +195,15 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
     public int getMaxAdditionalContactId() {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         try {
-
+            pstmt = conn.prepareStatement("select max(add_contact_id) from additionalcontactmaster");
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (Exception e) {
-
+            System.out.println("AdditionalContactDAOImpl : getMaxAdditionalContactId() : " + e);
         }
         return 0;
     }
