@@ -192,4 +192,17 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
         }
         return lstAdditionalContacts;
     }
+
+    @Override
+    public int getMaxAdditionalContactId() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
 }

@@ -16,4 +16,6 @@ public interface AdditionalContactDAO {
     String updateAdditionalContact(AdditionalContactBean obj);
 
     String deleteAdditionalContact(int additionalContactId);
+    
+    int getMaxAdditionalContactId();
 }

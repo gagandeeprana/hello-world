@@ -5,15 +5,7 @@
  */
 package dpu.ui.common;
 
-import static dpu.ui.common.AddCustomerFrame.txtPhone;
 import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
-import static dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper.mask;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import javax.swing.JFormattedTextField;
-import javax.swing.text.DateFormatter;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import properties.TimeConstants;
 
 /**
@@ -32,11 +24,14 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
             initComponents();
             setLocationRelativeTo(null);
             setResizable(false);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             additionalContactWorkingHoursUIHelper = new AdditionalContactWorkingHoursUIHelper();
             additionalContactWorkingHoursUIHelper.disable(false);
             additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
             additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
-
+            if (!additionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
+                additionalContactWorkingHoursUIHelper.showData();
+            }
         } catch (Exception e) {
             System.out.println("AdditionalContactWorkingHours() : " + e);
         }
@@ -176,6 +171,11 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
         jLabel7.setText("Choose when this person is available");
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         txtSunOpen1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("h:mm a"))));
 
@@ -757,6 +757,11 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
         txtSameClose2.setText(TimeConstants.close2);
         additionalContactWorkingHoursUIHelper.setText();
     }//GEN-LAST:event_btn24Hr8ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        additionalContactWorkingHoursUIHelper.saveToList();
+        dispose();
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments

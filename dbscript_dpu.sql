@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
 -- ------------------------------------------------------
--- Server version	5.5.27
+-- Server version	5.5.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -58,19 +58,18 @@ CREATE TABLE `additionalcontactmaster` (
   `add_contact_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) DEFAULT NULL,
   `customer_name` varchar(30) DEFAULT NULL,
-  `address` varchar(40) DEFAULT NULL,
+  `position` varchar(40) DEFAULT NULL,
   `phone` varchar(30) DEFAULT NULL,
   `ext` varchar(30) DEFAULT NULL,
   `fax` varchar(30) DEFAULT NULL,
+  `cellular` varchar(40) DEFAULT NULL,
   `prefix` varchar(30) DEFAULT NULL,
-  `province_state` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`add_contact_id`),
   KEY `company_id` (`company_id`),
-  KEY `province_state` (`province_state`),
   CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +78,7 @@ CREATE TABLE `additionalcontactmaster` (
 
 LOCK TABLES `additionalcontactmaster` WRITE;
 /*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
-INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',0,0,'JJJJJJJJJJJ');
+INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ');
 /*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +103,7 @@ CREATE TABLE `billinglocationmaster` (
   `contact` varchar(30) DEFAULT NULL,
   `position` varchar(30) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `attention` varchar(30) DEFAULT NULL,
+  `cellular` varchar(30) DEFAULT NULL,
   `phone` varchar(30) DEFAULT NULL,
   `ext` varchar(30) DEFAULT NULL,
   `fax` varchar(30) DEFAULT NULL,
@@ -204,7 +203,7 @@ CREATE TABLE `companymaster` (
   `customer_notes` varchar(500) DEFAULT NULL,
   `after_hours` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +212,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL);
+INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -784,11 +783,11 @@ DROP TABLE IF EXISTS `working_hours_additionalcontact`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `working_hours_additionalcontact` (
   `working_id` int(11) NOT NULL AUTO_INCREMENT,
-  `working_day` varchar(20) DEFAULT NULL,
-  `open1` varchar(20) DEFAULT NULL,
-  `close1` varchar(20) DEFAULT NULL,
-  `open2` varchar(20) DEFAULT NULL,
-  `close2` varchar(20) DEFAULT NULL,
+  `working_day` varchar(30) DEFAULT NULL,
+  `open1` varchar(30) DEFAULT NULL,
+  `open2` varchar(30) DEFAULT NULL,
+  `close1` varchar(30) DEFAULT NULL,
+  `close2` varchar(30) DEFAULT NULL,
   `is24Hr` int(11) DEFAULT NULL,
   `additional_contact_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`working_id`),
@@ -815,4 +814,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-24  0:13:48
+-- Dump completed on 2016-08-25 17:56:17
