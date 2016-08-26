@@ -6,8 +6,11 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.BillingLocationBean;
+import static dpu.ui.common.AddCustomerFrame.txtPhone;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -22,31 +25,93 @@ public class AddBillingLocation extends javax.swing.JFrame {
     BillingLocationUIHelper billingLocationUIHelper = null;
     BillingLocationBean billingLocationBean = null;
     int index = 0;
+    MaskFormatter mask = null;
 
     public AddBillingLocation() {
-        initComponents();
-        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        setLocationRelativeTo(null);
+        try {
 
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setTitle("Add Billing Location");
-        billingLocationUIHelper = new BillingLocationUIHelper();
+            initComponents();
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setLocationRelativeTo(null);
+            mask = new MaskFormatter("(###) ###-####");
+            mask.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtTollFree.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            setTitle("Add Billing Location");
+            billingLocationUIHelper = new BillingLocationUIHelper();
+        } catch (Exception e) {
+            System.out.println("AddBillingLocation(): " + e);
+        }
     }
 
     public AddBillingLocation(int index, BillingLocationBean billingLocationBean) {
-        initComponents();
-        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
+        try {
+            initComponents();
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            setLocationRelativeTo(null);
+            mask = new MaskFormatter("(###) ###-####");
+            mask.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtTollFree.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            setTitle("Edit Billing Location");
+            btnSave.setText("Update");
+            this.billingLocationBean = billingLocationBean;
+            this.index = index;
+            billingLocationUIHelper = new BillingLocationUIHelper();
+            showData();
 
-        setTitle("Edit Billing Location");
-        btnSave.setText("Update");
-        this.billingLocationBean = billingLocationBean;
-        this.index = index;
-        billingLocationUIHelper = new BillingLocationUIHelper();
-        showData();
+        } catch (Exception e) {
+            System.out.println("AddBillingLocation(int index, BillingLocationBean billingLocationBean): " + e);
+        }
     }
 
     private void showData() {
@@ -91,7 +156,6 @@ public class AddBillingLocation extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtPosition = new javax.swing.JTextField();
-        txtTollFree = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtProvinceState = new javax.swing.JTextField();
@@ -105,18 +169,15 @@ public class AddBillingLocation extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
-        txtFax = new javax.swing.JTextField();
         txtCity = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         txtUnitNo = new javax.swing.JTextField();
         txtContact = new javax.swing.JTextField();
-        txtCellular = new javax.swing.JTextField();
         txtZip = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel22 = new javax.swing.JLabel();
@@ -132,6 +193,10 @@ public class AddBillingLocation extends javax.swing.JFrame {
         txtExt = new javax.swing.JTextField();
         txtPrefix = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        txtPhone = new javax.swing.JFormattedTextField();
+        txtFax = new javax.swing.JFormattedTextField();
+        txtCellular = new javax.swing.JFormattedTextField();
+        txtTollFree = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -210,109 +275,108 @@ public class AddBillingLocation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnSave)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnCancel))
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel16))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(11, 11, 11)
+                                            .addComponent(txtProvinceState, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabel14)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtZip, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                                .addComponent(txtUnitNo)
+                                                .addComponent(txtCity)
+                                                .addComponent(txtName))))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel16))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                    .addGap(11, 11, 11)
-                                                    .addComponent(txtProvinceState, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jLabel14)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(txtZip, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                                                        .addComponent(txtUnitNo)
-                                                        .addComponent(txtCity)
-                                                        .addComponent(txtName))))
+                                            .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                            .addComponent(txtArUS)
-                                                            .addComponent(txtArCDN, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                                    .addComponent(jLabel24))
-                                .addGap(18, 18, 18)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtPosition)
-                                            .addComponent(txtContact)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(txtArUS)
+                                                    .addComponent(txtArCDN, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addComponent(jLabel24))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPosition)
+                                    .addComponent(txtContact)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtCellular))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel11))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                                            .addComponent(txtFax))
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(2, 2, 2)
+                                                .addComponent(jLabel20)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtExt))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel11))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(10, 10, 10)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(2, 2, 2)
-                                                        .addComponent(jLabel20)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(txtExt))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel21)
-                                                        .addGap(11, 11, 11)
-                                                        .addComponent(txtPrefix, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel18)
+                                                .addComponent(jLabel21)
                                                 .addGap(11, 11, 11)
-                                                .addComponent(txtTollFree)))))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(txtEquipmentTypeAddPowerUnit5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel23)
-                            .addComponent(txtEquipmentTypeAddPowerUnit6, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(txtPrefix, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtTollFree))))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(txtEquipmentTypeAddPowerUnit5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23)
+                                    .addComponent(txtEquipmentTypeAddPowerUnit6, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,21 +400,17 @@ public class AddBillingLocation extends javax.swing.JFrame {
                                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel17)
-                                            .addComponent(jLabel20)
-                                            .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel21)
-                                            .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel20)
+                                    .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel21)
+                                    .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(4, 4, 4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
@@ -399,7 +459,8 @@ public class AddBillingLocation extends javax.swing.JFrame {
                             .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jLabel23))
@@ -411,7 +472,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnSave))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel19, txtEmail});
@@ -500,20 +561,20 @@ public class AddBillingLocation extends javax.swing.JFrame {
     public static javax.swing.JTextField txtAddress;
     public static javax.swing.JTextField txtArCDN;
     public static javax.swing.JTextField txtArUS;
-    public static javax.swing.JTextField txtCellular;
+    public static javax.swing.JFormattedTextField txtCellular;
     public static javax.swing.JTextField txtCity;
     public static javax.swing.JTextField txtContact;
     public static javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEquipmentTypeAddPowerUnit5;
     private javax.swing.JTextField txtEquipmentTypeAddPowerUnit6;
     public static javax.swing.JTextField txtExt;
-    public static javax.swing.JTextField txtFax;
+    public static javax.swing.JFormattedTextField txtFax;
     public static javax.swing.JTextField txtName;
-    public static javax.swing.JTextField txtPhone;
+    public static javax.swing.JFormattedTextField txtPhone;
     public static javax.swing.JTextField txtPosition;
     public static javax.swing.JTextField txtPrefix;
     public static javax.swing.JTextField txtProvinceState;
-    public static javax.swing.JTextField txtTollFree;
+    public static javax.swing.JFormattedTextField txtTollFree;
     public static javax.swing.JTextField txtUnitNo;
     public static javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables

@@ -1,6 +1,3 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
 -- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
@@ -72,7 +69,7 @@ CREATE TABLE `additionalcontactmaster` (
   PRIMARY KEY (`add_contact_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +78,7 @@ CREATE TABLE `additionalcontactmaster` (
 
 LOCK TABLES `additionalcontactmaster` WRITE;
 /*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
-INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ');
+INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ'),(8,32,'AAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA',1,'AAAAAAAAAA'),(9,33,'TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT',1,'TTTTT'),(10,34,'AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA',1,'AAAAAAA'),(17,38,'MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM',1,'MIMIMIMIMIMIM'),(18,38,'GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG',1,'GHGHGHGHG'),(19,39,'AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA',1,'AAAAA'),(20,39,'BBBB','BBBB','BBBB','BBBB','BBBB','BBBB','BBBB',1,'BBBB'),(21,39,'hhhhhh','hhhhh','hhhhhhhhhhhh','hhhhh','hhhhh','hhhhh','hhhhh',1,'hhhhh');
 /*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +113,7 @@ CREATE TABLE `billinglocationmaster` (
   PRIMARY KEY (`billing_location_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `billinglocationmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +122,7 @@ CREATE TABLE `billinglocationmaster` (
 
 LOCK TABLES `billinglocationmaster` WRITE;
 /*!40000 ALTER TABLE `billinglocationmaster` DISABLE KEYS */;
+INSERT INTO `billinglocationmaster` VALUES (15,'KKKKKKa','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO',1,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','KKKKK',32);
 /*!40000 ALTER TABLE `billinglocationmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +204,7 @@ CREATE TABLE `companymaster` (
   `customer_notes` varchar(500) DEFAULT NULL,
   `after_hours` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +213,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222');
+INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(34,'BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(38,'JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','(666) 666-6666','(666) 666-6666',NULL,'(666) 666-6666'),(39,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -796,7 +794,7 @@ CREATE TABLE `working_hours_additionalcontact` (
   PRIMARY KEY (`working_id`),
   KEY `additional_contact_id` (`additional_contact_id`),
   CONSTRAINT `working_hours_additionalcontact_ibfk_1` FOREIGN KEY (`additional_contact_id`) REFERENCES `additionalcontactmaster` (`add_contact_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -805,6 +803,7 @@ CREATE TABLE `working_hours_additionalcontact` (
 
 LOCK TABLES `working_hours_additionalcontact` WRITE;
 /*!40000 ALTER TABLE `working_hours_additionalcontact` DISABLE KEYS */;
+INSERT INTO `working_hours_additionalcontact` VALUES (1,'Sun','11:59','12:01','00:00','12:00',1,17),(2,'Mon','11:59','12:01','00:00','12:00',1,17),(3,'Thur','11:59','12:01','00:00','12:00',1,18),(4,'Fri','11:59','12:01','00:00','12:00',1,18),(5,'Sun','11:59','12:01','00:00','12:00',1,19),(6,'Mon','11:59','12:01','00:00','12:00',1,19),(7,'Tue','11:59','12:01','00:00','12:00',1,19),(8,'Wed','11:59','12:01','00:00','12:00',1,19),(9,'Fri','11:59','12:01','00:00','12:00',1,20),(10,'Sat','11:59','12:01','00:00','12:00',1,20);
 /*!40000 ALTER TABLE `working_hours_additionalcontact` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -817,4 +816,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-25 17:56:17
+-- Dump completed on 2016-08-26 19:07:35

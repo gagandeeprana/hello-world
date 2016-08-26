@@ -18,6 +18,7 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
      * Creates new form AdditionalContactWorkingHours
      */
     AdditionalContactWorkingHoursUIHelper additionalContactWorkingHoursUIHelper = null;
+    int rowOfWorkingHours = 0;
 
     public AdditionalContactWorkingHours() {
         try {
@@ -30,8 +31,27 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
             additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
             additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
             if (!additionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
-                additionalContactWorkingHoursUIHelper.showData();
+                additionalContactWorkingHoursUIHelper.showData(rowOfWorkingHours);
             }
+        } catch (Exception e) {
+            System.out.println("AdditionalContactWorkingHours() : " + e);
+        }
+    }
+
+    public AdditionalContactWorkingHours(int rowOfWorkingHours) {
+        try {
+            initComponents();
+            this.rowOfWorkingHours = rowOfWorkingHours;
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            additionalContactWorkingHoursUIHelper = new AdditionalContactWorkingHoursUIHelper();
+            additionalContactWorkingHoursUIHelper.disable(false);
+            additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
+            additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
+//            if (!AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
+            additionalContactWorkingHoursUIHelper.showData(rowOfWorkingHours);
+//            }
         } catch (Exception e) {
             System.out.println("AdditionalContactWorkingHours() : " + e);
         }
@@ -759,7 +779,7 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
     }//GEN-LAST:event_btn24Hr8ActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        additionalContactWorkingHoursUIHelper.saveToList();
+        additionalContactWorkingHoursUIHelper.saveToList(rowOfWorkingHours);
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

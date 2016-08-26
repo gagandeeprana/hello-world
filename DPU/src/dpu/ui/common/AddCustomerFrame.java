@@ -13,6 +13,7 @@ import dpu.dao.admin.BillingLocationDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
 import dpu.ui.helper.common.AdditionalContactUIHelper;
+import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.Color;
@@ -176,13 +177,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }
 
     private void clickEventOnMenuItem() {
-        menuItem1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddAdditionalContact addAdditionalContact = new AddAdditionalContact();
-                addAdditionalContact.setVisible(true);
-            }
-        });
+
     }
 
     private void clickEventOnMenuItemForBilling() {
@@ -891,7 +886,6 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel23MouseClicked
 
     private void tblAdditionalContactsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdditionalContactsMouseReleased
-        // TODO add your handling code here:
         final MouseEvent evt1 = evt;
         jPopupMenu1 = new JPopupMenu();
         menuItem1 = new JMenuItem("Add Contact");
@@ -914,7 +908,13 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jPopupMenu1.add(menuItem5);
         if (evt.getButton() == 3) {
             jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
-            clickEventOnMenuItem();
+            menuItem1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    AddAdditionalContact addAdditionalContact = new AddAdditionalContact(AdditionalContactWorkingHoursUIHelper.mapWorkingHours.size());
+                    addAdditionalContact.setVisible(true);
+                }
+            });
         }
         if (lstAdditionalContacts.size() == 0) {
             menuItem2.setEnabled(false);
@@ -1053,7 +1053,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPhoneKeyPressed
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
-   
+
     }//GEN-LAST:event_txtPhoneKeyTyped
 
     private void txtFaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFaxKeyPressed

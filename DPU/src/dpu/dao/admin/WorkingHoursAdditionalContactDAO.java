@@ -1,7 +1,7 @@
 package dpu.dao.admin;
 
-import dpu.beans.admin.CompanyBean;
 import dpu.beans.admin.WorkingHoursAdditionalContactBean;
+import java.util.List;
 
 /**
  *
@@ -10,4 +10,6 @@ import dpu.beans.admin.WorkingHoursAdditionalContactBean;
 public interface WorkingHoursAdditionalContactDAO {
 
     String addWorkingHours(WorkingHoursAdditionalContactBean obj);
+
+    List<WorkingHoursAdditionalContactBean> getWorkingHoursByAdditionalContactId(int id);
 }

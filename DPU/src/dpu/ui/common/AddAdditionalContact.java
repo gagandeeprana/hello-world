@@ -9,12 +9,19 @@ import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.BillingLocationBean;
 import dpu.dao.admin.AdditionalContactDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
+import static dpu.ui.common.AddCustomerFrame.txtPhone;
 import dpu.ui.helper.common.AdditionalContactUIHelper;
 import static dpu.ui.helper.common.AdditionalContactUIHelper.addUpdateFlag;
+import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.text.MaskFormatter;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -29,33 +36,101 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     AdditionalContactUIHelper additionalContactUIHelper = null;
     AdditionalContactBean additionalContactBean = null;
     int index = 0;
-    
+    int rowForAdditionalContact = 0;
+    MaskFormatter mask = null;
+
     public AddAdditionalContact() {
-        initComponents();
-        additionalContactUIHelper = new AdditionalContactUIHelper();
-        setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setResizable(false);
-        setTitle("Add New Additional Contact");
+        try {
+
+            initComponents();
+            mask = new MaskFormatter("(###) ###-####");
+            mask.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            additionalContactUIHelper = new AdditionalContactUIHelper();
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            setTitle("Add New Additional Contact");
 //        setBackground(Color.WHITE);
+        } catch (Exception e) {
+            System.out.println("AddAdditionalContact(): " + e);
+        }
     }
-    
+
+    public AddAdditionalContact(int rowForAdditionalContact) {
+        try {
+            initComponents();
+            this.rowForAdditionalContact = rowForAdditionalContact;
+            JOptionPane.showMessageDialog(null, "ROW: " + rowForAdditionalContact);
+            mask = new MaskFormatter("(###) ###-####");
+            mask.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask;
+                }
+            });
+            additionalContactUIHelper = new AdditionalContactUIHelper();
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setLocationRelativeTo(null);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            setTitle("Add New Additional Contact");
+//        setBackground(Color.WHITE);
+        } catch (Exception e) {
+            System.out.println("AddAdditionalContact(int rowForAdditionalContact): " + e);
+        }
+    }
+
     public AddAdditionalContact(int index, AdditionalContactBean additionalContactBean) {
         initComponents();
-        
         lblSave.setText("Update");
         this.additionalContactBean = additionalContactBean;
         this.index = index;
+        rowForAdditionalContact = index;
+        System.out.println("INDEX : " + index);
         additionalContactUIHelper = new AdditionalContactUIHelper();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Edit Additional Contact");
         setResizable(false);
+        if (additionalContactBean.getAdditionalContactId() != 0) {
+            rowForAdditionalContact = additionalContactBean.getAdditionalContactId();
+        }
         showData();
     }
-    
+
     private void showData() {
         AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
         AddAdditionalContact.txtPosition.setText(additionalContactBean.getPosition());
@@ -84,7 +159,6 @@ public class AddAdditionalContact extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        txtFax = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtCustomer = new javax.swing.JTextField();
         jCheckBox4 = new javax.swing.JCheckBox();
@@ -98,7 +172,6 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        txtPhone = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtExt = new javax.swing.JTextField();
@@ -107,7 +180,9 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         ddlStatus = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        txtCellular = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JFormattedTextField();
+        txtFax = new javax.swing.JFormattedTextField();
+        txtCellular = new javax.swing.JFormattedTextField();
         lblSave = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         btnWorkingHours = new javax.swing.JButton();
@@ -170,8 +245,6 @@ public class AddAdditionalContact extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,18 +261,23 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                                 .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtEmail)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(56, 56, 56)
+                                .addComponent(txtPhone))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                                    .addComponent(txtFax)
-                                    .addComponent(txtCellular))))
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel14))
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCellular)
+                                    .addComponent(txtFax))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
@@ -226,9 +304,9 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19)
-                    .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
@@ -240,10 +318,11 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel24)
-                        .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel14)
-                        .addComponent(txtCellular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -351,11 +430,12 @@ public class AddAdditionalContact extends javax.swing.JFrame {
 //            AddCustomerFrame.lstAdditionalContacts.remove(additionalContactBean);
             additionalContactUIHelper.saveToList(index, additionalContactBean);
         }
+        AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
         dispose();
     }//GEN-LAST:event_lblSaveMousePressed
 
     private void btnWorkingHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkingHoursActionPerformed
-        AdditionalContactWorkingHours additionalContactWorkingHours = new AdditionalContactWorkingHours();
+        AdditionalContactWorkingHours additionalContactWorkingHours = new AdditionalContactWorkingHours(rowForAdditionalContact);
         additionalContactWorkingHours.setVisible(true);
     }//GEN-LAST:event_btnWorkingHoursActionPerformed
 
@@ -416,12 +496,12 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblSave;
-    public static javax.swing.JTextField txtCellular;
+    public static javax.swing.JFormattedTextField txtCellular;
     public static javax.swing.JTextField txtCustomer;
     public static javax.swing.JTextField txtEmail;
     public static javax.swing.JTextField txtExt;
-    public static javax.swing.JTextField txtFax;
-    public static javax.swing.JTextField txtPhone;
+    public static javax.swing.JFormattedTextField txtFax;
+    public static javax.swing.JFormattedTextField txtPhone;
     public static javax.swing.JTextField txtPosition;
     public static javax.swing.JTextField txtPrefix;
     // End of variables declaration//GEN-END:variables

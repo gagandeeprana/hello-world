@@ -197,6 +197,7 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
+            conn = connectDB.connect();
             pstmt = conn.prepareStatement("select max(add_contact_id) from additionalcontactmaster");
             rs = pstmt.executeQuery();
             if (rs.next()) {

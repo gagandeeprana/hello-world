@@ -6,6 +6,8 @@
 package dpu.ui.helper.common;
 
 import dpu.beans.admin.WorkingHoursAdditionalContactBean;
+import dpu.dao.admin.WorkingHoursAdditionalContactDAO;
+import dpu.dao.admin.impl.WorkingHoursAdditionalContactDAOImpl;
 import dpu.ui.common.AdditionalContactWorkingHours;
 import static dpu.ui.common.AdditionalContactWorkingHours.txtSunOpen1;
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ import properties.TimeConstants;
 public class AdditionalContactWorkingHoursUIHelper {
 
     public static MaskFormatter mask = null;
-    public static Map<String, WorkingHoursAdditionalContactBean> mapWorkingHours = new HashMap<>();
+    public static Map<Integer, List<WorkingHoursAdditionalContactBean>> mapWorkingHours = new HashMap<>();
+    public static List<WorkingHoursAdditionalContactBean> listOfWorkingHours = new ArrayList<>();
 
     public AdditionalContactWorkingHoursUIHelper() {
         try {
@@ -361,7 +364,7 @@ public class AdditionalContactWorkingHoursUIHelper {
         AdditionalContactWorkingHours.txtSatClose2.setText(str);
     }
 
-    public void saveToList() {
+    public void saveToList(int rowOfWorkingHours) {
         if (AdditionalContactWorkingHours.chkSun.isSelected()) {
             String workingDay = "Sun";
             String open1 = AdditionalContactWorkingHours.txtSunOpen1.getText();
@@ -373,7 +376,7 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkMon.isSelected()) {
             String workingDay = "Mon";
@@ -386,7 +389,7 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkTue.isSelected()) {
             String workingDay = "Tue";
@@ -399,7 +402,7 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkWed.isSelected()) {
             String workingDay = "Wed";
@@ -412,7 +415,7 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkThur.isSelected()) {
             String workingDay = "Thur";
@@ -425,7 +428,7 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkFri.isSelected()) {
             String workingDay = "Fri";
@@ -438,7 +441,7 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkSat.isSelected()) {
             String workingDay = "Sat";
@@ -451,17 +454,75 @@ public class AdditionalContactWorkingHoursUIHelper {
                 is24Hr = 1;
             }
             WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
-            mapWorkingHours.put(workingDay, work);
+            listOfWorkingHours.add(work);
         }
+        mapWorkingHours.put(rowOfWorkingHours, listOfWorkingHours);
     }
 
-    public void showData() {
-        if (mapWorkingHours != null && !mapWorkingHours.isEmpty()) {
-            Iterator<String> mapIterator = mapWorkingHours.keySet().iterator();
-            while (mapIterator.hasNext()) {
-                String workingDay = mapIterator.next();
-                WorkingHoursAdditionalContactBean work = mapWorkingHours.get(workingDay);
+    public void showData(int rowOfWorkingHours) {
+//        if (listOfWorkingHours != null && !listOfWorkingHours.isEmpty()) {
+//            Iterator<Integer> mapIterator = mapWorkingHours.keySet().iterator();
+//            while (mapIterator.hasNext()) {
+//                Integer rowOfWorkingHours = mapIterator.next();
+        List<WorkingHoursAdditionalContactBean> listOfWorkHours = mapWorkingHours.get(rowOfWorkingHours);
+        if (listOfWorkHours != null) {
 
+            for (WorkingHoursAdditionalContactBean work : listOfWorkHours) {
+                if (work.getWorkingDay().equals("Sun")) {
+                    AdditionalContactWorkingHours.chkSun.setSelected(true);
+                    AdditionalContactWorkingHours.txtSunOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtSunClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtSunOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtSunClose2.setText(work.getClose2());
+                }
+                if (work.getWorkingDay().equals("Mon")) {
+                    AdditionalContactWorkingHours.chkMon.setSelected(true);
+                    AdditionalContactWorkingHours.txtMonOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtMonClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtMonOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtMonClose2.setText(work.getClose2());
+                }
+                if (work.getWorkingDay().equals("Tue")) {
+                    AdditionalContactWorkingHours.chkTue.setSelected(true);
+                    AdditionalContactWorkingHours.txtTueOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtTueClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtTueOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtTueClose2.setText(work.getClose2());
+                }
+                if (work.getWorkingDay().equals("Wed")) {
+                    AdditionalContactWorkingHours.chkWed.setSelected(true);
+                    AdditionalContactWorkingHours.txtWedOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtWedClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtWedOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtWedClose2.setText(work.getClose2());
+                }
+                if (work.getWorkingDay().equals("Thur")) {
+                    AdditionalContactWorkingHours.chkThur.setSelected(true);
+                    AdditionalContactWorkingHours.txtThurOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtThurClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtThurOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtThurClose2.setText(work.getClose2());
+                }
+                if (work.getWorkingDay().equals("Fri")) {
+                    AdditionalContactWorkingHours.chkFri.setSelected(true);
+                    AdditionalContactWorkingHours.txtFriOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtFriClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtFriOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtFriClose2.setText(work.getClose2());
+                }
+                if (work.getWorkingDay().equals("Sat")) {
+                    AdditionalContactWorkingHours.chkSat.setSelected(true);
+                    AdditionalContactWorkingHours.txtSatOpen1.setText(work.getOpen1());
+                    AdditionalContactWorkingHours.txtSatClose1.setText(work.getClose1());
+                    AdditionalContactWorkingHours.txtSatOpen2.setText(work.getOpen2());
+                    AdditionalContactWorkingHours.txtSatClose2.setText(work.getClose2());
+                }
+            }
+//                }
+        } else {
+            WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
+            listOfWorkHours = workDAO.getWorkingHoursByAdditionalContactId(rowOfWorkingHours);
+            for (WorkingHoursAdditionalContactBean work : listOfWorkHours) {
                 if (work.getWorkingDay().equals("Sun")) {
                     AdditionalContactWorkingHours.chkSun.setSelected(true);
                     AdditionalContactWorkingHours.txtSunOpen1.setText(work.getOpen1());
@@ -513,5 +574,6 @@ public class AdditionalContactWorkingHoursUIHelper {
                 }
             }
         }
+//        }
     }
 }

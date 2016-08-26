@@ -20,6 +20,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -328,10 +330,19 @@ public class CompanyUIHelper {
             msg = companyDAO.addCompany(companyBean);
             if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
                 int contactId = companyDAO.getMaxCompanyId();
-                for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
+                for (int i = 0; i < AddCustomerFrame.lstAdditionalContacts.size(); i++) {
+                    AdditionalContactBean additionalContactBean = AddCustomerFrame.lstAdditionalContacts.get(i);
                     additionalContactBean.setContactId(contactId);
                     additionalContactDAO.addAdditionalContact(additionalContactBean);
                     maxAdditionalContactId = additionalContactDAO.getMaxAdditionalContactId();
+                    if (AdditionalContactWorkingHoursUIHelper.mapWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
+                        WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
+                        List<WorkingHoursAdditionalContactBean> listOfWorkingHours = mapWorkingHours.get(i);
+                        for (WorkingHoursAdditionalContactBean work : listOfWorkingHours) {
+                            work.setAdditionalContactId(maxAdditionalContactId);
+                            workDAO.addWorkingHours(work);
+                        }
+                    }
                 }
             }
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
@@ -341,16 +352,10 @@ public class CompanyUIHelper {
                     billingLocationDAO.addBillingLocation(billingLocationBean);
                 }
             }
-            if (AdditionalContactWorkingHoursUIHelper.mapWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
-                WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
-                Iterator<String> mapIterator = mapWorkingHours.keySet().iterator();
-                while (mapIterator.hasNext()) {
-                    String workingDay = mapIterator.next();
-                    WorkingHoursAdditionalContactBean work = mapWorkingHours.get(workingDay);
-                    work.setAdditionalContactId(maxAdditionalContactId);
-                    workDAO.addWorkingHours(work);
-                }
-            }
+
+            AddCustomerFrame.lstAdditionalContacts = new ArrayList<>();
+            AddCustomerFrame.lstAdditionalContacts = new ArrayList<>();
+            AdditionalContactWorkingHoursUIHelper.mapWorkingHours = new HashMap();
         } else {
             companyBean.setCompanyId(companyId);
             msg = companyDAO.updateCompany(companyBean);

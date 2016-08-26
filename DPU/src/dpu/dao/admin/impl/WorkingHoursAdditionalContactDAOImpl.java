@@ -5,6 +5,9 @@ import dpu.dao.admin.WorkingHoursAdditionalContactDAO;
 import dpu.dao.common.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -36,5 +39,26 @@ public class WorkingHoursAdditionalContactDAOImpl implements WorkingHoursAdditio
             System.out.println("WorkingHoursAdditionalContactDAOImpl : addWorkingHours : " + e);
         }
         return "Failed to Add Working Hours";
+    }
+
+    @Override
+    public List<WorkingHoursAdditionalContactBean> getWorkingHoursByAdditionalContactId(int id) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<WorkingHoursAdditionalContactBean> lstWorkingHours = new ArrayList<>();
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("select * from working_hours_additionalcontact where additional_contact_id = ?");
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(rs.getString("working_day"), rs.getString("open1"), rs.getString("close1"), rs.getString("open2"), rs.getString("close2"), rs.getInt("is24Hr"));
+                lstWorkingHours.add(work);
+            }
+        } catch (Exception e) {
+            System.out.println("WorkingHoursAdditionalContactDAOImpl : getWorkingHoursByAdditionalContactId : " + e);
+        }
+        return lstWorkingHours;
     }
 }
