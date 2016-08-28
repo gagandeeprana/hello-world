@@ -66,9 +66,9 @@
                   <Component id="btnDelete" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnUpdate" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="854" max="32767" attributes="0"/>
               </Group>
-              <Component id="jScrollPane4" alignment="0" pref="1265" max="32767" attributes="0"/>
+              <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -103,7 +103,7 @@
                 <EtchetBorder/>
               </Border>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Type Company Name to Search..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Type CustomBroker to Search..."/>
           </Properties>
 
           <Layout>
@@ -134,7 +134,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Type Company Name To Search..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Type CustomBroker to Search..."/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -155,7 +155,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/SearchIcon24.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Type Company Name To Search..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Type CustomBroker to Search..."/>
               </Properties>
             </Component>
           </SubComponents>
@@ -342,7 +342,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/Delete.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Print Company Report..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Delete Company..."/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -363,7 +363,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/Update.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Print Company Report..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Edit Company..."/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

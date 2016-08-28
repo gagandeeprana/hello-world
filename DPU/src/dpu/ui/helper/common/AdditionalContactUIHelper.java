@@ -314,6 +314,7 @@ public class AdditionalContactUIHelper {
 
             if (additionalContactBean != null) {
                 if (index == AddCustomerFrame.lstAdditionalContacts.size()) {
+                    System.out.println("11111111111");
                     additionalContactBean = new AdditionalContactBean();
                     additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
                     additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());
@@ -335,6 +336,7 @@ public class AdditionalContactUIHelper {
                     additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
                     AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
                 } else if (additionalContactBean.getAdditionalContactId() != 0) {
+                    System.out.println("2222222222222222");
                     for (AdditionalContactBean additionalContactBeanFromLst : AddCustomerFrame.lstAdditionalContacts) {
                         if (additionalContactBeanFromLst.getAdditionalContactId() == additionalContactBean.getAdditionalContactId()) {
                             additionalContactBeanFromLst.setCustomerName(AddAdditionalContact.txtCustomer.getText());
@@ -380,12 +382,11 @@ public class AdditionalContactUIHelper {
                     }
                     additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
                     AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
-
                 }
+                generateTable();
             } else {
                 JOptionPane.showMessageDialog(null, "Your AdditionalContact Object is null : ");
             }
-            generateTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Your AdditionalContact Object is null Becoz Of: " + e);
         }

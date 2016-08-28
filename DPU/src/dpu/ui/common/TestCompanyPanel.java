@@ -43,7 +43,6 @@ public class TestCompanyPanel extends javax.swing.JPanel {
      */
     CompanyUIHelper companyUI = null;
     String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
-    ListSelectionModel listSelectionModel = null;
 
     public TestCompanyPanel() {
         initComponents();
@@ -82,10 +81,10 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setToolTipText("Type Company Name to Search...");
+        jPanel1.setToolTipText("Type CustomBroker to Search...");
 
         txtCompanySearch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtCompanySearch.setToolTipText("Type Company Name To Search...");
+        txtCompanySearch.setToolTipText("Type CustomBroker to Search...");
         txtCompanySearch.setBorder(null);
         txtCompanySearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -98,7 +97,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/SearchIcon24.png"))); // NOI18N
-        jLabel2.setToolTipText("Type Company Name To Search...");
+        jLabel2.setToolTipText("Type CustomBroker to Search...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,7 +170,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
         btnDelete.setBackground(new java.awt.Color(135, 192, 248));
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Delete.png"))); // NOI18N
-        btnDelete.setToolTipText("Print Company Report...");
+        btnDelete.setToolTipText("Delete Company...");
         btnDelete.setBorder(null);
         btnDelete.setBorderPainted(false);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +181,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
         btnUpdate.setBackground(new java.awt.Color(135, 192, 248));
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update.png"))); // NOI18N
-        btnUpdate.setToolTipText("Print Company Report...");
+        btnUpdate.setToolTipText("Edit Company...");
         btnUpdate.setBorder(null);
         btnUpdate.setBorderPainted(false);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -206,8 +205,8 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
+                .addContainerGap(854, Short.MAX_VALUE))
+            .addComponent(jScrollPane4)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

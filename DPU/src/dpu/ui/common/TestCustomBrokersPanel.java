@@ -5,6 +5,32 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.CustomBrokerBean;
+import dpu.reports.common.JasperReportGenerator;
+import dpu.ui.helper.common.CustomBrokerUIHelper;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import properties.ImageConstants;
+import properties.ReadFromPropertiesFile;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +40,21 @@ public class TestCustomBrokersPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestCustomBrokersPanel
      */
+    CustomBrokerUIHelper customBrokerUIHelper = null;
+    String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
+
     public TestCustomBrokersPanel() {
         initComponents();
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        customBrokerUIHelper = new CustomBrokerUIHelper();
+        customBrokerUIHelper.generateTable();
+
+        btnPrint.setAction(new TestCustomBrokersPanel.ShowWaitAction(""));
+        btnPrint.setToolTipText("Print CustomBroker Report...");
+        btnPrint.setIcon(new ImageIcon(printImage));
+        btnPrint.setContentAreaFilled(false);
+        btnDelete.setContentAreaFilled(false);
+        btnUpdate.setContentAreaFilled(false);
     }
 
     /**
@@ -27,19 +66,349 @@ public class TestCustomBrokersPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        txtCustomBrokerSearch = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        lblAddManageCompany = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblCustomBroker = new javax.swing.JTable();
+        btnPrint = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+
+        jPanel2.setBackground(new java.awt.Color(135, 192, 248));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setToolTipText("Type CustomBroker to Search...");
+
+        txtCustomBrokerSearch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtCustomBrokerSearch.setToolTipText("Type CustomBroker To Search...");
+        txtCustomBrokerSearch.setBorder(null);
+        txtCustomBrokerSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCustomBrokerSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCustomBrokerSearchKeyTyped(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/SearchIcon24.png"))); // NOI18N
+        jLabel2.setToolTipText("Type CustomBroker To Search...");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(txtCustomBrokerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel2))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCustomBrokerSearch))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        lblAddManageCompany.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Add.png"))); // NOI18N
+        lblAddManageCompany.setToolTipText("Add New CustomBroker...");
+        lblAddManageCompany.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAddManageCompanyMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblAddManageCompanyMousePressed(evt);
+            }
+        });
+
+        jScrollPane4.setToolTipText("Company Listing...");
+        jScrollPane4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        tblCustomBroker.setAutoCreateRowSorter(true);
+        tblCustomBroker.setFont(new java.awt.Font("BatangChe", 0, 14)); // NOI18N
+        tblCustomBroker.setForeground(new java.awt.Color(255, 102, 102));
+        tblCustomBroker.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Custom Broker", "Contact", "Phone no.", "Ext", "Fax no.", "Email", "Website"
+            }
+        ));
+        tblCustomBroker.setToolTipText("CustomBroker Listing...");
+        tblCustomBroker.setGridColor(new java.awt.Color(255, 255, 255));
+        tblCustomBroker.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblCustomBrokerMouseReleased(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblCustomBroker);
+
+        btnPrint.setBackground(new java.awt.Color(135, 192, 248));
+        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Print.png"))); // NOI18N
+        btnPrint.setToolTipText("Print CustomBroker Report...");
+        btnPrint.setBorder(null);
+        btnPrint.setBorderPainted(false);
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(135, 192, 248));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Delete.png"))); // NOI18N
+        btnDelete.setToolTipText("Delete CustomBroker...");
+        btnDelete.setBorder(null);
+        btnDelete.setBorderPainted(false);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(135, 192, 248));
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Update.png"))); // NOI18N
+        btnUpdate.setToolTipText("Edit CustomBroker...");
+        btnUpdate.setBorder(null);
+        btnUpdate.setBorderPainted(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAddManageCompany)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lblAddManageCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtCustomBrokerSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustomBrokerSearchKeyReleased
+        customBrokerUIHelper.generateTable();
+    }//GEN-LAST:event_txtCustomBrokerSearchKeyReleased
+
+    private void txtCustomBrokerSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustomBrokerSearchKeyTyped
+
+    }//GEN-LAST:event_txtCustomBrokerSearchKeyTyped
+
+    private void lblAddManageCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMouseClicked
+
+    }//GEN-LAST:event_lblAddManageCompanyMouseClicked
+
+    private void lblAddManageCompanyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMousePressed
+        CustomBrokerUIHelper.addUpdateFlag = "add";
+        AddCustomBroker addCustomBroker = new AddCustomBroker();
+        addCustomBroker.setVisible(true);
+    }//GEN-LAST:event_lblAddManageCompanyMousePressed
+
+    private void tblCustomBrokerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomBrokerMouseReleased
+        if (evt.getButton() == 3) {
+            final MouseEvent evt1 = evt;
+            jPopupMenu1 = new JPopupMenu();
+            JMenuItem menuItem1 = new JMenuItem("Add New CustomBroker");
+            menuItem1.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
+            menuItem1.setIconTextGap(5);
+            JMenuItem menuItem2 = new JMenuItem("Print CustomBroker Report");
+            menuItem2.setIcon(new ImageIcon(printImage));
+            menuItem2.setIconTextGap(5);
+            JMenuItem menuItem3 = new JMenuItem("Edit CustomBroker");
+            menuItem3.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "New-Customer.png"));
+            menuItem3.setIconTextGap(5);
+            JMenuItem menuItem4 = new JMenuItem("Delete CustomBroker");
+            menuItem4.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
+            menuItem4.setIconTextGap(5);
+            jPopupMenu1.add(menuItem1);
+            jPopupMenu1.add(menuItem2);
+            jPopupMenu1.add(menuItem3);
+            jPopupMenu1.add(menuItem4);
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+
+            menuItem1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    CustomBrokerUIHelper.addUpdateFlag = "add";
+                    AddCustomBroker addCustomBroker = new AddCustomBroker();
+                    addCustomBroker.setVisible(true);
+                }
+            });
+
+            menuItem2.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JasperReportGenerator.generateReport("CustomBrokerReport.jrxml");
+                }
+            });
+
+            menuItem3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    CustomBrokerUIHelper.addUpdateFlag = "update";
+                    CustomBrokerBean customBrokerBean = new CustomBrokerBean();
+                    customBrokerBean = CustomBrokerUIHelper.lstCustomBrokers.get(tblCustomBroker.rowAtPoint(evt1.getPoint()));
+                    CustomBrokerUIHelper.customBrokerId = customBrokerBean.getCustomBrokerId();
+                    AddCustomBroker addCustomBroker = new AddCustomBroker(customBrokerBean);
+                    addCustomBroker.setVisible(true);
+                }
+            });
+
+            menuItem4.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    CustomBrokerBean customBrokerBean = CustomBrokerUIHelper.lstCustomBrokers.get(tblCustomBroker.rowAtPoint(evt1.getPoint()));
+                    customBrokerUIHelper.delete(customBrokerBean.getCustomBrokerId());
+                }
+            });
+        } else if (evt.getButton() == 1) {
+            tblCustomBroker.setSelectionBackground(Color.GREEN);
+        }
+    }//GEN-LAST:event_tblCustomBrokerMouseReleased
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int customBrokerIdToBeDeleted = CustomBrokerUIHelper.lstCustomBrokers.get(tblCustomBroker.getSelectedRow()).getCustomBrokerId();
+        customBrokerUIHelper.delete(customBrokerIdToBeDeleted);
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        CustomBrokerBean customBrokerBean = CustomBrokerUIHelper.lstCustomBrokers.get(tblCustomBroker.getSelectedRow());
+        CustomBrokerUIHelper.customBrokerId = customBrokerBean.getCustomBrokerId();
+        CustomBrokerUIHelper.addUpdateFlag = "update";
+        AddCustomBroker addCustomBroker = new AddCustomBroker(customBrokerBean);
+        addCustomBroker.setVisible(true);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnDelete;
+    public static javax.swing.JButton btnPrint;
+    public static javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    public static javax.swing.JScrollPane jScrollPane4;
+    public static javax.swing.JLabel lblAddManageCompany;
+    public static javax.swing.JTable tblCustomBroker;
+    public static javax.swing.JTextField txtCustomBrokerSearch;
     // End of variables declaration//GEN-END:variables
+    class ShowWaitAction extends AbstractAction {
+
+        protected static final long SLEEP_TIME = 2 * 1000;
+
+        public ShowWaitAction(String name) {
+            super(name);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
+
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        // mimic some long-running process here...
+                        Thread.sleep(SLEEP_TIME);
+                        return null;
+                    }
+                };
+
+                Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
+                final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
+                dialog.setUndecorated(true);
+
+                mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
+
+                    @Override
+                    public void propertyChange(PropertyChangeEvent evt) {
+                        if (evt.getPropertyName().equals("state")) {
+                            if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
+                                JasperReportGenerator.generateReport("CustomBrokerReport.jrxml");
+                                dialog.dispose();
+                            }
+                        }
+                    }
+                });
+                mySwingWorker.execute();
+//        JProgressBar progressBar = new JProgressBar();
+//        progressBar.setIndeterminate(true);
+                JPanel panel = new JPanel(new BorderLayout());
+//        panel.add(progressBar, BorderLayout.CENTER);
+//        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
+                JLabel jLabel = new JLabel(new ImageIcon(ReadFromPropertiesFile.imagePath + "Wait.gif"));
+                panel.add(jLabel);
+                dialog.add(panel);
+                TestClassPanel testClassPanel = new TestClassPanel();
+                testClassPanel.setEnabled(false);
+                dialog.pack();
+                dialog.setLocationRelativeTo(win);
+                dialog.setVisible(true);
+            } catch (Exception e) {
+                System.out.println("ShowWaitAction : actionPerformed(): " + e);
+            }
+
+        }
+    }
 }

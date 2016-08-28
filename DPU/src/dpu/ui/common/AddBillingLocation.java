@@ -195,8 +195,8 @@ public class AddBillingLocation extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JFormattedTextField();
         txtFax = new javax.swing.JFormattedTextField();
-        txtCellular = new javax.swing.JFormattedTextField();
         txtTollFree = new javax.swing.JFormattedTextField();
+        txtCellular = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
