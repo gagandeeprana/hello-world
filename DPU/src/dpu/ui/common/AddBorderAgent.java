@@ -8,6 +8,7 @@ package dpu.ui.common;
 import dpu.beans.admin.BorderAgentBean;
 import static dpu.ui.common.AddCustomBroker.txtFax;
 import static dpu.ui.common.AddCustomBroker.txtPhone;
+import dpu.ui.helper.common.BorderAgentUIHelper;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -24,11 +25,13 @@ public class AddBorderAgent extends javax.swing.JFrame {
      * Creates new form AddBorderAgent
      */
     MaskFormatter mask = null;
+    BorderAgentUIHelper borderAgentUIHelper = null;
 
     public AddBorderAgent() {
         try {
 
             initComponents();
+            borderAgentUIHelper = new BorderAgentUIHelper();
             mask = new MaskFormatter("(###) ###-####");
             mask.setPlaceholderCharacter('_');
             txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
@@ -237,8 +240,18 @@ public class AddBorderAgent extends javax.swing.JFrame {
         );
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,6 +282,16 @@ public class AddBorderAgent extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        borderAgentUIHelper.saveToList();
+        dispose();
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments

@@ -8,12 +8,17 @@ package dpu.ui.helper.common;
 import dpu.beans.admin.BorderAgentBean;
 import dpu.dao.admin.BorderAgentDAO;
 import dpu.dao.admin.impl.BorderAgentDAOImpl;
+import dpu.ui.common.AddBorderAgent;
 import dpu.ui.common.AddCustomBroker;
 import static dpu.ui.helper.common.BorderAgentUIHelper.lstBorderAgents;
+import static dpu.ui.helper.common.CustomBrokerUIHelper.addUpdateFlag;
+import static dpu.ui.helper.common.CustomBrokerUIHelper.customBrokerBean;
+import static dpu.ui.helper.common.CustomBrokerUIHelper.customBrokerId;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
@@ -28,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class BorderAgentUIHelper {
 
-    public static List<BorderAgentBean> lstBorderAgents = null;
+    public static List<BorderAgentBean> lstBorderAgents = new ArrayList();
     static public String addUpdateFlag = "add";
     static public int borderAgentId = 0;
     BorderAgentDAO borderAgentDAO = new BorderAgentDAOImpl();
@@ -85,6 +90,46 @@ public class BorderAgentUIHelper {
         AddCustomBroker.tblBorderAgents.setIntercellSpacing(new Dimension(0, 0));
         AddCustomBroker.tblBorderAgents.setShowGrid(false);
         AddCustomBroker.jScrollPane1.setViewportView(AddCustomBroker.tblBorderAgents);
+    }
+
+    public void saveToList() {
+        BorderAgentBean borderAgentBean = new BorderAgentBean();
+        borderAgentBean.setCode(AddBorderAgent.txtCode.getText());
+        borderAgentBean.setBorderAgent(AddBorderAgent.txtBorderAgent.getText());
+        borderAgentBean.setBorderCrossing(AddBorderAgent.txtBorderCrossing.getText());
+        borderAgentBean.setPhone(AddBorderAgent.txtPhone.getText());
+        borderAgentBean.setExt(AddBorderAgent.txtExt.getText());
+        borderAgentBean.setFax(AddBorderAgent.txtFax.getText());
+        if (AddBorderAgent.ddlStatus.getSelectedIndex() == 0) {
+            borderAgentBean.setStatus(1);
+        } else {
+            borderAgentBean.setStatus(0);
+        }
+        borderAgentBean.setEmail(AddBorderAgent.txtEmail.getText());
+        borderAgentBean.setOpenFrom(AddBorderAgent.txtOpenFrom.getText());
+        borderAgentBean.setOpenTo(AddBorderAgent.txtOpenTo.getText());
+        if (AddBorderAgent.chkOpen24Hrs.isSelected()) {
+            borderAgentBean.setIs24Hr(1);
+        } else {
+            borderAgentBean.setIs24Hr(0);
+        }
+        borderAgentBean.setComments(AddBorderAgent.taComments.getText());
+        lstBorderAgents.add(borderAgentBean);
+        generateTable();
+    }
+
+    public String save(int customBrokerId) {
+        String msg = "";
+        for (BorderAgentBean borderAgentBean : lstBorderAgents) {
+            borderAgentBean.setCustomBrokerId(customBrokerId);
+            if (addUpdateFlag.equals("add")) {
+                msg = borderAgentDAO.addBorderAgent(borderAgentBean);
+            } else {
+                borderAgentBean.setBorderAgentId(borderAgentId);
+                msg = borderAgentDAO.updateBorderAgent(borderAgentBean);
+            }
+        }
+        return msg;
     }
 
     class BorderAgentTable extends DefaultTableCellRenderer {
