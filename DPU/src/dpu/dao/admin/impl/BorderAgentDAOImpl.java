@@ -45,6 +45,7 @@ public class BorderAgentDAOImpl implements BorderAgentDAO {
                 obj.setEmail(rs.getString("email"));
                 obj.setOpenFrom(rs.getString("open_from"));
                 obj.setOpenTo(rs.getString("open_to"));
+                obj.setAfterHour(rs.getString("after_hour"));
                 obj.setIs24Hr(rs.getInt("is24Hr"));
                 obj.setComments(rs.getString("comments"));
                 obj.setCustomBrokerId(rs.getInt("custom_broker_id"));
@@ -82,7 +83,7 @@ public class BorderAgentDAOImpl implements BorderAgentDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into border_agent(code,border_agent,border_crossing,phone,ext,fax,status,email,open_from,open_to,is24Hr,comments,custom_broker_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt = conn.prepareStatement("insert into border_agent(code,border_agent,border_crossing,phone,ext,fax,status,email,open_from,open_to,after_hour,is24Hr,comments,custom_broker_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pstmt.setString(1, obj.getCode());
             pstmt.setString(2, obj.getBorderAgent());
             pstmt.setString(3, obj.getBorderCrossing());
@@ -93,9 +94,10 @@ public class BorderAgentDAOImpl implements BorderAgentDAO {
             pstmt.setString(8, obj.getEmail());
             pstmt.setString(9, obj.getOpenFrom());
             pstmt.setString(10, obj.getOpenTo());
-            pstmt.setInt(11, obj.getIs24Hr());
-            pstmt.setString(12, obj.getComments());
-            pstmt.setInt(13, obj.getCustomBrokerId());
+            pstmt.setString(11, obj.getAfterHour());
+            pstmt.setInt(12, obj.getIs24Hr());
+            pstmt.setString(13, obj.getComments());
+            pstmt.setInt(14, obj.getCustomBrokerId());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "BorderAgent Added";
@@ -113,7 +115,7 @@ public class BorderAgentDAOImpl implements BorderAgentDAO {
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update border_agent set code=?,border_agent=?,border_crossing=?,phone=?,ext=?,fax=?,status=?,email=?,open_from=?,open_to=?,is24Hr=?,comments=?,custom_broker_id=? where border_agent_id = ?");
+            pstmt = conn.prepareStatement("update border_agent set code=?,border_agent=?,border_crossing=?,phone=?,ext=?,fax=?,status=?,email=?,open_from=?,open_to=?,after_hour=?,is24Hr=?,comments=?,custom_broker_id=? where border_agent_id = ?");
             pstmt.setString(1, obj.getCode());
             pstmt.setString(2, obj.getBorderAgent());
             pstmt.setString(3, obj.getBorderCrossing());
@@ -124,10 +126,11 @@ public class BorderAgentDAOImpl implements BorderAgentDAO {
             pstmt.setString(8, obj.getEmail());
             pstmt.setString(9, obj.getOpenFrom());
             pstmt.setString(10, obj.getOpenTo());
-            pstmt.setInt(11, obj.getIs24Hr());
-            pstmt.setString(12, obj.getComments());
-            pstmt.setInt(13, obj.getCustomBrokerId());
-            pstmt.setInt(14, obj.getBorderAgentId());
+            pstmt.setString(11, obj.getAfterHour());
+            pstmt.setInt(12, obj.getIs24Hr());
+            pstmt.setString(13, obj.getComments());
+            pstmt.setInt(14, obj.getCustomBrokerId());
+            pstmt.setInt(15, obj.getBorderAgentId());
             int i = pstmt.executeUpdate();
             if (i > 0) {
                 return "BorderAgent Updated";
@@ -163,6 +166,7 @@ public class BorderAgentDAOImpl implements BorderAgentDAO {
                 obj.setEmail(rs.getString("email"));
                 obj.setOpenFrom(rs.getString("open_from"));
                 obj.setOpenTo(rs.getString("open_to"));
+                obj.setAfterHour(rs.getString("after_hour"));
                 obj.setIs24Hr(rs.getInt("is24Hr"));
                 obj.setComments(rs.getString("comments"));
                 obj.setCustomBrokerId(rs.getInt("custom_broker_id"));

@@ -1,3 +1,6 @@
+drop database if exists dpu;
+create database dpu;
+use dpu;
 -- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
 --
 -- Host: localhost    Database: dpu
@@ -149,7 +152,7 @@ CREATE TABLE `border_agent` (
   `comments` varchar(30) DEFAULT NULL,
   `custom_broker_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`border_agent_id`),
-  CONSTRAINT `border_agent_ibfk_1` FOREIGN KEY (`border_agent_id`) REFERENCES `custombrokermaster` (`custom_broker_id`)
+  CONSTRAINT `border_agent_ibfk_1` FOREIGN KEY (`custom_broker_id`) REFERENCES `custombrokermaster` (`custom_broker_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

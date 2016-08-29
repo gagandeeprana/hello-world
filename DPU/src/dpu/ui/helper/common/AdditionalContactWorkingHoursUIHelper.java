@@ -365,6 +365,7 @@ public class AdditionalContactWorkingHoursUIHelper {
     }
 
     public void saveToList(int rowOfWorkingHours) {
+        listOfWorkingHours = new ArrayList<>();
         if (AdditionalContactWorkingHours.chkSun.isSelected()) {
             String workingDay = "Sun";
             String open1 = AdditionalContactWorkingHours.txtSunOpen1.getText();
@@ -460,13 +461,9 @@ public class AdditionalContactWorkingHoursUIHelper {
     }
 
     public void showData(int rowOfWorkingHours) {
-//        if (listOfWorkingHours != null && !listOfWorkingHours.isEmpty()) {
-//            Iterator<Integer> mapIterator = mapWorkingHours.keySet().iterator();
-//            while (mapIterator.hasNext()) {
-//                Integer rowOfWorkingHours = mapIterator.next();
+        System.out.println("DATA to show of row no: " + rowOfWorkingHours);
         List<WorkingHoursAdditionalContactBean> listOfWorkHours = mapWorkingHours.get(rowOfWorkingHours);
         if (listOfWorkHours != null) {
-
             for (WorkingHoursAdditionalContactBean work : listOfWorkHours) {
                 if (work.getWorkingDay().equals("Sun")) {
                     AdditionalContactWorkingHours.chkSun.setSelected(true);

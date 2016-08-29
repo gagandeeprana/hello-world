@@ -28,7 +28,6 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     AdditionalContactUIHelper additionalContactUIHelper = null;
     AdditionalContactBean additionalContactBean = null;
     int index = 0;
-    int rowForAdditionalContact = 0;
     MaskFormatter mask = null;
 
     public AddAdditionalContact() {
@@ -67,77 +66,49 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         }
     }
 
-    public AddAdditionalContact(int rowForAdditionalContact) {
-        try {
-            initComponents();
-            this.rowForAdditionalContact = rowForAdditionalContact;
-            JOptionPane.showMessageDialog(null, "ROW: " + rowForAdditionalContact);
-            mask = new MaskFormatter("(###) ###-####");
-            mask.setPlaceholderCharacter('_');
-            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
-                @Override
-                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
-                    return mask;
-                }
-            });
-            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
-                @Override
-                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
-                    return mask;
-                }
-            });
-            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
-                @Override
-                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
-                    return mask;
-                }
-            });
-            additionalContactUIHelper = new AdditionalContactUIHelper();
-            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-            setLocationRelativeTo(null);
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            setResizable(false);
-            setTitle("Add New Additional Contact");
-//        setBackground(Color.WHITE);
-        } catch (Exception e) {
-            System.out.println("AddAdditionalContact(int rowForAdditionalContact): " + e);
-        }
-    }
-
-    public AddAdditionalContact(int index, AdditionalContactBean additionalContactBean) {
+//    public AddAdditionalContact() {
+//        try {
+//            initComponents();
+//            mask = new MaskFormatter("(###) ###-####");
+//            mask.setPlaceholderCharacter('_');
+//            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+//                @Override
+//                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+//                    return mask;
+//                }
+//            });
+//            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+//                @Override
+//                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+//                    return mask;
+//                }
+//            });
+//            txtCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+//                @Override
+//                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+//                    return mask;
+//                }
+//            });
+//            additionalContactUIHelper = new AdditionalContactUIHelper();
+//            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+//            setLocationRelativeTo(null);
+//            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//            setResizable(false);
+//            setTitle("Add New Additional Contact");
+//        } catch (Exception e) {
+//            System.out.println("AddAdditionalContact(int rowForAdditionalContact): " + e);
+//        }
+//    }
+    public AddAdditionalContact(AdditionalContactBean additionalContactBean) {
         initComponents();
         lblSave.setText("Update");
-        this.additionalContactBean = additionalContactBean;
-        this.index = index;
-        rowForAdditionalContact = index;
-        System.out.println("INDEX : " + index);
         additionalContactUIHelper = new AdditionalContactUIHelper();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Edit Additional Contact");
         setResizable(false);
-        if (additionalContactBean.getAdditionalContactId() != 0) {
-            rowForAdditionalContact = additionalContactBean.getAdditionalContactId();
-        }
-        showData();
-    }
-
-    private void showData() {
-        AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
-        AddAdditionalContact.txtPosition.setText(additionalContactBean.getPosition());
-        AddAdditionalContact.txtPhone.setText(additionalContactBean.getPhone());
-        AddAdditionalContact.txtExt.setText(additionalContactBean.getExt());
-        AddAdditionalContact.txtFax.setText(additionalContactBean.getFax());
-        AddAdditionalContact.txtPrefix.setText(additionalContactBean.getPrefix());
-        AddAdditionalContact.txtCellular.setText(additionalContactBean.getCellular());
-//        AddAdditionalContact.ddlProvinceState.setSelectedIndex(additionalContactBean.getProvinceState());
-        if (additionalContactBean.getStatus() == 0) {
-            ddlStatus.setSelectedIndex(1);
-        } else {
-            ddlStatus.setSelectedIndex(0);
-        }
-        AddAdditionalContact.txtEmail.setText(additionalContactBean.getEmail());
+        additionalContactUIHelper.showData(additionalContactBean);
     }
 
     /**
@@ -417,12 +388,10 @@ public class AddAdditionalContact extends javax.swing.JFrame {
 
     private void lblSaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMousePressed
         if (AdditionalContactUIHelper.addUpdateFlag.equals("add")) {
-            System.out.println("ADDD");
             additionalContactBean = new AdditionalContactBean();
             additionalContactUIHelper.saveToList(AddCustomerFrame.lstAdditionalContacts.size(), additionalContactBean);
+
         } else {
-            System.out.println("UPDATE..");
-//            AddCustomerFrame.lstAdditionalContacts.remove(additionalContactBean);
             additionalContactUIHelper.saveToList(index, additionalContactBean);
         }
         AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
@@ -430,7 +399,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSaveMousePressed
 
     private void btnWorkingHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkingHoursActionPerformed
-        AdditionalContactWorkingHours additionalContactWorkingHours = new AdditionalContactWorkingHours(rowForAdditionalContact);
+        AdditionalContactWorkingHours additionalContactWorkingHours = new AdditionalContactWorkingHours();
         additionalContactWorkingHours.setVisible(true);
     }//GEN-LAST:event_btnWorkingHoursActionPerformed
 

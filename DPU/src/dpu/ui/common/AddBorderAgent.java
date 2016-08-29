@@ -24,39 +24,109 @@ public class AddBorderAgent extends javax.swing.JFrame {
     /**
      * Creates new form AddBorderAgent
      */
-    MaskFormatter mask = null;
+    MaskFormatter mask1, mask2 = null;
     BorderAgentUIHelper borderAgentUIHelper = null;
+    BorderAgentBean borderAgentBean = null;
+    int index = 0;
 
     public AddBorderAgent() {
         try {
 
             initComponents();
             borderAgentUIHelper = new BorderAgentUIHelper();
-            mask = new MaskFormatter("(###) ###-####");
-            mask.setPlaceholderCharacter('_');
+            mask1 = new MaskFormatter("(###) ###-####");
+            mask1.setPlaceholderCharacter('_');
             txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
                 @Override
                 public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
-                    return mask;
+                    return mask1;
                 }
             });
             txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
                 @Override
                 public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
-                    return mask;
+                    return mask1;
+                }
+            });
+            txtAfterHour.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask1;
+                }
+            });
+            mask2 = new MaskFormatter("## : ##");
+            mask2.setPlaceholderCharacter('_');
+            txtOpenFrom.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask2;
+                }
+            });
+            txtOpenTo.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask2;
                 }
             });
             setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
             setLocationRelativeTo(null);
-            setTitle("Add New CustomBroker");
+            setTitle("Add New BorderAgent");
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setResizable(false);
         } catch (Exception e) {
+            System.out.println("AddBorderAgent(): " + e);
         }
     }
 
-    public AddBorderAgent(BorderAgentBean borderAgentBean) {
-        initComponents();
+    public AddBorderAgent(int index, BorderAgentBean borderAgentBean) {
+        try {
+            initComponents();
+            this.index = index;
+            borderAgentUIHelper = new BorderAgentUIHelper();
+            this.borderAgentBean = borderAgentBean;
+            mask1 = new MaskFormatter("(###) ###-####");
+            mask1.setPlaceholderCharacter('_');
+            txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask1;
+                }
+            });
+            txtFax.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask1;
+                }
+            });
+            txtAfterHour.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask1;
+                }
+            });
+            mask2 = new MaskFormatter("## : ##");
+            mask2.setPlaceholderCharacter('_');
+            txtOpenFrom.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask2;
+                }
+            });
+            txtOpenTo.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+                @Override
+                public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                    return mask2;
+                }
+            });
+            setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+            setLocationRelativeTo(null);
+            setTitle("Add New BorderAgent");
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            setResizable(false);
+            borderAgentUIHelper.showData(borderAgentBean);
+        } catch (Exception e) {
+            System.out.println("AddBorderAgent(BorderAgentBean borderAgentBean): " + e);
+        }
     }
 
     /**
@@ -75,7 +145,6 @@ public class AddBorderAgent extends javax.swing.JFrame {
         txtExt = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        txtOpenFrom = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtFax = new javax.swing.JFormattedTextField();
@@ -89,11 +158,14 @@ public class AddBorderAgent extends javax.swing.JFrame {
         txtBorderCrossing = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel21 = new javax.swing.JLabel();
-        txtOpenTo = new javax.swing.JTextField();
         chkOpen24Hrs = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taComments = new javax.swing.JTextArea();
+        txtOpenFrom = new javax.swing.JFormattedTextField();
+        txtOpenTo = new javax.swing.JFormattedTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtAfterHour = new javax.swing.JFormattedTextField();
         btnCancel = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
 
@@ -131,6 +203,8 @@ public class AddBorderAgent extends javax.swing.JFrame {
         taComments.setRows(5);
         jScrollPane1.setViewportView(taComments);
 
+        jLabel15.setText("After Hour");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,59 +212,64 @@ public class AddBorderAgent extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBorderCrossing))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(68, 68, 68)
-                        .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(txtOpenFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel20)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                        .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtBorderAgent)
-                                    .addComponent(txtCode)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel19))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel21)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtOpenTo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(14, 14, 14)
+                                        .addComponent(chkOpen24Hrs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(32, 32, 32)
+                                        .addComponent(jScrollPane1))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtOpenFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel21)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtOpenTo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(chkOpen24Hrs))))))
-                            .addComponent(jLabel14))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                                .addComponent(jLabel20)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                                .addComponent(txtExt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtBorderAgent)
+                                            .addComponent(txtCode)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel15))
+                                        .addGap(35, 35, 35)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtAfterHour)
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBorderCrossing))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(68, 68, 68)
+                                .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,17 +300,21 @@ public class AddBorderAgent extends javax.swing.JFrame {
                     .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtAfterHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(txtOpenFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addComponent(txtOpenTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkOpen24Hrs))
+                    .addComponent(chkOpen24Hrs)
+                    .addComponent(txtOpenFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOpenTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -259,21 +342,20 @@ public class AddBorderAgent extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnSave))
@@ -289,7 +371,11 @@ public class AddBorderAgent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        borderAgentUIHelper.saveToList();
+        if (BorderAgentUIHelper.addUpdateFlag.equals("add")) {
+            borderAgentUIHelper.saveToList(0, null);
+        } else {
+            borderAgentUIHelper.saveToList(index, borderAgentBean);
+        }
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -338,6 +424,7 @@ public class AddBorderAgent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -348,14 +435,15 @@ public class AddBorderAgent extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTextArea taComments;
+    public static javax.swing.JFormattedTextField txtAfterHour;
     public static javax.swing.JTextField txtBorderAgent;
     public static javax.swing.JTextField txtBorderCrossing;
     public static javax.swing.JTextField txtCode;
     public static javax.swing.JTextField txtEmail;
     public static javax.swing.JTextField txtExt;
     public static javax.swing.JFormattedTextField txtFax;
-    public static javax.swing.JTextField txtOpenFrom;
-    public static javax.swing.JTextField txtOpenTo;
+    public static javax.swing.JFormattedTextField txtOpenFrom;
+    public static javax.swing.JFormattedTextField txtOpenTo;
     public static javax.swing.JFormattedTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

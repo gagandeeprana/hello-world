@@ -49,9 +49,7 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
             additionalContactWorkingHoursUIHelper.disable(false);
             additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
             additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
-//            if (!AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
             additionalContactWorkingHoursUIHelper.showData(rowOfWorkingHours);
-//            }
         } catch (Exception e) {
             System.out.println("AdditionalContactWorkingHours() : " + e);
         }

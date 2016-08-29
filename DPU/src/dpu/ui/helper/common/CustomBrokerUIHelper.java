@@ -5,11 +5,17 @@
  */
 package dpu.ui.helper.common;
 
+import dpu.beans.admin.BorderAgentBean;
 import dpu.beans.admin.CustomBrokerBean;
+import dpu.dao.admin.BorderAgentDAO;
 import dpu.dao.admin.CustomBrokerDAO;
+import dpu.dao.admin.impl.BorderAgentDAOImpl;
 import dpu.dao.admin.impl.CustomBrokerDAOImpl;
 import dpu.ui.common.AddCustomBroker;
 import dpu.ui.common.TestCustomBrokersPanel;
+import static dpu.ui.helper.common.BorderAgentUIHelper.addUpdateFlag;
+import static dpu.ui.helper.common.BorderAgentUIHelper.borderAgentId;
+import static dpu.ui.helper.common.BorderAgentUIHelper.lstBorderAgents;
 import static dpu.ui.helper.common.CompanyUIHelper.companyBean;
 import java.awt.Color;
 import java.awt.Component;
@@ -33,6 +39,7 @@ public class CustomBrokerUIHelper {
     static public String addUpdateFlag = "add";
     static public int customBrokerId = 0;
     CustomBrokerDAO customBrokerDAO = new CustomBrokerDAOImpl();
+    BorderAgentDAO borderAgentDAO = new BorderAgentDAOImpl();
     public static CustomBrokerBean customBrokerBean = new CustomBrokerBean();
 
     public String delete(int customBrokerIdToBeDeleted) {
@@ -122,9 +129,27 @@ public class CustomBrokerUIHelper {
         customBrokerBean.setWebsite(AddCustomBroker.txtWebsite.getText());
         if (addUpdateFlag.equals("add")) {
             msg = customBrokerDAO.addCustomBroker(customBrokerBean);
+            customBrokerId = customBrokerDAO.getMaxCustomBrokerId();
+            if (lstBorderAgents != null && !lstBorderAgents.isEmpty()) {
+                for (BorderAgentBean borderAgentBean : lstBorderAgents) {
+                    borderAgentBean.setCustomBrokerId(customBrokerId);
+                    borderAgentDAO.addBorderAgent(borderAgentBean);
+                }
+            }
         } else {
             customBrokerBean.setCustomBrokerId(customBrokerId);
             msg = customBrokerDAO.updateCustomBroker(customBrokerBean);
+            if (lstBorderAgents != null && !lstBorderAgents.isEmpty()) {
+                for (BorderAgentBean borderAgentBean : lstBorderAgents) {
+                    if (borderAgentBean.getBorderAgentId() == 0) {
+                        borderAgentBean.setCustomBrokerId(customBrokerId);
+                        borderAgentDAO.addBorderAgent(borderAgentBean);
+                    } else {
+                        borderAgentBean.setCustomBrokerId(customBrokerId);
+                        borderAgentDAO.updateBorderAgent(borderAgentBean);
+                    }
+                }
+            }
         }
         generateTable();
         return msg;

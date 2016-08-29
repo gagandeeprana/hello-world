@@ -22,9 +22,18 @@ public class BorderAgentBean {
     private String email;
     private String openFrom;
     private String openTo;
+    private String afterHour;
     private int is24Hr;
     private String comments;
     private int customBrokerId;
+
+    public String getAfterHour() {
+        return afterHour;
+    }
+
+    public void setAfterHour(String afterHour) {
+        this.afterHour = afterHour;
+    }
 
     public int getBorderAgentId() {
         return borderAgentId;

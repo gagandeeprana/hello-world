@@ -5,6 +5,10 @@
  */
 package dpu.beans.admin;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author gagandeep.rana
@@ -22,6 +26,15 @@ public class AdditionalContactBean {
     private String cellular;
     private int status;
     private String email;
+    Map<Integer, List<WorkingHoursAdditionalContactBean>> map = new HashMap<>();
+
+    public Map<Integer, List<WorkingHoursAdditionalContactBean>> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<Integer, List<WorkingHoursAdditionalContactBean>> map) {
+        this.map = map;
+    }
 
     public String getPosition() {
         return position;

@@ -125,4 +125,23 @@ public class CustomBrokerDAOImpl implements CustomBrokerDAO {
         }
         return "Failed to Update CustomBroker";
     }
+
+    @Override
+    public int getMaxCustomBrokerId() {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("select max(custom_broker_id) from custombrokermaster");
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("CustomBrokerDAOImpl : deleteCustomBroker : " + e);
+//            logger.error("CompanyDAOImpl : deleteCompany : " + e);
+        }
+        return 0;
+    }
 }

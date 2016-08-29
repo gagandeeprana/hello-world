@@ -911,7 +911,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             menuItem1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    AddAdditionalContact addAdditionalContact = new AddAdditionalContact(AdditionalContactWorkingHoursUIHelper.mapWorkingHours.size());
+                    AddAdditionalContact addAdditionalContact = new AddAdditionalContact();
                     addAdditionalContact.setVisible(true);
                 }
             });
@@ -928,7 +928,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 AdditionalContactUIHelper.addUpdateFlag = "update";
                 AdditionalContactBean additionalContactBean = new AdditionalContactBean();
                 additionalContactBean = lstAdditionalContacts.get(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
-                AddAdditionalContact addAdditionalContact = new AddAdditionalContact(tblAdditionalContacts.rowAtPoint(evt1.getPoint()), additionalContactBean);
+                AddAdditionalContact addAdditionalContact = new AddAdditionalContact(additionalContactBean);
                 addAdditionalContact.setVisible(true);
             }
         });
@@ -938,6 +938,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                 AdditionalContactBean additionalContactBean = lstAdditionalContacts.get(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
                 if (additionalContactBean.getAdditionalContactId() != 0) {
                     lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
+                    AdditionalContactWorkingHoursUIHelper.mapWorkingHours.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));
                     additionalContactUIHelper.delete(additionalContactBean.getAdditionalContactId());
                 } else {
                     lstAdditionalContacts.remove(tblAdditionalContacts.rowAtPoint(evt1.getPoint()));

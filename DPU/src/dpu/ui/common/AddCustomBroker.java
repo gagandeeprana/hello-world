@@ -321,9 +321,11 @@ public class AddCustomBroker extends javax.swing.JFrame {
         String msg = customBrokerUIHelper.save();
         JOptionPane.showMessageDialog(null, msg);
         dispose();
+        BorderAgentUIHelper.lstBorderAgents.clear();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        BorderAgentUIHelper.lstBorderAgents.clear();
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -360,7 +362,7 @@ public class AddCustomBroker extends javax.swing.JFrame {
                     BorderAgentBean borderAgentBean = new BorderAgentBean();
                     borderAgentBean = BorderAgentUIHelper.lstBorderAgents.get(AddCustomBroker.tblBorderAgents.rowAtPoint(evt1.getPoint()));
                     BorderAgentUIHelper.borderAgentId = borderAgentBean.getBorderAgentId();
-                    AddBorderAgent addBorderAgent = new AddBorderAgent(borderAgentBean);
+                    AddBorderAgent addBorderAgent = new AddBorderAgent(AddCustomBroker.tblBorderAgents.rowAtPoint(evt1.getPoint()), borderAgentBean);
                     addBorderAgent.setVisible(true);
                 }
             });
@@ -368,8 +370,8 @@ public class AddCustomBroker extends javax.swing.JFrame {
             menuItem4.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    CustomBrokerBean customBrokerBean = CustomBrokerUIHelper.lstCustomBrokers.get(tblCustomBroker.rowAtPoint(evt1.getPoint()));
-                    customBrokerUIHelper.delete(customBrokerBean.getCustomBrokerId());
+                    BorderAgentBean borderAgentBean = BorderAgentUIHelper.lstBorderAgents.get(tblBorderAgents.rowAtPoint(evt1.getPoint()));
+                    borderAgentUIHelper.delete(tblBorderAgents.rowAtPoint(evt1.getPoint()), borderAgentBean.getBorderAgentId());
                 }
             });
         }

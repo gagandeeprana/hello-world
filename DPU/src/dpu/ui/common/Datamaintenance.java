@@ -26,6 +26,8 @@ public class Datamaintenance extends javax.swing.JPanel {
 
     private void setButtonContentArea() {
         btnCustomers.setContentAreaFilled(false);
+        btnCustomBroker.setContentAreaFilled(false);
+        btnStandardTemplates.setContentAreaFilled(false);
     }
 
     /**
@@ -76,8 +78,8 @@ public class Datamaintenance extends javax.swing.JPanel {
         jLabel28 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         btnCustomers = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnStandardTemplates = new javax.swing.JButton();
+        btnCustomBroker = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -233,12 +235,16 @@ public class Datamaintenance extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("<html>Standard Templates</html>");
+        btnStandardTemplates.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnStandardTemplates.setForeground(new java.awt.Color(102, 102, 102));
+        btnStandardTemplates.setText("<html>Standard Templates</html>");
 
-        jButton2.setText("<html>Custom Broker</html>");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCustomBroker.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCustomBroker.setForeground(new java.awt.Color(102, 102, 102));
+        btnCustomBroker.setText("<html>Custom Broker</html>");
+        btnCustomBroker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCustomBrokerActionPerformed(evt);
             }
         });
 
@@ -248,11 +254,11 @@ public class Datamaintenance extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnStandardTemplates, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -260,7 +266,7 @@ public class Datamaintenance extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCustomBroker, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -393,9 +399,9 @@ public class Datamaintenance extends javax.swing.JPanel {
                     .addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnStandardTemplates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCustomBroker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -496,7 +502,7 @@ public class Datamaintenance extends javax.swing.JPanel {
         System.out.println("44444444");
     }//GEN-LAST:event_jLabel15MousePressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCustomBrokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomBrokerActionPerformed
         System.out.println("111111111111");
         ArrangedMainFrame3.jInternalFrame1.setVisible(true);
         ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
@@ -523,13 +529,13 @@ public class Datamaintenance extends javax.swing.JPanel {
         root.setVisible(true);
         System.out.println("44444444");
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCustomBrokerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCustomBroker;
     private javax.swing.JButton btnCustomers;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnStandardTemplates;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

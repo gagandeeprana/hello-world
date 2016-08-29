@@ -4,6 +4,7 @@ import dpu.beans.admin.AdditionalContactBean;
 import dpu.dao.admin.AdditionalContactDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.ui.common.AddAdditionalContact;
+import static dpu.ui.common.AddAdditionalContact.ddlStatus;
 import dpu.ui.common.AddCustomerFrame;
 import java.awt.Color;
 //import static dpu.ui.common.TestAdditionalContactPanel.mainTabbedPane;
@@ -311,7 +312,6 @@ public class AdditionalContactUIHelper {
 
     public void saveToList(int index, AdditionalContactBean additionalContactBean) {
         try {
-
             if (additionalContactBean != null) {
                 if (index == AddCustomerFrame.lstAdditionalContacts.size()) {
                     System.out.println("11111111111");
@@ -334,7 +334,9 @@ public class AdditionalContactUIHelper {
                         additionalContactBean.setStatus(0);
                     }
                     additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
+                    additionalContactBean.setMap(AdditionalContactWorkingHoursUIHelper.mapWorkingHours);
                     AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
+                      
                 } else if (additionalContactBean.getAdditionalContactId() != 0) {
                     System.out.println("2222222222222222");
                     for (AdditionalContactBean additionalContactBeanFromLst : AddCustomerFrame.lstAdditionalContacts) {
@@ -410,6 +412,23 @@ public class AdditionalContactUIHelper {
 //        TestAdditionalContactPanel.mainTabbedPane.setEnabled(true);
 //        TestAdditionalContactPanel.additionalContactPanel.setEnabled(true);
         return msg;
+    }
+    
+    public void showData(AdditionalContactBean additionalContactBean) {
+        AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
+        AddAdditionalContact.txtPosition.setText(additionalContactBean.getPosition());
+        AddAdditionalContact.txtPhone.setText(additionalContactBean.getPhone());
+        AddAdditionalContact.txtExt.setText(additionalContactBean.getExt());
+        AddAdditionalContact.txtFax.setText(additionalContactBean.getFax());
+        AddAdditionalContact.txtPrefix.setText(additionalContactBean.getPrefix());
+        AddAdditionalContact.txtCellular.setText(additionalContactBean.getCellular());
+//        AddAdditionalContact.ddlProvinceState.setSelectedIndex(additionalContactBean.getProvinceState());
+        if (additionalContactBean.getStatus() == 0) {
+            ddlStatus.setSelectedIndex(1);
+        } else {
+            ddlStatus.setSelectedIndex(0);
+        }
+        AddAdditionalContact.txtEmail.setText(additionalContactBean.getEmail());
     }
 
     class AdditionalContactTable implements TableCellRenderer {

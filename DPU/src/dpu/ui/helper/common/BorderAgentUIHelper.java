@@ -92,29 +92,56 @@ public class BorderAgentUIHelper {
         AddCustomBroker.jScrollPane1.setViewportView(AddCustomBroker.tblBorderAgents);
     }
 
-    public void saveToList() {
-        BorderAgentBean borderAgentBean = new BorderAgentBean();
-        borderAgentBean.setCode(AddBorderAgent.txtCode.getText());
-        borderAgentBean.setBorderAgent(AddBorderAgent.txtBorderAgent.getText());
-        borderAgentBean.setBorderCrossing(AddBorderAgent.txtBorderCrossing.getText());
-        borderAgentBean.setPhone(AddBorderAgent.txtPhone.getText());
-        borderAgentBean.setExt(AddBorderAgent.txtExt.getText());
-        borderAgentBean.setFax(AddBorderAgent.txtFax.getText());
-        if (AddBorderAgent.ddlStatus.getSelectedIndex() == 0) {
-            borderAgentBean.setStatus(1);
+    public void saveToList(int index, BorderAgentBean borderAgentBean) {
+        if (borderAgentBean == null) {
+            borderAgentBean = new BorderAgentBean();
+            borderAgentBean.setCode(AddBorderAgent.txtCode.getText());
+            borderAgentBean.setBorderAgent(AddBorderAgent.txtBorderAgent.getText());
+            borderAgentBean.setBorderCrossing(AddBorderAgent.txtBorderCrossing.getText());
+            borderAgentBean.setPhone(AddBorderAgent.txtPhone.getText());
+            borderAgentBean.setExt(AddBorderAgent.txtExt.getText());
+            borderAgentBean.setFax(AddBorderAgent.txtFax.getText());
+            borderAgentBean.setAfterHour(AddBorderAgent.txtAfterHour.getText());
+            if (AddBorderAgent.ddlStatus.getSelectedIndex() == 0) {
+                borderAgentBean.setStatus(1);
+            } else {
+                borderAgentBean.setStatus(0);
+            }
+            borderAgentBean.setEmail(AddBorderAgent.txtEmail.getText());
+            borderAgentBean.setOpenFrom(AddBorderAgent.txtOpenFrom.getText());
+            borderAgentBean.setOpenTo(AddBorderAgent.txtOpenTo.getText());
+            if (AddBorderAgent.chkOpen24Hrs.isSelected()) {
+                borderAgentBean.setIs24Hr(1);
+            } else {
+                borderAgentBean.setIs24Hr(0);
+            }
+            borderAgentBean.setComments(AddBorderAgent.taComments.getText());
+            lstBorderAgents.add(lstBorderAgents.size(), borderAgentBean);
         } else {
-            borderAgentBean.setStatus(0);
+            lstBorderAgents.remove(index);
+            borderAgentBean.setCode(AddBorderAgent.txtCode.getText());
+            borderAgentBean.setBorderAgent(AddBorderAgent.txtBorderAgent.getText());
+            borderAgentBean.setBorderCrossing(AddBorderAgent.txtBorderCrossing.getText());
+            borderAgentBean.setPhone(AddBorderAgent.txtPhone.getText());
+            borderAgentBean.setExt(AddBorderAgent.txtExt.getText());
+            borderAgentBean.setFax(AddBorderAgent.txtFax.getText());
+            borderAgentBean.setAfterHour(AddBorderAgent.txtAfterHour.getText());
+            if (AddBorderAgent.ddlStatus.getSelectedIndex() == 0) {
+                borderAgentBean.setStatus(1);
+            } else {
+                borderAgentBean.setStatus(0);
+            }
+            borderAgentBean.setEmail(AddBorderAgent.txtEmail.getText());
+            borderAgentBean.setOpenFrom(AddBorderAgent.txtOpenFrom.getText());
+            borderAgentBean.setOpenTo(AddBorderAgent.txtOpenTo.getText());
+            if (AddBorderAgent.chkOpen24Hrs.isSelected()) {
+                borderAgentBean.setIs24Hr(1);
+            } else {
+                borderAgentBean.setIs24Hr(0);
+            }
+            borderAgentBean.setComments(AddBorderAgent.taComments.getText());
+            lstBorderAgents.add(index, borderAgentBean);
         }
-        borderAgentBean.setEmail(AddBorderAgent.txtEmail.getText());
-        borderAgentBean.setOpenFrom(AddBorderAgent.txtOpenFrom.getText());
-        borderAgentBean.setOpenTo(AddBorderAgent.txtOpenTo.getText());
-        if (AddBorderAgent.chkOpen24Hrs.isSelected()) {
-            borderAgentBean.setIs24Hr(1);
-        } else {
-            borderAgentBean.setIs24Hr(0);
-        }
-        borderAgentBean.setComments(AddBorderAgent.taComments.getText());
-        lstBorderAgents.add(borderAgentBean);
         generateTable();
     }
 
@@ -130,6 +157,44 @@ public class BorderAgentUIHelper {
             }
         }
         return msg;
+    }
+
+    public String delete(int index, int borderAgentId) {
+        String msg = "";
+        if (borderAgentId != 0) {
+            BorderAgentUIHelper.lstBorderAgents.remove(index);
+            borderAgentDAO.deleteBorderAgent(borderAgentId);
+        } else {
+            BorderAgentUIHelper.lstBorderAgents.remove(index);
+            msg = "BorderAgent Deleted";
+        }
+        generateTable();
+        return msg;
+    }
+
+    public void showData(BorderAgentBean borderAgentBean) {
+        this.borderAgentBean = borderAgentBean;
+        AddBorderAgent.txtCode.setText(borderAgentBean.getCode());
+        AddBorderAgent.txtBorderAgent.setText(borderAgentBean.getBorderAgent());
+        AddBorderAgent.txtBorderCrossing.setText(borderAgentBean.getBorderCrossing());
+        AddBorderAgent.txtPhone.setText(borderAgentBean.getPhone());
+        AddBorderAgent.txtExt.setText(borderAgentBean.getExt());
+        AddBorderAgent.txtFax.setText(borderAgentBean.getFax());
+        AddBorderAgent.txtAfterHour.setText(borderAgentBean.getAfterHour());
+        if (borderAgentBean.getStatus() == 1) {
+            AddBorderAgent.ddlStatus.setSelectedIndex(0);
+        } else {
+            AddBorderAgent.ddlStatus.setSelectedIndex(1);
+        }
+        AddBorderAgent.txtEmail.setText(borderAgentBean.getEmail());
+        AddBorderAgent.txtOpenFrom.setText(borderAgentBean.getOpenFrom());
+        AddBorderAgent.txtOpenTo.setText(borderAgentBean.getOpenTo());
+        if (borderAgentBean.getIs24Hr() == 1) {
+            AddBorderAgent.chkOpen24Hrs.setSelected(true);
+        } else {
+            AddBorderAgent.chkOpen24Hrs.setSelected(false);
+        }
+        AddBorderAgent.taComments.setText(borderAgentBean.getComments());
     }
 
     class BorderAgentTable extends DefaultTableCellRenderer {
