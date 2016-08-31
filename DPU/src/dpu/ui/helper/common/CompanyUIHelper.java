@@ -337,10 +337,12 @@ public class CompanyUIHelper {
                     maxAdditionalContactId = additionalContactDAO.getMaxAdditionalContactId();
                     if (AdditionalContactWorkingHoursUIHelper.mapWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
                         WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
-                        List<WorkingHoursAdditionalContactBean> listOfWorkingHours = mapWorkingHours.get(i);
-                        for (WorkingHoursAdditionalContactBean work : listOfWorkingHours) {
-                            work.setAdditionalContactId(maxAdditionalContactId);
-                            workDAO.addWorkingHours(work);
+                        List<WorkingHoursAdditionalContactBean> listOfWorkingHours = mapWorkingHours.get(additionalContactBean);
+                        if (listOfWorkingHours != null && !listOfWorkingHours.isEmpty()) {
+                            for (WorkingHoursAdditionalContactBean work : listOfWorkingHours) {
+                                work.setAdditionalContactId(maxAdditionalContactId);
+                                workDAO.addWorkingHours(work);
+                            }
                         }
                     }
                 }

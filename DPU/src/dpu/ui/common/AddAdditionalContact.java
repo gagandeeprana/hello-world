@@ -6,6 +6,7 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.AdditionalContactBean;
+import static dpu.ui.common.AddBorderAgent.txtEmail;
 import dpu.ui.helper.common.AdditionalContactUIHelper;
 import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         try {
 
             initComponents();
+            AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
+
             mask = new MaskFormatter("(###) ###-####");
             mask.setPlaceholderCharacter('_');
             txtPhone.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
@@ -135,7 +138,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtExt = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
@@ -147,7 +150,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         txtFax = new javax.swing.JFormattedTextField();
         txtCellular = new javax.swing.JFormattedTextField();
         lblSave = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblCancel = new javax.swing.JLabel();
         btnWorkingHours = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -190,8 +193,13 @@ public class AddAdditionalContact extends javax.swing.JFrame {
         jCheckBox2.setText("Send Actual PickUp Details via Email by default");
         jCheckBox2.setPreferredSize(new java.awt.Dimension(53, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
-        jLabel2.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        lblEmail.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblEmailMousePressed(evt);
+            }
+        });
 
         jLabel20.setText("Prefix");
 
@@ -226,7 +234,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -288,7 +296,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                         .addGap(6, 6, 6)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -316,11 +324,11 @@ public class AddAdditionalContact extends javax.swing.JFrame {
             }
         });
 
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
-        jLabel25.setToolTipText("Close Window...");
-        jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Cancel.png"))); // NOI18N
+        lblCancel.setToolTipText("Close Window...");
+        lblCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel25MousePressed(evt);
+                lblCancelMousePressed(evt);
             }
         });
 
@@ -343,7 +351,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel25))
+                        .addComponent(lblCancel))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -357,7 +365,7 @@ public class AddAdditionalContact extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnWorkingHours))
                 .addContainerGap())
@@ -381,27 +389,34 @@ public class AddAdditionalContact extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lblSaveMouseClicked
 
-    private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
-        // TODO add your handling code here:
+    private void lblCancelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMousePressed
+        AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
         dispose();
-    }//GEN-LAST:event_jLabel25MousePressed
+    }//GEN-LAST:event_lblCancelMousePressed
 
     private void lblSaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaveMousePressed
         if (AdditionalContactUIHelper.addUpdateFlag.equals("add")) {
+            System.out.println("Adding a new AdditionalContact");
             additionalContactBean = new AdditionalContactBean();
             additionalContactUIHelper.saveToList(AddCustomerFrame.lstAdditionalContacts.size(), additionalContactBean);
+            AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
 
         } else {
+            System.out.println("Updating AdditionalContact");
             additionalContactUIHelper.saveToList(index, additionalContactBean);
         }
-        AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
         dispose();
     }//GEN-LAST:event_lblSaveMousePressed
 
     private void btnWorkingHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkingHoursActionPerformed
-        AdditionalContactWorkingHours additionalContactWorkingHours = new AdditionalContactWorkingHours();
+        AdditionalContactWorkingHours additionalContactWorkingHours = new AdditionalContactWorkingHours(AdditionalContactUIHelper.additionalContactBean);
         additionalContactWorkingHours.setVisible(true);
     }//GEN-LAST:event_btnWorkingHoursActionPerformed
+
+    private void lblEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmailMousePressed
+        EmailTemplate emailTemplate = new EmailTemplate(txtEmail.getText().toString());
+        emailTemplate.setVisible(true);
+    }//GEN-LAST:event_lblEmailMousePressed
 
     /**
      * @param args the command line arguments
@@ -450,15 +465,15 @@ public class AddAdditionalContact extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCancel;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblSave;
     public static javax.swing.JFormattedTextField txtCellular;
     public static javax.swing.JTextField txtCustomer;

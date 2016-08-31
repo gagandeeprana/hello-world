@@ -28,7 +28,7 @@ public class AdditionalContactUIHelper {
     List<AdditionalContactBean> lstAdditionalContacts = null;
     int additionalContactIdToBeDeleted = 0;
     String msg = "";
-    AdditionalContactBean additionalContactBean = null;
+    public static AdditionalContactBean additionalContactBean = null;
 
     public void clear() {
 //        TestAdditionalContactPanel.txtAdditionalContactSearch.setText("");
@@ -334,9 +334,9 @@ public class AdditionalContactUIHelper {
                         additionalContactBean.setStatus(0);
                     }
                     additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
-                    additionalContactBean.setMap(AdditionalContactWorkingHoursUIHelper.mapWorkingHours);
                     AddCustomerFrame.lstAdditionalContacts.add(index, additionalContactBean);
-                      
+                    AdditionalContactWorkingHoursUIHelper.mapWorkingHours.put(additionalContactBean, AdditionalContactWorkingHoursUIHelper.listOfWorkingHours);
+
                 } else if (additionalContactBean.getAdditionalContactId() != 0) {
                     System.out.println("2222222222222222");
                     for (AdditionalContactBean additionalContactBeanFromLst : AddCustomerFrame.lstAdditionalContacts) {
@@ -413,8 +413,9 @@ public class AdditionalContactUIHelper {
 //        TestAdditionalContactPanel.additionalContactPanel.setEnabled(true);
         return msg;
     }
-    
+
     public void showData(AdditionalContactBean additionalContactBean) {
+        this.additionalContactBean = additionalContactBean;
         AddAdditionalContact.txtCustomer.setText(additionalContactBean.getCustomerName());
         AddAdditionalContact.txtPosition.setText(additionalContactBean.getPosition());
         AddAdditionalContact.txtPhone.setText(additionalContactBean.getPhone());

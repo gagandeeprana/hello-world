@@ -5,7 +5,10 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.AdditionalContactBean;
+import dpu.beans.admin.WorkingHoursAdditionalContactBean;
 import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
+import java.util.List;
 import properties.TimeConstants;
 
 /**
@@ -30,8 +33,26 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
             additionalContactWorkingHoursUIHelper.disable(false);
             additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
             additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
-            if (!additionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
-                additionalContactWorkingHoursUIHelper.showData(rowOfWorkingHours);
+        } catch (Exception e) {
+            System.out.println("AdditionalContactWorkingHours() : " + e);
+        }
+    }
+
+    public AdditionalContactWorkingHours(AdditionalContactBean additionalContactBean) {
+        try {
+            initComponents();
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            additionalContactWorkingHoursUIHelper = new AdditionalContactWorkingHoursUIHelper();
+            additionalContactWorkingHoursUIHelper.disable(false);
+            additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
+            additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
+            if (additionalContactBean != null) {
+                List<WorkingHoursAdditionalContactBean> listOfWorkHours = AdditionalContactWorkingHoursUIHelper.mapWorkingHours.get(additionalContactBean);
+                additionalContactWorkingHoursUIHelper.showData(listOfWorkHours);
+            } else if (AdditionalContactWorkingHoursUIHelper.listOfWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.listOfWorkingHours.isEmpty()) {
+                additionalContactWorkingHoursUIHelper.showData(AdditionalContactWorkingHoursUIHelper.listOfWorkingHours);
             }
         } catch (Exception e) {
             System.out.println("AdditionalContactWorkingHours() : " + e);
@@ -49,7 +70,7 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
             additionalContactWorkingHoursUIHelper.disable(false);
             additionalContactWorkingHoursUIHelper.setOpenMaskFormatter();
             additionalContactWorkingHoursUIHelper.setCloseMaskFormatter();
-            additionalContactWorkingHoursUIHelper.showData(rowOfWorkingHours);
+//            additionalContactWorkingHoursUIHelper.showData(rowOfWorkingHours);
         } catch (Exception e) {
             System.out.println("AdditionalContactWorkingHours() : " + e);
         }
@@ -777,7 +798,7 @@ public class AdditionalContactWorkingHours extends javax.swing.JFrame {
     }//GEN-LAST:event_btn24Hr8ActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        additionalContactWorkingHoursUIHelper.saveToList(rowOfWorkingHours);
+        additionalContactWorkingHoursUIHelper.saveToList();
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

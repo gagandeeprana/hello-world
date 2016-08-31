@@ -8,19 +8,25 @@ package dpu.ui.common;
 import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.BillingLocationBean;
 import dpu.beans.admin.CompanyBean;
+import dpu.beans.admin.WorkingHoursAdditionalContactBean;
 import dpu.dao.admin.AdditionalContactDAO;
 import dpu.dao.admin.BillingLocationDAO;
+import dpu.dao.admin.WorkingHoursAdditionalContactDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
+import dpu.dao.admin.impl.WorkingHoursAdditionalContactDAOImpl;
 import dpu.ui.helper.common.AdditionalContactUIHelper;
 import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 import dpu.ui.helper.common.CompanyUIHelper;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -168,6 +174,17 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             lstBillingLocations = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
             lstBillingLocationsFromDb = billingLocationDAO.getBillingLocationsByCompanyId(companyBean.getCompanyId());
             lstAdditionalContacts = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
+            if (lstAdditionalContacts != null && !lstAdditionalContacts.isEmpty()) {
+                WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
+                List<WorkingHoursAdditionalContactBean> lstWorks = null;
+                for (int i = 0; i < lstAdditionalContacts.size(); i++) {
+                    AdditionalContactBean additionalContactBean = lstAdditionalContacts.get(i);
+                    lstWorks = workDAO.getWorkingHoursByAdditionalContactId(additionalContactBean.getAdditionalContactId());
+                    if (lstWorks != null && !lstWorks.isEmpty()) {
+                        AdditionalContactWorkingHoursUIHelper.mapWorkingHours.put(additionalContactBean, lstWorks);
+                    }
+                }
+            }
             lstAdditionalContactsFromDb = additionalContactDAO.getAllAdditionalContactsByCompanyId(companyBean.getCompanyId());
             billingLocationUIHelper.generateTable();
             additionalContactUIHelper.generateTable();
@@ -229,7 +246,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtCompanyName = new javax.swing.JTextField();
         jCheckBox4 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
+        lblBrowser = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -254,7 +271,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtWebsite = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -307,10 +324,15 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jCheckBox4.setText("Deliver ETA");
         jCheckBox4.setPreferredSize(new java.awt.Dimension(53, 20));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Website.png"))); // NOI18N
-        jLabel3.setToolTipText("Open this Url on Web Browser...");
+        lblBrowser.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblBrowser.setForeground(new java.awt.Color(51, 51, 51));
+        lblBrowser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Website.png"))); // NOI18N
+        lblBrowser.setToolTipText("Open this Url on Web Browser...");
+        lblBrowser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBrowserMousePressed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -402,10 +424,15 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
         txtWebsite.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
-        jLabel2.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(51, 51, 51));
+        lblEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        lblEmail.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblEmailMousePressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
@@ -558,8 +585,8 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBrowser, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -680,13 +707,13 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel8)
                                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel16)
                                         .addComponent(txtWebsite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblBrowser, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10)
@@ -911,6 +938,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             menuItem1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    AdditionalContactUIHelper.addUpdateFlag = "add";
                     AddAdditionalContact addAdditionalContact = new AddAdditionalContact();
                     addAdditionalContact.setVisible(true);
                 }
@@ -953,6 +981,8 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         dispose();
         AddCustomerFrame.lstAdditionalContacts = new ArrayList<>();
         AddCustomerFrame.lstBillingLocations = new ArrayList<>();
+        AdditionalContactWorkingHoursUIHelper.listOfWorkingHours = new ArrayList<>();
+        AdditionalContactWorkingHoursUIHelper.mapWorkingHours = new HashMap<>();
         companyUIHelper.disable(true);
     }//GEN-LAST:event_jLabel24MousePressed
 
@@ -1117,6 +1147,22 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPagerKeyTyped
 
+    private void lblEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmailMousePressed
+        EmailTemplate emailTemplate = new EmailTemplate(txtEmail.getText().toString());
+        emailTemplate.setVisible(true);
+    }//GEN-LAST:event_lblEmailMousePressed
+
+    private void lblBrowserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBrowserMousePressed
+        try {
+            Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+            if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                desktop.browse(URI.create(txtWebsite.getText()));
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to open web-browser..  " + e);
+        }
+    }//GEN-LAST:event_lblBrowserMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1173,13 +1219,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1189,6 +1233,8 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBrowser;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNotes;
     public static javax.swing.JTable tblAdditionalContacts;
     public static javax.swing.JTable tblBillingLocations;

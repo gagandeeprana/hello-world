@@ -3,6 +3,7 @@ package dpu.dao.admin.impl;
 import dpu.dao.admin.UserDAO;
 import dpu.dao.common.ConnectDB;
 import email.SendSMTP;
+import email.SendSMTPUsingEmailTemplate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,17 @@ public class UserDAOImpl implements UserDAO {
             }
         } catch (Exception e) {
             System.out.println("exception in forgotPassword " + e);
+        }
+        return msg;
+    }
+
+    @Override
+    public String sendMail(String emailTo, String subject, String body) {
+        String msg = "";
+        try {
+            msg = new SendSMTPUsingEmailTemplate().sendMail(emailTo, body, subject);
+        } catch (Exception e) {
+            System.out.println("exception in sendMail " + e);
         }
         return msg;
     }

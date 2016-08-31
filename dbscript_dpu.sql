@@ -1,11 +1,8 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
--- MySQL dump 10.13  Distrib 5.5.27, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
 -- ------------------------------------------------------
--- Server version	5.5.27
+-- Server version	5.5.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -72,7 +69,7 @@ CREATE TABLE `additionalcontactmaster` (
   PRIMARY KEY (`add_contact_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +78,7 @@ CREATE TABLE `additionalcontactmaster` (
 
 LOCK TABLES `additionalcontactmaster` WRITE;
 /*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
-INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ'),(8,32,'AAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA',1,'AAAAAAAAAA'),(9,33,'TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT',1,'TTTTT'),(10,34,'AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA',1,'AAAAAAA'),(17,38,'MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM',1,'MIMIMIMIMIMIM'),(18,38,'GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG',1,'GHGHGHGHG'),(19,39,'AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA',1,'AAAAA'),(20,39,'BBBB','BBBB','BBBB','BBBB','BBBB','BBBB','BBBB',1,'BBBB'),(21,39,'hhhhhh','hhhhh','hhhhhhhhhhhh','hhhhh','hhhhh','hhhhh','hhhhh',1,'hhhhh'),(22,40,'HHHH','HHHH','(222) 222-2222','HHHH','(222) 222-2222','(444) 444-4444','HHHH',1,'HHHH'),(23,41,'nnnnnn','nnnnnn','(333) 333-3333','nnnnnn','(999) 999-9999','(666) 666-6666','nnnnnn',1,'nnnnnn'),(24,41,'BBBBBBBBBBB','BBBBBBBBBBB','(999) 999-9999','BBBBBBBBBBB','(777) 777-7777','(555) 555-5555','BBBBBBBBBBB',1,'BBBBBBBBBBB'),(25,42,'jjjjjjjjj','jjjjjjjjj','(812) 121-2121','jjjjjjjjj','(212) 121-2121','(212) 121-2121','jjjjjjjjj',1,'jjjjjjjjj'),(26,42,'nnnnnnnn','nnnnnnnn','(675) 675-7656','nnnnnnnn','(765) 765-7657','(765) 765-7657','nnnnnnnn',1,'nnnnnnnn');
+INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ'),(8,32,'AAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA',1,'AAAAAAAAAA'),(9,33,'TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT',1,'TTTTT'),(10,34,'AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA',1,'AAAAAAA'),(17,38,'MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM',1,'MIMIMIMIMIMIM'),(18,38,'GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG',1,'GHGHGHGHG'),(19,39,'AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA',1,'AAAAA'),(20,39,'BBBB','BBBB','BBBB','BBBB','BBBB','BBBB','BBBB',1,'BBBB'),(21,39,'hhhhhh','hhhhh','hhhhhhhhhhhh','hhhhh','hhhhh','hhhhh','hhhhh',1,'hhhhh'),(22,40,'HHHH','HHHH','(222) 222-2222','HHHH','(222) 222-2222','(444) 444-4444','HHHH',1,'HHHH'),(23,41,'nnnnnn','nnnnnn','(333) 333-3333','nnnnnn','(999) 999-9999','(666) 666-6666','nnnnnn',1,'nnnnnn'),(24,41,'BBBBBBBBBBB','BBBBBBBBBBB','(999) 999-9999','BBBBBBBBBBB','(777) 777-7777','(555) 555-5555','BBBBBBBBBBB',1,'BBBBBBBBBBB'),(25,42,'jjjjjjjjj','jjjjjjjjj','(812) 121-2121','jjjjjjjjj','(212) 121-2121','(212) 121-2121','jjjjjjjjj',1,'jjjjjjjjj'),(26,42,'nnnnnnnn','nnnnnnnn','(675) 675-7656','nnnnnnnn','(765) 765-7657','(765) 765-7657','nnnnnnnn',1,'nnnnnnnn'),(28,43,'BBBBBB','BBBBBB','(666) 666-6666','BBBBBB','(666) 666-6666','(666) 666-6666','BBBBBB',1,'BBBBBB');
 /*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,6 +149,7 @@ CREATE TABLE `border_agent` (
   `comments` varchar(30) DEFAULT NULL,
   `custom_broker_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`border_agent_id`),
+  KEY `border_agent_ibfk_1` (`custom_broker_id`),
   CONSTRAINT `border_agent_ibfk_1` FOREIGN KEY (`custom_broker_id`) REFERENCES `custombrokermaster` (`custom_broker_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -244,7 +242,7 @@ CREATE TABLE `companymaster` (
   `customer_notes` varchar(500) DEFAULT NULL,
   `after_hours` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +251,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(34,'BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(38,'JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','(666) 666-6666','(666) 666-6666',NULL,'(666) 666-6666'),(39,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(40,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(41,'GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','(888) 888-8888','(888) 888-8888',NULL,'(888) 888-8888'),(42,'Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','(888) 888-8888','Harry','(777) 777-7777','Harry','(444) 444-4444','(333) 333-3333','(222) 222-2222',NULL,'(666) 666-6666');
+INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(34,'BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(38,'JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','(666) 666-6666','(666) 666-6666',NULL,'(666) 666-6666'),(39,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(40,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(41,'GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','(888) 888-8888','(888) 888-8888',NULL,'(888) 888-8888'),(42,'Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','(888) 888-8888','Harry','(777) 777-7777','Harry','(444) 444-4444','(333) 333-3333','(222) 222-2222',NULL,'(666) 666-6666'),(43,'NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','(111) 111-1111','(111) 111-1111',NULL,'(111) 111-1111');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -864,8 +862,8 @@ CREATE TABLE `working_hours_additionalcontact` (
   `additional_contact_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`working_id`),
   KEY `additional_contact_id` (`additional_contact_id`),
-  CONSTRAINT `working_hours_additionalcontact_ibfk_1` FOREIGN KEY (`additional_contact_id`) REFERENCES `additionalcontactmaster` (`add_contact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+  CONSTRAINT `working_hours_additionalcontact_ibfk_1` FOREIGN KEY (`additional_contact_id`) REFERENCES `additionalcontactmaster` (`add_contact_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -874,7 +872,7 @@ CREATE TABLE `working_hours_additionalcontact` (
 
 LOCK TABLES `working_hours_additionalcontact` WRITE;
 /*!40000 ALTER TABLE `working_hours_additionalcontact` DISABLE KEYS */;
-INSERT INTO `working_hours_additionalcontact` VALUES (1,'Sun','11:59','12:01','00:00','12:00',1,17),(2,'Mon','11:59','12:01','00:00','12:00',1,17),(3,'Thur','11:59','12:01','00:00','12:00',1,18),(4,'Fri','11:59','12:01','00:00','12:00',1,18),(5,'Sun','11:59','12:01','00:00','12:00',1,19),(6,'Mon','11:59','12:01','00:00','12:00',1,19),(7,'Tue','11:59','12:01','00:00','12:00',1,19),(8,'Wed','11:59','12:01','00:00','12:00',1,19),(9,'Fri','11:59','12:01','00:00','12:00',1,20),(10,'Sat','11:59','12:01','00:00','12:00',1,20),(11,'Sun','11:59','12:01','00:00','12:00',1,22),(12,'Mon','11:59','12:01','00:00','12:00',1,22),(13,'Sun','11:59','12:01','00:00','12:00',1,23),(14,'Mon','11:59','12:01','00:00','12:00',1,23),(15,'Thur','11:59','12:01','00:00','12:00',1,24),(16,'Fri','11:59','12:01','00:00','12:00',1,24),(17,'Sun','11:59','12:01','00:00','12:00',1,25),(18,'Mon','11:59','12:01','00:00','12:00',1,25),(19,'Sat','11:59','12:01','00:00','12:00',1,26);
+INSERT INTO `working_hours_additionalcontact` VALUES (1,'Sun','11:59','12:01','00:00','12:00',1,17),(2,'Mon','11:59','12:01','00:00','12:00',1,17),(3,'Thur','11:59','12:01','00:00','12:00',1,18),(4,'Fri','11:59','12:01','00:00','12:00',1,18),(5,'Sun','11:59','12:01','00:00','12:00',1,19),(6,'Mon','11:59','12:01','00:00','12:00',1,19),(7,'Tue','11:59','12:01','00:00','12:00',1,19),(8,'Wed','11:59','12:01','00:00','12:00',1,19),(9,'Fri','11:59','12:01','00:00','12:00',1,20),(10,'Sat','11:59','12:01','00:00','12:00',1,20),(11,'Sun','11:59','12:01','00:00','12:00',1,22),(12,'Mon','11:59','12:01','00:00','12:00',1,22),(13,'Sun','11:59','12:01','00:00','12:00',1,23),(14,'Mon','11:59','12:01','00:00','12:00',1,23),(15,'Thur','11:59','12:01','00:00','12:00',1,24),(16,'Fri','11:59','12:01','00:00','12:00',1,24),(17,'Sun','11:59','12:01','00:00','12:00',1,25),(18,'Mon','11:59','12:01','00:00','12:00',1,25),(19,'Sat','11:59','12:01','00:00','12:00',1,26),(22,'Thur','11:59','12:01','00:00','12:00',1,28),(23,'Fri','11:59','12:01','00:00','12:00',1,28);
 /*!40000 ALTER TABLE `working_hours_additionalcontact` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -887,4 +885,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-28 23:34:36
+-- Dump completed on 2016-08-31 19:05:18

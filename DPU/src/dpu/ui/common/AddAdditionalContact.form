@@ -54,7 +54,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblSave" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCancel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel25" min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="lblCancel" min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="lblSave" min="-2" pref="53" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnWorkingHours" min="-2" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="txtEmail" pref="240" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel2" min="-2" pref="16" max="-2" attributes="0"/>
+                                      <Component id="lblEmail" min="-2" pref="16" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -206,7 +206,7 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="lblEmail" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
                               <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
@@ -323,13 +323,16 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="lblEmail">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/Email.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Send an Email to this contact using Outlook..."/>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEmailMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtEmail">
               <AuxValues>
@@ -404,7 +407,7 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSaveMousePressed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel25">
+        <Component class="javax.swing.JLabel" name="lblCancel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/Cancel.png"/>
@@ -412,7 +415,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Close Window..."/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel25MousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCancelMousePressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnWorkingHours">

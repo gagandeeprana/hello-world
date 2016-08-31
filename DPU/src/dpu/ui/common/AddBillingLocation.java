@@ -6,6 +6,7 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.BillingLocationBean;
+import static dpu.ui.common.AddBorderAgent.txtEmail;
 import static dpu.ui.common.AddCustomerFrame.txtPhone;
 import dpu.ui.helper.common.BillingLocationUIHelper;
 import javax.swing.ImageIcon;
@@ -188,7 +189,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         ddlStatus = new javax.swing.JComboBox<>();
-        jLabel19 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         txtExt = new javax.swing.JTextField();
         txtPrefix = new javax.swing.JTextField();
@@ -260,8 +261,13 @@ public class AddBillingLocation extends javax.swing.JFrame {
 
         ddlStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
-        jLabel19.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        lblEmail.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblEmailMousePressed(evt);
+            }
+        });
 
         jLabel20.setText("Ext");
 
@@ -330,7 +336,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -398,7 +404,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel13)
                                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel17)
@@ -475,7 +481,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel19, txtEmail});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblEmail, txtEmail});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -493,6 +499,11 @@ public class AddBillingLocation extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void lblEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmailMousePressed
+        EmailTemplate emailTemplate = new EmailTemplate(txtEmail.getText().toString());
+        emailTemplate.setVisible(true);
+    }//GEN-LAST:event_lblEmailMousePressed
 
     /**
      * @param args the command line arguments
@@ -542,7 +553,6 @@ public class AddBillingLocation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -558,6 +568,7 @@ public class AddBillingLocation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblEmail;
     public static javax.swing.JTextField txtAddress;
     public static javax.swing.JTextField txtArCDN;
     public static javax.swing.JTextField txtArUS;

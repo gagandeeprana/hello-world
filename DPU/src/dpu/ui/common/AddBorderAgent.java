@@ -8,6 +8,7 @@ package dpu.ui.common;
 import dpu.beans.admin.BorderAgentBean;
 import static dpu.ui.common.AddCustomBroker.txtFax;
 import static dpu.ui.common.AddCustomBroker.txtPhone;
+import static dpu.ui.common.AddCustomerFrame.txtEmail;
 import dpu.ui.helper.common.BorderAgentUIHelper;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -166,6 +167,7 @@ public class AddBorderAgent extends javax.swing.JFrame {
         txtOpenTo = new javax.swing.JFormattedTextField();
         jLabel15 = new javax.swing.JLabel();
         txtAfterHour = new javax.swing.JFormattedTextField();
+        lblEmail = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
 
@@ -204,6 +206,16 @@ public class AddBorderAgent extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taComments);
 
         jLabel15.setText("After Hour");
+
+        lblEmail.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(51, 51, 51));
+        lblEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Email.png"))); // NOI18N
+        lblEmail.setToolTipText("Send an Email to this contact using Outlook...");
+        lblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblEmailMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -252,9 +264,12 @@ public class AddBorderAgent extends javax.swing.JFrame {
                                             .addComponent(jLabel13)
                                             .addComponent(jLabel15))
                                         .addGap(35, 35, 35)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtAfterHour)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtAfterHour, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblEmail)))))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -267,7 +282,7 @@ public class AddBorderAgent extends javax.swing.JFrame {
                                 .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
@@ -303,9 +318,11 @@ public class AddBorderAgent extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(txtAfterHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,6 +396,11 @@ public class AddBorderAgent extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void lblEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmailMousePressed
+          EmailTemplate emailTemplate = new EmailTemplate(txtEmail.getText().toString());
+        emailTemplate.setVisible(true);
+    }//GEN-LAST:event_lblEmailMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -434,6 +456,7 @@ public class AddBorderAgent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblEmail;
     public static javax.swing.JTextArea taComments;
     public static javax.swing.JFormattedTextField txtAfterHour;
     public static javax.swing.JTextField txtBorderAgent;
