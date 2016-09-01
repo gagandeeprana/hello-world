@@ -13,8 +13,8 @@ import javax.mail.internet.MimeMessage;
 public class SendSMTPUsingEmailTemplate {
 
     String result = "failed";
-    String emailId = "simplegagan1989@gmail.com";
-    String password = "alpha925";
+    String emailId = "";
+    String password = "";
 
     public String sendMail(String toEmailId, String text, String subject) {
         try {
