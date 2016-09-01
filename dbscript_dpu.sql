@@ -637,6 +637,40 @@ INSERT INTO `shippermaster` VALUES (1,'hj','fghj','fgh','hjg','j','45','gh',0,' 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `standard_charges`
+--
+
+DROP TABLE IF EXISTS `standard_charges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `standard_charges` (
+  `standard_charges_id` int(11) NOT NULL DEFAULT '0',
+  `code` varchar(30) DEFAULT NULL,
+  `charge_type1` int(11) DEFAULT NULL,
+  `description` varchar(60) DEFAULT NULL,
+  `amount_as` int(11) DEFAULT NULL,
+  `base_charge` varchar(50) DEFAULT NULL,
+  `max_charge` varchar(50) DEFAULT NULL,
+  `charge_type2` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `include_charge_amount` int(11) DEFAULT NULL,
+  `calculate_fuel_surcharge` int(11) DEFAULT NULL,
+  `include_driver_payroll` int(11) DEFAULT NULL,
+  PRIMARY KEY (`standard_charges_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `standard_charges`
+--
+
+LOCK TABLES `standard_charges` WRITE;
+/*!40000 ALTER TABLE `standard_charges` DISABLE KEYS */;
+INSERT INTO `standard_charges` VALUES (1,'sdf',1,'sdf',1,'sdf','sdf',1,1,1,1,1);
+/*!40000 ALTER TABLE `standard_charges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `straighttruckmaster`
 --
 
@@ -885,4 +919,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-31 19:05:18
+-- Dump completed on 2016-09-01 19:03:24

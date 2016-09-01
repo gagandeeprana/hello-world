@@ -28,13 +28,15 @@ public class TestStandardCharges extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane9 = new javax.swing.JScrollPane();
-        tblPowerUnit = new javax.swing.JTable();
-        btnClearManagePowerUnit = new javax.swing.JButton();
-        txtPowerUnitSearch = new javax.swing.JTextField();
+        tblStandardCharges = new javax.swing.JTable();
+        btnPrint = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        btnAddManagePowerUnit2 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
-        tblPowerUnit.setModel(new javax.swing.table.DefaultTableModel(
+        tblStandardCharges.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -45,23 +47,27 @@ public class TestStandardCharges extends javax.swing.JPanel {
                 "Code", "Type", "Description", "Rate", "Maximum", "Apply Comm", "Apply F/S", "Driver Pay", "Charge Type"
             }
         ));
-        jScrollPane9.setViewportView(tblPowerUnit);
+        jScrollPane9.setViewportView(tblStandardCharges);
 
-        btnClearManagePowerUnit.setText("Clear");
+        btnPrint.setText("Print");
 
         jLabel10.setText("Search");
 
-        btnAddManagePowerUnit2.setText("+");
-        btnAddManagePowerUnit2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAdd.setText("+");
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddManagePowerUnit2MouseClicked(evt);
+                btnAddMouseClicked(evt);
             }
         });
-        btnAddManagePowerUnit2.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddManagePowerUnit2ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
+
+        btnUpdate.setText("Edit");
+
+        btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,16 +76,20 @@ public class TestStandardCharges extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 1248, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddManagePowerUnit2)
+                        .addComponent(btnAdd)
                         .addGap(11, 11, 11)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClearManagePowerUnit)))
-                .addGap(0, 11, Short.MAX_VALUE))
+                        .addComponent(btnPrint)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete)))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,34 +97,37 @@ public class TestStandardCharges extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtPowerUnitSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClearManagePowerUnit)
-                    .addComponent(btnAddManagePowerUnit2))
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrint)
+                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddManagePowerUnit2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnit2MouseClicked
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
         AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
         addPowerUnitFrame.setVisible(true);
-    }//GEN-LAST:event_btnAddManagePowerUnit2MouseClicked
+    }//GEN-LAST:event_btnAddMouseClicked
 
-    private void btnAddManagePowerUnit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddManagePowerUnit2ActionPerformed
-
-    }//GEN-LAST:event_btnAddManagePowerUnit2ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        AddStandardAccessorialCharge addStandardAccessorialCharge = new AddStandardAccessorialCharge();
+        addStandardAccessorialCharge.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnAddManagePowerUnit;
-    public static javax.swing.JButton btnAddManagePowerUnit1;
-    public static javax.swing.JButton btnAddManagePowerUnit2;
-    public static javax.swing.JButton btnClearManagePowerUnit;
+    public static javax.swing.JButton btnAdd;
+    public static javax.swing.JButton btnDelete;
+    public static javax.swing.JButton btnPrint;
+    public static javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JScrollPane jScrollPane9;
-    public static javax.swing.JTable tblPowerUnit;
-    public static javax.swing.JTextField txtPowerUnitSearch;
+    public static javax.swing.JScrollPane jScrollPane9;
+    public static javax.swing.JTable tblStandardCharges;
+    public static javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
