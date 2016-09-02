@@ -644,7 +644,7 @@ DROP TABLE IF EXISTS `standard_charges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `standard_charges` (
-  `standard_charges_id` int(11) NOT NULL DEFAULT '0',
+  `standard_charges_id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(30) DEFAULT NULL,
   `charge_type1` int(11) DEFAULT NULL,
   `description` varchar(60) DEFAULT NULL,
@@ -657,7 +657,7 @@ CREATE TABLE `standard_charges` (
   `calculate_fuel_surcharge` int(11) DEFAULT NULL,
   `include_driver_payroll` int(11) DEFAULT NULL,
   PRIMARY KEY (`standard_charges_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -666,7 +666,7 @@ CREATE TABLE `standard_charges` (
 
 LOCK TABLES `standard_charges` WRITE;
 /*!40000 ALTER TABLE `standard_charges` DISABLE KEYS */;
-INSERT INTO `standard_charges` VALUES (1,'sdf',1,'sdf',1,'sdf','sdf',1,1,1,1,1);
+INSERT INTO `standard_charges` VALUES (3,'aaaaa',1,'aaaaaaa',1,'34543','35666',1,1,1,1,1),(4,'bbbbbbbb',1,'bbbbbbbbbbbbbb',1,'2224','44444',1,1,1,1,0);
 /*!40000 ALTER TABLE `standard_charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -919,4 +919,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-01 19:03:24
+-- Dump completed on 2016-09-02 19:32:59

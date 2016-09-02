@@ -14,11 +14,10 @@ import java.util.List;
  */
 public interface StandardChargesDAO {
 
-    List<StandardChargesBean> getAllStandardCharges(String name);
+    List<StandardChargesBean> getAllStandardCharges();
 
-//    String addStandardCharges(StandardChargesBean obj);
-//
+    String addStandardCharges(StandardChargesBean obj);
 //    String updateStandardCharges(StandardChargesBean obj);
-//
-//    String deleteStandardCharges(int standardChargesId);
+
+    String deleteStandardCharges(int standardChargesId);
 }

@@ -5,6 +5,15 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.CustomBrokerBean;
+import dpu.beans.admin.StandardChargesBean;
+import dpu.dao.admin.StandardChargesDAO;
+import dpu.dao.admin.impl.StandardChargesDAOImpl;
+import static dpu.ui.common.TestCustomBrokersPanel.tblCustomBroker;
+import dpu.ui.helper.common.CustomBrokerUIHelper;
+import dpu.ui.helper.common.StandardChargesUIHelper;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gagandeep.rana
@@ -14,8 +23,16 @@ public class TestStandardCharges extends javax.swing.JPanel {
     /**
      * Creates new form TestStandardCharges
      */
+    StandardChargesUIHelper standardChargesUIHelper = null;
+    StandardChargesDAO standardChargesDAO = null;
+
     public TestStandardCharges() {
         initComponents();
+        standardChargesUIHelper = new StandardChargesUIHelper();
+        standardChargesDAO = new StandardChargesDAOImpl();
+        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges();
+        standardChargesUIHelper.generateTable();
+
     }
 
     /**
@@ -66,8 +83,18 @@ public class TestStandardCharges extends javax.swing.JPanel {
         });
 
         btnUpdate.setText("Edit");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,15 +136,27 @@ public class TestStandardCharges extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
-        AddPowerUnitFrame addPowerUnitFrame = new AddPowerUnitFrame();
-        addPowerUnitFrame.setVisible(true);
+
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         AddStandardAccessorialCharge addStandardAccessorialCharge = new AddStandardAccessorialCharge();
         addStandardAccessorialCharge.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int standardChargesIdToBeDeleted = StandardChargesUIHelper.lstStandardCharges.get(tblStandardCharges.getSelectedRow()).getStandardChargesId();
+        String msg = standardChargesUIHelper.delete(standardChargesIdToBeDeleted);
+        JOptionPane.showMessageDialog(null, msg);
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        StandardChargesBean standardChargesBean = StandardChargesUIHelper.lstStandardCharges.get(tblStandardCharges.getSelectedRow());
+        StandardChargesUIHelper.standardChargesId = standardChargesBean.getStandardChargesId();
+        StandardChargesUIHelper.addUpdateFlag = "update";
+        AddStandardAccessorialCharge addStandardAccessorialCharge = new AddStandardAccessorialCharge(standardChargesBean);
+        addStandardAccessorialCharge.setVisible(true);
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

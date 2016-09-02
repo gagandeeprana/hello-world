@@ -28,6 +28,7 @@ public class Datamaintenance extends javax.swing.JPanel {
         btnCustomers.setContentAreaFilled(false);
         btnCustomBroker.setContentAreaFilled(false);
         btnStandardTemplates.setContentAreaFilled(false);
+        btnStandardCharges.setContentAreaFilled(false);
     }
 
     /**
@@ -54,7 +55,6 @@ public class Datamaintenance extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
@@ -72,14 +72,12 @@ public class Datamaintenance extends javax.swing.JPanel {
         jSeparator17 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
         jSeparator18 = new javax.swing.JSeparator();
-        jLabel26 = new javax.swing.JLabel();
-        jSeparator19 = new javax.swing.JSeparator();
-        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         btnCustomers = new javax.swing.JButton();
         btnStandardTemplates = new javax.swing.JButton();
         btnCustomBroker = new javax.swing.JButton();
+        btnStandardCharges = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -129,10 +127,6 @@ public class Datamaintenance extends javax.swing.JPanel {
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabel17.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel17.setText("<html>Standard Charges</html>");
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(102, 102, 102));
@@ -199,18 +193,6 @@ public class Datamaintenance extends javax.swing.JPanel {
 
         jSeparator18.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel26.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel26.setText("<html>Timings</html>");
-        jLabel26.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jSeparator19.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        jLabel27.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel27.setText("<html> Prospects </html>");
-        jLabel27.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
         jLabel28.setFont(new java.awt.Font("Vijaya", 1, 17)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(102, 102, 102));
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Cross.png"))); // NOI18N
@@ -248,6 +230,15 @@ public class Datamaintenance extends javax.swing.JPanel {
             }
         });
 
+        btnStandardCharges.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnStandardCharges.setForeground(new java.awt.Color(102, 102, 102));
+        btnStandardCharges.setText("<html>Standard Charges</html>");
+        btnStandardCharges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStandardChargesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -261,7 +252,7 @@ public class Datamaintenance extends javax.swing.JPanel {
                 .addComponent(btnStandardTemplates, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,14 +274,14 @@ public class Datamaintenance extends javax.swing.JPanel {
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnStandardCharges, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -299,9 +290,9 @@ public class Datamaintenance extends javax.swing.JPanel {
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,198 +300,88 @@ public class Datamaintenance extends javax.swing.JPanel {
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator15, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator19, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel28)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(jSeparator14, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator13, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator12, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator11, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator10)
-                            .addComponent(jSeparator1)
-                            .addComponent(jSeparator2)
-                            .addComponent(jSeparator3)
-                            .addComponent(jSeparator4)
-                            .addComponent(jSeparator5)
-                            .addComponent(jSeparator6)
-                            .addComponent(jSeparator7)
-                            .addComponent(jSeparator8)
-                            .addComponent(jSeparator9))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(btnStandardCharges, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnStandardTemplates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCustomBroker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnCustomBroker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1316, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
-        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
-        //        jInternalFrame1.setTitle("DPU - " + jLabel25.getText().substring(jLabel25.getText().indexOf("<html>"), jLabel25.getText().indexOf("</html>")));
-        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Class");
-        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
-        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
-        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
-        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
-        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
-        bi.setNorthPane(null);
-        bi.setEastPane(null);
-        bi.setWestPane(null);
-        bi.setSouthPane(null);
-        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
-        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
-        root.setVisible(false);
-        TestClassPanel testClassPanel = new TestClassPanel();
-        testClassPanel.setBounds(5, 5, 500, 600);
-        root.add(testClassPanel);
-        root.setVisible(true);
-    }//GEN-LAST:event_jLabel25MouseClicked
-
-    private void jLabel25MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel25MouseEntered
-
-    private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
-        jPanel3.setVisible(false);
-    }//GEN-LAST:event_jLabel28MouseClicked
-
-    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
-        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
-        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
-        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
-        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
-        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
-        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
-//        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
-        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
-        bi.setNorthPane(null);
-        bi.setEastPane(null);
-        bi.setWestPane(null);
-        bi.setSouthPane(null);
-        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
-        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
-        root.setVisible(false);
-        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
-        testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
-        root.add(testCompanyPanel);
-        root.setVisible(true);
-    }//GEN-LAST:event_btnCustomersActionPerformed
-
-    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
-        System.out.println("111111111111");
-        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
-        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
-        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
-        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
-        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
-        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
-        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
-        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
-        System.out.println("2222222222");
-        bi.setNorthPane(null);
-        bi.setEastPane(null);
-        bi.setWestPane(null);
-        bi.setSouthPane(null);
-        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
-        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
-        root.setVisible(false);
-        TestShipperPannel testShippersPanel = new TestShipperPannel();
-        System.out.println("33333333");
-        testShippersPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
-        root.add(testShippersPanel);
-        root.setVisible(true);
-        System.out.println("44444444");
-    }//GEN-LAST:event_jLabel15MousePressed
 
     private void btnCustomBrokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomBrokerActionPerformed
         System.out.println("111111111111");
@@ -528,20 +409,125 @@ public class Datamaintenance extends javax.swing.JPanel {
         root.add(testCustomBrokersPanel);
         root.setVisible(true);
         System.out.println("44444444");
-        
+
     }//GEN-LAST:event_btnCustomBrokerActionPerformed
+
+    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
+        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
+        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
+        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
+        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
+        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
+        //        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
+        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
+        bi.setNorthPane(null);
+        bi.setEastPane(null);
+        bi.setWestPane(null);
+        bi.setSouthPane(null);
+        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
+        root.setVisible(false);
+        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
+        testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(testCompanyPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_btnCustomersActionPerformed
+
+    private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
+        jPanel3.setVisible(false);
+    }//GEN-LAST:event_jLabel28MouseClicked
+
+    private void jLabel25MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel25MouseEntered
+
+    private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
+        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
+        //        jInternalFrame1.setTitle("DPU - " + jLabel25.getText().substring(jLabel25.getText().indexOf("<html>"), jLabel25.getText().indexOf("</html>")));
+        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Class");
+        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
+        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
+        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
+        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
+        bi.setNorthPane(null);
+        bi.setEastPane(null);
+        bi.setWestPane(null);
+        bi.setSouthPane(null);
+        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
+        root.setVisible(false);
+        TestClassPanel testClassPanel = new TestClassPanel();
+        testClassPanel.setBounds(5, 5, 500, 600);
+        root.add(testClassPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_jLabel25MouseClicked
+
+    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
+        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
+        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
+        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
+        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
+        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
+        bi.setNorthPane(null);
+        bi.setEastPane(null);
+        bi.setWestPane(null);
+        bi.setSouthPane(null);
+        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
+        root.setVisible(false);
+        TestShipperPannel testShippersPanel = new TestShipperPannel();
+        testShippersPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(testShippersPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_jLabel15MousePressed
+
+    private void btnStandardChargesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStandardChargesActionPerformed
+        ArrangedMainFrame3.jInternalFrame1.setVisible(true);
+        ArrangedMainFrame3.jInternalFrame1.setTitle("DPU - Customers");
+        ArrangedMainFrame3.jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
+        ArrangedMainFrame3.jInternalFrame1.setMaximizable(false);
+        ArrangedMainFrame3.jInternalFrame1.setIconifiable(false);
+        ArrangedMainFrame3.jInternalFrame1.setClosable(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().setVisible(false);
+        ArrangedMainFrame3.jInternalFrame1.getContentPane().removeAll();
+        ArrangedMainFrame3.jInternalFrame1.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) ArrangedMainFrame3.jInternalFrame1.getUI();
+        bi.setNorthPane(null);
+        bi.setEastPane(null);
+        bi.setWestPane(null);
+        bi.setSouthPane(null);
+        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        Container root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
+        root.setVisible(false);
+        TestStandardCharges testStandardCharges = new TestStandardCharges();
+        testStandardCharges.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(testStandardCharges);
+        root.setVisible(true);
+    }//GEN-LAST:event_btnStandardChargesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomBroker;
     private javax.swing.JButton btnCustomers;
+    private javax.swing.JButton btnStandardCharges;
     private javax.swing.JButton btnStandardTemplates;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -550,8 +536,6 @@ public class Datamaintenance extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JPanel jPanel3;
@@ -565,7 +549,6 @@ public class Datamaintenance extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator18;
-    private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;

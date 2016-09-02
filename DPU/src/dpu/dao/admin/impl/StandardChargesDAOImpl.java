@@ -21,20 +21,19 @@ public class StandardChargesDAOImpl implements StandardChargesDAO {
     Logger logger = Logger.getLogger(StandardChargesDAOImpl.class);
 
     @Override
-    public List<StandardChargesBean> getAllStandardCharges(String name) {
+    public List<StandardChargesBean> getAllStandardCharges() {
         List<StandardChargesBean> lstStandardCharges = new ArrayList<>();
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from standard_charges where name like ? order by name");
-            pstmt.setString(1, "%" + name + "%");
+            pstmt = conn.prepareStatement("select * from standard_charges");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 StandardChargesBean obj = new StandardChargesBean();
-                obj.setStandardChargesId(rs.getInt("standard_charge_id"));
-                obj.setCode(rs.getString("name"));
+                obj.setStandardChargesId(rs.getInt("standard_charges_id"));
+                obj.setCode(rs.getString("code"));
                 obj.setChargeType1(rs.getInt("charge_type1"));
                 obj.setDescription(rs.getString("description"));
                 obj.setAmountAs(rs.getInt("amount_as"));
@@ -48,29 +47,39 @@ public class StandardChargesDAOImpl implements StandardChargesDAO {
                 lstStandardCharges.add(obj);
             }
         } catch (Exception e) {
+            System.out.println("StandardChargesDAOImpl : getAllStandardCharges: " + e);
             logger.error("StandardChargesDAOImpl : getAllStandardCharges : " + e);
         }
         return lstStandardCharges;
     }
 
-//    @Override
-//    public String addStandardCharges(StandardChargesBean obj) {
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        try {
-//            conn = connectDB.connect();
-//            pstmt = conn.prepareStatement("insert into standard_charges values(?,?)");
-//            pstmt.setInt(1, obj.getStandardChargesId());
-//            pstmt.setString(2, obj.getStandardCharges());
-//            int i = pstmt.executeUpdate();
-//            if (i > 0) {
-//                return "StandardCharges Added";
-//            }
-//        } catch (Exception e) {
-//            logger.error("StandardChargesDAOImpl : addStandardCharges : " + e);
-//        }
-//        return "Failed to Add StandardCharges";
-//    }
+    @Override
+    public String addStandardCharges(StandardChargesBean obj) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("insert into standard_charges (code,charge_type1,description,amount_as,base_charge,max_charge,charge_type2,status,include_charge_amount,calculate_fuel_surcharge,include_driver_payroll) values (?,?,?,?,?,?,?,?,?,?,?)");
+            pstmt.setString(1, obj.getCode());
+            pstmt.setInt(2, obj.getChargeType1());
+            pstmt.setString(3, obj.getDescription());
+            pstmt.setInt(4, obj.getAmountAs());
+            pstmt.setString(5, obj.getBaseCharge());
+            pstmt.setString(6, obj.getMaxCharge());
+            pstmt.setInt(7, obj.getChargeType2());
+            pstmt.setInt(8, obj.getStatus());
+            pstmt.setInt(9, obj.getIncludeChargeAmount());
+            pstmt.setInt(10, obj.getCalculateFuelSurcharge());
+            pstmt.setInt(11, obj.getIncludeDriverPayroll());
+            int i = pstmt.executeUpdate();
+            if (i > 0) {
+                return "StandardCharges Added";
+            }
+        } catch (Exception e) {
+            logger.error("StandardChargesDAOImpl : addStandardCharges : " + e);
+        }
+        return "Failed to Add StandardCharges";
+    }
 //
 //    @Override
 //    public String updateStandardCharges(StandardChargesBean obj) {
@@ -108,4 +117,23 @@ public class StandardChargesDAOImpl implements StandardChargesDAO {
 //        }
 //        return "Failed to Delete StandardCharges";
 //    }
+
+    @Override
+    public String deleteStandardCharges(int standardChargesId) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("delete from standard_charges where standard_charges_id = ?");
+            pstmt.setInt(1, standardChargesId);
+            int i = pstmt.executeUpdate();
+            if (i > 0) {
+                return "Failed to Delete StandardCharges";
+            }
+        } catch (Exception e) {
+            System.out.println("");
+        }
+        return "StandardCharges Deleted";
+    }
+
 }
