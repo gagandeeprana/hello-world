@@ -9,6 +9,7 @@ import dpu.beans.admin.CustomBrokerBean;
 import dpu.beans.admin.StandardChargesBean;
 import dpu.dao.admin.StandardChargesDAO;
 import dpu.dao.admin.impl.StandardChargesDAOImpl;
+import dpu.reports.common.JasperReportGenerator;
 import static dpu.ui.common.TestCustomBrokersPanel.tblCustomBroker;
 import dpu.ui.helper.common.CustomBrokerUIHelper;
 import dpu.ui.helper.common.StandardChargesUIHelper;
@@ -30,7 +31,7 @@ public class TestStandardCharges extends javax.swing.JPanel {
         initComponents();
         standardChargesUIHelper = new StandardChargesUIHelper();
         standardChargesDAO = new StandardChargesDAOImpl();
-        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges();
+        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
         standardChargesUIHelper.generateTable();
 
     }
@@ -67,6 +68,17 @@ public class TestStandardCharges extends javax.swing.JPanel {
         jScrollPane9.setViewportView(tblStandardCharges);
 
         btnPrint.setText("Print");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         jLabel10.setText("Search");
 
@@ -140,6 +152,7 @@ public class TestStandardCharges extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        StandardChargesUIHelper.addUpdateFlag = "add";
         AddStandardAccessorialCharge addStandardAccessorialCharge = new AddStandardAccessorialCharge();
         addStandardAccessorialCharge.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
@@ -157,6 +170,15 @@ public class TestStandardCharges extends javax.swing.JPanel {
         AddStandardAccessorialCharge addStandardAccessorialCharge = new AddStandardAccessorialCharge(standardChargesBean);
         addStandardAccessorialCharge.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        JasperReportGenerator.generateReport("StandardChargesReport.jrxml");
+    }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
+        standardChargesUIHelper.generateTable();
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

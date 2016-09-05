@@ -5,17 +5,25 @@
  */
 package dpu;
 
+import dpu.ui.common.LoginFrame;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author gagandeep.rana
  */
 public class DPU {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+            LoginFrame loginFrame = new LoginFrame();
+            loginFrame.setVisible(true);
+//            ((ClassPathXmlApplicationContext) context).close();
+        } catch (Exception e) {
+            System.out.println("Main: " + e);
+        }
     }
-    
 }

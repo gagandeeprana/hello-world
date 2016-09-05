@@ -1,3 +1,1 @@
-1. Spring Tutorials
-2. DPU Project
-3. Techs Blog Maintenance
+http://stackoverflow.com/questions/13661985/spring-mvc-difference-between-contextcomponent-scan-and-annotation-driven

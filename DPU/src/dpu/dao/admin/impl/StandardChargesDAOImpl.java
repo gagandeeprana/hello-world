@@ -21,14 +21,15 @@ public class StandardChargesDAOImpl implements StandardChargesDAO {
     Logger logger = Logger.getLogger(StandardChargesDAOImpl.class);
 
     @Override
-    public List<StandardChargesBean> getAllStandardCharges() {
+    public List<StandardChargesBean> getAllStandardCharges(String code) {
         List<StandardChargesBean> lstStandardCharges = new ArrayList<>();
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         try {
             conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from standard_charges");
+            pstmt = conn.prepareStatement("select * from standard_charges where code like ?");
+            pstmt.setString(1, "%" + code + "%");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 StandardChargesBean obj = new StandardChargesBean();
@@ -136,4 +137,32 @@ public class StandardChargesDAOImpl implements StandardChargesDAO {
         return "StandardCharges Deleted";
     }
 
+    @Override
+    public String updateStandardCharges(StandardChargesBean obj) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = connectDB.connect();
+            pstmt = conn.prepareStatement("update standard_charges set code=?,charge_type1=?,description=?,amount_as=?,base_charge=?,max_charge=?,charge_type2=?,status=?,include_charge_amount=?,calculate_fuel_surcharge=?,include_driver_payroll=? where standard_charges_id = ?");
+            pstmt.setString(1, obj.getCode());
+            pstmt.setInt(2, obj.getChargeType1());
+            pstmt.setString(3, obj.getDescription());
+            pstmt.setInt(4, obj.getAmountAs());
+            pstmt.setString(5, obj.getBaseCharge());
+            pstmt.setString(6, obj.getMaxCharge());
+            pstmt.setInt(7, obj.getChargeType2());
+            pstmt.setInt(8, obj.getStatus());
+            pstmt.setInt(9, obj.getIncludeChargeAmount());
+            pstmt.setInt(10, obj.getCalculateFuelSurcharge());
+            pstmt.setInt(11, obj.getIncludeDriverPayroll());
+            pstmt.setInt(12, obj.getStandardChargesId());
+            int i = pstmt.executeUpdate();
+            if (i > 0) {
+                return "StandardCharges Updated";
+            }
+        } catch (Exception e) {
+            logger.error("StandardChargesDAOImpl : updateStandardCharges : " + e);
+        }
+        return "Failed to Update StandardCharges";
+    }
 }

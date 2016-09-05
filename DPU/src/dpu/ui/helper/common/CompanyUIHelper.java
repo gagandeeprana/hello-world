@@ -22,7 +22,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
@@ -30,12 +29,15 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CompanyUIHelper {
 
+    @Autowired
+    CompanyDAO companyDAO;
+
     static public String addUpdateFlag = "";
     public static int companyId = 0;
-    CompanyDAO companyDAO = new CompanyDAOImpl();
     public static List<CompanyBean> lstCompanies = null;
     int companyIdToBeDeleted = 0;
     String msg = "";

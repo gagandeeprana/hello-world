@@ -31,6 +31,7 @@ public class AddStandardAccessorialCharge extends javax.swing.JFrame {
         standardChargesUIHelper = new StandardChargesUIHelper();
         setLocationRelativeTo(null);
         setTitle("Edit StandardCharges");
+        btnSave.setText("Update");
         standardChargesUIHelper.showData(standardChargesBean);
     }
 

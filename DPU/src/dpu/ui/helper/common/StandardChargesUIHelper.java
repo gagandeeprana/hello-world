@@ -134,7 +134,7 @@ public class StandardChargesUIHelper {
 
     public String delete(int standardChargesIdToBeDeleted) {
         String msg = standardChargesDAO.deleteStandardCharges(standardChargesIdToBeDeleted);
-        lstStandardCharges = standardChargesDAO.getAllStandardCharges();
+        lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
         generateTable();
         return msg;
     }
@@ -148,6 +148,9 @@ public class StandardChargesUIHelper {
         AddStandardAccessorialCharge.txtMaxCharge.setText(standardChargesBean.getMaxCharge());
         AddStandardAccessorialCharge.ddlChargeType2.setSelectedIndex(standardChargesBean.getChargeType2() - 1);
         AddStandardAccessorialCharge.ddlStatus.setSelectedIndex(standardChargesBean.getStatus() == 1 ? 0 : 1);
+        AddStandardAccessorialCharge.chk1.setSelected(standardChargesBean.getIncludeChargeAmount() == 1 ? true : false);
+        AddStandardAccessorialCharge.chk2.setSelected(standardChargesBean.getCalculateFuelSurcharge() == 1 ? true : false);
+        AddStandardAccessorialCharge.chk3.setSelected(standardChargesBean.getIncludeDriverPayroll() == 1 ? true : false);
     }
 
     public void generateTable() {
@@ -269,8 +272,14 @@ public class StandardChargesUIHelper {
         standardChargesBean.setIncludeChargeAmount(AddStandardAccessorialCharge.chk1.isSelected() ? 1 : 0);
         standardChargesBean.setCalculateFuelSurcharge(AddStandardAccessorialCharge.chk2.isSelected() ? 1 : 0);
         standardChargesBean.setIncludeDriverPayroll(AddStandardAccessorialCharge.chk3.isSelected() ? 1 : 0);
-        String msg = standardChargesDAO.addStandardCharges(standardChargesBean);
-        lstStandardCharges = standardChargesDAO.getAllStandardCharges();
+        String msg = "";
+        if (StandardChargesUIHelper.addUpdateFlag.equals("add")) {
+            msg = standardChargesDAO.addStandardCharges(standardChargesBean);
+        } else {
+            standardChargesBean.setStandardChargesId(standardChargesId);
+            msg = standardChargesDAO.updateStandardCharges(standardChargesBean);
+        }
+        lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
         generateTable();
         JOptionPane.showMessageDialog(null, msg);
     }
