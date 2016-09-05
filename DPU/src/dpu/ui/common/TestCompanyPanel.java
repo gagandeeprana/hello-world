@@ -26,9 +26,10 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import properties.ImageConstants;
 import properties.ReadFromPropertiesFile;
 
@@ -36,19 +37,23 @@ import properties.ReadFromPropertiesFile;
  *
  * @author gagandeep.rana
  */
+@Component
 public class TestCompanyPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form TestCompanyPanel
      */
-    CompanyUIHelper companyUI = null;
+    @Autowired
+    CompanyUIHelper companyUIHelper;
+//    CompanyUIHelper companyUIHelper = new CompanyUIHelper();
+
     String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
 
     public TestCompanyPanel() {
         initComponents();
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        companyUI = new CompanyUIHelper();
-        companyUI.generateTable();
+//        companyUI = new CompanyUIHelper();
+        companyUIHelper.generateTable();
 
         btnPrint.setAction(new ShowWaitAction(""));
         btnPrint.setToolTipText("Print Company Report...");
@@ -205,13 +210,13 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(854, Short.MAX_VALUE))
+                .addContainerGap(861, Short.MAX_VALUE))
             .addComponent(jScrollPane4)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -220,7 +225,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                     .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -242,7 +247,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCompanySearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyReleased
-        companyUI.generateTable();
+        companyUIHelper.generateTable();
     }//GEN-LAST:event_txtCompanySearchKeyReleased
 
     private void txtCompanySearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanySearchKeyTyped
@@ -254,10 +259,10 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
     private void lblAddManageCompanyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddManageCompanyMousePressed
         // TODO add your handling code here:
-        companyUI.addUpdateFlag = "add";
+        companyUIHelper.addUpdateFlag = "add";
         AddCustomerFrame addCustomerFrame = new AddCustomerFrame();
         addCustomerFrame.setVisible(true);
-        companyUI.disable(false);
+        companyUIHelper.disable(false);
     }//GEN-LAST:event_lblAddManageCompanyMousePressed
 
     private void tblCompanyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCompanyMouseReleased
@@ -315,7 +320,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     CompanyBean companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
-                    companyUI.delete(companyBean.getCompanyId());
+                    companyUIHelper.delete(companyBean.getCompanyId());
                 }
             });
         } else if (evt.getButton() == 1) {
@@ -329,7 +334,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int companyIdToBeDeleted = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow()).getCompanyId();
-        companyUI.delete(companyIdToBeDeleted);
+        companyUIHelper.delete(companyIdToBeDeleted);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

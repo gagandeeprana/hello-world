@@ -8,11 +8,15 @@ package dpu.beans.admin;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author gagandeep.rana
  */
+@Getter
+@Setter
 public class AdditionalContactBean {
 
     private int additionalContactId;
@@ -27,100 +31,4 @@ public class AdditionalContactBean {
     private int status;
     private String email;
     Map<Integer, List<WorkingHoursAdditionalContactBean>> map = new HashMap<>();
-
-    public Map<Integer, List<WorkingHoursAdditionalContactBean>> getMap() {
-        return map;
-    }
-
-    public void setMap(Map<Integer, List<WorkingHoursAdditionalContactBean>> map) {
-        this.map = map;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getCellular() {
-        return cellular;
-    }
-
-    public void setCellular(String cellular) {
-        this.cellular = cellular;
-    }
-
-    public int getAdditionalContactId() {
-        return additionalContactId;
-    }
-
-    public void setAdditionalContactId(int additionalContactId) {
-        this.additionalContactId = additionalContactId;
-    }
-
-    public int getContactId() {
-        return contactId;
-    }
-
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getExt() {
-        return ext;
-    }
-
-    public void setExt(String ext) {
-        this.ext = ext;
-    }
-
-    public String getFax() {
-        return fax;
-    }
-
-    public void setFax(String fax) {
-        this.fax = fax;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

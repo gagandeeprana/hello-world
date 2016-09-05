@@ -31,190 +31,32 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Component
 public class CompanyUIHelper {
 
-    @Autowired
-    CompanyDAO companyDAO;
+//    @Autowired
+//    CompanyDAO companyDAO;
+    CompanyDAO companyDAO = new CompanyDAOImpl();
 
     static public String addUpdateFlag = "";
     public static int companyId = 0;
     public static List<CompanyBean> lstCompanies = null;
     int companyIdToBeDeleted = 0;
     String msg = "";
-    public static CompanyBean companyBean = new CompanyBean();
+
+    @Autowired
+    public CompanyBean companyBean;
 
     public void clear() {
         TestCompanyPanel.txtCompanySearch.setText("");
     }
 
     public void disable(boolean var) {
-//        TestCompanyPanel.tblCompany.setEnabled(var);
-//        TestCompanyPanel.lblAddManageCompany.setEnabled(var);
-//        TestCompanyPanel.btnPrint.setEnabled(var);
-//        TestCompanyPanel.txtCompanySearch.setEnabled(var);
     }
 
-//    public class ButtonRenderer extends JButton implements TableCellRenderer {
-//
-//        public ButtonRenderer() {
-//            setOpaque(true);
-//        }
-//
-//        public Component getTableCellRendererComponent(JTable table, Object value,
-//                boolean isSelected, boolean hasFocus, int row, int column) {
-//            setToolTipText("Delete Company...");
-//            if (isSelected) {
-//                setForeground(table.getSelectionForeground());
-//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-//                setBackground(Color.WHITE);
-//                setContentAreaFilled(false);
-//            } else {
-//                setForeground(table.getForeground());
-//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-//                setContentAreaFilled(false);
-//            }
-//            setText((value == null) ? "" : value.toString());
-//            return this;
-//        }
-//    }
-//
-//    public class ButtonEditor extends DefaultCellEditor {
-//
-//        protected JButton button;
-//        private String label;
-//        private boolean isPushed;
-//
-//        public ButtonEditor(JCheckBox checkBox) {
-//            super(checkBox);
-//            button = new JButton();
-//            button.setOpaque(true);
-//            button.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    fireEditingStopped();
-//                }
-//            });
-//        }
-//
-//        public Component getTableCellEditorComponent(JTable table, Object value,
-//                boolean isSelected, int row, int column) {
-//            if (isSelected) {
-//                button.setForeground(table.getSelectionForeground());
-//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-//            } else {
-//                button.setForeground(table.getForeground());
-//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Delete.png"));
-//            }
-//            companyIdToBeDeleted = lstCompanies.get(row).getCompanyId();
-//            label = (value == null) ? "" : value.toString();
-//            button.setText(label);
-//            isPushed = true;
-//            return button;
-//        }
-//
-//        public Object getCellEditorValue() {
-//            if (isPushed) {
-//
-//                msg = delete(companyIdToBeDeleted);
-//                JOptionPane.showMessageDialog(null, msg);
-//            }
-//            isPushed = false;
-//            return new String(label);
-//        }
-//
-//        public boolean stopCellEditing() {
-//            isPushed = false;
-//            return super.stopCellEditing();
-//        }
-//
-//        protected void fireEditingStopped() {
-//            try {
-//                super.fireEditingStopped();
-//            } catch (Exception e) {
-//                System.out.println("CompanyUIHelper : fireEditingStopped() : " + e);
-//            }
-//        }
-//    }
-//
-//    public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
-//
-//        public ButtonRendererUpdate() {
-//            setOpaque(true);
-//        }
-//
-//        public Component getTableCellRendererComponent(JTable table, Object value,
-//                boolean isSelected, boolean hasFocus, int row, int column) {
-//            setToolTipText("Edit Company...");
-//            if (isSelected) {
-//                setForeground(table.getSelectionForeground());
-//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-//                setBackground(Color.WHITE);
-//                setContentAreaFilled(false);
-//            } else {
-//                setForeground(table.getForeground());
-//                setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-//                setBackground(Color.WHITE);
-//                setContentAreaFilled(false);
-//            }
-//            setText((value == null) ? "" : value.toString());
-//            return this;
-//        }
-//    }
-//
-//    public class ButtonEditorUpdate extends DefaultCellEditor {
-//
-//        protected JButton button;
-//        private String label;
-//        private boolean isPushed;
-//
-//        public ButtonEditorUpdate(JCheckBox checkBox) {
-//            super(checkBox);
-//            button = new JButton();
-//            button.setOpaque(true);
-//            button.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    fireEditingStopped();
-//                }
-//            });
-//        }
-//
-//        public Component getTableCellEditorComponent(JTable table, Object value,
-//                boolean isSelected, int row, int column) {
-//            if (isSelected) {
-//                button.setForeground(table.getSelectionForeground());
-//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-//            } else {
-//                button.setForeground(table.getForeground());
-//                button.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Update.png"));
-//            }
-//            companyIdToBeDeleted = lstCompanies.get(row).getCompanyId();
-//            companyId = lstCompanies.get(row).getCompanyId();
-//            companyBean = companyDAO.getCompanyInfoById(companyId);
-//            label = (value == null) ? "" : value.toString();
-//            button.setText(label);
-//            isPushed = true;
-//            return button;
-//        }
-//
-//        public Object getCellEditorValue() {
-//            if (isPushed) {
-//                addUpdateFlag = "update";
-//                AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
-//                addCustomerFrame.setVisible(true);
-//                disable(false);
-//            }
-//            isPushed = false;
-//            return new String(label);
-//        }
-//
-//        public boolean stopCellEditing() {
-//            isPushed = false;
-//            return super.stopCellEditing();
-//        }
-//
-//        protected void fireEditingStopped() {
-//            super.fireEditingStopped();
-//        }
-//    }
+    public CompanyUIHelper() {
+    }
+
     public void generateTable() {
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
@@ -241,23 +83,12 @@ public class CompanyUIHelper {
                 data[i][12] = obj.getExt();
                 data[i][13] = obj.getFax();
                 data[i][14] = obj.getPager();
-//                data[i][15] = "";
-//                data[i][16] = "";
                 TestCompanyPanel.tblCompany.setRowHeight(30);
             }
             TestCompanyPanel.tblCompany.setColumnSelectionAllowed(false);
-
             defaultTableModel.setDataVector(data, cols);
-            TestCompanyPanel.tblCompany.getTableHeader().setBackground(Color.red);
-
             TestCompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
             TestCompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
-//            TestCompanyPanel.tblCompany.getColumn(" ").setCellRenderer(new ButtonRenderer());
-//            TestCompanyPanel.tblCompany.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-//            TestCompanyPanel.tblCompany.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-//            TestCompanyPanel.tblCompany.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-//            TestCompanyPanel.tblCompany.getColumn(" ").setMaxWidth(25);
-//            TestCompanyPanel.tblCompany.getColumn("  ").setMaxWidth(25);
             TestCompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
             TestCompanyPanel.tblCompany.setShowGrid(false);
             TestCompanyPanel.jScrollPane4.setViewportView(TestCompanyPanel.tblCompany);
@@ -404,10 +235,7 @@ public class CompanyUIHelper {
     public String delete(int companyIdToBeDeleted) {
         CompanyDAO companyDAO = new CompanyDAOImpl();
         String msg = companyDAO.deleteCompany(companyIdToBeDeleted);
-//        disable(true);
         generateTable();
-//        TestCompanyPanel.mainTabbedPane.setEnabled(true);
-//        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
 
@@ -416,8 +244,6 @@ public class CompanyUIHelper {
         String msg = companyDAO.updateCompany(companyBean);
         disable(true);
         generateTable();
-//        TestCompanyPanel.mainTabbedPane.setEnabled(true);
-//        TestCompanyPanel.companyPanel.setEnabled(true);
         return msg;
     }
 

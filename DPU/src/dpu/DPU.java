@@ -6,24 +6,29 @@
 package dpu;
 
 import dpu.ui.common.LoginFrame;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author gagandeep.rana
  */
 public class DPU {
-
+    
+    static Logger logger = Logger.getLogger(DPU.class);
+    
     public static void main(String[] args) {
+        
+        logger.info("Inside DPU: main(): STARTS");
         try {
             ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-            LoginFrame loginFrame = new LoginFrame();
+            LoginFrame loginFrame = (LoginFrame) context.getBean(LoginFrame.class);
             loginFrame.setVisible(true);
-//            ((ClassPathXmlApplicationContext) context).close();
         } catch (Exception e) {
             System.out.println("Main: " + e);
         }
+        
+        logger.info("Inside DPU: main(): ENDS");
     }
 }

@@ -18,20 +18,22 @@ public class AddStandardAccessorialCharge extends javax.swing.JFrame {
      * Creates new form AddStandardAccessorialCharge
      */
     StandardChargesUIHelper standardChargesUIHelper = null;
-    
+
     public AddStandardAccessorialCharge() {
         initComponents();
         standardChargesUIHelper = new StandardChargesUIHelper();
         setLocationRelativeTo(null);
         setTitle("Add New StandardCharges");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
+
     public AddStandardAccessorialCharge(StandardChargesBean standardChargesBean) {
         initComponents();
         standardChargesUIHelper = new StandardChargesUIHelper();
         setLocationRelativeTo(null);
         setTitle("Edit StandardCharges");
         btnSave.setText("Update");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         standardChargesUIHelper.showData(standardChargesBean);
     }
 
@@ -199,6 +201,11 @@ public class AddStandardAccessorialCharge extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -233,6 +240,10 @@ public class AddStandardAccessorialCharge extends javax.swing.JFrame {
         standardChargesUIHelper.save();
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments

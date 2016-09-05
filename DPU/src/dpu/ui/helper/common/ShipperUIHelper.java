@@ -40,7 +40,6 @@ public class ShipperUIHelper {
             editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
             editor.setBorder(null);
             if (value != null) {
-                //here space is given to provide some left margin while showing data on textfield..
                 editor.setText("   " + value.toString());
             }
             if (row % 2 == 0) {
@@ -62,7 +61,6 @@ public class ShipperUIHelper {
         arrayList = shipperDAO.getAllShipper(TestShipperPannel.txtShipperSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestShipperPannel.tblShipper = new JTable(defaultTableModel);
-        TestShipperPannel.tblShipper.getTableHeader().setBackground(Color.red);
         TestShipperPannel.tblShipper.setDefaultRenderer(Object.class, new ShipperUIHelper.ShipperTable());
         Object[][] data = new Object[arrayList.size()][22];
         for (int i = 0; i < arrayList.size(); i++) {
@@ -86,7 +84,6 @@ public class ShipperUIHelper {
         }
         Object[] cols = {"Location Name", "Address", "Unit No", "City", "P/S", "Postal/Zip", "Zone", "Main Contact", "Position", "Phone", "Extension", "Fax", "Watts", "Created By", "Email"};
         defaultTableModel.setDataVector(data, cols);
-        TestShipperPannel.tblShipper.getTableHeader().setBackground(Color.red);
         TestShipperPannel.tblShipper.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         TestShipperPannel.tblShipper.getTableHeader().setForeground(Color.DARK_GRAY);
         TestShipperPannel.tblShipper.setIntercellSpacing(new Dimension(0, 0));
@@ -118,7 +115,6 @@ public class ShipperUIHelper {
         } else {
             shippermasterBean.setStatus(0);
         }
-//        shippermasterBean.setStatus(NewShipperFrame.ddlStatus.getSelectedItem().toString());
         shippermasterBean.setTimeZone(NewShipperFrame.ddlTimeZone.getSelectedItem().toString());
         shippermasterBean.setTollFree(NewShipperFrame.txtTollFree.getText());
         shippermasterBean.setUnit(NewShipperFrame.txtUnitNo.getText());

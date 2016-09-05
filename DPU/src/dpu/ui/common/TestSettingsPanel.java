@@ -124,9 +124,9 @@ public class TestSettingsPanel extends javax.swing.JPanel implements ActionListe
             JOptionPane.showMessageDialog(null, "Changes Done");
             MainTabbedPane.lstPreferences = new ArrayList<>();
             MainTabbedPane.map = new TreeMap<>();
-            LoginFrame.mainTabbedPane.checkPreference();
-            LoginFrame.mainTabbedPane.showHideTabs();
-            LoginFrame.mainTabbedPane.setSettingsIcon();
+//            LoginFrame.mainTabbedPane.checkPreference();
+//            LoginFrame.mainTabbedPane.showHideTabs();
+//            LoginFrame.mainTabbedPane.setSettingsIcon();
             setSettingsPanelBody();
         }
     }

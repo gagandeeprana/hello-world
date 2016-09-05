@@ -54,10 +54,7 @@ public class BorderAgentUIHelper {
                 AddCustomBroker.tblBorderAgents.setRowHeight(30);
             }
             AddCustomBroker.tblBorderAgents.setColumnSelectionAllowed(false);
-
             defaultTableModel.setDataVector(data, cols);
-            AddCustomBroker.tblBorderAgents.getTableHeader().setBackground(Color.red);
-
             AddCustomBroker.tblBorderAgents.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
             AddCustomBroker.tblBorderAgents.getTableHeader().setForeground(Color.DARK_GRAY);
             AddCustomBroker.tblBorderAgents.setIntercellSpacing(new Dimension(0, 0));
@@ -82,9 +79,7 @@ public class BorderAgentUIHelper {
             AddCustomBroker.tblBorderAgents.setRowHeight(30);
         }
         AddCustomBroker.tblBorderAgents.setColumnSelectionAllowed(false);
-
         defaultTableModel.setDataVector(data, cols);
-
         AddCustomBroker.tblBorderAgents.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         AddCustomBroker.tblBorderAgents.getTableHeader().setForeground(Color.DARK_GRAY);
         AddCustomBroker.tblBorderAgents.setIntercellSpacing(new Dimension(0, 0));

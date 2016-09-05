@@ -376,7 +376,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkMon.isSelected()) {
@@ -389,7 +389,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkTue.isSelected()) {
@@ -402,7 +402,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkWed.isSelected()) {
@@ -415,7 +415,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkThur.isSelected()) {
@@ -428,7 +428,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkFri.isSelected()) {
@@ -441,7 +441,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
         if (AdditionalContactWorkingHours.chkSat.isSelected()) {
@@ -454,7 +454,7 @@ public class AdditionalContactWorkingHoursUIHelper {
             if (open1.equals(TimeConstants.open1) && open2.equals(TimeConstants.open2) && close1.equals(TimeConstants.close1) && close2.equals(TimeConstants.close2)) {
                 is24Hr = 1;
             }
-            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(workingDay, open1, close1, open2, close2, is24Hr);
+            WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(0, workingDay, open1, close1, open2, close2, is24Hr, 0);
             listOfWorkingHours.add(work);
         }
     }

@@ -53,7 +53,7 @@ public class WorkingHoursAdditionalContactDAOImpl implements WorkingHoursAdditio
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(rs.getString("working_day"), rs.getString("open1"), rs.getString("close1"), rs.getString("open2"), rs.getString("close2"), rs.getInt("is24Hr"));
+                WorkingHoursAdditionalContactBean work = new WorkingHoursAdditionalContactBean(rs.getInt("working_id"), rs.getString("working_day"), rs.getString("open1"), rs.getString("close1"), rs.getString("open2"), rs.getString("close2"), rs.getInt("is24Hr"), rs.getInt("additional_contact_id"));
                 lstWorkingHours.add(work);
             }
         } catch (Exception e) {

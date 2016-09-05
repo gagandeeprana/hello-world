@@ -8,21 +8,25 @@ package dpu.ui.common;
 import dpu.dao.admin.UserDAO;
 import dpu.dao.admin.impl.UserDAOImpl;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import properties.ReadFromPropertiesFile;
 
 /**
  *
  * @author gagandeep.rana
  */
+@Component
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginFrame
      */
-    static MainTabbedPane mainTabbedPane = null;
+    @Autowired
+    ArrangedMainFrame3 arrangedMainFrame3;
+    
+//    static MainTabbedPane mainTabbedPane = null;
 
     public LoginFrame() {
         initComponents();
@@ -160,9 +164,8 @@ public class LoginFrame extends javax.swing.JFrame {
 //        test.setTitle("DPU (" + mainTabbedPane.getTitleAt(mainTabbedPane.getSelectedIndex()).trim() + ")");
 //        test.add(mainTabbedPane);
 //        test.setVisible(true);
-        this.setVisible(false);
-            ArrangedMainFrame3 arrangedMainFrame3= new ArrangedMainFrame3();
-            arrangedMainFrame3.setVisible(true);
+        setVisible(false);
+        arrangedMainFrame3.setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblForgotPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblForgotPasswordMouseClicked

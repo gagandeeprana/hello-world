@@ -2,8 +2,6 @@ package dpu.dao.admin;
 
 import dpu.beans.admin.CompanyBean;
 import java.util.List;
-import org.springframework.stereotype.Component;
-
 
 public interface CompanyDAO {
 

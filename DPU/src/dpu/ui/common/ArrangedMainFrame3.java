@@ -5,7 +5,6 @@
  */
 package dpu.ui.common;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -14,32 +13,36 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRootPane;
 import javax.swing.Timer;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import properties.ReadFromPropertiesFile;
 
 /**
  *
  * @author gagandeep.rana
  */
+@Component
 public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
     /**
      * Creates new form ArrangedMainFrame
      */
-    float alpha = 1.0f; // current opacity of button
-    Timer timer; // for later start/stop actions
-    int animationDuration = 2000; // each animation will take 2 seconds
-    long animationStartTime; // start time for each animation
+    float alpha = 1.0f;
+    Timer timer;
+    int animationDuration = 2000;
+    long animationStartTime;
     BufferedImage buttonImage = null;
     boolean flag = true;
     Container root = null;
 
+    @Autowired
+    Datamaintenance datamaintenance;
+
     public ArrangedMainFrame3() {
         initComponents();
-//        setVisiblity(false);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setButtonContentArea();
         jInternalFrame1.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
         jInternalFrame1.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         jLayeredPane1.setVisible(false);
@@ -47,29 +50,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         root = getContentPane();
         jInternalFrame1.setVisible(false);
         jInternalFrame1.setBorder(null);
-        setButtonContentArea();
-        InternalFrameSetting();
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
-    }
-
-    private void InternalFrameSetting() {
-//        SubListingInternalFrame.setBackground(Color.WHITE);
-//        SubListingInternalFrame.setVisible(true);
-//        SubListingInternalFrame.setTitle("DPU - Customers");
-//        SubListingInternalFrame.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
-//        SubListingInternalFrame.setMaximizable(false);
-//        SubListingInternalFrame.setIconifiable(false);
-//        SubListingInternalFrame.setClosable(false);
-////        SubListingInternalFrame.getContentPane().setVisible(false);
-//        SubListingInternalFrame.getContentPane().removeAll();
-//        SubListingInternalFrame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-//        BasicInternalFrameUI bi = (BasicInternalFrameUI) SubListingInternalFrame.getUI();
-//        bi.setNorthPane(null);
-//        bi.setEastPane(null);
-//        bi.setWestPane(null);
-//        bi.setSouthPane(null);
-////        SubListingInternalFrame.setBorder(null);
-//        SubListingInternalFrame.setVisible(true);
     }
 
     private void setButtonContentArea() {
@@ -87,32 +68,12 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
             } else {
                 timer.stop();
                 this.setText("Start Animation");
-                // reset alpha to opaque
                 alpha = 1.0f;
             }
         }
 
     }
 
-//    public void paint(Graphics g) {
-//        // Create an image for the button graphics if necessary
-//        if (buttonImage == null || buttonImage.getWidth() != getWidth()
-//                || buttonImage.getHeight() != getHeight()) {
-//            buttonImage = getGraphicsConfiguration().createCompatibleImage(getWidth(), getHeight());
-//        }
-//        Graphics gButton = buttonImage.getGraphics();
-//        gButton.setClip(g.getClip());
-//
-//        // Have the superclass render the button for us
-////        super.paint(gButton);
-//        // Make the graphics object sent to this paint() method translucent
-//        Graphics2D g2d = (Graphics2D) g;
-//        AlphaComposite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
-//        g2d.setComposite(newComposite);
-//
-//        // Copy the button's image to the destination graphics, translucently
-//        g2d.drawImage(buttonImage, 0, 0, null);
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,12 +87,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         btnDatamaintenance = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -192,28 +147,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Class.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-        jLabel4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel4KeyPressed(evt);
-            }
-        });
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Company.png"))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CustomBrokers.png"))); // NOI18N
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customers.png"))); // NOI18N
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Jurisdiction.png"))); // NOI18N
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/List.png"))); // NOI18N
-
         btnDatamaintenance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Datamaintenance.png"))); // NOI18N
         btnDatamaintenance.setToolTipText("Datamaintenance...");
         btnDatamaintenance.addActionListener(new java.awt.event.ActionListener() {
@@ -227,35 +160,15 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addComponent(btnDatamaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(1092, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
-            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(btnDatamaintenance)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -346,45 +259,12 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel4KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4KeyPressed
-
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
-//        jPanel5.setVisible(true);
-//        jPanel3.setVisible(false);
-    }//GEN-LAST:event_jLabel4MouseClicked
-
     private void btnDatamaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatamaintenanceActionPerformed
-        Datamaintenance datamaintenance = new Datamaintenance();
         datamaintenance.setBounds(0, 0, getWidth(), getHeight());
         jLayeredPane1.add(datamaintenance);
         jLayeredPane1.setVisible(true);
         datamaintenance.setVisible(true);
     }//GEN-LAST:event_btnDatamaintenanceActionPerformed
-
-    private void setVisiblity(boolean val) {
-//        border.setVisible(val);
-//        jLabel11.setVisible(val);
-//        jLabel12.setVisible(val);
-//        jLabel13.setVisible(val);
-//        jLabel14.setVisible(val);
-//        jLabel15.setVisible(val);
-//        jLabel16.setVisible(val);
-//        jLabel17.setVisible(val);
-//        jLabel18.setVisible(val);
-//        jLabel19.setVisible(val);
-//        jLabel20.setVisible(val);
-//        jLabel22.setVisible(val);
-//        jLabel23.setVisible(val);
-//        jLabel24.setVisible(val);
-//        jLabel25.setVisible(val);
-//        jLabel26.setVisible(val);
-//        jLabel27.setVisible(val);
-//        jLabel28.setVisible(val);
-//        jLabel29.setVisible(val);
-    }
 
     /**
      * @param args the command line arguments
@@ -423,7 +303,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ArrangedMainFrame3().setVisible(true);
+//                new ArrangedMainFrame3().setVisible(true);
             }
         });
     }
@@ -431,12 +311,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatamaintenance;
     public static javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

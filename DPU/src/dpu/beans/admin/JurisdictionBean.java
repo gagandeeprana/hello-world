@@ -5,10 +5,15 @@
  */
 package dpu.beans.admin;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author gagandeep.rana
  */
+@Getter
+@Setter
 public class JurisdictionBean {
 
     private int jurisdictionId;
@@ -18,43 +23,4 @@ public class JurisdictionBean {
     private int countryId;
     private double roadTax;
 
-    public int getJurisdictionId() {
-        return jurisdictionId;
-    }
-
-    public void setJurisdictionId(int jurisdictionId) {
-        this.jurisdictionId = jurisdictionId;
-    }
-
-    public String getJurisdictionName() {
-        return jurisdictionName;
-    }
-
-    public void setJurisdictionName(String jurisdictionName) {
-        this.jurisdictionName = jurisdictionName;
-    }
-
-    public String getIFAJurisdiction() {
-        return IFAJurisdiction;
-    }
-
-    public void setIFAJurisdiction(String IFAJurisdiction) {
-        this.IFAJurisdiction = IFAJurisdiction;
-    }
-
-    public int getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
-    }
-
-    public double getRoadTax() {
-        return roadTax;
-    }
-
-    public void setRoadTax(double roadTax) {
-        this.roadTax = roadTax;
-    }
 }

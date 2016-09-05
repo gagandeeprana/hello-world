@@ -16,7 +16,7 @@ import dpu.ui.common.TestCustomBrokersPanel;
 import static dpu.ui.helper.common.BorderAgentUIHelper.addUpdateFlag;
 import static dpu.ui.helper.common.BorderAgentUIHelper.borderAgentId;
 import static dpu.ui.helper.common.BorderAgentUIHelper.lstBorderAgents;
-import static dpu.ui.helper.common.CompanyUIHelper.companyBean;
+//import static dpu.ui.helper.common.CompanyUIHelper.companyBean;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -70,10 +70,7 @@ public class CustomBrokerUIHelper {
                 TestCustomBrokersPanel.tblCustomBroker.setRowHeight(30);
             }
             TestCustomBrokersPanel.tblCustomBroker.setColumnSelectionAllowed(false);
-
             defaultTableModel.setDataVector(data, cols);
-            TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setBackground(Color.red);
-
             TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
             TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setForeground(Color.DARK_GRAY);
             TestCustomBrokersPanel.tblCustomBroker.setIntercellSpacing(new Dimension(0, 0));

@@ -46,9 +46,9 @@ public class AddCustomerNotes extends javax.swing.JFrame {
     }
 
     private void showData() {
-        if (CompanyUIHelper.companyBean.getNotes() != null) {
-            taNotes.setText(CompanyUIHelper.companyBean.getNotes());
-        }
+//        if (CompanyUIHelper.companyBean.getNotes() != null) {
+//            taNotes.setText(CompanyUIHelper.companyBean.getNotes());
+//        }
         lblContact.setText(AddCustomerFrame.txtContact.getText());
         lblPosition.setText(AddCustomerFrame.txtPosition.getText());
         lblPhone.setText(AddCustomerFrame.txtPhone.getText());
@@ -272,7 +272,7 @@ public class AddCustomerNotes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDateTimeActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        CompanyUIHelper.companyBean.setNotes(taNotes.getText());
+//        CompanyUIHelper.companyBean.setNotes(taNotes.getText());
         dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
