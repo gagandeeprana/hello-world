@@ -8,19 +8,24 @@ package dpu.dao.admin.impl;
 import dpu.beans.admin.CompanyBean;
 import dpu.dao.admin.CompanyDAO;
 import dpu.dao.common.ConnectDB;
+import dpu.dao.admin.CompanyDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("companyDAO")
 public class CompanyDAOImpl implements CompanyDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
-    Logger logger = Logger.getLogger(CompanyDAOImpl.class);
+//    ConnectDB connectDB = ConnectDB.getInstance();
+    @Autowired
+    ConnectDB connectDB;
+
+//    Logger logger = Logger.getLogger(CompanyDAOImpl.class);
 
     @Override
     public List<CompanyBean> getAllCompanies(String name) {
@@ -59,7 +64,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             }
         } catch (Exception e) {
             System.out.println("CompanyDAOImpl : getAllCompanies : " + e);
-            logger.error("CompanyDAOImpl : getAllCompanies : " + e);
+//            logger.error("CompanyDAOImpl : getAllCompanies : " + e);
         }
         return lstCompanies;
     }
@@ -96,7 +101,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             }
         } catch (Exception e) {
             System.out.println("CompanyDAOImpl : addCompany : " + e);
-            logger.error("CompanyDAOImpl : addCompany : " + e);
+//            logger.error("CompanyDAOImpl : addCompany : " + e);
         }
         return "Failed to Add Company";
     }
@@ -134,7 +139,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             }
         } catch (Exception e) {
             System.out.println("CompanyDAOImpl : updateCompany : " + e);
-            logger.error("CompanyDAOImpl : updateCompany : " + e);
+//            logger.error("CompanyDAOImpl : updateCompany : " + e);
         }
         return "Failed to Update Company";
     }
@@ -153,7 +158,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             }
         } catch (Exception e) {
             System.out.println("CompanyDAOImpl : deleteCompany : " + e);
-            logger.error("CompanyDAOImpl : deleteCompany : " + e);
+//            logger.error("CompanyDAOImpl : deleteCompany : " + e);
         }
         return "Failed to Delete Company";
     }
@@ -194,7 +199,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             }
         } catch (Exception e) {
             System.out.println("CompanyDAOImpl : getCompanyInfoById : " + e);
-            logger.error("CompanyDAOImpl : getCompanyInfoById : " + e);
+//            logger.error("CompanyDAOImpl : getCompanyInfoById : " + e);
         }
         return obj;
     }
@@ -213,7 +218,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             }
         } catch (Exception e) {
             System.out.println("CompanyDAOImpl : getMaxCompanyId : " + e);
-            logger.error("CompanyDAOImpl : getMaxCompanyId : " + e);
+//            logger.error("CompanyDAOImpl : getMaxCompanyId : " + e);
         }
         return 0;
     }

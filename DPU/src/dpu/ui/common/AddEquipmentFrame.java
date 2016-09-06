@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.EquipmentUIHelper;
+import dpu.ui.common.helper.EquipmentUIHelper;
 import dpu.Validations;
 import dpu.beans.admin.EquipmentBean;
 import dpu.dao.admin.EquipmentDAO;

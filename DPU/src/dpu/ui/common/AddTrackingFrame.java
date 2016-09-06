@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.TrackingUIHelper;
+import dpu.ui.common.helper.TrackingUIHelper;
 import dpu.Validations;
 import dpu.beans.admin.TrackingBean;
 import dpu.dao.admin.TrackingDAO;

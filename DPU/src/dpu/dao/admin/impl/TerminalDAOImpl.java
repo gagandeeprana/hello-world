@@ -14,10 +14,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TerminalDAOImpl implements TerminalDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
+    @Autowired
+    ConnectDB connectDB;
     Logger logger = Logger.getLogger(TerminalDAOImpl.class);
 
     @Override

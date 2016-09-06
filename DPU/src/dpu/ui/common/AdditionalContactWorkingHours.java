@@ -7,7 +7,7 @@ package dpu.ui.common;
 
 import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.WorkingHoursAdditionalContactBean;
-import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
+import dpu.ui.common.helper.AdditionalContactWorkingHoursUIHelper;
 import java.util.List;
 import properties.TimeConstants;
 

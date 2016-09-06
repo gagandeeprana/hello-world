@@ -5,23 +5,9 @@
  */
 package dpu.ui.common;
 
-import dpu.reports.common.JasperReportGenerator;
-import dpu.ui.helper.common.ClassUIHelper;
-import java.awt.BorderLayout;
-import java.awt.Dialog;
+import dpu.ui.common.helper.ClassUIHelper;
 import java.awt.Dimension;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -40,7 +26,6 @@ public class TestClassPanel extends javax.swing.JPanel {
             initComponents();
             btnClearManageClass.setContentAreaFilled(false);
             tblClass.setPreferredSize(new Dimension(300, 300));
-            btnClearManageClass.setAction(new ShowWaitAction(""));
             btnClearManageClass.setIcon(new ImageIcon(ReadFromPropertiesFile.imagePath + "Print.png"));
             classUIHelper = new ClassUIHelper();
             classUIHelper.generateTable();
@@ -170,63 +155,4 @@ public class TestClassPanel extends javax.swing.JPanel {
     public static javax.swing.JTable tblClass;
     public static javax.swing.JTextField txtClassSearch;
     // End of variables declaration//GEN-END:variables
-}
-
-class ShowWaitAction extends AbstractAction {
-
-    protected static final long SLEEP_TIME = 2 * 1000;
-
-    public ShowWaitAction(String name) {
-        super(name);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        try {
-
-            SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
-
-                @Override
-                protected Void doInBackground() throws Exception {
-                    // mimic some long-running process here...
-                    Thread.sleep(SLEEP_TIME);
-                    return null;
-                }
-            };
-
-            Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
-            final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
-            dialog.setUndecorated(true);
-
-            mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
-
-                @Override
-                public void propertyChange(PropertyChangeEvent evt) {
-                    if (evt.getPropertyName().equals("state")) {
-                        if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-                            JasperReportGenerator.generateReport("ClassReport.jrxml");
-                            dialog.dispose();
-                        }
-                    }
-                }
-            });
-            mySwingWorker.execute();
-//        JProgressBar progressBar = new JProgressBar();
-//        progressBar.setIndeterminate(true);
-            JPanel panel = new JPanel(new BorderLayout());
-//        panel.add(progressBar, BorderLayout.CENTER);
-//        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
-            JLabel jLabel = new JLabel(new ImageIcon(ReadFromPropertiesFile.imagePath + "Wait.gif"));
-            panel.add(jLabel);
-            dialog.add(panel);
-            TestClassPanel testClassPanel = new TestClassPanel();
-            testClassPanel.setEnabled(false);
-            dialog.pack();
-            dialog.setLocationRelativeTo(win);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            System.out.println("ShowWaitAction : actionPerformed(): " + e);
-        }
-
-    }
 }

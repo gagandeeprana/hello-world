@@ -9,7 +9,7 @@ import dpu.beans.admin.BorderAgentBean;
 import static dpu.ui.common.AddCustomBroker.txtFax;
 import static dpu.ui.common.AddCustomBroker.txtPhone;
 import static dpu.ui.common.AddCustomerFrame.txtEmail;
-import dpu.ui.helper.common.BorderAgentUIHelper;
+import dpu.ui.common.helper.BorderAgentUIHelper;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;

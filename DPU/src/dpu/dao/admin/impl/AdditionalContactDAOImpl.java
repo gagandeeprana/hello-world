@@ -13,10 +13,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AdditionalContactDAOImpl implements AdditionalContactDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
+    @Autowired
+    ConnectDB connectDB;
 //    Logger logger = Logger.getLogger(AdditionalContactDAOImpl.class);
 
     @Override

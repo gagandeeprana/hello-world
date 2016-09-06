@@ -6,7 +6,7 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.StandardChargesBean;
-import dpu.ui.helper.common.StandardChargesUIHelper;
+import dpu.ui.common.helper.StandardChargesUIHelper;
 
 /**
  *

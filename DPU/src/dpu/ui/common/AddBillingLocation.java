@@ -8,7 +8,7 @@ package dpu.ui.common;
 import dpu.beans.admin.BillingLocationBean;
 import static dpu.ui.common.AddBorderAgent.txtEmail;
 import static dpu.ui.common.AddCustomerFrame.txtPhone;
-import dpu.ui.helper.common.BillingLocationUIHelper;
+import dpu.ui.common.helper.BillingLocationUIHelper;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;

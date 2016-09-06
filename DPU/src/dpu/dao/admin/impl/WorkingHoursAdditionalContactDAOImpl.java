@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -15,7 +16,8 @@ import java.util.List;
  */
 public class WorkingHoursAdditionalContactDAOImpl implements WorkingHoursAdditionalContactDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
+   @Autowired
+    ConnectDB connectDB;
 
     @Override
     public String addWorkingHours(WorkingHoursAdditionalContactBean obj) {

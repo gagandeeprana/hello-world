@@ -8,10 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserDAOImpl implements UserDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
+    @Autowired
+    ConnectDB connectDB;
     Logger logger = Logger.getLogger(TrackingDAOImpl.class);
 
     @Override

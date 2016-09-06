@@ -66,9 +66,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnClearManageClass">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="E:\gitrepository\DPU\images\Print.png"/>
-        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
@@ -108,11 +105,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="btnAddManageClass">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="E:\gitrepository\DPU\images\Add.png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddManageClassMouseClicked"/>
       </Events>

@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.RoleUIHelper;
+import dpu.ui.common.helper.RoleUIHelper;
 import dpu.Validations;
 import dpu.beans.admin.RoleBean;
 import dpu.dao.admin.RoleDAO;

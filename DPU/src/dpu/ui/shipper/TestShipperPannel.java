@@ -5,7 +5,7 @@
  */
 package dpu.ui.shipper;
 
-import dpu.ui.helper.common.ShipperUIHelper;
+import dpu.ui.common.helper.ShipperUIHelper;
 import java.awt.Toolkit;
 
 /**

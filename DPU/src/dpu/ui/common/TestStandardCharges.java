@@ -11,8 +11,8 @@ import dpu.dao.admin.StandardChargesDAO;
 import dpu.dao.admin.impl.StandardChargesDAOImpl;
 import dpu.reports.common.JasperReportGenerator;
 import static dpu.ui.common.TestCustomBrokersPanel.tblCustomBroker;
-import dpu.ui.helper.common.CustomBrokerUIHelper;
-import dpu.ui.helper.common.StandardChargesUIHelper;
+import dpu.ui.common.helper.CustomBrokerUIHelper;
+import dpu.ui.common.helper.StandardChargesUIHelper;
 import javax.swing.JOptionPane;
 
 /**

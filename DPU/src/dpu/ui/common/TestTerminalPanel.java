@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.TerminalUIHelper;
+import dpu.ui.common.helper.TerminalUIHelper;
 
 /**
  *

@@ -7,30 +7,18 @@ package dpu.ui.common;
 
 import dpu.beans.admin.CompanyBean;
 import dpu.reports.common.JasperReportGenerator;
-import dpu.ui.helper.common.CompanyUIHelper;
-import java.awt.BorderLayout;
+import dpu.ui.common.helper.CompanyUIHelper;
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Toolkit;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import properties.ImageConstants;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -43,24 +31,34 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     /**
      * Creates new form TestCompanyPanel
      */
+    Logger logger = Logger.getLogger(TestCompanyPanel.class);
+
     @Autowired
     CompanyUIHelper companyUIHelper;
-//    CompanyUIHelper companyUIHelper = new CompanyUIHelper();
 
-    String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
+//    CompanyUIHelper companyUIHelper = new CompanyUIHelper();
+//    String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
+    String printImage = "";
 
     public TestCompanyPanel() {
-        initComponents();
+//        try {
+            initComponents();
+            doWork();
+//        } catch (Exception e) {
+//            logger.error("Inside TestCompanyPanel : Exception is: " + e);
+//        }
+    }
+
+    private void doWork() {
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
 //        companyUI = new CompanyUIHelper();
         companyUIHelper.generateTable();
-
-        btnPrint.setAction(new ShowWaitAction(""));
         btnPrint.setToolTipText("Print Company Report...");
-        btnPrint.setIcon(new ImageIcon(printImage));
+//        btnPrint.setIcon(new ImageIcon(printImage));
         btnPrint.setContentAreaFilled(false);
         btnDelete.setContentAreaFilled(false);
         btnUpdate.setContentAreaFilled(false);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -290,7 +288,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
             menuItem1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    CompanyUIHelper.addUpdateFlag = "add";
+//                    CompanyUIHelper.addUpdateFlag = "add";
                     AddCustomerFrame addCustomerFrame = new AddCustomerFrame();
                     addCustomerFrame.setVisible(true);
                 }
@@ -307,20 +305,20 @@ public class TestCompanyPanel extends javax.swing.JPanel {
             menuItem3.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    CompanyUIHelper.addUpdateFlag = "update";
-                    CompanyBean companyBean = new CompanyBean();
-                    companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
-                    CompanyUIHelper.companyId = companyBean.getCompanyId();
-                    AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
-                    addCustomerFrame.setVisible(true);
+//                    CompanyUIHelper.addUpdateFlag = "update";
+//                    CompanyBean companyBean = new CompanyBean();
+//                    companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
+//                    CompanyUIHelper.companyId = companyBean.getCompanyId();
+//                    AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
+//                    addCustomerFrame.setVisible(true);
                 }
             });
 
             menuItem4.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    CompanyBean companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
-                    companyUIHelper.delete(companyBean.getCompanyId());
+//                    CompanyBean companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.rowAtPoint(evt1.getPoint()));
+//                    companyUIHelper.delete(companyBean.getCompanyId());
                 }
             });
         } else if (evt.getButton() == 1) {
@@ -333,16 +331,16 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int companyIdToBeDeleted = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow()).getCompanyId();
-        companyUIHelper.delete(companyIdToBeDeleted);
+//        int companyIdToBeDeleted = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow()).getCompanyId();
+//        companyUIHelper.delete(companyIdToBeDeleted);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        CompanyBean companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow());
-        CompanyUIHelper.companyId = companyBean.getCompanyId();
-        CompanyUIHelper.addUpdateFlag = "update";
-        AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
-        addCustomerFrame.setVisible(true);
+//        CompanyBean companyBean = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow());
+//        CompanyUIHelper.companyId = companyBean.getCompanyId();
+//        CompanyUIHelper.addUpdateFlag = "update";
+//        AddCustomerFrame addCustomerFrame = new AddCustomerFrame(companyBean);
+//        addCustomerFrame.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
@@ -359,62 +357,4 @@ public class TestCompanyPanel extends javax.swing.JPanel {
     public static javax.swing.JTable tblCompany;
     public static javax.swing.JTextField txtCompanySearch;
     // End of variables declaration//GEN-END:variables
-
-    class ShowWaitAction extends AbstractAction {
-
-        protected static final long SLEEP_TIME = 2 * 1000;
-
-        public ShowWaitAction(String name) {
-            super(name);
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-            try {
-                SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
-
-                    @Override
-                    protected Void doInBackground() throws Exception {
-                        // mimic some long-running process here...
-                        Thread.sleep(SLEEP_TIME);
-                        return null;
-                    }
-                };
-
-                Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
-                final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
-                dialog.setUndecorated(true);
-
-                mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
-
-                    @Override
-                    public void propertyChange(PropertyChangeEvent evt) {
-                        if (evt.getPropertyName().equals("state")) {
-                            if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-                                JasperReportGenerator.generateReport("CustomerReport.jrxml");
-                                dialog.dispose();
-                            }
-                        }
-                    }
-                });
-                mySwingWorker.execute();
-//        JProgressBar progressBar = new JProgressBar();
-//        progressBar.setIndeterminate(true);
-                JPanel panel = new JPanel(new BorderLayout());
-//        panel.add(progressBar, BorderLayout.CENTER);
-//        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
-                JLabel jLabel = new JLabel(new ImageIcon(ReadFromPropertiesFile.imagePath + "Wait.gif"));
-                panel.add(jLabel);
-                dialog.add(panel);
-                TestClassPanel testClassPanel = new TestClassPanel();
-                testClassPanel.setEnabled(false);
-                dialog.pack();
-                dialog.setLocationRelativeTo(win);
-                dialog.setVisible(true);
-            } catch (Exception e) {
-                System.out.println("ShowWaitAction : actionPerformed(): " + e);
-            }
-
-        }
-    }
 }

@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.CompanyUIHelper;
+import dpu.ui.common.helper.CompanyUIHelper;
 import dpu.Validations;
 import dpu.beans.admin.CompanyBean;
 import dpu.beans.admin.CompanyBean;

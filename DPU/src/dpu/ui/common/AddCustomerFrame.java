@@ -15,10 +15,10 @@ import dpu.dao.admin.WorkingHoursAdditionalContactDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
 import dpu.dao.admin.impl.WorkingHoursAdditionalContactDAOImpl;
-import dpu.ui.helper.common.AdditionalContactUIHelper;
-import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
-import dpu.ui.helper.common.BillingLocationUIHelper;
-import dpu.ui.helper.common.CompanyUIHelper;
+import dpu.ui.common.helper.AdditionalContactUIHelper;
+import dpu.ui.common.helper.AdditionalContactWorkingHoursUIHelper;
+import dpu.ui.common.helper.BillingLocationUIHelper;
+import dpu.ui.common.helper.CompanyUIHelper;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -1057,12 +1057,12 @@ public class AddCustomerFrame extends javax.swing.JFrame {
 
     private void lblNotesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNotesMousePressed
         AddCustomerNotes addCustomerNotes = null;
-        if (CompanyUIHelper.addUpdateFlag.equals("add")) {
-            addCustomerNotes = new AddCustomerNotes();
-        } else {
-            addCustomerNotes = new AddCustomerNotes(companyBean);
-        }
-        addCustomerNotes.setVisible(true);
+//        if (CompanyUIHelper.addUpdateFlag.equals("add")) {
+//            addCustomerNotes = new AddCustomerNotes();
+//        } else {
+//            addCustomerNotes = new AddCustomerNotes(companyBean);
+//        }
+//        addCustomerNotes.setVisible(true);
     }//GEN-LAST:event_lblNotesMousePressed
 
     private void txtCompanyNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCompanyNameKeyReleased

@@ -6,7 +6,7 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.CompanyBean;
-import dpu.ui.helper.common.CompanyUIHelper;
+import dpu.ui.common.helper.CompanyUIHelper;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;

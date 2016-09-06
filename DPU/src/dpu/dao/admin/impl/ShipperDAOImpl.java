@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -19,7 +20,8 @@ import java.util.ArrayList;
  */
 public class ShipperDAOImpl implements ShipperDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
+   @Autowired
+    ConnectDB connectDB;
 
     @Override
     public String addShipper(ShippermasterBean shippermasterBean) {

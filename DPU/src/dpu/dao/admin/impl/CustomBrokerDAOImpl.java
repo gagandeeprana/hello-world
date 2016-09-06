@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -21,7 +22,8 @@ import java.util.List;
  */
 public class CustomBrokerDAOImpl implements CustomBrokerDAO {
 
-    ConnectDB connectDB = ConnectDB.getInstance();
+   @Autowired
+    ConnectDB connectDB;
 
     @Override
     public List<CustomBrokerBean> getAllCustomBrokers(String name) {

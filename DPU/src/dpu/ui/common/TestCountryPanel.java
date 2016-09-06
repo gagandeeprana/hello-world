@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.CountryUIHelper;
+import dpu.ui.common.helper.CountryUIHelper;
 
 /**
  *

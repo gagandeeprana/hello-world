@@ -7,8 +7,8 @@ package dpu.ui.common;
 
 import dpu.beans.admin.AdditionalContactBean;
 import static dpu.ui.common.AddBorderAgent.txtEmail;
-import dpu.ui.helper.common.AdditionalContactUIHelper;
-import dpu.ui.helper.common.AdditionalContactWorkingHoursUIHelper;
+import dpu.ui.common.helper.AdditionalContactUIHelper;
+import dpu.ui.common.helper.AdditionalContactWorkingHoursUIHelper;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;

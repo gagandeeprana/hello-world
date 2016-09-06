@@ -5,7 +5,7 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.helper.common.PowerUnitUIHelper;
+import dpu.ui.common.helper.PowerUnitUIHelper;
 
 /**
  *

@@ -7,7 +7,7 @@ package dpu.ui.common;
 
 import dpu.beans.admin.CustomBrokerBean;
 import dpu.reports.common.JasperReportGenerator;
-import dpu.ui.helper.common.CustomBrokerUIHelper;
+import dpu.ui.common.helper.CustomBrokerUIHelper;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog;
@@ -49,7 +49,6 @@ public class TestCustomBrokersPanel extends javax.swing.JPanel {
         customBrokerUIHelper = new CustomBrokerUIHelper();
         customBrokerUIHelper.generateTable();
 
-        btnPrint.setAction(new TestCustomBrokersPanel.ShowWaitAction(""));
         btnPrint.setToolTipText("Print CustomBroker Report...");
         btnPrint.setIcon(new ImageIcon(printImage));
         btnPrint.setContentAreaFilled(false);
@@ -356,61 +355,4 @@ public class TestCustomBrokersPanel extends javax.swing.JPanel {
     public static javax.swing.JTable tblCustomBroker;
     public static javax.swing.JTextField txtCustomBrokerSearch;
     // End of variables declaration//GEN-END:variables
-    class ShowWaitAction extends AbstractAction {
-
-        protected static final long SLEEP_TIME = 2 * 1000;
-
-        public ShowWaitAction(String name) {
-            super(name);
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-            try {
-                SwingWorker<Void, Void> mySwingWorker = new SwingWorker<Void, Void>() {
-
-                    @Override
-                    protected Void doInBackground() throws Exception {
-                        // mimic some long-running process here...
-                        Thread.sleep(SLEEP_TIME);
-                        return null;
-                    }
-                };
-
-                Window win = SwingUtilities.getWindowAncestor((AbstractButton) evt.getSource());
-                final JDialog dialog = new JDialog(win, "", Dialog.ModalityType.APPLICATION_MODAL);
-                dialog.setUndecorated(true);
-
-                mySwingWorker.addPropertyChangeListener(new PropertyChangeListener() {
-
-                    @Override
-                    public void propertyChange(PropertyChangeEvent evt) {
-                        if (evt.getPropertyName().equals("state")) {
-                            if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
-                                JasperReportGenerator.generateReport("CustomBrokerReport.jrxml");
-                                dialog.dispose();
-                            }
-                        }
-                    }
-                });
-                mySwingWorker.execute();
-//        JProgressBar progressBar = new JProgressBar();
-//        progressBar.setIndeterminate(true);
-                JPanel panel = new JPanel(new BorderLayout());
-//        panel.add(progressBar, BorderLayout.CENTER);
-//        panel.add(new JLabel("Please wait......."), BorderLayout.PAGE_START);
-                JLabel jLabel = new JLabel(new ImageIcon(ReadFromPropertiesFile.imagePath + "Wait.gif"));
-                panel.add(jLabel);
-                dialog.add(panel);
-                TestClassPanel testClassPanel = new TestClassPanel();
-                testClassPanel.setEnabled(false);
-                dialog.pack();
-                dialog.setLocationRelativeTo(win);
-                dialog.setVisible(true);
-            } catch (Exception e) {
-                System.out.println("ShowWaitAction : actionPerformed(): " + e);
-            }
-
-        }
-    }
 }
