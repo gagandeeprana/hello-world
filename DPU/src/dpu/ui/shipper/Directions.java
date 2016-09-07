@@ -5,6 +5,9 @@
  */
 package dpu.ui.shipper;
 
+import dpu.beans.admin.ShippermasterBean;
+import dpu.ui.helper.common.ShipperUIHelper;
+
 /**
  *
  * @author jagvir
@@ -18,7 +21,14 @@ public class Directions extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        if (ShipperUIHelper.addUpdateFlag.equals("update")) {
+            showDataOnScreen(NewShipperFrame.shippermasterBean);
+            System.out.println("direction:::" + NewShipperFrame.shippermasterBean.getDirections());
+        }
+    }
 
+    public void showDataOnScreen(ShippermasterBean shippermasterBean) {
+        taDirections.setText(shippermasterBean.getDirections());
     }
 
     /**
@@ -31,14 +41,14 @@ public class Directions extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        taDirections = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        taDirections.setColumns(20);
+        taDirections.setRows(5);
+        jScrollPane1.setViewportView(taDirections);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Close");
@@ -117,6 +127,6 @@ public class Directions extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    public static javax.swing.JTextArea taDirections;
     // End of variables declaration//GEN-END:variables
 }
