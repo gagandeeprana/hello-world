@@ -9,9 +9,7 @@ public interface CompanyDAO {
 
     CompanyBean getCompanyInfoById(int companyId);
 
-    int getMaxCompanyId();
-
-    String addCompany(CompanyBean obj);
+    int addCompany(CompanyBean obj);
 
     String updateCompany(CompanyBean obj);
 

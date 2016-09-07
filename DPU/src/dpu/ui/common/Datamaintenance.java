@@ -16,16 +16,12 @@ import org.springframework.stereotype.Component;
  *
  * @author gagandeep.rana
  */
-@Component
 public class Datamaintenance extends javax.swing.JPanel {
 
     /**
      * Creates new form Datamaintenance
      */
     Container root = null;
-
-    @Autowired
-    TestCompanyPanel testCompanyPanel;
 
     public Datamaintenance() {
         initComponents();
@@ -357,6 +353,7 @@ public class Datamaintenance extends javax.swing.JPanel {
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         internalFrameSettings();
+        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
         testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testCompanyPanel);
         root.setVisible(true);

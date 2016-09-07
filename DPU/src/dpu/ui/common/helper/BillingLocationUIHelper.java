@@ -136,7 +136,7 @@ public class BillingLocationUIHelper {
         BillingLocationDAO billingLocationDAO = new BillingLocationDAOImpl();
         String msg = "";
         if (addUpdateFlag.equals("add")) {
-            msg = billingLocationDAO.addBillingLocation(billingLocationBean);
+            int id = billingLocationDAO.addBillingLocation(billingLocationBean);
         } else {
             billingLocationBean.setBillingLocationId(billingLocationId);
             msg = billingLocationDAO.updateBillingLocation(billingLocationBean);

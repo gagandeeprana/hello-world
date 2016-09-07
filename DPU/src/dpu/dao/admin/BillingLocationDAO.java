@@ -17,7 +17,7 @@ public interface BillingLocationDAO {
     List<BillingLocationBean> getAllBillingLocations(String name);
     BillingLocationBean getBillingLocationById(int id);
     List<BillingLocationBean> getBillingLocationsByCompanyId(int id);
-    String addBillingLocation(BillingLocationBean obj);
+    int addBillingLocation(BillingLocationBean obj);
     String updateBillingLocation(BillingLocationBean obj);
     String deleteBillingLocation(int billingLocationId);
 }

@@ -28,25 +28,15 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class CompanyUIHelper {
 
-    @Autowired
-    CompanyDAO companyDAO;
-//    CompanyDAO companyDAO = new CompanyDAOImpl();
-
-    @Autowired
-    public CompanyBean companyBean;
-
-//    static public String addUpdateFlag = "";
-//    public static int companyId = 0;
-//    public static List<CompanyBean> lstCompanies = null;
-    public String addUpdateFlag = "";
-    public int companyId = 0;
-    public List<CompanyBean> lstCompanies = null;
+   
+    CompanyDAO companyDAO = new CompanyDAOImpl();
+    public CompanyBean companyBean = new CompanyBean();
+    static public String addUpdateFlag = "";
+    public static int companyId = 0;
+    public static List<CompanyBean> lstCompanies = null;
     int companyIdToBeDeleted = 0;
     String msg = "";
 //    static Logger logger = Logger.getLogger(CompanyUIHelper.class);
@@ -160,13 +150,13 @@ public class CompanyUIHelper {
 
         String msg = "";
         int maxAdditionalContactId = 0;
+        int maxCompanyId = 0;
         if (addUpdateFlag.equals("add")) {
-            msg = companyDAO.addCompany(companyBean);
+            maxCompanyId = companyDAO.addCompany(companyBean);
             if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
-                int contactId = companyDAO.getMaxCompanyId();
                 for (int i = 0; i < AddCustomerFrame.lstAdditionalContacts.size(); i++) {
                     AdditionalContactBean additionalContactBean = AddCustomerFrame.lstAdditionalContacts.get(i);
-                    additionalContactBean.setContactId(contactId);
+//                    additionalContactBean.setContactId(contactId);
                     additionalContactDAO.addAdditionalContact(additionalContactBean);
                     maxAdditionalContactId = additionalContactDAO.getMaxAdditionalContactId();
                     if (AdditionalContactWorkingHoursUIHelper.mapWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
@@ -182,9 +172,9 @@ public class CompanyUIHelper {
                 }
             }
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
-                int contactId = companyDAO.getMaxCompanyId();
+                CompanyBean companyBean = companyDAO.getCompanyInfoById(maxCompanyId);
                 for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
-                    billingLocationBean.setCompanyId(contactId);
+                    billingLocationBean.setCompanyBean(companyBean);
                     billingLocationDAO.addBillingLocation(billingLocationBean);
                 }
             }
@@ -213,7 +203,7 @@ public class CompanyUIHelper {
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
                 int contactId = companyId;
                 for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
-                    billingLocationBean.setCompanyId(contactId);
+//                    billingLocationBean.setCompanyId(contactId);
                     if (billingLocationBean.getBillingLocationId() != 0) {
                         for (int i = 0; i < AddCustomerFrame.lstBillingLocationsFromDb.size(); i++) {
                             if (billingLocationBean.getBillingLocationId() == AddCustomerFrame.lstBillingLocationsFromDb.get(i).getBillingLocationId()) {

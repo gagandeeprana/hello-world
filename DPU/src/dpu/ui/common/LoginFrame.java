@@ -17,17 +17,12 @@ import properties.ReadFromPropertiesFile;
  *
  * @author gagandeep.rana
  */
-@Component
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginFrame
      */
-    @Autowired
-    ArrangedMainFrame3 arrangedMainFrame3;
-    
 //    static MainTabbedPane mainTabbedPane = null;
-
     public LoginFrame() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(ReadFromPropertiesFile.imagePath + "Application-Exe.png"));
@@ -164,7 +159,8 @@ public class LoginFrame extends javax.swing.JFrame {
 //        test.setTitle("DPU (" + mainTabbedPane.getTitleAt(mainTabbedPane.getSelectedIndex()).trim() + ")");
 //        test.add(mainTabbedPane);
 //        test.setVisible(true);
-        setVisible(false);
+        ArrangedMainFrame3 arrangedMainFrame3 = new ArrangedMainFrame3();
+        this.setVisible(false);
         arrangedMainFrame3.setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 

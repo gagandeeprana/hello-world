@@ -1,6 +1,3 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
 -- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
@@ -110,13 +107,13 @@ CREATE TABLE `billinglocationmaster` (
   `phone` varchar(30) DEFAULT NULL,
   `ext` varchar(30) DEFAULT NULL,
   `fax` varchar(30) DEFAULT NULL,
-  `prefix` varchar(30) DEFAULT NULL,
+  `billing_prefix` varchar(30) DEFAULT NULL,
   `tollfree` varchar(30) DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`billing_location_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `billinglocationmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +122,7 @@ CREATE TABLE `billinglocationmaster` (
 
 LOCK TABLES `billinglocationmaster` WRITE;
 /*!40000 ALTER TABLE `billinglocationmaster` DISABLE KEYS */;
-INSERT INTO `billinglocationmaster` VALUES (15,'KKKKKKa','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO',1,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','KKKKK',32);
+INSERT INTO `billinglocationmaster` VALUES (15,'KKKKKKa','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO',1,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','KKKKK',32),(16,'wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww',1,'wwwwwww','wwwwwww','wwwwwww','(222) 222-2222','(222) 222-2222','wwwwwww','(222) 222-2222','wwwwwww','(222) 222-2222',44),(17,'JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ',1,'JJJJJ','JJJJJ','JJJJJ','(444) 444-4444','(444) 444-4444','JJJJJ','(444) 444-4444','JJJJJ','(444) 444-4444',45);
 /*!40000 ALTER TABLE `billinglocationmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,14 +235,14 @@ CREATE TABLE `companymaster` (
   `phone` varchar(30) DEFAULT NULL,
   `ext` varchar(20) DEFAULT NULL,
   `fax` varchar(40) DEFAULT NULL,
-  `prefix` varchar(30) DEFAULT NULL,
+  `company_prefix` varchar(30) DEFAULT NULL,
   `tollfree` varchar(30) DEFAULT NULL,
   `cellular` varchar(30) DEFAULT NULL,
   `pager` varchar(30) DEFAULT NULL,
   `customer_notes` varchar(500) DEFAULT NULL,
   `after_hours` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +251,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(34,'BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(38,'JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','(666) 666-6666','(666) 666-6666',NULL,'(666) 666-6666'),(39,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(40,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(41,'GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','(888) 888-8888','(888) 888-8888',NULL,'(888) 888-8888'),(42,'Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','(888) 888-8888','Harry','(777) 777-7777','Harry','(444) 444-4444','(333) 333-3333','(222) 222-2222',NULL,'(666) 666-6666'),(43,'NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','(111) 111-1111','(111) 111-1111',NULL,'(111) 111-1111');
+INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(34,'BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(38,'JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','(666) 666-6666','(666) 666-6666',NULL,'(666) 666-6666'),(39,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(40,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(41,'GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','(888) 888-8888','(888) 888-8888',NULL,'(888) 888-8888'),(42,'Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','(888) 888-8888','Harry','(777) 777-7777','Harry','(444) 444-4444','(333) 333-3333','(222) 222-2222',NULL,'(666) 666-6666'),(43,'NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','(111) 111-1111','(111) 111-1111',NULL,'(111) 111-1111'),(44,'aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','(111) 111-1111','aaaaaaaa','(111) 111-1111','aaaaaaaa','(111) 111-1111','(111) 111-1111','(111) 111-1111',NULL,'(111) 111-1111'),(45,'New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','(777) 777-7777','New Cust111','(777) 777-7777','New Cust111','(777) 777-7777','(777) 777-7777','(777) 777-7777',NULL,'(777) 777-7777');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -922,4 +919,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-02 19:32:59
+-- Dump completed on 2016-09-07 18:47:55

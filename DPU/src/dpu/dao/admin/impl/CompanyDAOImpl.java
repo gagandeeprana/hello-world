@@ -5,221 +5,242 @@
  */
 package dpu.dao.admin.impl;
 
+import dpu.DPU;
 import dpu.beans.admin.CompanyBean;
-import dpu.dao.admin.CompanyDAO;
 import dpu.dao.common.ConnectDB;
 import dpu.dao.admin.CompanyDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
-@Component("companyDAO")
 public class CompanyDAOImpl implements CompanyDAO {
 
-//    ConnectDB connectDB = ConnectDB.getInstance();
-    @Autowired
-    ConnectDB connectDB;
+    ConnectDB connectDB = ConnectDB.getInstance();
 
-//    Logger logger = Logger.getLogger(CompanyDAOImpl.class);
+    Logger logger = Logger.getLogger(CompanyDAOImpl.class);
 
     @Override
     public List<CompanyBean> getAllCompanies(String name) {
         List<CompanyBean> lstCompanies = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from companymaster where name like ?");
-            pstmt.setString(1, "%" + name + "%");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                CompanyBean obj = new CompanyBean();
-                obj.setCompanyId(rs.getInt("company_id"));
-                obj.setCompanyName(rs.getString("name"));
-                obj.setAddress(rs.getString("address"));
-                obj.setUnitNo(rs.getString("unit_no"));
-                obj.setCity(rs.getString("city"));
-                obj.setProvinceState(rs.getString("province_state"));
-                obj.setZip(rs.getString("zip"));
-                obj.setEmail(rs.getString("email"));
-                obj.setWebsite(rs.getString("website"));
-                obj.setContact(rs.getString("contact"));
-                obj.setPosition(rs.getString("position"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setPrefix(rs.getString("prefix"));
-                obj.setTollfree(rs.getString("tollfree"));
-                obj.setCellular(rs.getString("cellular"));
-                obj.setPager(rs.getString("pager"));
-                obj.setNotes(rs.getString("customer_notes"));
-                obj.setAfterHours(rs.getString("after_hours"));
-                lstCompanies.add(obj);
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(CompanyBean.class);
+            if (!"".equals(name)) {
+                criteria.add(Restrictions.like("companyName", name));
             }
+            lstCompanies = (List<CompanyBean>) criteria.list();
         } catch (Exception e) {
-            System.out.println("CompanyDAOImpl : getAllCompanies : " + e);
-//            logger.error("CompanyDAOImpl : getAllCompanies : " + e);
+            logger.error("CompanyDAOImpl : getAllCompanies : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstCompanies;
     }
 
     @Override
-    public String addCompany(CompanyBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public int addCompany(CompanyBean obj) {
+//        Connection conn = null;
+//        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
+        int maxId = 0;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager,customer_notes,after_hours) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            pstmt.setString(1, obj.getCompanyName());
-            pstmt.setString(2, obj.getAddress());
-            pstmt.setString(3, obj.getUnitNo());
-            pstmt.setString(4, obj.getCity());
-            pstmt.setString(5, obj.getProvinceState());
-            pstmt.setString(6, obj.getZip());
-            pstmt.setString(7, obj.getEmail());
-            pstmt.setString(8, obj.getWebsite());
-            pstmt.setString(9, obj.getContact());
-            pstmt.setString(10, obj.getPosition());
-            pstmt.setString(11, obj.getPhone());
-            pstmt.setString(12, obj.getExt());
-            pstmt.setString(13, obj.getFax());
-            pstmt.setString(14, obj.getPrefix());
-            pstmt.setString(15, obj.getTollfree());
-            pstmt.setString(16, obj.getCellular());
-            pstmt.setString(17, obj.getPager());
-            pstmt.setString(18, obj.getNotes());
-            pstmt.setString(19, obj.getAfterHours());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Company Added";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            maxId = (int) session.save(obj);
+            tx.commit();
+            return maxId;
+//            conn = connectDB.connect();
+//            pstmt = conn.prepareStatement("insert into companymaster (name,address,unit_no,city,province_state,zip,email,website,contact,position,phone,ext,fax,prefix,tollfree,cellular,pager,customer_notes,after_hours) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+//            pstmt.setString(1, obj.getCompanyName());
+//            pstmt.setString(2, obj.getAddress());
+//            pstmt.setString(3, obj.getUnitNo());
+//            pstmt.setString(4, obj.getCity());
+//            pstmt.setString(5, obj.getProvinceState());
+//            pstmt.setString(6, obj.getZip());
+//            pstmt.setString(7, obj.getEmail());
+//            pstmt.setString(8, obj.getWebsite());
+//            pstmt.setString(9, obj.getContact());
+//            pstmt.setString(10, obj.getPosition());
+//            pstmt.setString(11, obj.getPhone());
+//            pstmt.setString(12, obj.getExt());
+//            pstmt.setString(13, obj.getFax());
+//            pstmt.setString(14, obj.getPrefix());
+//            pstmt.setString(15, obj.getTollfree());
+//            pstmt.setString(16, obj.getCellular());
+//            pstmt.setString(17, obj.getPager());
+//            pstmt.setString(18, obj.getNotes());
+//            pstmt.setString(19, obj.getAfterHours());
+//            int i = pstmt.executeUpdate();
+//            if (i > 0) {
+//            }
         } catch (Exception e) {
-            System.out.println("CompanyDAOImpl : addCompany : " + e);
-//            logger.error("CompanyDAOImpl : addCompany : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("CompanyDAOImpl : addCompany : " + e);
+//            System.out.println("CompanyDAOImpl : addCompany : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
-        return "Failed to Add Company";
+        return maxId;
     }
 
     @Override
     public String updateCompany(CompanyBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+//        Connection conn = null;
+//        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update companymaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,email=?,website=?,contact=?,position=?,phone=?,ext=?,fax=?,prefix = ?,tollfree=?,cellular=?,pager=?,customer_notes=?,after_hours = ? where company_id = ?");
-            pstmt.setString(1, obj.getCompanyName());
-            pstmt.setString(2, obj.getAddress());
-            pstmt.setString(3, obj.getUnitNo());
-            pstmt.setString(4, obj.getCity());
-            pstmt.setString(5, obj.getProvinceState());
-            pstmt.setString(6, obj.getZip());
-            pstmt.setString(7, obj.getEmail());
-            pstmt.setString(8, obj.getWebsite());
-            pstmt.setString(9, obj.getContact());
-            pstmt.setString(10, obj.getPosition());
-            pstmt.setString(11, obj.getPhone());
-            pstmt.setString(12, obj.getExt());
-            pstmt.setString(13, obj.getFax());
-            pstmt.setString(14, obj.getPrefix());
-            pstmt.setString(15, obj.getTollfree());
-            pstmt.setString(16, obj.getCellular());
-            pstmt.setString(17, obj.getPager());
-            pstmt.setString(18, obj.getNotes());
-            pstmt.setString(19, obj.getAfterHours());
-            pstmt.setInt(20, obj.getCompanyId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Company Updated";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.update(obj);
+            tx.commit();
+//            conn = connectDB.connect();
+//            pstmt = conn.prepareStatement("update companymaster set name = ?,address=?,unit_no=?,city=?,province_state=?,zip=?,email=?,website=?,contact=?,position=?,phone=?,ext=?,fax=?,prefix = ?,tollfree=?,cellular=?,pager=?,customer_notes=?,after_hours = ? where company_id = ?");
+//            pstmt.setString(1, obj.getCompanyName());
+//            pstmt.setString(2, obj.getAddress());
+//            pstmt.setString(3, obj.getUnitNo());
+//            pstmt.setString(4, obj.getCity());
+//            pstmt.setString(5, obj.getProvinceState());
+//            pstmt.setString(6, obj.getZip());
+//            pstmt.setString(7, obj.getEmail());
+//            pstmt.setString(8, obj.getWebsite());
+//            pstmt.setString(9, obj.getContact());
+//            pstmt.setString(10, obj.getPosition());
+//            pstmt.setString(11, obj.getPhone());
+//            pstmt.setString(12, obj.getExt());
+//            pstmt.setString(13, obj.getFax());
+//            pstmt.setString(14, obj.getPrefix());
+//            pstmt.setString(15, obj.getTollfree());
+//            pstmt.setString(16, obj.getCellular());
+//            pstmt.setString(17, obj.getPager());
+//            pstmt.setString(18, obj.getNotes());
+//            pstmt.setString(19, obj.getAfterHours());
+//            pstmt.setInt(20, obj.getCompanyId());
+//            int i = pstmt.executeUpdate();
+//            if (i > 0) {
+            return "Company Updated";
+//            }
         } catch (Exception e) {
-            System.out.println("CompanyDAOImpl : updateCompany : " + e);
-//            logger.error("CompanyDAOImpl : updateCompany : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+//            System.out.println("CompanyDAOImpl : updateCompany : " + e);
+            logger.error("CompanyDAOImpl : updateCompany : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Update Company";
     }
 
     @Override
     public String deleteCompany(int companyId) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+//        Connection conn = null;
+//        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("delete from companymaster where company_id = ?");
-            pstmt.setInt(1, companyId);
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Company Deleted";
-            }
+            session = DPU.getSessionFactory().openSession();
+            CompanyBean obj = (CompanyBean) session.get(CompanyBean.class, companyId);
+            tx = session.beginTransaction();
+            session.delete(obj);
+            tx.commit();
+//            conn = connectDB.connect();
+//            pstmt = conn.prepareStatement("delete from companymaster where company_id = ?");
+//            pstmt.setInt(1, companyId);
+//            int i = pstmt.executeUpdate();
+//            if (i > 0) {
+            return "Company Deleted";
+//            }
         } catch (Exception e) {
-            System.out.println("CompanyDAOImpl : deleteCompany : " + e);
-//            logger.error("CompanyDAOImpl : deleteCompany : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("CompanyDAOImpl : deleteCompany : " + e);
+//            System.out.println("CompanyDAOImpl : deleteCompany : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Delete Company";
     }
 
     @Override
     public CompanyBean getCompanyInfoById(int companyId) {
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+//        Connection conn = null;
+//        ResultSet rs = null;
+//        PreparedStatement pstmt = null;
+        Session session = null;
         CompanyBean obj = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from companymaster where company_id = ?");
-            pstmt.setInt(1, companyId);
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                obj = new CompanyBean();
-                obj.setCompanyId(rs.getInt("company_id"));
-                obj.setCompanyName(rs.getString("name"));
-                obj.setAddress(rs.getString("address"));
-                obj.setUnitNo(rs.getString("unit_no"));
-                obj.setCity(rs.getString("city"));
-                obj.setProvinceState(rs.getString("province_state"));
-                obj.setZip(rs.getString("zip"));
-                obj.setEmail(rs.getString("email"));
-                obj.setWebsite(rs.getString("website"));
-                obj.setContact(rs.getString("contact"));
-                obj.setPosition(rs.getString("position"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setPrefix(rs.getString("prefix"));
-                obj.setTollfree(rs.getString("tollfree"));
-                obj.setCellular(rs.getString("cellular"));
-                obj.setPager(rs.getString("pager"));
-                obj.setNotes(rs.getString("customer_notes"));
-                obj.setAfterHours(rs.getString("after_hours"));
-            }
+            session = DPU.getSessionFactory().openSession();
+            obj = (CompanyBean) session.get(CompanyBean.class, companyId);
+//            conn = connectDB.connect();
+//            pstmt = conn.prepareStatement("select * from companymaster where company_id = ?");
+//            pstmt.setInt(1, companyId);
+//            rs = pstmt.executeQuery();
+//            if (rs.next()) {
+//                obj = new CompanyBean();
+//                obj.setCompanyId(rs.getInt("company_id"));
+//                obj.setCompanyName(rs.getString("name"));
+//                obj.setAddress(rs.getString("address"));
+//                obj.setUnitNo(rs.getString("unit_no"));
+//                obj.setCity(rs.getString("city"));
+//                obj.setProvinceState(rs.getString("province_state"));
+//                obj.setZip(rs.getString("zip"));
+//                obj.setEmail(rs.getString("email"));
+//                obj.setWebsite(rs.getString("website"));
+//                obj.setContact(rs.getString("contact"));
+//                obj.setPosition(rs.getString("position"));
+//                obj.setPhone(rs.getString("phone"));
+//                obj.setExt(rs.getString("ext"));
+//                obj.setFax(rs.getString("fax"));
+//                obj.setPrefix(rs.getString("prefix"));
+//                obj.setTollfree(rs.getString("tollfree"));
+//                obj.setCellular(rs.getString("cellular"));
+//                obj.setPager(rs.getString("pager"));
+//                obj.setNotes(rs.getString("customer_notes"));
+//                obj.setAfterHours(rs.getString("after_hours"));
+//            }
         } catch (Exception e) {
-            System.out.println("CompanyDAOImpl : getCompanyInfoById : " + e);
-//            logger.error("CompanyDAOImpl : getCompanyInfoById : " + e);
+//            System.out.println("CompanyDAOImpl : getCompanyInfoById : " + e);
+            logger.error("CompanyDAOImpl : getCompanyInfoById : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return obj;
     }
-
-    @Override
-    public int getMaxCompanyId() {
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
-        try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select max(company_id) from companymaster");
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (Exception e) {
-            System.out.println("CompanyDAOImpl : getMaxCompanyId : " + e);
-//            logger.error("CompanyDAOImpl : getMaxCompanyId : " + e);
-        }
-        return 0;
-    }
+    
 }

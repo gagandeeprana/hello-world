@@ -3,19 +3,11 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQLDialect
-        </property>
-        <property name="hibernate.connection.driver_class">
-            com.mysql.jdbc.Driver
-        </property>
-        <!-- Assume test is the database name -->
-        <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3306/dpu
-        </property>
-        <property name="hibernate.connection.username">
-            root
-        </property>
-        <mapping resource="dpu.beans.admin.CompanyBean"/>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dpu</property>
+        <property name="hibernate.connection.username">root</property>
+        <mapping class="dpu.beans.admin.CompanyBean"/>
+        <mapping class="dpu.beans.admin.BillingLocationBean"/>
     </session-factory>
 </hibernate-configuration>

@@ -25,7 +25,6 @@ import properties.ReadFromPropertiesFile;
  *
  * @author gagandeep.rana
  */
-@Component
 public class TestCompanyPanel extends javax.swing.JPanel {
 
     /**
@@ -33,17 +32,14 @@ public class TestCompanyPanel extends javax.swing.JPanel {
      */
     Logger logger = Logger.getLogger(TestCompanyPanel.class);
 
-    @Autowired
-    CompanyUIHelper companyUIHelper;
-
-//    CompanyUIHelper companyUIHelper = new CompanyUIHelper();
+    CompanyUIHelper companyUIHelper = null;
 //    String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
     String printImage = "";
 
     public TestCompanyPanel() {
 //        try {
-            initComponents();
-            doWork();
+        initComponents();
+        doWork();
 //        } catch (Exception e) {
 //            logger.error("Inside TestCompanyPanel : Exception is: " + e);
 //        }
@@ -51,7 +47,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
     private void doWork() {
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-//        companyUI = new CompanyUIHelper();
+        companyUIHelper = new CompanyUIHelper();
         companyUIHelper.generateTable();
         btnPrint.setToolTipText("Print Company Report...");
 //        btnPrint.setIcon(new ImageIcon(printImage));

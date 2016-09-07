@@ -3,24 +3,27 @@ package dpu.dao.common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import properties.ReadFromPropertiesFile;
 
 //@Configuration
 @Component
 public class ConnectDB {
 
-//    @Autowired
-//    ReadFromPropertiesFile readFromPropertiesFile;
+    ReadFromPropertiesFile readFromPropertiesFile;
 //    static Logger logger = Logger.getLogger(ConnectDB.class);
-//    ConnectDB connectDB = null;
-//    @Bean
-//    public ConnectDB connectDB() {
-////        if (connectDB == null) {
-////            connectDB = ();
-////        }
-////        return new ConnectDB();
-//    }
+    private static ConnectDB connectDB = null;
+
+    private ConnectDB() {
+
+    }
+
+    public static ConnectDB getInstance() {
+        if (connectDB == null) {
+            connectDB = new ConnectDB();
+        }
+        return connectDB;
+    }
 
     public static Connection connect() {
         Connection conn = null;

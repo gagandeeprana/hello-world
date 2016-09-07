@@ -3102,3 +3102,563 @@ Caused by: java.lang.NullPointerException
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
 	... 41 more
 Dispatch Processing Unit 2016-09-06 17:04:53,218  INFO [main] (DPU.java:32) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 11:08:22,893  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 11:08:23,006  INFO [main] (AbstractApplicationContext.java:510) - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@23d66d03: startup date [Wed Sep 07 11:08:23 IST 2016]; root of context hierarchy
+Dispatch Processing Unit 2016-09-07 11:08:23,039  INFO [main] (XmlBeanDefinitionReader.java:317) - Loading XML bean definitions from class path resource [beans.xml]
+Dispatch Processing Unit 2016-09-07 11:08:25,979  WARN [main] (AbstractApplicationContext.java:487) - Exception encountered during context initialization - cancelling refresh attempt
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'arrangedMainFrame3': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: dpu.ui.common.Datamaintenance dpu.ui.common.ArrangedMainFrame3.datamaintenance; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'datamaintenance': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: dpu.ui.common.TestCompanyPanel dpu.ui.common.Datamaintenance.testCompanyPanel; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testCompanyPanel' defined in file [D:\JavaGit\hello-world\DPU\build\classes\dpu\ui\common\TestCompanyPanel.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [dpu.ui.common.TestCompanyPanel]: Constructor threw exception; nested exception is java.lang.NullPointerException
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83)
+	at dpu.DPU.main(DPU.java:25)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: dpu.ui.common.Datamaintenance dpu.ui.common.ArrangedMainFrame3.datamaintenance; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'datamaintenance': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: dpu.ui.common.TestCompanyPanel dpu.ui.common.Datamaintenance.testCompanyPanel; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testCompanyPanel' defined in file [D:\JavaGit\hello-world\DPU\build\classes\dpu\ui\common\TestCompanyPanel.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [dpu.ui.common.TestCompanyPanel]: Constructor threw exception; nested exception is java.lang.NullPointerException
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 13 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'datamaintenance': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: dpu.ui.common.TestCompanyPanel dpu.ui.common.Datamaintenance.testCompanyPanel; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testCompanyPanel' defined in file [D:\JavaGit\hello-world\DPU\build\classes\dpu\ui\common\TestCompanyPanel.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [dpu.ui.common.TestCompanyPanel]: Constructor threw exception; nested exception is java.lang.NullPointerException
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 15 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: dpu.ui.common.TestCompanyPanel dpu.ui.common.Datamaintenance.testCompanyPanel; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testCompanyPanel' defined in file [D:\JavaGit\hello-world\DPU\build\classes\dpu\ui\common\TestCompanyPanel.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [dpu.ui.common.TestCompanyPanel]: Constructor threw exception; nested exception is java.lang.NullPointerException
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 26 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'testCompanyPanel' defined in file [D:\JavaGit\hello-world\DPU\build\classes\dpu\ui\common\TestCompanyPanel.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [dpu.ui.common.TestCompanyPanel]: Constructor threw exception; nested exception is java.lang.NullPointerException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1101)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1046)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:504)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 28 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [dpu.ui.common.TestCompanyPanel]: Constructor threw exception; nested exception is java.lang.NullPointerException
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:163)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:89)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1094)
+	... 39 more
+Caused by: java.lang.NullPointerException
+	at dpu.ui.common.TestCompanyPanel.doWork(TestCompanyPanel.java:55)
+	at dpu.ui.common.TestCompanyPanel.<init>(TestCompanyPanel.java:46)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
+	... 41 more
+Dispatch Processing Unit 2016-09-07 11:08:25,984  INFO [main] (DPU.java:32) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 11:17:24,925  INFO [main] (DPU.java:21) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 11:17:25,094  INFO [main] (DPU.java:31) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 11:18:10,807  INFO [main] (DPU.java:21) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 11:18:10,964  INFO [main] (DPU.java:31) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:06:03,090  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:06:03,258  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:14:56,957  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:14:57,112  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:16:14,564  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:16:14,719  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:17:36,953  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:17:37,135  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:19:37,084  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:19:37,261  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:21:40,521  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:21:40,704  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:24:43,911  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:24:44,085  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:26:03,034  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:26:03,232  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:27:06,222  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:27:06,421  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:27:09,263  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 12:27:09,268  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 12:27:09,269  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 12:27:09,271  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 12:27:09,286  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:27:09,286  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:27:09,355  INFO [AWT-EventQueue-0] (Configuration.java:757) - HHH000221: Reading mappings from resource: dpu.beans.admin.CompanyBean
+Dispatch Processing Unit 2016-09-07 12:27:09,356 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.MappingNotFoundException: resource: dpu.beans.admin.CompanyBean not found
+Dispatch Processing Unit 2016-09-07 12:32:55,802  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:32:55,961  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:32:59,390  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 12:32:59,395  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 12:32:59,397  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 12:32:59,398  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 12:32:59,412  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:32:59,412  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:32:59,477  INFO [AWT-EventQueue-0] (Configuration.java:757) - HHH000221: Reading mappings from resource: dpu.beans.admin.CompanyBean
+Dispatch Processing Unit 2016-09-07 12:32:59,478 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.MappingNotFoundException: resource: dpu.beans.admin.CompanyBean not found
+Dispatch Processing Unit 2016-09-07 12:33:49,404  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:33:49,563  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:33:53,955  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 12:33:53,960  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 12:33:53,961  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 12:33:53,962  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 12:33:53,976  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:33:53,976  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:33:54,026  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 12:33:54,087  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 12:33:54,093  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 12:33:54,094  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 12:33:54,094  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 12:33:54,096  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 12:33:54,312  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 12:35:40,646  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 12:35:40,825  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 12:35:48,793  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 12:35:48,798  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 12:35:48,799  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 12:35:48,800  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 12:35:48,814  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:35:48,815  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 12:35:48,865  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 12:35:48,924  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 12:35:48,929  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 12:35:48,930  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 12:35:48,930  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 12:35:48,933  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 12:35:49,103  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:03:57,456  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:03:57,608  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:04:00,779  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:04:00,784  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:04:00,785  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:04:00,787  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:04:00,800  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:04:00,800  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:04:00,848  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:04:00,905  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:04:00,910  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:04:00,910  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:04:00,910  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:04:00,911  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:04:01,073  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:33:08,096  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:33:08,242  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:33:11,202  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:33:11,207  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:33:11,208  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:33:11,209  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:33:11,223  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:33:11,223  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:33:11,273  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:33:11,332  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:33:11,337  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:33:11,338  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:33:11,338  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:33:11,339  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:33:11,496  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:37:49,369  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:37:49,548  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:37:53,720  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:37:53,725  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:37:53,726  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:37:53,728  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:37:53,742  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:37:53,742  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:37:53,791  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:37:53,848  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:37:53,853  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:37:53,853  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:37:53,853  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:37:53,854  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:37:54,019  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:37:54,124  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:37:54,140  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:37:54,329 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.MappingException: Could not get constructor for org.hibernate.persister.entity.SingleTableEntityPersister
+Dispatch Processing Unit 2016-09-07 14:38:33,112  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:38:33,267  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:38:36,779  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:38:36,784  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:38:36,786  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:38:36,787  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:38:36,801  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:38:36,801  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:38:36,850  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:38:36,908  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:38:36,913  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:38:36,914  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:38:36,914  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:38:36,915  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:38:37,073  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:38:37,172  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:38:37,177  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:38:37,245 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.MappingException: Could not get constructor for org.hibernate.persister.entity.SingleTableEntityPersister
+Dispatch Processing Unit 2016-09-07 14:38:59,583  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:38:59,736  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:39:03,572  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:39:03,577  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:39:03,578  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:39:03,580  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:39:03,593  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:39:03,593  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:39:03,642  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:39:03,697  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:39:03,702  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:39:03,703  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:39:03,703  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:39:03,704  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:39:03,858  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:39:03,956  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:39:03,960  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:39:04,024 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.MappingException: Could not get constructor for org.hibernate.persister.entity.SingleTableEntityPersister
+Dispatch Processing Unit 2016-09-07 14:51:00,350  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:51:00,500  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:51:03,365  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:51:03,370  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:51:03,371  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:51:03,372  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:51:03,386  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:51:03,386  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:51:03,436  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:51:03,494  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:51:03,498  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:51:03,499  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:51:03,499  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:51:03,500  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:51:03,658  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:51:03,758  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:51:03,763  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:52:05,920  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:52:06,099  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:52:08,979  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:52:08,984  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:52:08,986  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:52:08,987  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:52:09,001  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:52:09,001  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:52:09,051  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:52:09,111  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:52:09,116  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:52:09,116  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:52:09,116  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:52:09,117  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:52:09,277  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:52:09,380  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:52:09,384  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:52:09,636 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.QueryException: could not resolve property: name of: dpu.beans.admin.CompanyBean
+Dispatch Processing Unit 2016-09-07 14:53:18,863  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:53:19,018  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:53:22,675  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:53:22,681  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:53:22,682  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:53:22,683  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:53:22,698  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:53:22,698  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:53:22,751  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:53:22,810  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:53:22,815  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:53:22,815  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:53:22,816  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:53:22,817  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:53:22,980  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:53:23,078  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:53:23,083  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:53:23,350 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.QueryException: could not resolve property: name of: dpu.beans.admin.CompanyBean
+Dispatch Processing Unit 2016-09-07 14:54:34,885  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:54:35,057  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:54:37,640  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:54:37,644  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:54:37,646  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:54:37,647  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:54:37,661  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:54:37,661  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:54:37,711  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:54:37,772  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:54:37,776  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:54:37,777  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:54:37,777  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:54:37,778  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:54:37,939  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:54:38,036  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:54:38,041  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:54:38,334  WARN [AWT-EventQueue-0] (SqlExceptionHelper.java:144) - SQL Error: 1054, SQLState: 42S22
+Dispatch Processing Unit 2016-09-07 14:54:38,334 ERROR [AWT-EventQueue-0] (SqlExceptionHelper.java:146) - Unknown column 'this_.notes' in 'field list'
+Dispatch Processing Unit 2016-09-07 14:54:38,347 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:67) - CompanyDAOImpl : getAllCompanies : org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+Dispatch Processing Unit 2016-09-07 14:55:06,989  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:55:07,143  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:55:09,992  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:55:09,997  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:55:09,999  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:55:10,000  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:55:10,014  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:55:10,014  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:55:10,067  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:55:10,123  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:55:10,128  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:55:10,128  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:55:10,129  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:55:10,130  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:55:10,283  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:55:10,379  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:55:10,384  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:57:07,878  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:57:08,027  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:57:11,158  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:57:11,163  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:57:11,165  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:57:11,166  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:57:11,179  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:11,179  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:11,227  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:57:11,283  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:57:11,287  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:57:11,287  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:57:11,288  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:57:11,289  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:57:11,443  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:57:11,537  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:57:11,541  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:57:47,669  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:47,670  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:47,684  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:57:47,695  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:57:47,696  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:57:47,696  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:57:47,697  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:57:47,697  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:57:47,720  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:57:47,728  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:57:47,728  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:57:49,573  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:49,574  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:49,586  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:57:49,603  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:57:49,604  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:57:49,605  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:57:49,605  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:57:49,605  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:57:49,626  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:57:49,635  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:57:49,636  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:57:50,060  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:50,060  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:50,067  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:57:50,077  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:57:50,078  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:57:50,078  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:57:50,079  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:57:50,079  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:57:50,115  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:57:50,122  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:57:50,122  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:57:50,805  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:50,806  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:57:50,817  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:57:50,832  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:57:50,833  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:57:50,834  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:57:50,835  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:57:50,835  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:57:50,852  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:57:50,861  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:57:50,862  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:58:41,496  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 14:58:41,652  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 14:58:45,577  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 14:58:45,582  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 14:58:45,583  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 14:58:45,584  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 14:58:45,598  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:58:45,598  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:58:45,646  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:58:45,702  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:58:45,707  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:58:45,708  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:58:45,708  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:58:45,709  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:58:45,863  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:58:45,959  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:58:45,963  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:58:50,210  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:58:50,211  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:58:50,223  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:58:50,237  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:58:50,238  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:58:50,238  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:58:50,238  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:58:50,239  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:58:50,262  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:58:50,268  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:58:50,269  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 14:58:51,859  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:58:51,859  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 14:58:51,871  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 14:58:51,885  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 14:58:51,885  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 14:58:51,886  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 14:58:51,886  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 14:58:51,886  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 14:58:51,910  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 14:58:51,917  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 14:58:51,918  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 15:38:06,121  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 15:38:06,538  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 15:38:09,306  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 15:38:09,311  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 15:38:09,312  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 15:38:09,313  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 15:38:09,325  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:38:09,325  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:38:09,434  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 15:38:09,481  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 15:38:09,485  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 15:38:09,486  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 15:38:09,486  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 15:38:09,487  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 15:38:09,724  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 15:38:09,806  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 15:38:09,809  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 15:39:35,436  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 15:39:35,621  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 15:39:38,212  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 15:39:38,217  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 15:39:38,218  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 15:39:38,219  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 15:39:38,231  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:39:38,232  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:39:38,278  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 15:39:38,325  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 15:39:38,329  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 15:39:38,329  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 15:39:38,329  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 15:39:38,330  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 15:39:38,554  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 15:39:38,640  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 15:39:38,643  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 15:40:10,052  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:40:10,053  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:40:10,066  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 15:40:10,076  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 15:40:10,077  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 15:40:10,078  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 15:40:10,078  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 15:40:10,079  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 15:40:10,094  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 15:40:10,100  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 15:40:10,101  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 15:40:10,143  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:40:10,143  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:40:10,147  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 15:40:10,149  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 15:40:10,149  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 15:40:10,149  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 15:40:10,150  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 15:40:10,150  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 15:40:10,156  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 15:40:10,160  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 15:40:10,161  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 15:40:10,215  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:40:10,215  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 15:40:10,218  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 15:40:10,220  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 15:40:10,220  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 15:40:10,221  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 15:40:10,221  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 15:40:10,222  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 15:40:10,228  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 15:40:10,232  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 15:40:10,232  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 18:44:31,774  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 18:44:32,141  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 18:44:35,691  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 18:44:35,695  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 18:44:35,697  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 18:44:35,698  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 18:44:35,709  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:44:35,710  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:44:35,759  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 18:44:35,806  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 18:44:35,809  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 18:44:35,810  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 18:44:35,810  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 18:44:35,811  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 18:44:36,046  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 18:44:36,148 ERROR [AWT-EventQueue-0] (CompanyDAOImpl.java:39) - CompanyDAOImpl : getAllCompanies : org.hibernate.AnnotationException: Use of @OneToMany or @ManyToMany targeting an unmapped class: dpu.beans.admin.CompanyBean.billingLocations[dpu.beans.admin.BillingLocationBean]
+Dispatch Processing Unit 2016-09-07 18:45:02,747  INFO [main] (DPU.java:23) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-09-07 18:45:02,935  INFO [main] (DPU.java:35) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-09-07 18:45:06,127  INFO [AWT-EventQueue-0] (Version.java:37) - HCANN000001: Hibernate Commons Annotations {4.0.3.Final}
+Dispatch Processing Unit 2016-09-07 18:45:06,131  INFO [AWT-EventQueue-0] (Version.java:54) - HHH000412: Hibernate Core {4.3.5.Final}
+Dispatch Processing Unit 2016-09-07 18:45:06,132  INFO [AWT-EventQueue-0] (Environment.java:239) - HHH000206: hibernate.properties not found
+Dispatch Processing Unit 2016-09-07 18:45:06,133  INFO [AWT-EventQueue-0] (Environment.java:346) - HHH000021: Bytecode provider name : javassist
+Dispatch Processing Unit 2016-09-07 18:45:06,146  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:06,146  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:06,193  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 18:45:06,241  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 18:45:06,245  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 18:45:06,245  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 18:45:06,245  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 18:45:06,246  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 18:45:06,467  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 18:45:06,586  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 18:45:06,589  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 18:45:49,003  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,004  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,017  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 18:45:49,027  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 18:45:49,028  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 18:45:49,029  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 18:45:49,030  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 18:45:49,031  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 18:45:49,051  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 18:45:49,061  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 18:45:49,062  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 18:45:49,111  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,112  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,115  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 18:45:49,117  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 18:45:49,117  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 18:45:49,118  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 18:45:49,118  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 18:45:49,118  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 18:45:49,124  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 18:45:49,130  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 18:45:49,131  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 18:45:49,157  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,157  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,160  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 18:45:49,162  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 18:45:49,162  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 18:45:49,162  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 18:45:49,163  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 18:45:49,163  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 18:45:49,169  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 18:45:49,175  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 18:45:49,175  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-09-07 18:45:49,320  INFO [AWT-EventQueue-0] (Configuration.java:2073) - HHH000043: Configuring from resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,320  INFO [AWT-EventQueue-0] (Configuration.java:2092) - HHH000040: Configuration resource: hibernate.cfg.xml
+Dispatch Processing Unit 2016-09-07 18:45:49,323  INFO [AWT-EventQueue-0] (Configuration.java:2214) - HHH000041: Configured SessionFactory: null
+Dispatch Processing Unit 2016-09-07 18:45:49,325  WARN [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:93) - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+Dispatch Processing Unit 2016-09-07 18:45:49,325  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:166) - HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/dpu]
+Dispatch Processing Unit 2016-09-07 18:45:49,325  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:175) - HHH000046: Connection properties: {user=root}
+Dispatch Processing Unit 2016-09-07 18:45:49,325  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:180) - HHH000006: Autocommit mode: false
+Dispatch Processing Unit 2016-09-07 18:45:49,325  INFO [AWT-EventQueue-0] (DriverManagerConnectionProviderImpl.java:102) - HHH000115: Hibernate connection pool size: 20 (min=1)
+Dispatch Processing Unit 2016-09-07 18:45:49,332  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+Dispatch Processing Unit 2016-09-07 18:45:49,338  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
+Dispatch Processing Unit 2016-09-07 18:45:49,338  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory

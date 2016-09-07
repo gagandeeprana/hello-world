@@ -14,15 +14,12 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Timer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import properties.ReadFromPropertiesFile;
 
 /**
  *
  * @author gagandeep.rana
  */
-@Component
 public class ArrangedMainFrame3 extends javax.swing.JFrame {
 
     /**
@@ -35,9 +32,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     BufferedImage buttonImage = null;
     boolean flag = true;
     Container root = null;
-
-    @Autowired
-    Datamaintenance datamaintenance;
 
     public ArrangedMainFrame3() {
         initComponents();
@@ -260,6 +254,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDatamaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatamaintenanceActionPerformed
+        Datamaintenance datamaintenance = new Datamaintenance();
         datamaintenance.setBounds(0, 0, getWidth(), getHeight());
         jLayeredPane1.add(datamaintenance);
         jLayeredPane1.setVisible(true);

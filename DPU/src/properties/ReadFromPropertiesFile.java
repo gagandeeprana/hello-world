@@ -2,12 +2,7 @@ package properties;
 
 import java.io.InputStream;
 import java.util.Properties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
-@Configuration
-@Component
 public class ReadFromPropertiesFile {
 
     public static String imagePath = "src\\images\\";
@@ -15,16 +10,15 @@ public class ReadFromPropertiesFile {
     public static String filesPath = "src\\files\\";
 
 //    static Logger logger = Logger.getLogger(ReadFromPropertiesFile.class);
-    @Bean
+    ReadFromPropertiesFile readFromPropertiesFile = null;
+
     public ReadFromPropertiesFile readFromPropertiesFile() {
-//        ReadFromPropertiesFile readFromPropertiesFile = null;
-//        if (readFromPropertiesFile == null) {
-//            readFromPropertiesFile = new ReadFromPropertiesFile();
-//        }
-        return new ReadFromPropertiesFile();
+        if (readFromPropertiesFile == null) {
+            readFromPropertiesFile = new ReadFromPropertiesFile();
+        }
+        return readFromPropertiesFile;
     }
 
-    @Bean
     public String getProperty(String property) {
         Properties properties = null;
         try {
