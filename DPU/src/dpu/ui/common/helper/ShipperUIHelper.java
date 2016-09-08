@@ -8,7 +8,9 @@ package dpu.ui.common.helper;
 import dpu.beans.admin.ShippermasterBean;
 import dpu.dao.admin.ShipperDAO;
 import dpu.dao.admin.impl.ShipperDAOImpl;
+import dpu.ui.shipper.Directions;
 import dpu.ui.shipper.NewShipperFrame;
+import dpu.ui.shipper.NotePad;
 import dpu.ui.shipper.TestShipperPannel;
 import java.awt.Color;
 import java.awt.Component;
@@ -28,9 +30,15 @@ import javax.swing.table.TableCellRenderer;
  */
 public class ShipperUIHelper {
 
-    public String addUpdateFlag = "";
-    ArrayList<ShippermasterBean> arrayList = null;
-    ShipperDAO shipperDAO = new ShipperDAOImpl();
+    
+    public static String addUpdateFlag = "";
+    public static ArrayList<ShippermasterBean> shipperList = null;
+    ShipperDAO shipperDAO = null;
+    public static int shipperId = 0;
+
+    public ShipperUIHelper() {
+        shipperDAO = new ShipperDAOImpl();
+    }
 
     class ShipperTable implements TableCellRenderer {
 
@@ -40,6 +48,7 @@ public class ShipperUIHelper {
             editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
             editor.setBorder(null);
             if (value != null) {
+                //here space is given to provide some left margin while showing data on textfield..
                 editor.setText("   " + value.toString());
             }
             if (row % 2 == 0) {
@@ -57,14 +66,15 @@ public class ShipperUIHelper {
     }
 
     public void generateTable() {
-        arrayList = new ArrayList<>();
-        arrayList = shipperDAO.getAllShipper(TestShipperPannel.txtShipperSearch.getText());
+//        shipperList = new ArrayList<>();
+        shipperList = shipperDAO.getAllShipper(TestShipperPannel.txtShipperSearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TestShipperPannel.tblShipper = new JTable(defaultTableModel);
+        TestShipperPannel.tblShipper.getTableHeader().setBackground(Color.red);
         TestShipperPannel.tblShipper.setDefaultRenderer(Object.class, new ShipperUIHelper.ShipperTable());
-        Object[][] data = new Object[arrayList.size()][22];
-        for (int i = 0; i < arrayList.size(); i++) {
-            ShippermasterBean obj = arrayList.get(i);
+        Object[][] data = new Object[shipperList.size()][22];
+        for (int i = 0; i < shipperList.size(); i++) {
+            ShippermasterBean obj = shipperList.get(i);
             data[i][0] = obj.getCity();
             data[i][1] = obj.getAddress();
             data[i][2] = obj.getUnit();
@@ -84,6 +94,7 @@ public class ShipperUIHelper {
         }
         Object[] cols = {"Location Name", "Address", "Unit No", "City", "P/S", "Postal/Zip", "Zone", "Main Contact", "Position", "Phone", "Extension", "Fax", "Watts", "Created By", "Email"};
         defaultTableModel.setDataVector(data, cols);
+        TestShipperPannel.tblShipper.getTableHeader().setBackground(Color.red);
         TestShipperPannel.tblShipper.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         TestShipperPannel.tblShipper.getTableHeader().setForeground(Color.DARK_GRAY);
         TestShipperPannel.tblShipper.setIntercellSpacing(new Dimension(0, 0));
@@ -100,6 +111,7 @@ public class ShipperUIHelper {
         shippermasterBean.setEmail(NewShipperFrame.txtEmail.getText());
         shippermasterBean.setExt(NewShipperFrame.txtExt.getText());
         shippermasterBean.setFax(NewShipperFrame.txtFax.getText());
+        shippermasterBean.setCellNumber(NewShipperFrame.txtCellNumber.getText());
         shippermasterBean.setImporter(NewShipperFrame.txtImporter.getText());
         shippermasterBean.setInternalNotes(NewShipperFrame.txtInternalNotes.getText());
         shippermasterBean.setLeadTime(NewShipperFrame.txtLeadTime.getText());
@@ -115,13 +127,53 @@ public class ShipperUIHelper {
         } else {
             shippermasterBean.setStatus(0);
         }
+//        shippermasterBean.setReport(LocationReports.ddlReport.getSelectedItem().toString());
+//        shippermasterBean.setReportName(LocationReports.ddlReportName.getSelectedItem().toString());
+
+//        shippermasterBean.setStatus(NewShipperFrame.ddlStatus.getSelectedItem().toString());
         shippermasterBean.setTimeZone(NewShipperFrame.ddlTimeZone.getSelectedItem().toString());
         shippermasterBean.setTollFree(NewShipperFrame.txtTollFree.getText());
         shippermasterBean.setUnit(NewShipperFrame.txtUnitNo.getText());
         shippermasterBean.setZone(NewShipperFrame.txtZone.getText());
+        shippermasterBean.setDirections(Directions.taDirections.getText());
+        shippermasterBean.setDateStamp(NotePad.taDateStamp.getText());
+        shippermasterBean.setShipperId(ShipperUIHelper.shipperId);
+        System.out.println("id:::::::" + ShipperUIHelper.shipperId);
         ShipperDAO shipperDAO = new ShipperDAOImpl();
         String msg = "";
-        msg = shipperDAO.addShipper(shippermasterBean);
+        if (ShipperUIHelper.addUpdateFlag.equalsIgnoreCase("add")) {
+            msg = shipperDAO.addShipper(shippermasterBean);
+        }
+        if (ShipperUIHelper.addUpdateFlag.equalsIgnoreCase("update")) {
+            msg = shipperDAO.updateShipper(shippermasterBean);
+        }
+
         return msg;
     }
+
+    public String saveShippingReceiving() {
+        String msg = null;
+        shipperDAO.addShippingHours(ShippingReceivingHoursUIHelper.listOfReceivingHours, ShippingReceivingHoursUIHelper.listOfShippingHours);
+        if (ShipperUIHelper.addUpdateFlag.equalsIgnoreCase("update")) {
+
+        }
+        if (ShipperUIHelper.addUpdateFlag.equalsIgnoreCase("add")) {
+            msg = shipperDAO.addShippingHours(ShippingReceivingHoursUIHelper.listOfReceivingHours, ShippingReceivingHoursUIHelper.listOfShippingHours);
+
+        }
+        return msg;
+    }
+
+    public String deleteShipper(int shipperId) {
+        String msg = shipperDAO.deleteShipper(shipperId);
+        generateTable();
+        return msg;
+    }
+
+    public String updateShipper(ShippermasterBean shippermasterBean) {
+        String msg = shipperDAO.updateShipper(shippermasterBean);
+        generateTable();
+        return msg;
+    }
+
 }

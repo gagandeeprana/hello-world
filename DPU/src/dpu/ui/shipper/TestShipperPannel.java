@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,10 +6,7 @@
 package dpu.ui.shipper;
 
 import dpu.beans.admin.ShippermasterBean;
-import dpu.ui.common.AddCustomerFrame;
-import dpu.ui.helper.common.CompanyUIHelper;
-import static dpu.ui.helper.common.CompanyUIHelper.companyBean;
-import dpu.ui.helper.common.ShipperUIHelper;
+import dpu.ui.common.helper.ShipperUIHelper;
 import java.awt.Toolkit;
 
 /**
@@ -17,9 +14,9 @@ import java.awt.Toolkit;
  * @author jagvir
  */
 public class TestShipperPannel extends javax.swing.JPanel {
-    
+
     ShipperUIHelper shipperUI = null;
-    
+
     public TestShipperPannel() {
         initComponents();
         setSize(Toolkit.getDefaultToolkit().getScreenSize());

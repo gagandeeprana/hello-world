@@ -6,8 +6,8 @@
 package dpu.ui.shipper;
 
 import dpu.beans.admin.ShippermasterBean;
-import dpu.ui.helper.common.AdditionalShipperContactsHelper;
-import dpu.ui.helper.common.ShipperUIHelper;
+import dpu.ui.common.helper.AdditionalShipperContactsHelper;
+import dpu.ui.common.helper.ShipperUIHelper;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 

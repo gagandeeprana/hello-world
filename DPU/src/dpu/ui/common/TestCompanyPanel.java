@@ -5,7 +5,6 @@
  */
 package dpu.ui.common;
 
-import dpu.beans.admin.CompanyBean;
 import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.common.helper.CompanyUIHelper;
 import java.awt.Color;
@@ -17,8 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -38,6 +35,7 @@ public class TestCompanyPanel extends javax.swing.JPanel {
 
     public TestCompanyPanel() {
 //        try {
+        System.out.println("ENTER>>>>>>>>>>>>");
         initComponents();
         doWork();
 //        } catch (Exception e) {

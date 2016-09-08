@@ -9,5 +9,7 @@
         <property name="hibernate.connection.username">root</property>
         <mapping class="dpu.beans.admin.CompanyBean"/>
         <mapping class="dpu.beans.admin.BillingLocationBean"/>
+        <mapping class="dpu.beans.admin.TypeBean"/>
+        <mapping class="dpu.beans.admin.CategoryBean"/>
     </session-factory>
 </hibernate-configuration>

@@ -10,8 +10,8 @@ import dpu.dao.admin.ShipperDAO;
 import dpu.dao.admin.WorkingHoursAdditionalContactDAO;
 import dpu.dao.admin.impl.ShipperDAOImpl;
 import dpu.dao.admin.impl.WorkingHoursAdditionalContactDAOImpl;
-import dpu.ui.helper.common.ShipperUIHelper;
-import dpu.ui.helper.common.ShippingReceivingHoursUIHelper;
+import dpu.ui.common.helper.ShipperUIHelper;
+import dpu.ui.common.helper.ShippingReceivingHoursUIHelper;
 import java.util.List;
 import properties.TimeConstants;
 

@@ -254,11 +254,16 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDatamaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatamaintenanceActionPerformed
-        Datamaintenance datamaintenance = new Datamaintenance();
-        datamaintenance.setBounds(0, 0, getWidth(), getHeight());
-        jLayeredPane1.add(datamaintenance);
+//        Datamaintenance datamaintenance = new Datamaintenance();
+//        datamaintenance.setBounds(0, 0, getWidth(), getHeight());
+//        jLayeredPane1.add(datamaintenance);
+//        jLayeredPane1.setVisible(true);
+//        datamaintenance.setVisible(true);
+        DatamaintenanceOptions datamaintenanceOptions = new DatamaintenanceOptions();
+        datamaintenanceOptions.setBounds(0, 0, getWidth(), getHeight());
+        jLayeredPane1.add(datamaintenanceOptions);
         jLayeredPane1.setVisible(true);
-        datamaintenance.setVisible(true);
+        datamaintenanceOptions.setVisible(true);
     }//GEN-LAST:event_btnDatamaintenanceActionPerformed
 
     /**

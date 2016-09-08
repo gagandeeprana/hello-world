@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 public class CompanyDAOImpl implements CompanyDAO {
@@ -32,7 +32,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             session = DPU.getSessionFactory().openSession();
             Criteria criteria = session.createCriteria(CompanyBean.class);
             if (!"".equals(name)) {
-                criteria.add(Restrictions.like("companyName", name));
+                criteria.add(Restrictions.like("companyName", name, MatchMode.ANYWHERE));
             }
             lstCompanies = (List<CompanyBean>) criteria.list();
         } catch (Exception e) {
@@ -242,5 +242,5 @@ public class CompanyDAOImpl implements CompanyDAO {
         }
         return obj;
     }
-    
+
 }

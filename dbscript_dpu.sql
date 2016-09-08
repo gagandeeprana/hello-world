@@ -48,6 +48,41 @@ LOCK TABLES `acipassengermaster` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `additionalcontactforshipper`
+--
+
+DROP TABLE IF EXISTS `additionalcontactforshipper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `additionalcontactforshipper` (
+  `contactid` int(11) NOT NULL AUTO_INCREMENT,
+  `contactname` varchar(40) DEFAULT NULL,
+  `position` varchar(40) DEFAULT NULL,
+  `phone` varchar(40) DEFAULT NULL,
+  `fax` varchar(40) DEFAULT NULL,
+  `cellular` varchar(40) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `ext` varchar(40) DEFAULT NULL,
+  `prefix` varchar(40) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `shipperid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`contactid`),
+  KEY `shipperid` (`shipperid`),
+  CONSTRAINT `additionalcontactforshipper_ibfk_1` FOREIGN KEY (`shipperid`) REFERENCES `shippermaster` (`shipper_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `additionalcontactforshipper`
+--
+
+LOCK TABLES `additionalcontactforshipper` WRITE;
+/*!40000 ALTER TABLE `additionalcontactforshipper` DISABLE KEYS */;
+INSERT INTO `additionalcontactforshipper` VALUES (1,'jkj','kj','kj','kj','jk','kj','kj','jk',1,13),(2,'hjh','hjgh','76786','8789','7897','hgf','979','798',1,13),(3,'jkg','5765','765','76565','576','jhgbv','765','6',1,13);
+/*!40000 ALTER TABLE `additionalcontactforshipper` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `additionalcontactmaster`
 --
 
@@ -174,7 +209,11 @@ DROP TABLE IF EXISTS `categorymaster`;
 CREATE TABLE `categorymaster` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`category_id`)
+  `status` int(11) DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`category_id`),
+  KEY `type_id` (`type_id`),
+  CONSTRAINT `categorymaster_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `typemaster` (`type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -184,7 +223,7 @@ CREATE TABLE `categorymaster` (
 
 LOCK TABLES `categorymaster` WRITE;
 /*!40000 ALTER TABLE `categorymaster` DISABLE KEYS */;
-INSERT INTO `categorymaster` VALUES (1,'sdfsd'),(2,'Cat');
+INSERT INTO `categorymaster` VALUES (1,'sdfsd',1,3),(2,'Cat',0,4);
 /*!40000 ALTER TABLE `categorymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -853,6 +892,30 @@ LOCK TABLES `tripmaster` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `typemaster`
+--
+
+DROP TABLE IF EXISTS `typemaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `typemaster` (
+  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `typemaster`
+--
+
+LOCK TABLES `typemaster` WRITE;
+/*!40000 ALTER TABLE `typemaster` DISABLE KEYS */;
+INSERT INTO `typemaster` VALUES (3,'Customers'),(4,'Contract');
+/*!40000 ALTER TABLE `typemaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usermaster`
 --
 
@@ -909,6 +972,38 @@ LOCK TABLES `working_hours_additionalcontact` WRITE;
 INSERT INTO `working_hours_additionalcontact` VALUES (1,'Sun','11:59','12:01','00:00','12:00',1,17),(2,'Mon','11:59','12:01','00:00','12:00',1,17),(3,'Thur','11:59','12:01','00:00','12:00',1,18),(4,'Fri','11:59','12:01','00:00','12:00',1,18),(5,'Sun','11:59','12:01','00:00','12:00',1,19),(6,'Mon','11:59','12:01','00:00','12:00',1,19),(7,'Tue','11:59','12:01','00:00','12:00',1,19),(8,'Wed','11:59','12:01','00:00','12:00',1,19),(9,'Fri','11:59','12:01','00:00','12:00',1,20),(10,'Sat','11:59','12:01','00:00','12:00',1,20),(11,'Sun','11:59','12:01','00:00','12:00',1,22),(12,'Mon','11:59','12:01','00:00','12:00',1,22),(13,'Sun','11:59','12:01','00:00','12:00',1,23),(14,'Mon','11:59','12:01','00:00','12:00',1,23),(15,'Thur','11:59','12:01','00:00','12:00',1,24),(16,'Fri','11:59','12:01','00:00','12:00',1,24),(17,'Sun','11:59','12:01','00:00','12:00',1,25),(18,'Mon','11:59','12:01','00:00','12:00',1,25),(19,'Sat','11:59','12:01','00:00','12:00',1,26),(22,'Thur','11:59','12:01','00:00','12:00',1,28),(23,'Fri','11:59','12:01','00:00','12:00',1,28);
 /*!40000 ALTER TABLE `working_hours_additionalcontact` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `working_hours_additionalshipper`
+--
+
+DROP TABLE IF EXISTS `working_hours_additionalshipper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `working_hours_additionalshipper` (
+  `working_id` int(10) NOT NULL AUTO_INCREMENT,
+  `working_day` varchar(30) DEFAULT NULL,
+  `open1` varchar(30) DEFAULT NULL,
+  `open2` varchar(30) DEFAULT NULL,
+  `close1` varchar(30) DEFAULT NULL,
+  `close2` varchar(30) DEFAULT NULL,
+  `is24Hr` int(11) DEFAULT NULL,
+  `additional_shipper_id` int(11) DEFAULT NULL,
+  `type` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`working_id`),
+  KEY `additional_shipper_id` (`additional_shipper_id`),
+  CONSTRAINT `working_hours_additionalshipper_ibfk_1` FOREIGN KEY (`additional_shipper_id`) REFERENCES `shippermaster` (`shipper_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `working_hours_additionalshipper`
+--
+
+LOCK TABLES `working_hours_additionalshipper` WRITE;
+/*!40000 ALTER TABLE `working_hours_additionalshipper` DISABLE KEYS */;
+/*!40000 ALTER TABLE `working_hours_additionalshipper` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -919,4 +1014,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-07 18:47:55
+-- Dump completed on 2016-09-08 18:51:56

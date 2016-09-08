@@ -5,7 +5,7 @@
  */
 package dpu.ui.shipper;
 
-import dpu.ui.helper.common.AdditionalShipperContactsHelper;
+import dpu.ui.common.helper.AdditionalShipperContactsHelper;
 
 /**
  *
