@@ -128,7 +128,7 @@ public class MainTabbedPane extends JTabbedPane implements ChangeListener {
                 if (msg.contains("Class")) {
                     map.put(msg, new TestClassPanel());
                 } else if (msg.contains("Company")) {
-                    map.put(msg, new TestCompanyPanel());
+                    map.put(msg, new CompanyPanel());
                 } else if (msg.contains("Role")) {
                     map.put(msg, new TestRolePanel());
                 } else if (msg.contains("Tracking")) {
@@ -142,7 +142,7 @@ public class MainTabbedPane extends JTabbedPane implements ChangeListener {
                 } else if (msg.contains("SalesPerson")) {
                     map.put(msg, new TestSalesPersonPanel());
                 } else if (msg.contains("StandardCharges")) {
-                    map.put(msg, new TestStandardCharges());
+                    map.put(msg, new StandardCharges());
                 } else if (msg.contains("Customers")) {
                     map.put(msg, new TestCustomerPanel());
                 } else if (msg.contains("Prospects")) {
@@ -156,7 +156,7 @@ public class MainTabbedPane extends JTabbedPane implements ChangeListener {
                 } else if (msg.contains("MiscVendors")) {
                     map.put(msg, new TestMiscVendorsPanel());
                 } else if (msg.contains("CustomBrokers")) {
-                    map.put(msg, new TestCustomBrokersPanel());
+                    map.put(msg, new CustomBrokersPanel());
                 } else if (msg.contains("PayrollSchedules")) {
                     map.put(msg, new TestPayrollSchedulesPanel());
                 } else if (msg.contains("StandardTemplates")) {

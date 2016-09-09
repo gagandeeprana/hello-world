@@ -30,6 +30,6 @@ public class TypeBean {
     @Column(name = "type_name")
     private String typeName;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "typeBean")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeBean")
     private Set<CategoryBean> categories = new HashSet<>();
 }

@@ -5,157 +5,140 @@
  */
 package dpu.dao.admin.impl;
 
+import dpu.DPU;
+import dpu.beans.admin.CompanyBean;
 import dpu.beans.admin.AdditionalContactBean;
 import dpu.dao.admin.AdditionalContactDAO;
-import dpu.dao.common.ConnectDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 public class AdditionalContactDAOImpl implements AdditionalContactDAO {
 
-    @Autowired
-    ConnectDB connectDB;
-//    Logger logger = Logger.getLogger(AdditionalContactDAOImpl.class);
+    Logger logger = Logger.getLogger(AdditionalContactDAOImpl.class);
 
     @Override
-    public List<AdditionalContactBean> getAllAdditionalContacts(String name) {
+    public List<AdditionalContactBean> getAllAdditionalContacts() {
         List<AdditionalContactBean> lstAdditionalContacts = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from additionalcontactmaster");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                AdditionalContactBean obj = new AdditionalContactBean();
-                obj.setAdditionalContactId(rs.getInt("add_contact_id"));
-                obj.setContactId(rs.getInt("company_id"));
-                obj.setCustomerName(rs.getString("customer_name"));
-                obj.setPosition(rs.getString("position"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setPrefix(rs.getString("prefix"));
-                obj.setCellular(rs.getString("cellular"));
-                obj.setStatus(rs.getInt("status"));
-                obj.setEmail(rs.getString("email"));
-                lstAdditionalContacts.add(obj);
-            }
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(AdditionalContactBean.class);
+            lstAdditionalContacts = (List<AdditionalContactBean>) criteria.list();
         } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
-//            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
+            logger.error("AdditionalContactDAOImpl : getAllAdditionalContacts : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstAdditionalContacts;
     }
 
     @Override
-    public String addAdditionalContact(AdditionalContactBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public int addAdditionalContact(AdditionalContactBean obj) {
+        Session session = null;
+        Transaction tx = null;
+        int maxId = 0;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into additionalcontactmaster (company_id,customer_name,position,phone,ext,fax,prefix,cellular,status,email) values(?,?,?,?,?,?,?,?,?,?)");
-            pstmt.setInt(1, obj.getContactId());
-            pstmt.setString(2, obj.getCustomerName());
-            pstmt.setString(3, obj.getPosition());
-            pstmt.setString(4, obj.getPhone());
-            pstmt.setString(5, obj.getExt());
-            pstmt.setString(6, obj.getFax());
-            pstmt.setString(7, obj.getPrefix());
-            pstmt.setString(8, obj.getCellular());
-            pstmt.setInt(9, obj.getStatus());
-            pstmt.setString(10, obj.getEmail());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "AdditionalContact Added";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            maxId = (int) session.save(obj);
+            tx.commit();
+            return maxId;
         } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : addAdditionalContact : " + e);
-//            logger.error("AdditionalContactDAOImpl : addAdditionalContact : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("AdditionalContactDAOImpl : addAdditionalContact : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
-        return "Failed to Add AdditionalContact";
+        return maxId;
     }
 
     @Override
     public String updateAdditionalContact(AdditionalContactBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update additionalcontactmaster set company_id = ?,customer_name = ?,position=?,phone=?,ext=?,fax=?,prefix=?,cellular=?,status=?,email=? where add_contact_id = ?");
-            pstmt.setInt(1, obj.getContactId());
-            pstmt.setString(2, obj.getCustomerName());
-            pstmt.setString(3, obj.getPosition());
-            pstmt.setString(4, obj.getPhone());
-            pstmt.setString(5, obj.getExt());
-            pstmt.setString(6, obj.getFax());
-            pstmt.setString(7, obj.getPrefix());
-            pstmt.setString(8, obj.getCellular());
-            pstmt.setInt(9, obj.getStatus());
-            pstmt.setString(10, obj.getEmail());
-            pstmt.setInt(11, obj.getAdditionalContactId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "AdditionalContact Updated";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.update(obj);
+            tx.commit();
+            return "AdditionalContact Updated";
         } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : updateAdditionalContact : " + e);
-//            logger.error("AdditionalContactDAOImpl : updateAdditionalContact : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("AdditionalContactDAOImpl : updateAdditionalContact : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Update AdditionalContact";
     }
 
     @Override
     public String deleteAdditionalContact(int additionalContactId) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("delete from additionalcontactmaster where add_contact_id = ?");
-            pstmt.setInt(1, additionalContactId);
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "AdditionalContact Deleted";
-            }
+            session = DPU.getSessionFactory().openSession();
+            AdditionalContactBean obj = (AdditionalContactBean) session.get(AdditionalContactBean.class, additionalContactId);
+            tx = session.beginTransaction();
+            session.delete(obj);
+            tx.commit();
+            return "AdditionalContact Deleted";
         } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : deleteAdditionalContact : " + e);
-//            logger.error("AdditionalContactDAOImpl : deleteAdditionalContact : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("AdditionalContactDAOImpl : deleteAdditionalContact : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Delete AdditionalContact";
     }
 
     @Override
-    public AdditionalContactBean getAdditionalContactInfoById(int additionalContactId) {
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+    public AdditionalContactBean getAdditionalContactInfoById(int id) {
+        Session session = null;
         AdditionalContactBean obj = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from additionalcontactmaster where add_contact_id = ?");
-            pstmt.setInt(1, additionalContactId);
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                obj = new AdditionalContactBean();
-                obj.setAdditionalContactId(rs.getInt("add_contact_id"));
-                obj.setContactId(rs.getInt("company_id"));
-                obj.setCustomerName(rs.getString("customer_name"));
-                obj.setPosition(rs.getString("position"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setPrefix(rs.getString("prefix"));
-                obj.setCellular(rs.getString("cellular"));
-                obj.setStatus(rs.getInt("status"));
-                obj.setEmail(rs.getString("email"));
-            }
+            session = DPU.getSessionFactory().openSession();
+            obj = (AdditionalContactBean) session.get(AdditionalContactBean.class, id);
         } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : getAdditionalContactInfoById : " + e);
+            logger.error("AdditionalContactDAOImpl : getAdditionalContactInfoById : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return obj;
     }
@@ -163,52 +146,23 @@ public class AdditionalContactDAOImpl implements AdditionalContactDAO {
     @Override
     public List<AdditionalContactBean> getAllAdditionalContactsByCompanyId(int id) {
         List<AdditionalContactBean> lstAdditionalContacts = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from additionalcontactmaster where company_id = ?");
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                AdditionalContactBean obj = new AdditionalContactBean();
-                obj.setAdditionalContactId(rs.getInt("add_contact_id"));
-                obj.setContactId(rs.getInt("company_id"));
-                obj.setCustomerName(rs.getString("customer_name"));
-                obj.setPosition(rs.getString("position"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setPrefix(rs.getString("prefix"));
-                obj.setCellular(rs.getString("cellular"));
-                obj.setStatus(rs.getInt("status"));
-                obj.setEmail(rs.getString("email"));
-                lstAdditionalContacts.add(obj);
-            }
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(AdditionalContactBean.class);
+            criteria.createCriteria("companyBean");
+            criteria.add(Restrictions.eq("companyBean.companyId", id));
+            lstAdditionalContacts = (List<AdditionalContactBean>) criteria.list();
         } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : getAllAdditionalContactsByCompanyId : " + e);
-//            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
+            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactsByCompanyId : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstAdditionalContacts;
     }
-
-    @Override
-    public int getMaxAdditionalContactId() {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select max(add_contact_id) from additionalcontactmaster");
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (Exception e) {
-            System.out.println("AdditionalContactDAOImpl : getMaxAdditionalContactId() : " + e);
-        }
-        return 0;
-    }
-
 }

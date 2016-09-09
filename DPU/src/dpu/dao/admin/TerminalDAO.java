@@ -7,10 +7,12 @@ public interface TerminalDAO {
 
     List<TerminalBean> getAllTerminals(String name);
 
-    String addTerminal(TerminalBean obj);
+    TerminalBean getTerminalInfoById(int id);
+
+    int addTerminal(TerminalBean obj);
 
     String updateTerminal(TerminalBean obj);
+
     String deleteTerminal(int terminalId);
-    
-    
+
 }

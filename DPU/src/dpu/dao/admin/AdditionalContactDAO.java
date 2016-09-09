@@ -5,17 +5,16 @@ import java.util.List;
 
 public interface AdditionalContactDAO {
 
-    List<AdditionalContactBean> getAllAdditionalContacts(String name);
+    List<AdditionalContactBean> getAllAdditionalContacts();
     
     AdditionalContactBean getAdditionalContactInfoById(int additionalContactId);
 
     List<AdditionalContactBean> getAllAdditionalContactsByCompanyId(int id);
     
-    String addAdditionalContact(AdditionalContactBean obj);
+    int addAdditionalContact(AdditionalContactBean obj);
 
     String updateAdditionalContact(AdditionalContactBean obj);
 
     String deleteAdditionalContact(int additionalContactId);
     
-    int getMaxAdditionalContactId();
 }

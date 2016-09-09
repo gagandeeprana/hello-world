@@ -82,6 +82,8 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         jMenu14 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenu16 = new javax.swing.JMenu();
         jMenu17 = new javax.swing.JMenu();
@@ -202,6 +204,22 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         });
         jMenu14.add(jMenuItem2);
 
+        jMenuItem7.setText("Equipment List");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem7);
+
+        jMenuItem8.setText("Terminals List");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem8);
+
         jMenuBar1.add(jMenu14);
 
         jMenu15.setText("Master Orders");
@@ -255,7 +273,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
 
     private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
         internalFrameSettings();
-        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
+        CompanyPanel testCompanyPanel = new CompanyPanel();
         testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testCompanyPanel);
         root.setVisible(true);
@@ -283,7 +301,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
 
     private void jMenu7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MousePressed
         internalFrameSettings();
-        TestCustomBrokersPanel testCustomBrokersPanel = new TestCustomBrokersPanel();
+        CustomBrokersPanel testCustomBrokersPanel = new CustomBrokersPanel();
         testCustomBrokersPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testCustomBrokersPanel);
         root.setVisible(true);
@@ -291,7 +309,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
 
     private void jMenu8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MousePressed
         internalFrameSettings();
-        TestStandardCharges testStandardCharges = new TestStandardCharges();
+        StandardCharges testStandardCharges = new StandardCharges();
         testStandardCharges.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testStandardCharges);
         root.setVisible(true);
@@ -306,13 +324,28 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
      }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
         internalFrameSettings();
         CategoryPanel categoryPanel = new CategoryPanel();
         categoryPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(categoryPanel);
         root.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        internalFrameSettings();
+        EquipmentPanel equipmentPanel = new EquipmentPanel();
+        equipmentPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(equipmentPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        internalFrameSettings();
+        TerminalPanel terminalPanel = new TerminalPanel();
+        terminalPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(terminalPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -339,5 +372,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }

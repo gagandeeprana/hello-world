@@ -8,7 +8,7 @@ import dpu.ui.common.AddBillingLocation;
 import dpu.ui.common.AddCustomerFrame;
 import static dpu.ui.common.AddCustomerFrame.lstBillingLocations;
 import static dpu.ui.common.AddCustomerFrame.tblBillingLocations;
-import dpu.ui.common.TestCompanyPanel;
+import dpu.ui.common.CompanyPanel;
 import java.awt.Color;
 //import static dpu.ui.common.TestBillingLocationPanel.mainTabbedPane;
 import java.awt.Component;

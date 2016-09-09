@@ -16,9 +16,11 @@ public interface BorderAgentDAO {
 
     List<BorderAgentBean> getAllBorderAgents();
 
+    BorderAgentBean getBorderAgentInfoById(int id);
+
     List<BorderAgentBean> getAllBorderAgentsByCustomBrokerId(int customBrokerId);
 
-    String addBorderAgent(BorderAgentBean obj);
+    int addBorderAgent(BorderAgentBean obj);
 
     String updateBorderAgent(BorderAgentBean obj);
 

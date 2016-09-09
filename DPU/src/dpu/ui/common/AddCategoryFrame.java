@@ -6,7 +6,11 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.CategoryBean;
+import dpu.beans.admin.TypeBean;
+import dpu.dao.admin.impl.TypeDAOImpl;
 import dpu.ui.common.helper.CategoryUIHelper;
+import dpu.ui.common.helper.TypeUIHelper;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 public class AddCategoryFrame extends javax.swing.JFrame {
@@ -23,11 +27,13 @@ public class AddCategoryFrame extends javax.swing.JFrame {
         setTitle("Add New Category");
         categoryUIHelper = new CategoryUIHelper();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        fillTypes();
     }
 
     public AddCategoryFrame(CategoryBean categoryBean) {
         initComponents();
         categoryUIHelper = new CategoryUIHelper();
+        fillTypes();
         setTitle("Edit Category");
         setLocationRelativeTo(null);
         categoryUIHelper.showData(categoryBean);
@@ -35,6 +41,12 @@ public class AddCategoryFrame extends javax.swing.JFrame {
         btnSave.setText("Update");
     }
 
+    private void fillTypes() {
+        List<TypeBean> lstTypes = new TypeDAOImpl().getAllTypes("");
+        for (TypeBean typeBean : lstTypes) {
+            ddl1.addItem(typeBean.getTypeName());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,7 +93,7 @@ public class AddCategoryFrame extends javax.swing.JFrame {
 
         jLabel9.setText("Status");
 
-        ddl2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Active", "Inactive" }));
+        ddl2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,12 +224,12 @@ public class AddCategoryFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> ddl1;
-    private javax.swing.JComboBox<String> ddl2;
+    public static javax.swing.JComboBox<String> ddl1;
+    public static javax.swing.JComboBox<String> ddl2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField txt1;
+    public static javax.swing.JTextField txt1;
     // End of variables declaration//GEN-END:variables
 }

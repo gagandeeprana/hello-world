@@ -7,11 +7,7 @@ package dpu.dao.admin.impl;
 
 import dpu.DPU;
 import dpu.beans.admin.BillingLocationBean;
-import dpu.beans.admin.CompanyBean;
 import dpu.dao.admin.BillingLocationDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -180,7 +176,7 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
 //            pstmt.setInt(1, billingLocationId);
 //            int i = pstmt.executeUpdate();
 //            if (i > 0) {
-                return "BillingLocation Deleted";
+            return "BillingLocation Deleted";
 //            }
         } catch (Exception e) {
 //            System.out.println("BillingLocationDAOImpl : deleteBillingLocation : " + e);
@@ -237,6 +233,23 @@ public class BillingLocationDAOImpl implements BillingLocationDAO {
     @Override
     public List<BillingLocationBean> getBillingLocationsByCompanyId(int id) {
         List<BillingLocationBean> lstBillingLocations = new ArrayList<>();
+        Session session = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(BillingLocationBean.class);
+            criteria.createCriteria("companyBean");
+            criteria.add(Restrictions.eq("companyBean.companyId", id));
+            lstBillingLocations = (List<BillingLocationBean>) criteria.list();
+        } catch (Exception e) {
+            logger.error("BillingLocationDAOImpl : getBillingLocationsByCompanyId : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
 //        Connection conn = null;
 //        ResultSet rs = null;
 //        PreparedStatement pstmt = null;

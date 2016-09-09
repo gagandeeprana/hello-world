@@ -11,5 +11,11 @@
         <mapping class="dpu.beans.admin.BillingLocationBean"/>
         <mapping class="dpu.beans.admin.TypeBean"/>
         <mapping class="dpu.beans.admin.CategoryBean"/>
+        <mapping class="dpu.beans.admin.EquipmentBean"/>
+        <mapping class="dpu.beans.admin.TerminalBean"/>
+        <mapping class="dpu.beans.admin.StandardChargesBean"/>
+        <mapping class="dpu.beans.admin.CustomBrokerBean"/>
+        <mapping class="dpu.beans.admin.BorderAgentBean"/>
+        <mapping class="dpu.beans.admin.AdditionalContactBean"/>
     </session-factory>
 </hibernate-configuration>

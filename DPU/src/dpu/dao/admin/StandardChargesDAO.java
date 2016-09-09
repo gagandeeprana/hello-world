@@ -16,7 +16,9 @@ public interface StandardChargesDAO {
 
     List<StandardChargesBean> getAllStandardCharges(String code);
 
-    String addStandardCharges(StandardChargesBean obj);
+    StandardChargesBean getStandardChargesInfoById(int id);
+
+    int addStandardCharges(StandardChargesBean obj);
 
     String updateStandardCharges(StandardChargesBean obj);
 

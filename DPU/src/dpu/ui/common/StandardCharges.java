@@ -10,7 +10,7 @@ import dpu.beans.admin.StandardChargesBean;
 import dpu.dao.admin.StandardChargesDAO;
 import dpu.dao.admin.impl.StandardChargesDAOImpl;
 import dpu.reports.common.JasperReportGenerator;
-import static dpu.ui.common.TestCustomBrokersPanel.tblCustomBroker;
+import static dpu.ui.common.CustomBrokersPanel.tblCustomBroker;
 import dpu.ui.common.helper.CustomBrokerUIHelper;
 import dpu.ui.common.helper.StandardChargesUIHelper;
 import javax.swing.JOptionPane;
@@ -19,19 +19,19 @@ import javax.swing.JOptionPane;
  *
  * @author gagandeep.rana
  */
-public class TestStandardCharges extends javax.swing.JPanel {
+public class StandardCharges extends javax.swing.JPanel {
 
     /**
-     * Creates new form TestStandardCharges
+     * Creates new form StandardCharges
      */
     StandardChargesUIHelper standardChargesUIHelper = null;
     StandardChargesDAO standardChargesDAO = null;
 
-    public TestStandardCharges() {
+    public StandardCharges() {
         initComponents();
         standardChargesUIHelper = new StandardChargesUIHelper();
         standardChargesDAO = new StandardChargesDAOImpl();
-        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
+        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges(StandardCharges.txtSearch.getText());
         standardChargesUIHelper.generateTable();
 
     }
@@ -176,7 +176,7 @@ public class TestStandardCharges extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
+        StandardChargesUIHelper.lstStandardCharges = standardChargesDAO.getAllStandardCharges(StandardCharges.txtSearch.getText());
         standardChargesUIHelper.generateTable();
     }//GEN-LAST:event_txtSearchKeyReleased
 

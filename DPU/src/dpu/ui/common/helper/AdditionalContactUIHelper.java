@@ -90,39 +90,41 @@ public class AdditionalContactUIHelper {
         AddCustomerFrame.ScrollPanetblAdditionalContacts.setViewportView(AddCustomerFrame.tblAdditionalContacts);
     }
 
-    public String save() {
-        AdditionalContactBean additionalContactBean = new AdditionalContactBean();
-        additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
-        additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());
-        additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
-        additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
-        additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
-        additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
-        additionalContactBean.setCellular(AddAdditionalContact.txtCellular.getText());
-        if (AddAdditionalContact.ddlStatus.getSelectedIndex() == 0) {
-            additionalContactBean.setStatus(0);
-        } else {
-            additionalContactBean.setStatus(1);
-        }
-        additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
-        AdditionalContactDAO additionalContactDAO = new AdditionalContactDAOImpl();
-        String msg = "";
-        if (addUpdateFlag.equals("add")) {
-            msg = additionalContactDAO.addAdditionalContact(additionalContactBean);
-        } else {
-            additionalContactBean.setAdditionalContactId(additionalContactId);
-            msg = additionalContactDAO.updateAdditionalContact(additionalContactBean);
-        }
-        disable(true);
-        generateTable();
-        return msg;
-    }
-
+//    public String save() {
+//        AdditionalContactBean additionalContactBean = new AdditionalContactBean();
+//        additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
+//        additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());
+//        additionalContactBean.setPhone(AddAdditionalContact.txtPhone.getText());
+//        additionalContactBean.setExt(AddAdditionalContact.txtExt.getText());
+//        additionalContactBean.setFax(AddAdditionalContact.txtFax.getText());
+//        additionalContactBean.setPrefix(AddAdditionalContact.txtPrefix.getText());
+//        additionalContactBean.setCellular(AddAdditionalContact.txtCellular.getText());
+//        if (AddAdditionalContact.ddlStatus.getSelectedIndex() == 0) {
+//            additionalContactBean.setStatus(0);
+//        } else {
+//            additionalContactBean.setStatus(1);
+//        }
+//        additionalContactBean.setEmail(AddAdditionalContact.txtEmail.getText());
+//        AdditionalContactDAO additionalContactDAO = new AdditionalContactDAOImpl();
+//        String msg = "";
+//        if (addUpdateFlag.equals("add")) {
+//            int i = additionalContactDAO.addAdditionalContact(additionalContactBean);
+//            if(i>0)
+//            {
+//                msg = "New ";
+//            }
+//        } else {
+//            additionalContactBean.setAdditionalContactId(additionalContactId);
+//            msg = additionalContactDAO.updateAdditionalContact(additionalContactBean);
+//        }
+//        disable(true);
+//        generateTable();
+//        return msg;
+//    }
     public void saveToList(int index, AdditionalContactBean additionalContactBean) {
         try {
             if (additionalContactBean != null) {
                 if (index == AddCustomerFrame.lstAdditionalContacts.size()) {
-                    System.out.println("11111111111");
                     additionalContactBean = new AdditionalContactBean();
                     additionalContactBean.setCustomerName(AddAdditionalContact.txtCustomer.getText());
                     additionalContactBean.setPosition(AddAdditionalContact.txtPosition.getText());

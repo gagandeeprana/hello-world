@@ -98,13 +98,13 @@ CREATE TABLE `additionalcontactmaster` (
   `ext` varchar(30) DEFAULT NULL,
   `fax` varchar(30) DEFAULT NULL,
   `cellular` varchar(40) DEFAULT NULL,
-  `prefix` varchar(30) DEFAULT NULL,
+  `additional_contact_prefix` varchar(30) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`add_contact_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `additionalcontactmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `additionalcontactmaster` (
 
 LOCK TABLES `additionalcontactmaster` WRITE;
 /*!40000 ALTER TABLE `additionalcontactmaster` DISABLE KEYS */;
-INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ'),(8,32,'AAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA',1,'AAAAAAAAAA'),(9,33,'TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT',1,'TTTTT'),(10,34,'AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA','AAAAAAA',1,'AAAAAAA'),(17,38,'MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM','MIMIMIMIMIMIM',1,'MIMIMIMIMIMIM'),(18,38,'GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG','GHGHGHGHG',1,'GHGHGHGHG'),(19,39,'AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA','AAAAA',1,'AAAAA'),(20,39,'BBBB','BBBB','BBBB','BBBB','BBBB','BBBB','BBBB',1,'BBBB'),(21,39,'hhhhhh','hhhhh','hhhhhhhhhhhh','hhhhh','hhhhh','hhhhh','hhhhh',1,'hhhhh'),(22,40,'HHHH','HHHH','(222) 222-2222','HHHH','(222) 222-2222','(444) 444-4444','HHHH',1,'HHHH'),(23,41,'nnnnnn','nnnnnn','(333) 333-3333','nnnnnn','(999) 999-9999','(666) 666-6666','nnnnnn',1,'nnnnnn'),(24,41,'BBBBBBBBBBB','BBBBBBBBBBB','(999) 999-9999','BBBBBBBBBBB','(777) 777-7777','(555) 555-5555','BBBBBBBBBBB',1,'BBBBBBBBBBB'),(25,42,'jjjjjjjjj','jjjjjjjjj','(812) 121-2121','jjjjjjjjj','(212) 121-2121','(212) 121-2121','jjjjjjjjj',1,'jjjjjjjjj'),(26,42,'nnnnnnnn','nnnnnnnn','(675) 675-7656','nnnnnnnn','(765) 765-7657','(765) 765-7657','nnnnnnnn',1,'nnnnnnnn'),(28,43,'BBBBBB','BBBBBB','(666) 666-6666','BBBBBB','(666) 666-6666','(666) 666-6666','BBBBBB',1,'BBBBBB');
+INSERT INTO `additionalcontactmaster` VALUES (5,30,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',NULL,'JJJJJJJJJJJ',0,'JJJJJJJJJJJ'),(7,31,'JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ','JJJJJJJJJJJ',1,'JJJJJJJJJJJ'),(8,32,'AAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA','AAAAAAAAAA',1,'AAAAAAAAAA'),(9,33,'TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT','TTTTT',1,'TTTTT'),(29,30,'AAA','AAA','(222) 222-2222','AAA','(222) 222-2222','(222) 222-2222','AAA',1,'AAA'),(30,46,'OOKOK','OOKOK','(222) 222-2222','OOKOK','(222) 222-2222','(222) 222-2222','OOKOK',1,'OOKOK');
 /*!40000 ALTER TABLE `additionalcontactmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `billinglocationmaster` (
   PRIMARY KEY (`billing_location_id`),
   KEY `company_id` (`company_id`),
   CONSTRAINT `billinglocationmaster_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companymaster` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `billinglocationmaster` (
 
 LOCK TABLES `billinglocationmaster` WRITE;
 /*!40000 ALTER TABLE `billinglocationmaster` DISABLE KEYS */;
-INSERT INTO `billinglocationmaster` VALUES (15,'KKKKKKa','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO',1,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','KKKKK',32),(16,'wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww','wwwwwww',1,'wwwwwww','wwwwwww','wwwwwww','(222) 222-2222','(222) 222-2222','wwwwwww','(222) 222-2222','wwwwwww','(222) 222-2222',44),(17,'JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ',1,'JJJJJ','JJJJJ','JJJJJ','(444) 444-4444','(444) 444-4444','JJJJJ','(444) 444-4444','JJJJJ','(444) 444-4444',45);
+INSERT INTO `billinglocationmaster` VALUES (15,'KKKKKKa','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO',1,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','KKKKK',32),(17,'JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ','JJJJJ',1,'JJJJJ','JJJJJ','JJJJJ','(444) 444-4444','(444) 444-4444','JJJJJ','(444) 444-4444','JJJJJ','(444) 444-4444',45),(18,'AAA','AAA','AAA','AAA','AAA','6786','86786','86876',1,'AAA','AAA','AAA','(868) 686-8686','(777) 777-7777','7777','(876) 876-8768','876','(___) ___-____',NULL),(19,'HH','HH','HH','HH','HH','HH','HH','HH',1,'HH','HH','HH','(111) 111-1111','(111) 111-1111','HH','(111) 111-1111','HH','(111) 111-1111',30),(20,'asdsdasd','asdas','dasd','asdasdasd','asdasdasd','asdasdasd','asdasdasd','asdasdasd',1,'asdasdasd','asdasdasd','asdasdasd','(222) 222-2222','(222) 222-2222','asdasdasd','(222) 222-2222','asdasdasd','(222) 222-2222',46);
 /*!40000 ALTER TABLE `billinglocationmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,6 +176,7 @@ CREATE TABLE `border_agent` (
   `phone` varchar(40) DEFAULT NULL,
   `ext` varchar(30) DEFAULT NULL,
   `fax` varchar(30) DEFAULT NULL,
+  `after_hour` varchar(50) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `open_from` varchar(20) DEFAULT NULL,
@@ -186,7 +187,7 @@ CREATE TABLE `border_agent` (
   PRIMARY KEY (`border_agent_id`),
   KEY `border_agent_ibfk_1` (`custom_broker_id`),
   CONSTRAINT `border_agent_ibfk_1` FOREIGN KEY (`custom_broker_id`) REFERENCES `custombrokermaster` (`custom_broker_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +196,7 @@ CREATE TABLE `border_agent` (
 
 LOCK TABLES `border_agent` WRITE;
 /*!40000 ALTER TABLE `border_agent` DISABLE KEYS */;
-INSERT INTO `border_agent` VALUES (1,'sdf','sdf','sdf','sdf','sdf','sdf',1,'sdf','sdf','dfd',1,'sdf',1);
+INSERT INTO `border_agent` VALUES (1,'sdf','sdf','sdf','sdf','sdf','sdf',NULL,1,'sdf','sdf','dfd',1,'sdf',1);
 /*!40000 ALTER TABLE `border_agent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +282,7 @@ CREATE TABLE `companymaster` (
   `customer_notes` varchar(500) DEFAULT NULL,
   `after_hours` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +291,7 @@ CREATE TABLE `companymaster` (
 
 LOCK TABLES `companymaster` WRITE;
 /*!40000 ALTER TABLE `companymaster` DISABLE KEYS */;
-INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH',NULL),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(34,'BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','BBBBB','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(38,'JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','JUJUJUJUU','(666) 666-6666','(666) 666-6666','(666) 666-6666',NULL,'(666) 666-6666'),(39,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(40,'','','','','','','','','','','(___) ___-____','','(___) ___-____','','(___) ___-____','(___) ___-____','(___) ___-____',NULL,'(___) ___-____'),(41,'GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','GGGGGGG','(888) 888-8888','(888) 888-8888','(888) 888-8888',NULL,'(888) 888-8888'),(42,'Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','Harry','(888) 888-8888','Harry','(777) 777-7777','Harry','(444) 444-4444','(333) 333-3333','(222) 222-2222',NULL,'(666) 666-6666'),(43,'NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','NNNNNNN','(111) 111-1111','(111) 111-1111','(111) 111-1111',NULL,'(111) 111-1111'),(44,'aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','aaaaaaaa','(111) 111-1111','aaaaaaaa','(111) 111-1111','aaaaaaaa','(111) 111-1111','(111) 111-1111','(111) 111-1111',NULL,'(111) 111-1111'),(45,'New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','(777) 777-7777','New Cust111','(777) 777-7777','New Cust111','(777) 777-7777','(777) 777-7777','(777) 777-7777',NULL,'(777) 777-7777');
+INSERT INTO `companymaster` VALUES (30,'GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG','GGGGG',NULL,'(___) ___-____'),(31,'YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','YYYYY','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(32,'OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','OOOOO','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(33,'JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','JHJHJHHJH','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222'),(45,'New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','New Cust111','(777) 777-7777','New Cust111','(777) 777-7777','New Cust111','(777) 777-7777','(777) 777-7777','(777) 777-7777',NULL,'(777) 777-7777'),(46,'WSWS','WSWS','WSWS','WSWS','WSWS','WSWS','WSWS','WSWS','WSWS','WSWS','(222) 222-2222','WSWS','(222) 222-2222','WSWS','(222) 222-2222','(222) 222-2222','(222) 222-2222',NULL,'(222) 222-2222');
 /*!40000 ALTER TABLE `companymaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +313,7 @@ CREATE TABLE `containermaster` (
   KEY `terminal_id_idx` (`terminal_id`),
   CONSTRAINT `equipment_id_containermaster` FOREIGN KEY (`equipment_id`) REFERENCES `equipmentmaster` (`equipment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `owner_id_containermaster` FOREIGN KEY (`owner_id`) REFERENCES `companymaster` (`company_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `terminal_id_containermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `terminal_id_containermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -367,7 +368,7 @@ CREATE TABLE `custombrokermaster` (
   `email` varchar(30) DEFAULT NULL,
   `website` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`custom_broker_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +377,7 @@ CREATE TABLE `custombrokermaster` (
 
 LOCK TABLES `custombrokermaster` WRITE;
 /*!40000 ALTER TABLE `custombrokermaster` DISABLE KEYS */;
-INSERT INTO `custombrokermaster` VALUES (1,'sdf','sdf','sdf','sdfsd','(333) 333-3333',0,'sdfs','sdf'),(7,'JJJJJJJJ','JJJJJJJJ','(345) 345-3535','JJJJJJJJ','(345) 345-3453',1,'JJJJJJJJ','JJJJJJJJ'),(8,'PPPPPPP','PPPPPPP','(111) 111-1111','PPPPPPP','(777) 777-7777',1,'PPPPPPP','PPPPPPP');
+INSERT INTO `custombrokermaster` VALUES (1,'sdf','sdf','sdf','sdfsd','(333) 333-3333',0,'sdfs','sdf'),(7,'JJJJJJJJ','JJJJJJJJ','(345) 345-3535','JJJJJJJJ','(345) 345-3453',1,'JJJJJJJJ','JJJJJJJJ');
 /*!40000 ALTER TABLE `custombrokermaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +443,7 @@ CREATE TABLE `drivermaster` (
   CONSTRAINT `category_id_drivermaster` FOREIGN KEY (`category_id`) REFERENCES `categorymaster` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `class_id_drivermaster` FOREIGN KEY (`class_id`) REFERENCES `classmaster` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `division_id_drivermaster` FOREIGN KEY (`division_id`) REFERENCES `divisionmaster` (`division_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `terminal_id_drivermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `terminal_id_drivermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -452,7 +453,6 @@ CREATE TABLE `drivermaster` (
 
 LOCK TABLES `drivermaster` WRITE;
 /*!40000 ALTER TABLE `drivermaster` DISABLE KEYS */;
-INSERT INTO `drivermaster` VALUES (1,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(2,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(3,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(4,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2),(5,'gf','ee','ee','33','324','234','234',1,'wer','2016-09-09','dfg','df','sdfsdf','sdf','sdf',2,2,2,2,'sdfsd',2);
 /*!40000 ALTER TABLE `drivermaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,7 +465,8 @@ DROP TABLE IF EXISTS `equipmaster`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipmaster` (
   `equipment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) DEFAULT NULL,
+  `equipment_name` varchar(150) DEFAULT NULL,
+  `description` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`equipment_id`),
   UNIQUE KEY `container_id_UNIQUE` (`equipment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -489,10 +490,11 @@ DROP TABLE IF EXISTS `equipmentmaster`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipmentmaster` (
   `equipment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) DEFAULT NULL,
+  `equipment_name` varchar(50) DEFAULT NULL,
+  `description` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`equipment_id`),
   UNIQUE KEY `container_id_UNIQUE` (`equipment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -501,7 +503,7 @@ CREATE TABLE `equipmentmaster` (
 
 LOCK TABLES `equipmentmaster` WRITE;
 /*!40000 ALTER TABLE `equipmentmaster` DISABLE KEYS */;
-INSERT INTO `equipmentmaster` VALUES (1,'JJJGG');
+INSERT INTO `equipmentmaster` VALUES (1,'JJJGG',NULL),(2,'Power Unit','asas');
 /*!40000 ALTER TABLE `equipmentmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -562,7 +564,7 @@ CREATE TABLE `powerunitmaster` (
   KEY `tracking_id_idx` (`tracking_id`),
   KEY `terminal_id_idx` (`terminal_id`),
   CONSTRAINT `owner_id` FOREIGN KEY (`owner_id`) REFERENCES `companymaster` (`company_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `terminal_id` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `terminal_id` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE,
   CONSTRAINT `tracking_id` FOREIGN KEY (`tracking_id`) REFERENCES `trackingmaster` (`tracking_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -696,7 +698,7 @@ CREATE TABLE `standard_charges` (
   `calculate_fuel_surcharge` int(11) DEFAULT NULL,
   `include_driver_payroll` int(11) DEFAULT NULL,
   PRIMARY KEY (`standard_charges_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -705,7 +707,7 @@ CREATE TABLE `standard_charges` (
 
 LOCK TABLES `standard_charges` WRITE;
 /*!40000 ALTER TABLE `standard_charges` DISABLE KEYS */;
-INSERT INTO `standard_charges` VALUES (3,'aaaaa',1,'aaaaaaa',1,'34543','35666',1,1,1,1,1),(4,'bbbbbbbb',1,'bbbbbbbbbbbbbb',1,'2224','44444',1,1,1,1,0);
+INSERT INTO `standard_charges` VALUES (3,'aaaaa',1,'aaaaaaa',1,'34543','35666',1,1,1,1,1),(6,'aas',1,'asas',3,'3434','65765',1,1,1,1,1);
 /*!40000 ALTER TABLE `standard_charges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -741,7 +743,7 @@ CREATE TABLE `straighttruckmaster` (
   KEY `terminal_id_idx` (`terminal_id`),
   KEY `category_id_idx` (`category_id`),
   CONSTRAINT `category_id_straighttruckmaster` FOREIGN KEY (`category_id`) REFERENCES `categorymaster` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `terminal_id_straighttruckmaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `terminal_id_straighttruckmaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE,
   CONSTRAINT `tracking_id_straighttruckmaster` FOREIGN KEY (`tracking_id`) REFERENCES `trackingmaster` (`tracking_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -752,7 +754,6 @@ CREATE TABLE `straighttruckmaster` (
 
 LOCK TABLES `straighttruckmaster` WRITE;
 /*!40000 ALTER TABLE `straighttruckmaster` DISABLE KEYS */;
-INSERT INTO `straighttruckmaster` VALUES (1,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(2,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(3,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(4,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(5,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(6,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(7,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(8,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(9,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(10,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(11,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(12,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(13,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(14,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(15,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg'),(16,'df','sdf','dsf','tyui',2016,'234fdg','CA','435435','rrr',1,'234234','2016-09-09',1,'2017-03-05','SDSD',1,1,'234fdg');
 /*!40000 ALTER TABLE `straighttruckmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -765,9 +766,10 @@ DROP TABLE IF EXISTS `terminalmaster`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `terminalmaster` (
   `terminal_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `terminal_name` varchar(50) DEFAULT NULL,
+  `location` varchar(50) DEFAULT NULL,
   UNIQUE KEY `terminal_id_UNIQUE` (`terminal_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -776,7 +778,7 @@ CREATE TABLE `terminalmaster` (
 
 LOCK TABLES `terminalmaster` WRITE;
 /*!40000 ALTER TABLE `terminalmaster` DISABLE KEYS */;
-INSERT INTO `terminalmaster` VALUES (1,'AAA'),(2,'sdfsdf');
+INSERT INTO `terminalmaster` VALUES (4,'abc','ww');
 /*!40000 ALTER TABLE `terminalmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -832,7 +834,7 @@ CREATE TABLE `trailermaster` (
   KEY `class_id_idx` (`class_id`),
   KEY `equipment_id_idx` (`equipment_id`),
   CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `classmaster` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `equipment_id` FOREIGN KEY (`equipment_id`) REFERENCES `equipmentmaster` (`equipment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `equipment_id` FOREIGN KEY (`equipment_id`) REFERENCES `equipmentmaster` (`equipment_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -969,7 +971,6 @@ CREATE TABLE `working_hours_additionalcontact` (
 
 LOCK TABLES `working_hours_additionalcontact` WRITE;
 /*!40000 ALTER TABLE `working_hours_additionalcontact` DISABLE KEYS */;
-INSERT INTO `working_hours_additionalcontact` VALUES (1,'Sun','11:59','12:01','00:00','12:00',1,17),(2,'Mon','11:59','12:01','00:00','12:00',1,17),(3,'Thur','11:59','12:01','00:00','12:00',1,18),(4,'Fri','11:59','12:01','00:00','12:00',1,18),(5,'Sun','11:59','12:01','00:00','12:00',1,19),(6,'Mon','11:59','12:01','00:00','12:00',1,19),(7,'Tue','11:59','12:01','00:00','12:00',1,19),(8,'Wed','11:59','12:01','00:00','12:00',1,19),(9,'Fri','11:59','12:01','00:00','12:00',1,20),(10,'Sat','11:59','12:01','00:00','12:00',1,20),(11,'Sun','11:59','12:01','00:00','12:00',1,22),(12,'Mon','11:59','12:01','00:00','12:00',1,22),(13,'Sun','11:59','12:01','00:00','12:00',1,23),(14,'Mon','11:59','12:01','00:00','12:00',1,23),(15,'Thur','11:59','12:01','00:00','12:00',1,24),(16,'Fri','11:59','12:01','00:00','12:00',1,24),(17,'Sun','11:59','12:01','00:00','12:00',1,25),(18,'Mon','11:59','12:01','00:00','12:00',1,25),(19,'Sat','11:59','12:01','00:00','12:00',1,26),(22,'Thur','11:59','12:01','00:00','12:00',1,28),(23,'Fri','11:59','12:01','00:00','12:00',1,28);
 /*!40000 ALTER TABLE `working_hours_additionalcontact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1014,4 +1015,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-08 18:51:56
+-- Dump completed on 2016-09-09 19:01:16

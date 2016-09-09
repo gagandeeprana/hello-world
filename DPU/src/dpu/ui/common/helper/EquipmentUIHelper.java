@@ -1,247 +1,142 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dpu.ui.common.helper;
 
 import dpu.beans.admin.EquipmentBean;
 import dpu.dao.admin.EquipmentDAO;
 import dpu.dao.admin.impl.EquipmentDAOImpl;
 import dpu.ui.common.AddEquipmentFrame;
-import dpu.ui.common.TestEquipmentPanel;
-//import static dpu.ui.common.TestEquipmentPanel.mainTabbedPane;
+import dpu.ui.common.EquipmentPanel;
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
+/**
+ *
+ * @author gagandeep.rana
+ */
 public class EquipmentUIHelper {
 
-    public String addUpdateFlag = "";
-    int equipmentId = 0;
-    String equipmentName;
+    public static List<EquipmentBean> lstEquipments = new ArrayList();
     EquipmentDAO equipmentDAO = new EquipmentDAOImpl();
-    List<EquipmentBean> lstEquipments = null;
-    int equipmentIdToBeDeleted = 0;
-    String msg = "";
+    public static int equipmentId = 0;
+    public static String addUpdateFlag = "add";
 
-    public void clear() {
-        TestEquipmentPanel.txtEquipmentSearch.setText("");
+    public String delete(int equipmentIdToBeDeleted) {
+        String msg = equipmentDAO.deleteEquipment(equipmentIdToBeDeleted);
+        lstEquipments = equipmentDAO.getAllEquipments(EquipmentPanel.txtSearch.getText());
+        generateTable();
+        return msg;
     }
 
-    public void disable(boolean var) {
-//        mainTabbedPane.setEnabled(var);
-//        TestEquipmentPanel.equipmentPanel.setEnabled(var);
-        TestEquipmentPanel.tblEquipment.setEnabled(var);
-        TestEquipmentPanel.btnAddManageEquipment.setEnabled(var);
-        TestEquipmentPanel.btnClearManageEquipment.setEnabled(var);
-        TestEquipmentPanel.txtEquipmentSearch.setEnabled(var);
-    }
-
-    public class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
-            } else {
-                setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    public class ButtonEditor extends DefaultCellEditor {
-
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            if (isSelected) {
-                button.setForeground(table.getSelectionForeground());
-                button.setBackground(table.getSelectionBackground());
-            } else {
-                button.setForeground(table.getForeground());
-                button.setBackground(table.getBackground());
-            }
-            equipmentIdToBeDeleted = lstEquipments.get(row).getEquipmentId();
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                msg = delete();
-                JOptionPane.showMessageDialog(null, msg);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-    }
-
-    public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
-
-        public ButtonRendererUpdate() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
-            } else {
-                setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    public class ButtonEditorUpdate extends DefaultCellEditor {
-
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-
-        public ButtonEditorUpdate(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            if (isSelected) {
-                button.setForeground(table.getSelectionForeground());
-                button.setBackground(table.getSelectionBackground());
-            } else {
-                button.setForeground(table.getForeground());
-                button.setBackground(table.getBackground());
-            }
-            equipmentIdToBeDeleted = lstEquipments.get(row).getEquipmentId();
-            equipmentId = lstEquipments.get(row).getEquipmentId();
-            equipmentName = lstEquipments.get(row).getEquipmentName();
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                EquipmentBean equipmentBean = new EquipmentBean();
-                equipmentBean.setEquipmentId(equipmentId);
-                equipmentBean.setEquipmentName(equipmentName);
-                AddEquipmentFrame addEquipmentFrame = new AddEquipmentFrame(equipmentBean);
-                addEquipmentFrame.setVisible(true);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
+    public void showData(EquipmentBean equipmentBean) {
+        AddEquipmentFrame.ddl1.setSelectedItem(equipmentBean.getEquipmentName());
+        AddEquipmentFrame.txt1.setText(equipmentBean.getDescription());
     }
 
     public void generateTable() {
-        lstEquipments = equipmentDAO.getAllEquipments(TestEquipmentPanel.txtEquipmentSearch.getText());
+        Object[] cols = {"Equipment Type", "Description"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestEquipmentPanel.tblEquipment = new JTable(defaultTableModel);
-        Object[][] data = new Object[lstEquipments.size()][4];
-        for (int i = 0; i < lstEquipments.size(); i++) {
-            EquipmentBean obj = lstEquipments.get(i);
-            data[i][0] = obj.getEquipmentId();
-            data[i][1] = obj.getEquipmentName();
-            data[i][2] = "Remove";
-            data[i][3] = "Update";
+        EquipmentPanel.tblEquipment.setModel(defaultTableModel);
+        EquipmentPanel.tblEquipment.setAutoCreateRowSorter(true);
+        EquipmentPanel.tblEquipment.setDefaultRenderer(Object.class, new EquipmentUIHelper.EquipmentTable());
+        if (lstEquipments.size() > 0) {
+            Object[][] data = new Object[lstEquipments.size()][2];
+            for (int i = 0; i < lstEquipments.size(); i++) {
+                EquipmentBean obj = lstEquipments.get(i);
+                data[i][0] = obj.getEquipmentName();
+                data[i][1] = obj.getDescription();
+                EquipmentPanel.tblEquipment.setRowHeight(30);
+            }
+            defaultTableModel.setDataVector(data, cols);
+            EquipmentPanel.tblEquipment.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            EquipmentPanel.tblEquipment.getTableHeader().setForeground(Color.DARK_GRAY);
+            EquipmentPanel.tblEquipment.setIntercellSpacing(new Dimension(0, 0));
+            EquipmentPanel.tblEquipment.setShowGrid(false);
+            EquipmentPanel.jScrollPane9.setViewportView(EquipmentPanel.tblEquipment);
+        } else {
+            generateEmptyTable();
         }
-        Object[] cols = {"Equipment Id", "Equipment Name", " ", "  "};
+    }
+
+    public void generateEmptyTable() {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        EquipmentPanel.tblEquipment.setModel(defaultTableModel);
+        EquipmentPanel.tblEquipment.setDefaultRenderer(Object.class, new EquipmentUIHelper.EquipmentTable());
+        Object[][] data = new Object[7][2];
+        for (int i = 0; i < 7; i++) {
+            data[i][0] = "";
+            data[i][1] = "";
+            EquipmentPanel.tblEquipment.setRowHeight(30);
+        }
+        Object[] cols = {"Equipment Type", "Description"};
+
         defaultTableModel.setDataVector(data, cols);
-        TestEquipmentPanel.tblEquipment.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        TestEquipmentPanel.tblEquipment.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        TestEquipmentPanel.tblEquipment.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        TestEquipmentPanel.tblEquipment.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        TestEquipmentPanel.jScrollPane5.setViewportView(TestEquipmentPanel.tblEquipment);
+        EquipmentPanel.tblEquipment.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        EquipmentPanel.tblEquipment.getTableHeader().setForeground(Color.DARK_GRAY);
+        EquipmentPanel.tblEquipment.setIntercellSpacing(new Dimension(0, 0));
+        EquipmentPanel.tblEquipment.setShowGrid(false);
+        EquipmentPanel.jScrollPane9.setViewportView(EquipmentPanel.tblEquipment);
     }
 
-    public String save() {
-        EquipmentBean obj = new EquipmentBean();
-        obj.setEquipmentId(Integer.parseInt(AddEquipmentFrame.txtEquipmentIdAddEquipment.getText()));
-        obj.setEquipmentName(AddEquipmentFrame.txtEquipmentNameAddEquipment.getText());
-        EquipmentDAO equipmentDAO = new EquipmentDAOImpl();
-        String msg = equipmentDAO.addEquipment(obj);
-        disable(true);
+    public void save() {
+        EquipmentBean equipmentBean = new EquipmentBean();
+        equipmentBean.setEquipmentName(AddEquipmentFrame.ddl1.getSelectedItem().toString());
+        equipmentBean.setDescription(AddEquipmentFrame.txt1.getText());
+        String msg = "";
+        if (EquipmentUIHelper.addUpdateFlag.equals("add")) {
+            int i = equipmentDAO.addEquipment(equipmentBean);
+            if (i > 0) {
+                msg = "New Equipment Added";
+            }
+        } else {
+            equipmentBean.setEquipmentId(equipmentId);
+            msg = equipmentDAO.updateEquipment(equipmentBean);
+        }
+        lstEquipments = equipmentDAO.getAllEquipments(EquipmentPanel.txtSearch.getText());
         generateTable();
-//        TestEquipmentPanel.mainTabbedPane.setEnabled(true);
-//        TestEquipmentPanel.equipmentPanel.setEnabled(true);
-        return msg;
+        JOptionPane.showMessageDialog(null, msg);
     }
 
-    public String delete() {
-        EquipmentDAO equipmentDAO = new EquipmentDAOImpl();
-        String msg = equipmentDAO.deleteEquipment(equipmentIdToBeDeleted);
-        disable(true);
-        generateTable();
-//        TestEquipmentPanel.mainTabbedPane.setEnabled(true);
-//        TestEquipmentPanel.equipmentPanel.setEnabled(true);
-        return msg;
-    }
+    class EquipmentTable extends DefaultTableCellRenderer {
 
-    public String update(EquipmentBean equipmentBean) {
-        EquipmentDAO equipmentDAO = new EquipmentDAOImpl();
-        String msg = equipmentDAO.updateEquipment(equipmentBean);
-        disable(true);
-        generateTable();
-//        TestEquipmentPanel.mainTabbedPane.setEnabled(true);
-//        TestEquipmentPanel.equipmentPanel.setEnabled(true);
-        return msg;
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JTextField editor = new JTextField();
+            editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
+            editor.setEditable(false);
+            editor.setBorder(null);
+            if (value != null) {
+                editor.setText("   " + value.toString());
+            }
+            if (row % 2 == 0) {
+                Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
+                editor.setBorder(border);
+
+            } else {
+                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
+                editor.setBorder(border);
+            }
+            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+            if (isSelected) {
+                Border border = BorderFactory.createLineBorder(Color.CYAN, 4);
+                editor.setBorder(border);
+                editor.setBackground(Color.CYAN);
+            }
+            return editor;
+        }
     }
 }

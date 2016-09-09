@@ -5,13 +5,8 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.common.helper.TerminalUIHelper;
-import dpu.Validations;
 import dpu.beans.admin.TerminalBean;
-import dpu.dao.admin.TerminalDAO;
-import dpu.dao.admin.impl.TerminalDAOImpl;
-import java.util.List;
-import javax.swing.JOptionPane;
+import dpu.ui.common.helper.TerminalUIHelper;
 
 public class AddTerminalFrame extends javax.swing.JFrame {
 
@@ -27,8 +22,6 @@ public class AddTerminalFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         terminalUI = new TerminalUIHelper();
-        btnSaveAddTerminal.setEnabled(false);
-        fillLabel();
     }
 
     public AddTerminalFrame(TerminalBean terminalBean) {
@@ -36,52 +29,8 @@ public class AddTerminalFrame extends javax.swing.JFrame {
         terminalUI = new TerminalUIHelper();
         this.terminalBean = terminalBean;
         setLocationRelativeTo(null);
-        addUpdateFlag = "update";
-        showRecord(terminalBean);
+        terminalUI.showData(terminalBean);
         btnSaveAddTerminal.setText("Update");
-        btnSaveAddTerminal.setEnabled(true);
-    }
-    
-    private void fillLabel() {
-        lblTerminalIdAddTerminalFrameValidation.setText(" ");
-        lblTerminalNameAddTerminalFrameValidation.setText(" ");
-    }
-
-    public boolean validateTerminalId(String str) {
-        if (Validations.isEmpty(str)) {
-            msg = "Left Empty..!";
-            return false;
-        }
-        if (Validations.hasNumerals(str)) {
-            msg = "Only Numerics Allowed..!";
-            return false;
-        }
-        if (Validations.hasSpace(str)) {
-            msg = "Space Not Allowed..!";
-            return false;
-        }
-        return true;
-    }
-
-    public boolean validateTerminalName(String str) {
-        if (Validations.isEmpty(str)) {
-            msg = "Left Empty..!";
-            return false;
-        }
-        if (Validations.hasAlphabets(str)) {
-            msg = "Only Alphabets Allowed..!";
-            return false;
-        }
-        if (Validations.hasSpace(str)) {
-            msg = "Space Not Allowed..!";
-            return false;
-        }
-        return true;
-    }
-
-    public void showRecord(TerminalBean terminalBean) {
-        txtTerminalIdAddTerminal.setText(String.valueOf(terminalBean.getTerminalId()));
-        txtTerminalNameAddTerminal.setText(terminalBean.getTerminalName());
     }
 
     /**
@@ -94,39 +43,37 @@ public class AddTerminalFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtTerminalIdAddTerminal = new javax.swing.JTextField();
+        txt1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtTerminalNameAddTerminal = new javax.swing.JTextField();
+        txt2 = new javax.swing.JTextField();
         btnSaveAddTerminal = new javax.swing.JButton();
         btnCancelAddTerminal = new javax.swing.JButton();
-        lblTerminalIdAddTerminalFrameValidation = new javax.swing.JLabel();
-        lblTerminalNameAddTerminalFrameValidation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Terminal Id");
+        jLabel1.setText("Terminal");
 
-        txtTerminalIdAddTerminal.addActionListener(new java.awt.event.ActionListener() {
+        txt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTerminalIdAddTerminalActionPerformed(evt);
+                txt1ActionPerformed(evt);
             }
         });
-        txtTerminalIdAddTerminal.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTerminalIdAddTerminalKeyReleased(evt);
+                txt1KeyReleased(evt);
             }
         });
 
-        jLabel8.setText("Terminal Name");
+        jLabel8.setText("Location");
 
-        txtTerminalNameAddTerminal.addActionListener(new java.awt.event.ActionListener() {
+        txt2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTerminalNameAddTerminalActionPerformed(evt);
+                txt2ActionPerformed(evt);
             }
         });
-        txtTerminalNameAddTerminal.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTerminalNameAddTerminalKeyReleased(evt);
+                txt2KeyReleased(evt);
             }
         });
 
@@ -149,11 +96,11 @@ public class AddTerminalFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSaveAddTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSaveAddTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelAddTerminal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,115 +108,54 @@ public class AddTerminalFrame extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTerminalNameAddTerminal)
-                            .addComponent(txtTerminalIdAddTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTerminalIdAddTerminalFrameValidation, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTerminalNameAddTerminalFrameValidation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt2)
+                            .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelAddTerminal, btnSaveAddTerminal});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTerminalIdAddTerminalFrameValidation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txtTerminalIdAddTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(txtTerminalNameAddTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTerminalNameAddTerminalFrameValidation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveAddTerminal)
                     .addComponent(btnCancelAddTerminal))
-                .addGap(17, 17, 17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTerminalIdAddTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTerminalIdAddTerminalActionPerformed
+    private void txt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTerminalIdAddTerminalActionPerformed
+    }//GEN-LAST:event_txt1ActionPerformed
 
     private void btnCancelAddTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAddTerminalActionPerformed
         dispose();
-        terminalUI.disable(true);
     }//GEN-LAST:event_btnCancelAddTerminalActionPerformed
 
     private void btnSaveAddTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAddTerminalActionPerformed
-        String msg = "";
-        if (addUpdateFlag.equals("update")) {
-            terminalBean = new TerminalBean();
-            terminalBean.setTerminalId(Integer.parseInt(txtTerminalIdAddTerminal.getText()));
-            terminalBean.setTerminalName(txtTerminalNameAddTerminal.getText());
-            msg = terminalUI.update(terminalBean);
-        } else {
-            msg = terminalUI.save();
-        }
-        JOptionPane.showMessageDialog(null, msg);
         dispose();
+        terminalUI.save();
     }//GEN-LAST:event_btnSaveAddTerminalActionPerformed
 
-    private void txtTerminalIdAddTerminalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalIdAddTerminalKeyReleased
-        TerminalDAO terminalDAO = new TerminalDAOImpl();
-        List<TerminalBean> lstTerminals = terminalDAO.getAllTerminals("");
-        try {
-            if (validateTerminalId(txtTerminalIdAddTerminal.getText())) {
-                lblTerminalIdAddTerminalFrameValidation.setText("");
-                for (TerminalBean terminalBean : lstTerminals) {
-                    if (terminalBean.getTerminalId() == Integer.parseInt(txtTerminalIdAddTerminal.getText().trim())) {
-                        lblTerminalIdAddTerminalFrameValidation.setText("Already Taken");
-                        btnSaveAddTerminal.setEnabled(false);
-                    }
-                }
-            } else {
-                lblTerminalIdAddTerminalFrameValidation.setText(msg);
-                btnSaveAddTerminal.setEnabled(false);
-            }
-            if (lblTerminalIdAddTerminalFrameValidation.getText().equals("") && lblTerminalNameAddTerminalFrameValidation.getText().equals("")) {
-                btnSaveAddTerminal.setEnabled(true);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_txtTerminalIdAddTerminalKeyReleased
+    private void txt1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt1KeyReleased
+    }//GEN-LAST:event_txt1KeyReleased
 
-    private void txtTerminalNameAddTerminalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTerminalNameAddTerminalKeyReleased
-        TerminalDAO terminalDAO = new TerminalDAOImpl();
-        List<TerminalBean> lstTerminals = terminalDAO.getAllTerminals("");
-        try {
-            if (validateTerminalName(txtTerminalNameAddTerminal.getText())) {
-                lblTerminalNameAddTerminalFrameValidation.setText("");
-                for (TerminalBean terminalBean : lstTerminals) {
-                    if (terminalBean.getTerminalName().equals(txtTerminalNameAddTerminal.getText().trim())) {
-                        lblTerminalNameAddTerminalFrameValidation.setText("Already Taken");
-                        btnSaveAddTerminal.setEnabled(false);
-                    }
-                }
-            } else {
-                lblTerminalNameAddTerminalFrameValidation.setText(msg);
-                btnSaveAddTerminal.setEnabled(false);
-            }
-            if (lblTerminalIdAddTerminalFrameValidation.getText().equals("") && lblTerminalNameAddTerminalFrameValidation.getText().equals("")) {
-                btnSaveAddTerminal.setEnabled(true);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_txtTerminalNameAddTerminalKeyReleased
+    private void txt2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt2KeyReleased
+      
+    }//GEN-LAST:event_txt2KeyReleased
 
-    private void txtTerminalNameAddTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTerminalNameAddTerminalActionPerformed
+    private void txt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTerminalNameAddTerminalActionPerformed
+    }//GEN-LAST:event_txt2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,9 +260,7 @@ public class AddTerminalFrame extends javax.swing.JFrame {
     public static javax.swing.JButton btnSaveAddTerminal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel lblTerminalIdAddTerminalFrameValidation;
-    private javax.swing.JLabel lblTerminalNameAddTerminalFrameValidation;
-    public static javax.swing.JTextField txtTerminalIdAddTerminal;
-    public static javax.swing.JTextField txtTerminalNameAddTerminal;
+    public static javax.swing.JTextField txt1;
+    public static javax.swing.JTextField txt2;
     // End of variables declaration//GEN-END:variables
 }

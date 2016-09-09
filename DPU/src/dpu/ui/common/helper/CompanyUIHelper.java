@@ -13,16 +13,17 @@ import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
 import dpu.dao.admin.impl.WorkingHoursAdditionalContactDAOImpl;
 import dpu.ui.common.AddCustomerFrame;
-import dpu.ui.common.TestCompanyPanel;
+import dpu.ui.common.CompanyPanel;
 import static dpu.ui.common.helper.AdditionalContactWorkingHoursUIHelper.mapWorkingHours;
 import java.awt.Color;
-//import static dpu.ui.common.TestCompanyPanel.mainTabbedPane;
+//import static dpu.ui.common.CompanyPanel.mainTabbedPane;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -31,7 +32,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class CompanyUIHelper {
 
-   
     CompanyDAO companyDAO = new CompanyDAOImpl();
     public CompanyBean companyBean = new CompanyBean();
     static public String addUpdateFlag = "";
@@ -42,7 +42,7 @@ public class CompanyUIHelper {
 //    static Logger logger = Logger.getLogger(CompanyUIHelper.class);
 
     public void clear() {
-        TestCompanyPanel.txtCompanySearch.setText("");
+        CompanyPanel.txtCompanySearch.setText("");
     }
 
     public void disable(boolean var) {
@@ -50,12 +50,11 @@ public class CompanyUIHelper {
 
     public void generateTable() {
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"};
-        lstCompanies = companyDAO.getAllCompanies(TestCompanyPanel.txtCompanySearch.getText());
-        System.out.println("size: " + lstCompanies.size());
+        lstCompanies = companyDAO.getAllCompanies(CompanyPanel.txtCompanySearch.getText());
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestCompanyPanel.tblCompany.setModel(defaultTableModel);
-        TestCompanyPanel.tblCompany.setAutoCreateRowSorter(true);
-        TestCompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
+        CompanyPanel.tblCompany.setModel(defaultTableModel);
+        CompanyPanel.tblCompany.setAutoCreateRowSorter(true);
+        CompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
         if (lstCompanies.size() > 0) {
             Object[][] data = new Object[lstCompanies.size()][15];
             for (int i = 0; i < lstCompanies.size(); i++) {
@@ -75,15 +74,15 @@ public class CompanyUIHelper {
                 data[i][12] = obj.getExt();
                 data[i][13] = obj.getFax();
                 data[i][14] = obj.getPager();
-                TestCompanyPanel.tblCompany.setRowHeight(30);
+                CompanyPanel.tblCompany.setRowHeight(30);
             }
-            TestCompanyPanel.tblCompany.setColumnSelectionAllowed(false);
+            CompanyPanel.tblCompany.setColumnSelectionAllowed(false);
             defaultTableModel.setDataVector(data, cols);
-            TestCompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-            TestCompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
-            TestCompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
-            TestCompanyPanel.tblCompany.setShowGrid(false);
-            TestCompanyPanel.jScrollPane4.setViewportView(TestCompanyPanel.tblCompany);
+            CompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            CompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
+            CompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
+            CompanyPanel.tblCompany.setShowGrid(false);
+            CompanyPanel.jScrollPane4.setViewportView(CompanyPanel.tblCompany);
         } else {
             generateEmptyTable();
         }
@@ -92,8 +91,8 @@ public class CompanyUIHelper {
     private void generateEmptyTable() {
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestCompanyPanel.tblCompany.setModel(defaultTableModel);
-        TestCompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
+        CompanyPanel.tblCompany.setModel(defaultTableModel);
+        CompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
         Object[][] data = new Object[7][17];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
@@ -113,17 +112,17 @@ public class CompanyUIHelper {
             data[i][14] = "";
             data[i][15] = "";
             data[i][16] = "";
-            TestCompanyPanel.tblCompany.setRowHeight(30);
+            CompanyPanel.tblCompany.setRowHeight(30);
         }
-        TestCompanyPanel.tblCompany.setColumnSelectionAllowed(false);
+        CompanyPanel.tblCompany.setColumnSelectionAllowed(false);
 
         defaultTableModel.setDataVector(data, cols);
 
-        TestCompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-        TestCompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
-        TestCompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
-        TestCompanyPanel.tblCompany.setShowGrid(false);
-        TestCompanyPanel.jScrollPane4.setViewportView(TestCompanyPanel.tblCompany);
+        CompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        CompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
+        CompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
+        CompanyPanel.tblCompany.setShowGrid(false);
+        CompanyPanel.jScrollPane4.setViewportView(CompanyPanel.tblCompany);
     }
 
     public String save() {
@@ -156,29 +155,33 @@ public class CompanyUIHelper {
             if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
                 for (int i = 0; i < AddCustomerFrame.lstAdditionalContacts.size(); i++) {
                     AdditionalContactBean additionalContactBean = AddCustomerFrame.lstAdditionalContacts.get(i);
-//                    additionalContactBean.setContactId(contactId);
+                    CompanyBean companyBean = companyDAO.getCompanyInfoById(maxCompanyId);
+                    additionalContactBean.setCompanyBean(companyBean);
                     additionalContactDAO.addAdditionalContact(additionalContactBean);
-                    maxAdditionalContactId = additionalContactDAO.getMaxAdditionalContactId();
-                    if (AdditionalContactWorkingHoursUIHelper.mapWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
-                        WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
-                        List<WorkingHoursAdditionalContactBean> listOfWorkingHours = mapWorkingHours.get(additionalContactBean);
-                        if (listOfWorkingHours != null && !listOfWorkingHours.isEmpty()) {
-                            for (WorkingHoursAdditionalContactBean work : listOfWorkingHours) {
-                                work.setAdditionalContactId(maxAdditionalContactId);
-                                workDAO.addWorkingHours(work);
-                            }
-                        }
-                    }
+//                    maxAdditionalContactId = additionalContactDAO.getMaxAdditionalContactId();
+//                    if (AdditionalContactWorkingHoursUIHelper.mapWorkingHours != null && !AdditionalContactWorkingHoursUIHelper.mapWorkingHours.isEmpty()) {
+//                        WorkingHoursAdditionalContactDAO workDAO = new WorkingHoursAdditionalContactDAOImpl();
+//                        List<WorkingHoursAdditionalContactBean> listOfWorkingHours = mapWorkingHours.get(additionalContactBean);
+//                        if (listOfWorkingHours != null && !listOfWorkingHours.isEmpty()) {
+//                            for (WorkingHoursAdditionalContactBean work : listOfWorkingHours) {
+//                                work.setAdditionalContactId(maxAdditionalContactId);
+//                                workDAO.addWorkingHours(work);
+//                            }
+//                        }
+//                    }
                 }
             }
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
                 CompanyBean companyBean = companyDAO.getCompanyInfoById(maxCompanyId);
+                System.out.println("maxCompanyId: " + maxCompanyId);
                 for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
                     billingLocationBean.setCompanyBean(companyBean);
                     billingLocationDAO.addBillingLocation(billingLocationBean);
                 }
             }
-
+            if (maxCompanyId > 0) {
+                msg = "New Customer Added";
+            }
             AddCustomerFrame.lstAdditionalContacts = new ArrayList<>();
             AddCustomerFrame.lstAdditionalContacts = new ArrayList<>();
             AdditionalContactWorkingHoursUIHelper.mapWorkingHours = new HashMap();
@@ -186,9 +189,9 @@ public class CompanyUIHelper {
             companyBean.setCompanyId(companyId);
             msg = companyDAO.updateCompany(companyBean);
             if (AddCustomerFrame.lstAdditionalContacts.size() > 0) {
-                int contactId = companyId;
                 for (AdditionalContactBean additionalContactBean : AddCustomerFrame.lstAdditionalContacts) {
-                    additionalContactBean.setContactId(contactId);
+                    CompanyBean companyBean = companyDAO.getCompanyInfoById(companyId);
+                    additionalContactBean.setCompanyBean(companyBean);
                     if (additionalContactBean.getAdditionalContactId() != 0) {
                         for (int i = 0; i < AddCustomerFrame.lstAdditionalContactsFromDb.size(); i++) {
                             if (additionalContactBean.getAdditionalContactId() == AddCustomerFrame.lstAdditionalContactsFromDb.get(i).getAdditionalContactId()) {
@@ -201,9 +204,9 @@ public class CompanyUIHelper {
                 }
             }
             if (AddCustomerFrame.lstBillingLocations.size() > 0) {
-                int contactId = companyId;
+//                int contactId = companyId;
                 for (BillingLocationBean billingLocationBean : AddCustomerFrame.lstBillingLocations) {
-//                    billingLocationBean.setCompanyId(contactId);
+                    billingLocationBean.setCompanyBean(companyBean);
                     if (billingLocationBean.getBillingLocationId() != 0) {
                         for (int i = 0; i < AddCustomerFrame.lstBillingLocationsFromDb.size(); i++) {
                             if (billingLocationBean.getBillingLocationId() == AddCustomerFrame.lstBillingLocationsFromDb.get(i).getBillingLocationId()) {
@@ -218,8 +221,7 @@ public class CompanyUIHelper {
         }
         disable(true);
         generateTable();
-//        TestCompanyPanel.mainTabbedPane.setEnabled(true);
-//        TestCompanyPanel.companyPanel.setEnabled(true);
+        JOptionPane.showMessageDialog(null, msg);
         return msg;
     }
 
@@ -227,6 +229,7 @@ public class CompanyUIHelper {
         CompanyDAO companyDAO = new CompanyDAOImpl();
         String msg = companyDAO.deleteCompany(companyIdToBeDeleted);
         generateTable();
+        JOptionPane.showMessageDialog(null, msg);
         return msg;
     }
 

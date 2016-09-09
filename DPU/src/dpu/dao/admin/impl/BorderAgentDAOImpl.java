@@ -5,178 +5,161 @@
  */
 package dpu.dao.admin.impl;
 
+import dpu.DPU;
 import dpu.beans.admin.BorderAgentBean;
 import dpu.dao.admin.BorderAgentDAO;
-import dpu.dao.common.ConnectDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author Gagandeep
- */
 public class BorderAgentDAOImpl implements BorderAgentDAO {
 
-    @Autowired
-    ConnectDB connectDB;
+    Logger logger = Logger.getLogger(BorderAgentDAOImpl.class);
 
     @Override
     public List<BorderAgentBean> getAllBorderAgents() {
         List<BorderAgentBean> lstBorderAgents = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from border_agent");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                BorderAgentBean obj = new BorderAgentBean();
-                obj.setBorderAgentId(rs.getInt("border_agent_id"));
-                obj.setCode(rs.getString("code"));
-                obj.setBorderAgent(rs.getString("border_agent"));
-                obj.setBorderCrossing(rs.getString("border_crossing"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setStatus(rs.getInt("status"));
-                obj.setEmail(rs.getString("email"));
-                obj.setOpenFrom(rs.getString("open_from"));
-                obj.setOpenTo(rs.getString("open_to"));
-                obj.setAfterHour(rs.getString("after_hour"));
-                obj.setIs24Hr(rs.getInt("is24Hr"));
-                obj.setComments(rs.getString("comments"));
-                obj.setCustomBrokerId(rs.getInt("custom_broker_id"));
-                lstBorderAgents.add(obj);
-            }
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(BorderAgentBean.class);
+            lstBorderAgents = (List<BorderAgentBean>) criteria.list();
         } catch (Exception e) {
-            System.out.println("BorderAgentDAOImpl : getAllBorderAgents : " + e);
-//            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
+            logger.error("BorderAgentDAOImpl : getAllBorderAgents : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstBorderAgents;
     }
 
     @Override
-    public String deleteBorderAgent(int borderAgentId) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public int addBorderAgent(BorderAgentBean obj) {
+        Session session = null;
+        Transaction tx = null;
+        int maxId = 0;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("delete from border_agent where border_agent_id = ?");
-            pstmt.setInt(1, borderAgentId);
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "BorderAgent Deleted";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            maxId = (int) session.save(obj);
+            tx.commit();
+            return maxId;
         } catch (Exception e) {
-            System.out.println("BorderAgentDAOImpl : deleteBorderAgent : " + e);
-//            logger.error("CompanyDAOImpl : deleteCompany : " + e);
-        }
-        return "Failed to Delete BorderAgent";
-    }
-
-    @Override
-    public String addBorderAgent(BorderAgentBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into border_agent(code,border_agent,border_crossing,phone,ext,fax,status,email,open_from,open_to,after_hour,is24Hr,comments,custom_broker_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            pstmt.setString(1, obj.getCode());
-            pstmt.setString(2, obj.getBorderAgent());
-            pstmt.setString(3, obj.getBorderCrossing());
-            pstmt.setString(4, obj.getPhone());
-            pstmt.setString(5, obj.getExt());
-            pstmt.setString(6, obj.getFax());
-            pstmt.setInt(7, obj.getStatus());
-            pstmt.setString(8, obj.getEmail());
-            pstmt.setString(9, obj.getOpenFrom());
-            pstmt.setString(10, obj.getOpenTo());
-            pstmt.setString(11, obj.getAfterHour());
-            pstmt.setInt(12, obj.getIs24Hr());
-            pstmt.setString(13, obj.getComments());
-            pstmt.setInt(14, obj.getCustomBrokerId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "BorderAgent Added";
+            if (tx != null) {
+                tx.rollback();
             }
-        } catch (Exception e) {
-            System.out.println("BorderAgentDAOImpl : addBorderAgent : " + e);
-//            logger.error("CompanyDAOImpl : addCompany : " + e);
+            logger.error("BorderAgentDAOImpl : addBorderAgent : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
-        return "Failed to Add BorderAgent";
+        return maxId;
     }
 
     @Override
     public String updateBorderAgent(BorderAgentBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update border_agent set code=?,border_agent=?,border_crossing=?,phone=?,ext=?,fax=?,status=?,email=?,open_from=?,open_to=?,after_hour=?,is24Hr=?,comments=?,custom_broker_id=? where border_agent_id = ?");
-            pstmt.setString(1, obj.getCode());
-            pstmt.setString(2, obj.getBorderAgent());
-            pstmt.setString(3, obj.getBorderCrossing());
-            pstmt.setString(4, obj.getPhone());
-            pstmt.setString(5, obj.getExt());
-            pstmt.setString(6, obj.getFax());
-            pstmt.setInt(7, obj.getStatus());
-            pstmt.setString(8, obj.getEmail());
-            pstmt.setString(9, obj.getOpenFrom());
-            pstmt.setString(10, obj.getOpenTo());
-            pstmt.setString(11, obj.getAfterHour());
-            pstmt.setInt(12, obj.getIs24Hr());
-            pstmt.setString(13, obj.getComments());
-            pstmt.setInt(14, obj.getCustomBrokerId());
-            pstmt.setInt(15, obj.getBorderAgentId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "BorderAgent Updated";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.update(obj);
+            tx.commit();
+            return "BorderAgent Updated";
         } catch (Exception e) {
-            System.out.println("BorderAgentDAOImpl : updateBorderAgent : " + e);
-//            logger.error("CompanyDAOImpl : addCompany : " + e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("BorderAgentDAOImpl : updateBorderAgent : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Update BorderAgent";
     }
 
     @Override
+    public String deleteBorderAgent(int borderAgentId) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            BorderAgentBean obj = (BorderAgentBean) session.get(BorderAgentBean.class, borderAgentId);
+            tx = session.beginTransaction();
+            session.delete(obj);
+            tx.commit();
+            return "BorderAgent Deleted";
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("BorderAgentDAOImpl : deleteBorderAgent : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return "Failed to Delete BorderAgent";
+    }
+
+    @Override
+    public BorderAgentBean getBorderAgentInfoById(int id) {
+        Session session = null;
+        BorderAgentBean obj = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            obj = (BorderAgentBean) session.get(BorderAgentBean.class, id);
+        } catch (Exception e) {
+            logger.error("BorderAgentDAOImpl : getBorderAgentInfoById : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return obj;
+    }
+
+    @Override
     public List<BorderAgentBean> getAllBorderAgentsByCustomBrokerId(int customBrokerId) {
         List<BorderAgentBean> lstBorderAgents = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from border_agent where custom_broker_id = ?");
-            pstmt.setInt(1, customBrokerId);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                BorderAgentBean obj = new BorderAgentBean();
-                obj.setBorderAgentId(rs.getInt("border_agent_id"));
-                obj.setCode(rs.getString("code"));
-                obj.setBorderAgent(rs.getString("border_agent"));
-                obj.setBorderCrossing(rs.getString("border_crossing"));
-                obj.setPhone(rs.getString("phone"));
-                obj.setExt(rs.getString("ext"));
-                obj.setFax(rs.getString("fax"));
-                obj.setStatus(rs.getInt("status"));
-                obj.setEmail(rs.getString("email"));
-                obj.setOpenFrom(rs.getString("open_from"));
-                obj.setOpenTo(rs.getString("open_to"));
-                obj.setAfterHour(rs.getString("after_hour"));
-                obj.setIs24Hr(rs.getInt("is24Hr"));
-                obj.setComments(rs.getString("comments"));
-                obj.setCustomBrokerId(rs.getInt("custom_broker_id"));
-                lstBorderAgents.add(obj);
-            }
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(BorderAgentBean.class);
+            criteria.createCriteria("customBrokerBean");
+            criteria.add(Restrictions.eq("customBrokerBean.customBrokerId", customBrokerId));
+            lstBorderAgents = (List<BorderAgentBean>) criteria.list();
         } catch (Exception e) {
-            System.out.println("BorderAgentDAOImpl : getAllBorderAgentsByCustomBrokerId : " + e);
-//            logger.error("AdditionalContactDAOImpl : getAllAdditionalContactes : " + e);
+            logger.error("BorderAgentDAOImpl : getAllBorderAgentsByCustomBrokerId : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstBorderAgents;
     }

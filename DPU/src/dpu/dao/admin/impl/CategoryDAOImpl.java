@@ -99,12 +99,12 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public String deleteCategory(int companyId) {
+    public String deleteCategory(int categoryId) {
         Session session = null;
         Transaction tx = null;
         try {
             session = DPU.getSessionFactory().openSession();
-            CategoryBean obj = (CategoryBean) session.get(CategoryBean.class, companyId);
+            CategoryBean obj = (CategoryBean) session.get(CategoryBean.class, categoryId);
             tx = session.beginTransaction();
             session.delete(obj);
             tx.commit();

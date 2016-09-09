@@ -11,6 +11,8 @@ public interface TypeDAO {
 
     List<TypeBean> getAllTypes(String typeName);
 
+    TypeBean getTypeInfoById(int id);
+
     int addType(TypeBean obj);
 
     String updateType(TypeBean obj);

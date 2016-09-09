@@ -5,99 +5,143 @@
  */
 package dpu.dao.admin.impl;
 
+import dpu.DPU;
 import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.TerminalDAO;
-import dpu.dao.common.ConnectDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 public class TerminalDAOImpl implements TerminalDAO {
 
-    @Autowired
-    ConnectDB connectDB;
     Logger logger = Logger.getLogger(TerminalDAOImpl.class);
 
     @Override
-    public List<TerminalBean> getAllTerminals(String name) {
+    public List<TerminalBean> getAllTerminals(String terminalName) {
         List<TerminalBean> lstTerminals = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from terminalmaster where name like ? order by name");
-            pstmt.setString(1, "%" + name + "%");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                TerminalBean obj = new TerminalBean();
-                obj.setTerminalId(rs.getInt("terminal_id"));
-                obj.setTerminalName(rs.getString("name"));
-                lstTerminals.add(obj);
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(TerminalBean.class);
+            if (!"".equals(terminalName)) {
+                criteria.add(Restrictions.like("terminalName", terminalName, MatchMode.ANYWHERE));
             }
+            lstTerminals = (List<TerminalBean>) criteria.list();
         } catch (Exception e) {
             logger.error("TerminalDAOImpl : getAllTerminals : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstTerminals;
     }
 
     @Override
-    public String addTerminal(TerminalBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public int addTerminal(TerminalBean obj) {
+        Session session = null;
+        Transaction tx = null;
+        int maxId = 0;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into terminalmaster values(?,?)");
-            pstmt.setInt(1, obj.getTerminalId());
-            pstmt.setString(2, obj.getTerminalName());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Terminal Added";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            maxId = (int) session.save(obj);
+            tx.commit();
+            return maxId;
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             logger.error("TerminalDAOImpl : addTerminal : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
-        return "Failed to Add Terminal";
+        return maxId;
     }
 
     @Override
     public String updateTerminal(TerminalBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update terminalmaster set name = ? where terminal_id = ?");
-            pstmt.setString(1, obj.getTerminalName());
-            pstmt.setInt(2, obj.getTerminalId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Terminal Updated";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.update(obj);
+            tx.commit();
+            return "Terminal Updated";
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             logger.error("TerminalDAOImpl : updateTerminal : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Update Terminal";
     }
 
     @Override
-    public String deleteTerminal(int divisionId) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public String deleteTerminal(int terminalId) {
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("delete from terminalmaster where terminal_id = ?");
-            pstmt.setInt(1, divisionId);
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Terminal Deleted";
-            }
+            session = DPU.getSessionFactory().openSession();
+            TerminalBean obj = (TerminalBean) session.get(TerminalBean.class, terminalId);
+            tx = session.beginTransaction();
+            session.delete(obj);
+            tx.commit();
+            return "Terminal Deleted";
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             logger.error("TerminalDAOImpl : deleteTerminal : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Delete Terminal";
+    }
+
+    @Override
+    public TerminalBean getTerminalInfoById(int id) {
+        Session session = null;
+        TerminalBean obj = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            obj = (TerminalBean) session.get(TerminalBean.class, id);
+        } catch (Exception e) {
+            logger.error("TerminalDAOImpl : getTerminalInfoById : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return obj;
     }
 }

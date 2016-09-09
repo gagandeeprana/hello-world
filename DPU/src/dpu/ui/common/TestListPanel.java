@@ -155,12 +155,12 @@ public class TestListPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuTerminalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuTerminalMouseClicked
-        root.removeAll();
-        root.setVisible(false);
-        TestTerminalPanel testTerminalPanel = new TestTerminalPanel();
-        testTerminalPanel.setBounds(50, 50, 1100, 700);
-        root.add(testTerminalPanel);
-        root.setVisible(true);
+//        root.removeAll();
+//        root.setVisible(false);
+//        TestTerminalPanel testTerminalPanel = new TestTerminalPanel();
+//        testTerminalPanel.setBounds(50, 50, 1100, 700);
+//        root.add(testTerminalPanel);
+//        root.setVisible(true);
     }//GEN-LAST:event_mnuTerminalMouseClicked
 
     private void mnuTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTerminalActionPerformed
@@ -208,10 +208,10 @@ public class TestListPanel extends javax.swing.JPanel {
     private void mnuEquipmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuEquipmentMouseClicked
         root.removeAll();
         root.setVisible(false);
-        TestEquipmentPanel testEquipmentPanel = new TestEquipmentPanel();
-        testEquipmentPanel.setBounds(50, 50, 1250, 700);
-        root.add(testEquipmentPanel);
-        root.setVisible(true);
+//        TestEquipmentPanel testEquipmentPanel = new TestEquipmentPanel();
+//        testEquipmentPanel.setBounds(50, 50, 1250, 700);
+//        root.add(testEquipmentPanel);
+//        root.setVisible(true);
     }//GEN-LAST:event_mnuEquipmentMouseClicked
 
 

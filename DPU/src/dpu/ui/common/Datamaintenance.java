@@ -345,7 +345,7 @@ public class Datamaintenance extends javax.swing.JPanel {
 
     private void btnCustomBrokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomBrokerActionPerformed
         internalFrameSettings();
-        TestCustomBrokersPanel testCustomBrokersPanel = new TestCustomBrokersPanel();
+        CustomBrokersPanel testCustomBrokersPanel = new CustomBrokersPanel();
         testCustomBrokersPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testCustomBrokersPanel);
         root.setVisible(true);
@@ -353,7 +353,7 @@ public class Datamaintenance extends javax.swing.JPanel {
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         internalFrameSettings();
-        TestCompanyPanel testCompanyPanel = new TestCompanyPanel();
+        CompanyPanel testCompanyPanel = new CompanyPanel();
         testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testCompanyPanel);
         root.setVisible(true);
@@ -362,7 +362,7 @@ public class Datamaintenance extends javax.swing.JPanel {
     private void btnStandardChargesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStandardChargesActionPerformed
         internalFrameSettings();
 
-        TestStandardCharges testStandardCharges = new TestStandardCharges();
+        StandardCharges testStandardCharges = new StandardCharges();
         testStandardCharges.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
         root.add(testStandardCharges);
         root.setVisible(true);

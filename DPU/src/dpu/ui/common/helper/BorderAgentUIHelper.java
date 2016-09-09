@@ -140,19 +140,19 @@ public class BorderAgentUIHelper {
         generateTable();
     }
 
-    public String save(int customBrokerId) {
-        String msg = "";
-        for (BorderAgentBean borderAgentBean : lstBorderAgents) {
-            borderAgentBean.setCustomBrokerId(customBrokerId);
-            if (addUpdateFlag.equals("add")) {
-                msg = borderAgentDAO.addBorderAgent(borderAgentBean);
-            } else {
-                borderAgentBean.setBorderAgentId(borderAgentId);
-                msg = borderAgentDAO.updateBorderAgent(borderAgentBean);
-            }
-        }
-        return msg;
-    }
+//    public String save(int customBrokerId) {
+//        String msg = "";
+//        for (BorderAgentBean borderAgentBean : lstBorderAgents) {
+//            borderAgentBean.setCustomBrokerId(customBrokerId);
+//            if (addUpdateFlag.equals("add")) {
+//                msg = borderAgentDAO.addBorderAgent(borderAgentBean);
+//            } else {
+//                borderAgentBean.setBorderAgentId(borderAgentId);
+//                msg = borderAgentDAO.updateBorderAgent(borderAgentBean);
+//            }
+//        }
+//        return msg;
+//    }
 
     public String delete(int index, int borderAgentId) {
         String msg = "";

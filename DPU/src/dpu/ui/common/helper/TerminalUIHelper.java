@@ -1,247 +1,142 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dpu.ui.common.helper;
 
 import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.TerminalDAO;
 import dpu.dao.admin.impl.TerminalDAOImpl;
 import dpu.ui.common.AddTerminalFrame;
-import dpu.ui.common.TestTerminalPanel;
-//import static dpu.ui.common.TestTerminalPanel.mainTabbedPane;
+import dpu.ui.common.TerminalPanel;
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
+/**
+ *
+ * @author gagandeep.rana
+ */
 public class TerminalUIHelper {
 
-    public String addUpdateFlag = "";
-    int terminalId = 0;
-    String terminalName;
+    public static List<TerminalBean> lstTerminals = new ArrayList();
     TerminalDAO terminalDAO = new TerminalDAOImpl();
-    List<TerminalBean> lstTerminals = null;
-    int terminalIdToBeDeleted = 0;
-    String msg = "";
+    public static int terminalId = 0;
+    public static String addUpdateFlag = "add";
 
-    public void clear() {
-        TestTerminalPanel.txtTerminalSearch.setText("");
+    public String delete(int terminalIdToBeDeleted) {
+        String msg = terminalDAO.deleteTerminal(terminalIdToBeDeleted);
+        lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        generateTable();
+        return msg;
     }
 
-    public void disable(boolean var) {
-//        mainTabbedPane.setEnabled(var);
-//        TestTerminalPanel.terminalPanel.setEnabled(var);
-        TestTerminalPanel.tblTerminal.setEnabled(var);
-        TestTerminalPanel.btnAddManageTerminal.setEnabled(var);
-        TestTerminalPanel.btnClearManageTerminal.setEnabled(var);
-        TestTerminalPanel.txtTerminalSearch.setEnabled(var);
-    }
-
-    public class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
-            } else {
-                setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    public class ButtonEditor extends DefaultCellEditor {
-
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-
-        public ButtonEditor(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            if (isSelected) {
-                button.setForeground(table.getSelectionForeground());
-                button.setBackground(table.getSelectionBackground());
-            } else {
-                button.setForeground(table.getForeground());
-                button.setBackground(table.getBackground());
-            }
-            terminalIdToBeDeleted = lstTerminals.get(row).getTerminalId();
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                msg = delete();
-                JOptionPane.showMessageDialog(null, msg);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-    }
-
-    public class ButtonRendererUpdate extends JButton implements TableCellRenderer {
-
-        public ButtonRendererUpdate() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                setBackground(table.getSelectionBackground());
-            } else {
-                setForeground(table.getForeground());
-                setBackground(UIManager.getColor("Button.background"));
-            }
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    public class ButtonEditorUpdate extends DefaultCellEditor {
-
-        protected JButton button;
-        private String label;
-        private boolean isPushed;
-
-        public ButtonEditorUpdate(JCheckBox checkBox) {
-            super(checkBox);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                boolean isSelected, int row, int column) {
-            if (isSelected) {
-                button.setForeground(table.getSelectionForeground());
-                button.setBackground(table.getSelectionBackground());
-            } else {
-                button.setForeground(table.getForeground());
-                button.setBackground(table.getBackground());
-            }
-            terminalIdToBeDeleted = lstTerminals.get(row).getTerminalId();
-            terminalId = lstTerminals.get(row).getTerminalId();
-            terminalName = lstTerminals.get(row).getTerminalName();
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                TerminalBean terminalBean = new TerminalBean();
-                terminalBean.setTerminalId(terminalId);
-                terminalBean.setTerminalName(terminalName);
-                AddTerminalFrame addTerminalFrame = new AddTerminalFrame(terminalBean);
-                addTerminalFrame.setVisible(true);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
+    public void showData(TerminalBean terminalBean) {
+        AddTerminalFrame.txt1.setText(terminalBean.getTerminalName());
+        AddTerminalFrame.txt2.setText(terminalBean.getLocation());
     }
 
     public void generateTable() {
-        lstTerminals = terminalDAO.getAllTerminals(TestTerminalPanel.txtTerminalSearch.getText());
+        Object[] cols = {"Terminal", "Location"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestTerminalPanel.tblTerminal = new JTable(defaultTableModel);
-        Object[][] data = new Object[lstTerminals.size()][4];
-        for (int i = 0; i < lstTerminals.size(); i++) {
-            TerminalBean obj = lstTerminals.get(i);
-            data[i][0] = obj.getTerminalId();
-            data[i][1] = obj.getTerminalName();
-            data[i][2] = "Remove";
-            data[i][3] = "Update";
+        TerminalPanel.tblTerminal.setModel(defaultTableModel);
+        TerminalPanel.tblTerminal.setAutoCreateRowSorter(true);
+        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper.TerminalTable());
+        if (lstTerminals.size() > 0) {
+            Object[][] data = new Object[lstTerminals.size()][2];
+            for (int i = 0; i < lstTerminals.size(); i++) {
+                TerminalBean obj = lstTerminals.get(i);
+                data[i][0] = obj.getTerminalName();
+                data[i][1] = obj.getLocation();
+                TerminalPanel.tblTerminal.setRowHeight(30);
+            }
+            defaultTableModel.setDataVector(data, cols);
+            TerminalPanel.tblTerminal.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            TerminalPanel.tblTerminal.getTableHeader().setForeground(Color.DARK_GRAY);
+            TerminalPanel.tblTerminal.setIntercellSpacing(new Dimension(0, 0));
+            TerminalPanel.tblTerminal.setShowGrid(false);
+            TerminalPanel.jScrollPane9.setViewportView(TerminalPanel.tblTerminal);
+        } else {
+            generateEmptyTable();
         }
-        Object[] cols = {"Terminal Id", "Terminal Name", " ", "  "};
+    }
+
+    public void generateEmptyTable() {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        TerminalPanel.tblTerminal.setModel(defaultTableModel);
+        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper.TerminalTable());
+        Object[][] data = new Object[7][2];
+        for (int i = 0; i < 7; i++) {
+            data[i][0] = "";
+            data[i][1] = "";
+            TerminalPanel.tblTerminal.setRowHeight(30);
+        }
+        Object[] cols = {"Terminal", "Location"};
+
         defaultTableModel.setDataVector(data, cols);
-        TestTerminalPanel.tblTerminal.getColumn(" ").setCellRenderer(new ButtonRenderer());
-        TestTerminalPanel.tblTerminal.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
-        TestTerminalPanel.tblTerminal.getColumn("  ").setCellRenderer(new ButtonRendererUpdate());
-        TestTerminalPanel.tblTerminal.getColumn("  ").setCellEditor(new ButtonEditorUpdate(new JCheckBox()));
-        TestTerminalPanel.jScrollPane7.setViewportView(TestTerminalPanel.tblTerminal);
+        TerminalPanel.tblTerminal.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        TerminalPanel.tblTerminal.getTableHeader().setForeground(Color.DARK_GRAY);
+        TerminalPanel.tblTerminal.setIntercellSpacing(new Dimension(0, 0));
+        TerminalPanel.tblTerminal.setShowGrid(false);
+        TerminalPanel.jScrollPane9.setViewportView(TerminalPanel.tblTerminal);
     }
 
-    public String save() {
-        TerminalBean obj = new TerminalBean();
-        obj.setTerminalId(Integer.parseInt(AddTerminalFrame.txtTerminalIdAddTerminal.getText()));
-        obj.setTerminalName(AddTerminalFrame.txtTerminalNameAddTerminal.getText());
-        TerminalDAO terminalDAO = new TerminalDAOImpl();
-        String msg = terminalDAO.addTerminal(obj);
-        disable(true);
+    public void save() {
+        TerminalBean terminalBean = new TerminalBean();
+        terminalBean.setTerminalName(AddTerminalFrame.txt1.getText());
+        terminalBean.setLocation(AddTerminalFrame.txt2.getText());
+        String msg = "";
+        if (TerminalUIHelper.addUpdateFlag.equals("add")) {
+            int i = terminalDAO.addTerminal(terminalBean);
+            if (i > 0) {
+                msg = "New Terminal Added";
+            }
+        } else {
+            terminalBean.setTerminalId(terminalId);
+            msg = terminalDAO.updateTerminal(terminalBean);
+        }
+        lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
         generateTable();
-//        TestTerminalPanel.mainTabbedPane.setEnabled(true);
-//        TestTerminalPanel.terminalPanel.setEnabled(true);
-        return msg;
+        JOptionPane.showMessageDialog(null, msg);
     }
 
-    public String delete() {
-        TerminalDAO terminalDAO = new TerminalDAOImpl();
-        String msg = terminalDAO.deleteTerminal(terminalIdToBeDeleted);
-        disable(true);
-        generateTable();
-//        TestTerminalPanel.mainTabbedPane.setEnabled(true);
-//        TestTerminalPanel.terminalPanel.setEnabled(true);
-        return msg;
-    }
+    class TerminalTable extends DefaultTableCellRenderer {
 
-    public String update(TerminalBean terminalBean) {
-        TerminalDAO terminalDAO = new TerminalDAOImpl();
-        String msg = terminalDAO.updateTerminal(terminalBean);
-        disable(true);
-        generateTable();
-//        TestTerminalPanel.mainTabbedPane.setEnabled(true);
-//        TestTerminalPanel.terminalPanel.setEnabled(true);
-        return msg;
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JTextField editor = new JTextField();
+            editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
+            editor.setEditable(false);
+            editor.setBorder(null);
+            if (value != null) {
+                editor.setText("   " + value.toString());
+            }
+            if (row % 2 == 0) {
+                Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
+                editor.setBorder(border);
+
+            } else {
+                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
+                editor.setBorder(border);
+            }
+            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+            if (isSelected) {
+                Border border = BorderFactory.createLineBorder(Color.CYAN, 4);
+                editor.setBorder(border);
+                editor.setBackground(Color.CYAN);
+            }
+            return editor;
+        }
     }
 }

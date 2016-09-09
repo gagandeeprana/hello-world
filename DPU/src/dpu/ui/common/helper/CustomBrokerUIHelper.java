@@ -12,9 +12,7 @@ import dpu.dao.admin.CustomBrokerDAO;
 import dpu.dao.admin.impl.BorderAgentDAOImpl;
 import dpu.dao.admin.impl.CustomBrokerDAOImpl;
 import dpu.ui.common.AddCustomBroker;
-import dpu.ui.common.TestCustomBrokersPanel;
-import static dpu.ui.common.helper.BorderAgentUIHelper.addUpdateFlag;
-import static dpu.ui.common.helper.BorderAgentUIHelper.borderAgentId;
+import dpu.ui.common.CustomBrokersPanel;
 import static dpu.ui.common.helper.BorderAgentUIHelper.lstBorderAgents;
 //import static dpu.ui.helper.common.CompanyUIHelper.companyBean;
 import java.awt.Color;
@@ -23,6 +21,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -46,16 +45,17 @@ public class CustomBrokerUIHelper {
         CustomBrokerDAO customBrokerDAO = new CustomBrokerDAOImpl();
         String msg = customBrokerDAO.deleteCustomBroker(customBrokerIdToBeDeleted);
         generateTable();
+        JOptionPane.showMessageDialog(null, msg);
         return msg;
     }
 
     public void generateTable() {
         Object[] cols = {"Custom Broker", "Contact Name", "Phone No.", "Ext", "Fax", "Email", "Website"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        lstCustomBrokers = customBrokerDAO.getAllCustomBrokers(TestCustomBrokersPanel.txtCustomBrokerSearch.getText());
-        TestCustomBrokersPanel.tblCustomBroker.setModel(defaultTableModel);
-        TestCustomBrokersPanel.tblCustomBroker.setAutoCreateRowSorter(true);
-        TestCustomBrokersPanel.tblCustomBroker.setDefaultRenderer(Object.class, new CustomBrokerUIHelper.CustomBrokerTable());
+        lstCustomBrokers = customBrokerDAO.getAllCustomBrokers(CustomBrokersPanel.txtCustomBrokerSearch.getText());
+        CustomBrokersPanel.tblCustomBroker.setModel(defaultTableModel);
+        CustomBrokersPanel.tblCustomBroker.setAutoCreateRowSorter(true);
+        CustomBrokersPanel.tblCustomBroker.setDefaultRenderer(Object.class, new CustomBrokerUIHelper.CustomBrokerTable());
         if (lstCustomBrokers.size() > 0) {
             Object[][] data = new Object[lstCustomBrokers.size()][7];
             for (int i = 0; i < lstCustomBrokers.size(); i++) {
@@ -67,15 +67,15 @@ public class CustomBrokerUIHelper {
                 data[i][4] = obj.getFaxNo();
                 data[i][5] = obj.getEmail();
                 data[i][6] = obj.getWebsite();
-                TestCustomBrokersPanel.tblCustomBroker.setRowHeight(30);
+                CustomBrokersPanel.tblCustomBroker.setRowHeight(30);
             }
-            TestCustomBrokersPanel.tblCustomBroker.setColumnSelectionAllowed(false);
+            CustomBrokersPanel.tblCustomBroker.setColumnSelectionAllowed(false);
             defaultTableModel.setDataVector(data, cols);
-            TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-            TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setForeground(Color.DARK_GRAY);
-            TestCustomBrokersPanel.tblCustomBroker.setIntercellSpacing(new Dimension(0, 0));
-            TestCustomBrokersPanel.tblCustomBroker.setShowGrid(false);
-            TestCustomBrokersPanel.jScrollPane4.setViewportView(TestCustomBrokersPanel.tblCustomBroker);
+            CustomBrokersPanel.tblCustomBroker.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            CustomBrokersPanel.tblCustomBroker.getTableHeader().setForeground(Color.DARK_GRAY);
+            CustomBrokersPanel.tblCustomBroker.setIntercellSpacing(new Dimension(0, 0));
+            CustomBrokersPanel.tblCustomBroker.setShowGrid(false);
+            CustomBrokersPanel.jScrollPane4.setViewportView(CustomBrokersPanel.tblCustomBroker);
         } else {
             generateEmptyTable();
         }
@@ -84,9 +84,9 @@ public class CustomBrokerUIHelper {
     private void generateEmptyTable() {
         Object[] cols = {"Custom Broker", "Contact Name", "Phone No.", "Ext", "Fax", "Email", "Website"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestCustomBrokersPanel.tblCustomBroker.setModel(defaultTableModel);
-        TestCustomBrokersPanel.tblCustomBroker.setAutoCreateRowSorter(true);
-        TestCustomBrokersPanel.tblCustomBroker.setDefaultRenderer(Object.class, new CustomBrokerUIHelper.CustomBrokerTable());
+        CustomBrokersPanel.tblCustomBroker.setModel(defaultTableModel);
+        CustomBrokersPanel.tblCustomBroker.setAutoCreateRowSorter(true);
+        CustomBrokersPanel.tblCustomBroker.setDefaultRenderer(Object.class, new CustomBrokerUIHelper.CustomBrokerTable());
         Object[][] data = new Object[7][7];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
@@ -97,17 +97,17 @@ public class CustomBrokerUIHelper {
             data[i][5] = "";
             data[i][6] = "";
 
-            TestCustomBrokersPanel.tblCustomBroker.setRowHeight(30);
+            CustomBrokersPanel.tblCustomBroker.setRowHeight(30);
         }
-        TestCustomBrokersPanel.tblCustomBroker.setColumnSelectionAllowed(false);
+        CustomBrokersPanel.tblCustomBroker.setColumnSelectionAllowed(false);
 
         defaultTableModel.setDataVector(data, cols);
 
-        TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-        TestCustomBrokersPanel.tblCustomBroker.getTableHeader().setForeground(Color.DARK_GRAY);
-        TestCustomBrokersPanel.tblCustomBroker.setIntercellSpacing(new Dimension(0, 0));
-        TestCustomBrokersPanel.tblCustomBroker.setShowGrid(false);
-        TestCustomBrokersPanel.jScrollPane4.setViewportView(TestCustomBrokersPanel.tblCustomBroker);
+        CustomBrokersPanel.tblCustomBroker.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        CustomBrokersPanel.tblCustomBroker.getTableHeader().setForeground(Color.DARK_GRAY);
+        CustomBrokersPanel.tblCustomBroker.setIntercellSpacing(new Dimension(0, 0));
+        CustomBrokersPanel.tblCustomBroker.setShowGrid(false);
+        CustomBrokersPanel.jScrollPane4.setViewportView(CustomBrokersPanel.tblCustomBroker);
     }
 
     public String save() {
@@ -125,13 +125,16 @@ public class CustomBrokerUIHelper {
         customBrokerBean.setEmail(AddCustomBroker.txtEmail.getText());
         customBrokerBean.setWebsite(AddCustomBroker.txtWebsite.getText());
         if (addUpdateFlag.equals("add")) {
-            msg = customBrokerDAO.addCustomBroker(customBrokerBean);
-            customBrokerId = customBrokerDAO.getMaxCustomBrokerId();
+            int maxCustomBrokerId = customBrokerDAO.addCustomBroker(customBrokerBean);
             if (lstBorderAgents != null && !lstBorderAgents.isEmpty()) {
                 for (BorderAgentBean borderAgentBean : lstBorderAgents) {
-                    borderAgentBean.setCustomBrokerId(customBrokerId);
+                    CustomBrokerBean customBrokerBean = customBrokerDAO.getCustomBrokerInfoById(maxCustomBrokerId);
+                    borderAgentBean.setCustomBrokerBean(customBrokerBean);
                     borderAgentDAO.addBorderAgent(borderAgentBean);
                 }
+            }
+            if (maxCustomBrokerId > 0) {
+                msg = "New Custom Broker Added";
             }
         } else {
             customBrokerBean.setCustomBrokerId(customBrokerId);
@@ -139,16 +142,17 @@ public class CustomBrokerUIHelper {
             if (lstBorderAgents != null && !lstBorderAgents.isEmpty()) {
                 for (BorderAgentBean borderAgentBean : lstBorderAgents) {
                     if (borderAgentBean.getBorderAgentId() == 0) {
-                        borderAgentBean.setCustomBrokerId(customBrokerId);
+                        borderAgentBean.setCustomBrokerBean(customBrokerBean);
                         borderAgentDAO.addBorderAgent(borderAgentBean);
                     } else {
-                        borderAgentBean.setCustomBrokerId(customBrokerId);
+                        borderAgentBean.setCustomBrokerBean(customBrokerBean);
                         borderAgentDAO.updateBorderAgent(borderAgentBean);
                     }
                 }
             }
         }
         generateTable();
+        JOptionPane.showMessageDialog(null, msg);
         return msg;
     }
 

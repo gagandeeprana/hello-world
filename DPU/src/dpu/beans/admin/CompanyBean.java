@@ -83,4 +83,7 @@ public class CompanyBean implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "companyBean")
     private Set<BillingLocationBean> billingLocations = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "companyBean")
+    private Set<AdditionalContactBean> additionalContacts = new HashSet<>();
 }

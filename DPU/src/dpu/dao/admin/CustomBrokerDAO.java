@@ -7,15 +7,12 @@ public interface CustomBrokerDAO {
 
     List<CustomBrokerBean> getAllCustomBrokers(String name);
 
-//    CustomBrokerBean getCustomBrokerInfoById(int customBrokerId);
-//    List<CustomBrokerBean> getAllCustomBrokersByCompanyId(int id);
-    int getMaxCustomBrokerId();
+    CustomBrokerBean getCustomBrokerInfoById(int id);
 
-    String addCustomBroker(CustomBrokerBean obj);
+    int addCustomBroker(CustomBrokerBean obj);
 
     String updateCustomBroker(CustomBrokerBean obj);
 
     String deleteCustomBroker(int customBrokerId);
 
-//    int getMaxCustomBrokerId();
 }

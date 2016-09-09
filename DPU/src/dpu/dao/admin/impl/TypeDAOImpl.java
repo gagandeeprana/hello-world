@@ -6,6 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.beans.admin.CompanyBean;
 import dpu.beans.admin.TypeBean;
 import dpu.dao.admin.TypeDAO;
 import java.util.ArrayList;
@@ -99,12 +100,12 @@ public class TypeDAOImpl implements TypeDAO {
     }
 
     @Override
-    public String deleteType(int companyId) {
+    public String deleteType(int typeId) {
         Session session = null;
         Transaction tx = null;
         try {
             session = DPU.getSessionFactory().openSession();
-            TypeBean obj = (TypeBean) session.get(TypeBean.class, companyId);
+            TypeBean obj = (TypeBean) session.get(TypeBean.class, typeId);
             tx = session.beginTransaction();
             session.delete(obj);
             tx.commit();
@@ -123,5 +124,25 @@ public class TypeDAOImpl implements TypeDAO {
             }
         }
         return "Failed to Delete Type";
+    }
+
+    @Override
+    public TypeBean getTypeInfoById(int id) {
+        Session session = null;
+        TypeBean obj = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            obj = (TypeBean) session.get(TypeBean.class, id);
+        } catch (Exception e) {
+            logger.error("TypeDAOImpl : getTypeInfoById : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return obj;
     }
 }

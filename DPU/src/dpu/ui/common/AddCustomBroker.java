@@ -10,7 +10,7 @@ import dpu.beans.admin.CustomBrokerBean;
 import dpu.dao.admin.BorderAgentDAO;
 import dpu.dao.admin.impl.BorderAgentDAOImpl;
 import dpu.reports.common.JasperReportGenerator;
-import static dpu.ui.common.TestCustomBrokersPanel.tblCustomBroker;
+import static dpu.ui.common.CustomBrokersPanel.tblCustomBroker;
 import dpu.ui.common.helper.BorderAgentUIHelper;
 import dpu.ui.common.helper.CustomBrokerUIHelper;
 import java.awt.event.ActionEvent;
@@ -328,8 +328,7 @@ public class AddCustomBroker extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String msg = customBrokerUIHelper.save();
-        JOptionPane.showMessageDialog(null, msg);
+        customBrokerUIHelper.save();
         dispose();
         BorderAgentUIHelper.lstBorderAgents.clear();
     }//GEN-LAST:event_btnSaveActionPerformed

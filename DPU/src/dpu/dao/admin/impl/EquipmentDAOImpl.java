@@ -5,101 +5,143 @@
  */
 package dpu.dao.admin.impl;
 
+import dpu.DPU;
 import dpu.beans.admin.EquipmentBean;
 import dpu.dao.admin.EquipmentDAO;
-import dpu.dao.common.ConnectDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 public class EquipmentDAOImpl implements EquipmentDAO {
 
-   @Autowired
-    ConnectDB connectDB;
     Logger logger = Logger.getLogger(EquipmentDAOImpl.class);
 
     @Override
-    public List<EquipmentBean> getAllEquipments(String title) {
+    public List<EquipmentBean> getAllEquipments(String equipmentName) {
         List<EquipmentBean> lstEquipments = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from equipmentmaster where title like ? order by title");
-            pstmt.setString(1, "%" + title + "%");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                EquipmentBean obj = new EquipmentBean();
-                obj.setEquipmentId(rs.getInt("equipment_id"));
-                obj.setEquipmentName(rs.getString("title"));
-                lstEquipments.add(obj);
-                System.out.println("LSIT SII: " + lstEquipments.size());
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(EquipmentBean.class);
+            if (!"".equals(equipmentName)) {
+                criteria.add(Restrictions.like("equipmentName", equipmentName, MatchMode.ANYWHERE));
             }
+            lstEquipments = (List<EquipmentBean>) criteria.list();
         } catch (Exception e) {
-            System.out.println(e);
             logger.error("EquipmentDAOImpl : getAllEquipments : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return lstEquipments;
     }
 
     @Override
-    public String addEquipment(EquipmentBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+    public int addEquipment(EquipmentBean obj) {
+        Session session = null;
+        Transaction tx = null;
+        int maxId = 0;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("insert into equipmentmaster values(?,?)");
-            pstmt.setInt(1, obj.getEquipmentId());
-            pstmt.setString(2, obj.getEquipmentName());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Equipment Added";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            maxId = (int) session.save(obj);
+            tx.commit();
+            return maxId;
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             logger.error("EquipmentDAOImpl : addEquipment : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
-        return "Failed to Add Equipment";
+        return maxId;
     }
 
     @Override
     public String updateEquipment(EquipmentBean obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update equipmentmaster set title = ? where equipment_id = ?");
-            pstmt.setString(1, obj.getEquipmentName());
-            pstmt.setInt(2, obj.getEquipmentId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Equipment Updated";
-            }
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.update(obj);
+            tx.commit();
+            return "Equipment Updated";
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             logger.error("EquipmentDAOImpl : updateEquipment : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Update Equipment";
     }
 
     @Override
     public String deleteEquipment(int equipmentId) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        Session session = null;
+        Transaction tx = null;
         try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("delete from equipmentmaster where equipment_id = ?");
-            pstmt.setInt(1, equipmentId);
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Equipment Deleted";
-            }
+            session = DPU.getSessionFactory().openSession();
+            EquipmentBean obj = (EquipmentBean) session.get(EquipmentBean.class, equipmentId);
+            tx = session.beginTransaction();
+            session.delete(obj);
+            tx.commit();
+            return "Equipment Deleted";
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             logger.error("EquipmentDAOImpl : deleteEquipment : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return "Failed to Delete Equipment";
+    }
+
+    @Override
+    public EquipmentBean getEquipmentInfoById(int id) {
+        Session session = null;
+        EquipmentBean obj = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            obj = (EquipmentBean) session.get(EquipmentBean.class, id);
+        } catch (Exception e) {
+            logger.error("EquipmentDAOImpl : getEquipmentInfoById : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return obj;
     }
 }

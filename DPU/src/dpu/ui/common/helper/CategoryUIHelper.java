@@ -6,8 +6,11 @@
 package dpu.ui.common.helper;
 
 import dpu.beans.admin.CategoryBean;
+import dpu.beans.admin.TypeBean;
 import dpu.dao.admin.CategoryDAO;
+import dpu.dao.admin.TypeDAO;
 import dpu.dao.admin.impl.CategoryDAOImpl;
+import dpu.dao.admin.impl.TypeDAOImpl;
 import dpu.ui.common.AddCategoryFrame;
 import dpu.ui.common.CategoryPanel;
 import java.awt.Color;
@@ -34,6 +37,7 @@ public class CategoryUIHelper {
     CategoryDAO categoryDAO = new CategoryDAOImpl();
     public static int categoryId = 0;
     public static String addUpdateFlag = "add";
+    TypeDAO typeDAO = new TypeDAOImpl();
 
     public String delete(int categoryIdToBeDeleted) {
         String msg = categoryDAO.deleteCategory(categoryIdToBeDeleted);
@@ -43,7 +47,14 @@ public class CategoryUIHelper {
     }
 
     public void showData(CategoryBean categoryBean) {
-//        AddCategoryFrame.txt1.setText(categoryBean.getCategoryName());
+        for (int i = 0; i < typeDAO.getAllTypes("").size(); i++) {
+            TypeBean typeBean = typeDAO.getAllTypes("").get(i);
+            if (typeBean.getTypeId() == categoryBean.getTypeBean().getTypeId()) {
+                AddCategoryFrame.ddl1.setSelectedIndex(i + 1);
+            }
+        }
+        AddCategoryFrame.txt1.setText(categoryBean.getCategoryName());
+        AddCategoryFrame.ddl2.setSelectedIndex(categoryBean.getStatus() == 1 ? 0 : 1);
     }
 
     public void generateTable() {
@@ -93,7 +104,9 @@ public class CategoryUIHelper {
 
     public void save() {
         CategoryBean categoryBean = new CategoryBean();
-//        categoryBean.setCategoryName(AddCategoryFrame.txt1.getText());
+        categoryBean.setCategoryName(AddCategoryFrame.txt1.getText());
+        categoryBean.setStatus(AddCategoryFrame.ddl2.getSelectedIndex() == 0 ? 1 : 0);
+        categoryBean.setTypeBean(typeDAO.getTypeInfoById(typeDAO.getAllTypes("").get(AddCategoryFrame.ddl1.getSelectedIndex() - 1).getTypeId()));
         String msg = "";
         if (CategoryUIHelper.addUpdateFlag.equals("add")) {
             int i = categoryDAO.addCategory(categoryBean);

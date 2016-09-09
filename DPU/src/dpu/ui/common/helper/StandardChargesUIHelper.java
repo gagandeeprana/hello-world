@@ -13,7 +13,7 @@ import dpu.dao.admin.impl.CustomBrokerDAOImpl;
 import dpu.dao.admin.impl.StandardChargesDAOImpl;
 import dpu.ui.common.AddCustomBroker;
 import dpu.ui.common.AddStandardAccessorialCharge;
-import dpu.ui.common.TestStandardCharges;
+import dpu.ui.common.StandardCharges;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -134,7 +134,7 @@ public class StandardChargesUIHelper {
 
     public String delete(int standardChargesIdToBeDeleted) {
         String msg = standardChargesDAO.deleteStandardCharges(standardChargesIdToBeDeleted);
-        lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
+        lstStandardCharges = standardChargesDAO.getAllStandardCharges(StandardCharges.txtSearch.getText());
         generateTable();
         return msg;
     }
@@ -156,9 +156,9 @@ public class StandardChargesUIHelper {
     public void generateTable() {
         Object[] cols = {"Code", "Type", "Description", "Rate", "Maximum", "Apply Comm", "Apply F/S", "Driver Pay", "Charge Type"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestStandardCharges.tblStandardCharges.setModel(defaultTableModel);
-        TestStandardCharges.tblStandardCharges.setAutoCreateRowSorter(true);
-        TestStandardCharges.tblStandardCharges.setDefaultRenderer(Object.class, new StandardChargesUIHelper.StandardChargesTable());
+        StandardCharges.tblStandardCharges.setModel(defaultTableModel);
+        StandardCharges.tblStandardCharges.setAutoCreateRowSorter(true);
+        StandardCharges.tblStandardCharges.setDefaultRenderer(Object.class, new StandardChargesUIHelper.StandardChargesTable());
         if (lstStandardCharges.size() > 0) {
             Object[][] data = new Object[lstStandardCharges.size()][9];
             for (int i = 0; i < lstStandardCharges.size(); i++) {
@@ -172,20 +172,20 @@ public class StandardChargesUIHelper {
                 data[i][6] = "";
                 data[i][7] = "";
                 data[i][8] = checkChargeType2(obj.getChargeType2());
-                TestStandardCharges.tblStandardCharges.setRowHeight(30);
+                StandardCharges.tblStandardCharges.setRowHeight(30);
             }
             defaultTableModel.setDataVector(data, cols);
-            TestStandardCharges.tblStandardCharges.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-            TestStandardCharges.tblStandardCharges.getColumn("Apply Comm").setCellRenderer(new StandardChargesUIHelper.ButtonRenderer());
-            TestStandardCharges.tblStandardCharges.getColumn("Apply Comm").setCellEditor(new StandardChargesUIHelper.ButtonEditor(new JCheckBox()));
-            TestStandardCharges.tblStandardCharges.getColumn("Apply F/S").setCellRenderer(new StandardChargesUIHelper.ButtonRenderer());
-            TestStandardCharges.tblStandardCharges.getColumn("Apply F/S").setCellEditor(new StandardChargesUIHelper.ButtonEditor(new JCheckBox()));
-            TestStandardCharges.tblStandardCharges.getColumn("Driver Pay").setCellRenderer(new StandardChargesUIHelper.ButtonRenderer());
-            TestStandardCharges.tblStandardCharges.getColumn("Driver Pay").setCellEditor(new StandardChargesUIHelper.ButtonEditor(new JCheckBox()));
-            TestStandardCharges.tblStandardCharges.getTableHeader().setForeground(Color.DARK_GRAY);
-            TestStandardCharges.tblStandardCharges.setIntercellSpacing(new Dimension(0, 0));
-            TestStandardCharges.tblStandardCharges.setShowGrid(false);
-            TestStandardCharges.jScrollPane9.setViewportView(TestStandardCharges.tblStandardCharges);
+            StandardCharges.tblStandardCharges.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            StandardCharges.tblStandardCharges.getColumn("Apply Comm").setCellRenderer(new StandardChargesUIHelper.ButtonRenderer());
+            StandardCharges.tblStandardCharges.getColumn("Apply Comm").setCellEditor(new StandardChargesUIHelper.ButtonEditor(new JCheckBox()));
+            StandardCharges.tblStandardCharges.getColumn("Apply F/S").setCellRenderer(new StandardChargesUIHelper.ButtonRenderer());
+            StandardCharges.tblStandardCharges.getColumn("Apply F/S").setCellEditor(new StandardChargesUIHelper.ButtonEditor(new JCheckBox()));
+            StandardCharges.tblStandardCharges.getColumn("Driver Pay").setCellRenderer(new StandardChargesUIHelper.ButtonRenderer());
+            StandardCharges.tblStandardCharges.getColumn("Driver Pay").setCellEditor(new StandardChargesUIHelper.ButtonEditor(new JCheckBox()));
+            StandardCharges.tblStandardCharges.getTableHeader().setForeground(Color.DARK_GRAY);
+            StandardCharges.tblStandardCharges.setIntercellSpacing(new Dimension(0, 0));
+            StandardCharges.tblStandardCharges.setShowGrid(false);
+            StandardCharges.jScrollPane9.setViewportView(StandardCharges.tblStandardCharges);
         } else {
             generateEmptyTable();
         }
@@ -232,8 +232,8 @@ public class StandardChargesUIHelper {
 
     public void generateEmptyTable() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TestStandardCharges.tblStandardCharges.setModel(defaultTableModel);
-        TestStandardCharges.tblStandardCharges.setDefaultRenderer(Object.class, new StandardChargesUIHelper.StandardChargesTable());
+        StandardCharges.tblStandardCharges.setModel(defaultTableModel);
+        StandardCharges.tblStandardCharges.setDefaultRenderer(Object.class, new StandardChargesUIHelper.StandardChargesTable());
         Object[][] data = new Object[7][9];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
@@ -245,18 +245,18 @@ public class StandardChargesUIHelper {
             data[i][6] = "";
             data[i][7] = "";
             data[i][8] = "";
-            TestStandardCharges.tblStandardCharges.setRowHeight(30);
+            StandardCharges.tblStandardCharges.setRowHeight(30);
         }
         Object[] cols = {"Code", "Type", "Description", "Rate", "Maximum", "Apply Comm", "Apply F/S", "Driver Pay", "Charge Type"};
 
         defaultTableModel.setDataVector(data, cols);
-        TestStandardCharges.tblStandardCharges.getTableHeader().setBackground(Color.red);
+        StandardCharges.tblStandardCharges.getTableHeader().setBackground(Color.red);
 
-        TestStandardCharges.tblStandardCharges.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-        TestStandardCharges.tblStandardCharges.getTableHeader().setForeground(Color.DARK_GRAY);
-        TestStandardCharges.tblStandardCharges.setIntercellSpacing(new Dimension(0, 0));
-        TestStandardCharges.tblStandardCharges.setShowGrid(false);
-        TestStandardCharges.jScrollPane9.setViewportView(TestStandardCharges.tblStandardCharges);
+        StandardCharges.tblStandardCharges.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        StandardCharges.tblStandardCharges.getTableHeader().setForeground(Color.DARK_GRAY);
+        StandardCharges.tblStandardCharges.setIntercellSpacing(new Dimension(0, 0));
+        StandardCharges.tblStandardCharges.setShowGrid(false);
+        StandardCharges.jScrollPane9.setViewportView(StandardCharges.tblStandardCharges);
     }
 
     public void save() {
@@ -274,12 +274,15 @@ public class StandardChargesUIHelper {
         standardChargesBean.setIncludeDriverPayroll(AddStandardAccessorialCharge.chk3.isSelected() ? 1 : 0);
         String msg = "";
         if (StandardChargesUIHelper.addUpdateFlag.equals("add")) {
-            msg = standardChargesDAO.addStandardCharges(standardChargesBean);
+            int i = standardChargesDAO.addStandardCharges(standardChargesBean);
+            if (i > 0) {
+                msg = "New Standard Charge Added";
+            }
         } else {
             standardChargesBean.setStandardChargesId(standardChargesId);
             msg = standardChargesDAO.updateStandardCharges(standardChargesBean);
         }
-        lstStandardCharges = standardChargesDAO.getAllStandardCharges(TestStandardCharges.txtSearch.getText());
+        lstStandardCharges = standardChargesDAO.getAllStandardCharges(StandardCharges.txtSearch.getText());
         generateTable();
         JOptionPane.showMessageDialog(null, msg);
     }

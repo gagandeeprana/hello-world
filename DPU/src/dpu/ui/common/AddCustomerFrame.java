@@ -987,9 +987,8 @@ public class AddCustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel24MousePressed
 
     private void jLabel23MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel23MousePressed
-        String msg = companyUIHelper.save();
-        JOptionPane.showMessageDialog(null, msg);
         dispose();
+        companyUIHelper.save();
     }//GEN-LAST:event_jLabel23MousePressed
 
     private void tblBillingLocationsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillingLocationsMouseReleased

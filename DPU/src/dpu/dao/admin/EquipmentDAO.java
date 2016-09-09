@@ -13,9 +13,14 @@ import java.util.List;
  * @author gagandeep.rana
  */
 public interface EquipmentDAO {
-    
+
     List<EquipmentBean> getAllEquipments(String name);
-    String addEquipment(EquipmentBean obj);
+    
+    EquipmentBean getEquipmentInfoById(int id);
+
+    int addEquipment(EquipmentBean obj);
+
     String updateEquipment(EquipmentBean obj);
+
     String deleteEquipment(int equipmentId);
 }
