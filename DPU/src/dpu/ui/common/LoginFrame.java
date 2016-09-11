@@ -9,14 +9,13 @@ import dpu.dao.admin.UserDAO;
 import dpu.dao.admin.impl.UserDAOImpl;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import properties.ReadFromPropertiesFile;
 
 /**
  *
  * @author gagandeep.rana
  */
+//@Component
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
@@ -25,6 +24,7 @@ public class LoginFrame extends javax.swing.JFrame {
 //    static MainTabbedPane mainTabbedPane = null;
     public LoginFrame() {
         initComponents();
+//        DPU.autowire(this);
         setIconImage(Toolkit.getDefaultToolkit().getImage(ReadFromPropertiesFile.imagePath + "Application-Exe.png"));
         setResizable(false);
         setTitle("Authentication - DPU");

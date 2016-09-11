@@ -5,16 +5,12 @@ import dpu.dao.admin.impl.CompanyDAOImpl;
 import dpu.beans.admin.AdditionalContactBean;
 import dpu.beans.admin.BillingLocationBean;
 import dpu.beans.admin.CompanyBean;
-import dpu.beans.admin.WorkingHoursAdditionalContactBean;
 import dpu.dao.admin.AdditionalContactDAO;
 import dpu.dao.admin.BillingLocationDAO;
-import dpu.dao.admin.WorkingHoursAdditionalContactDAO;
 import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
-import dpu.dao.admin.impl.WorkingHoursAdditionalContactDAOImpl;
 import dpu.ui.common.AddCustomerFrame;
 import dpu.ui.common.CompanyPanel;
-import static dpu.ui.common.helper.AdditionalContactWorkingHoursUIHelper.mapWorkingHours;
 import java.awt.Color;
 //import static dpu.ui.common.CompanyPanel.mainTabbedPane;
 import java.awt.Dimension;
@@ -30,6 +26,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+//@Component
 public class CompanyUIHelper {
 
     CompanyDAO companyDAO = new CompanyDAOImpl();

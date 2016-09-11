@@ -5,6 +5,7 @@
  */
 package dpu.ui.common;
 
+import dpu.DPU;
 import dpu.ui.shipper.TestShipperPannel;
 import java.awt.Container;
 import javax.swing.JRootPane;
@@ -23,6 +24,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
 
     public DatamaintenanceOptions() {
         initComponents();
+//        DPU.autowire(this);
         jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
         jInternalFrame1.setMaximizable(false);
         jInternalFrame1.setIconifiable(false);

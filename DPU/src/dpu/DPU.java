@@ -9,6 +9,8 @@ import dpu.ui.common.LoginFrame;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 /**
  *
@@ -18,13 +20,29 @@ public class DPU {
 
     static Logger logger = Logger.getLogger(DPU.class);
 
+    private static ApplicationContext applicationContext;
+
+    public static void autowire(Object object) {
+        try {
+            System.out.println("Object : " + object.getClass());
+            applicationContext.getAutowireCapableBeanFactory().autowireBean(object);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Autowired
+    private void setApplicationContext(ApplicationContext applicationContext) {
+        DPU.applicationContext = applicationContext;
+    }
+
     public static void main(String[] args) {
 
         logger.info("Inside DPU: main(): STARTS");
         try {
             //**********************************Spring Configuration*********************************
-//            ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-//            LoginFrame loginFrame = (LoginFrame) context.getBean(LoginFrame.class);
+//            applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+//            LoginFrame loginFrame = (LoginFrame) applicationContext.getBean(LoginFrame.class);
             //****************************************************************************************
             LoginFrame loginFrame = new LoginFrame();
             loginFrame.setVisible(true);

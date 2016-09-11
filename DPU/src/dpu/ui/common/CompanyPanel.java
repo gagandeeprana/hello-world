@@ -30,12 +30,14 @@ public class CompanyPanel extends javax.swing.JPanel {
      */
     Logger logger = Logger.getLogger(CompanyPanel.class);
 
-    CompanyUIHelper companyUIHelper = null;
+//    @Autowired
+    CompanyUIHelper companyUIHelper;
 //    String printImage = ReadFromPropertiesFile.imagePath + ImageConstants.PRINT;
     String printImage = "";
 
     public CompanyPanel() {
         initComponents();
+//        DPU.autowire(this);
         doWork();
     }
 

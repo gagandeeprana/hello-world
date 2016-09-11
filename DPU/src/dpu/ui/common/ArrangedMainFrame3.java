@@ -8,11 +8,8 @@ package dpu.ui.common;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.Timer;
 import properties.ReadFromPropertiesFile;
 
@@ -32,9 +29,10 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     BufferedImage buttonImage = null;
     boolean flag = true;
     Container root = null;
-
+    
     public ArrangedMainFrame3() {
         initComponents();
+//        DPU.autowire(this);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setButtonContentArea();
         jInternalFrame1.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
@@ -46,28 +44,27 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jInternalFrame1.setBorder(null);
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
     }
-
+    
     private void setButtonContentArea() {
         btnDatamaintenance.setContentAreaFilled(false);
     }
 
-    class AddButton extends JButton implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (!timer.isRunning()) {
-                animationStartTime = System.nanoTime() / 1000000;
-                this.setText("Stop Animation");
-                timer.start();
-            } else {
-                timer.stop();
-                this.setText("Start Animation");
-                alpha = 1.0f;
-            }
-        }
-
-    }
-
+//    class AddButton extends JButton implements ActionListener {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            if (!timer.isRunning()) {
+//                animationStartTime = System.nanoTime() / 1000000;
+//                this.setText("Stop Animation");
+//                timer.start();
+//            } else {
+//                timer.stop();
+//                this.setText("Start Animation");
+//                alpha = 1.0f;
+//            }
+//        }
+//
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
