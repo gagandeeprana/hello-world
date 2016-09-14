@@ -86,6 +86,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenu16 = new javax.swing.JMenu();
         jMenu17 = new javax.swing.JMenu();
@@ -222,6 +223,14 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         });
         jMenu14.add(jMenuItem8);
 
+        jMenuItem9.setText("Payment Terms List");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem9);
+
         jMenuBar1.add(jMenu14);
 
         jMenu15.setText("Master Orders");
@@ -236,6 +245,11 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         jMenu17.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
 
         jMenuItem5.setText("Sales Person");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu17.add(jMenuItem5);
 
         jMenuItem6.setText("Standard Templates");
@@ -349,6 +363,22 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         root.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        internalFrameSettings();
+        PaymentTermsPanel paymentTermsPanel = new PaymentTermsPanel();
+        paymentTermsPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(paymentTermsPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        internalFrameSettings();
+        SalesPersonPanel salesPersonPanel = new SalesPersonPanel();
+        salesPersonPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(salesPersonPanel);
+        root.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -376,5 +406,6 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
