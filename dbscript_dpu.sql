@@ -1,6 +1,3 @@
-drop database if exists dpu;
-create database dpu;
-use dpu;
 -- MySQL dump 10.13  Distrib 5.5.45, for Win64 (x86)
 --
 -- Host: localhost    Database: dpu
@@ -307,15 +304,17 @@ DROP TABLE IF EXISTS `containermaster`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `containermaster` (
   `container_id` int(11) NOT NULL AUTO_INCREMENT,
-  `owner_id` int(11) DEFAULT NULL,
-  `equipment_id` int(11) DEFAULT NULL,
+  `unit_no` varchar(30) DEFAULT NULL,
+  `type` varchar(30) DEFAULT NULL,
   `terminal_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `owner` varchar(40) DEFAULT NULL,
+  `location` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`container_id`),
-  KEY `owner_id_idx` (`owner_id`),
-  KEY `equipment_id_idx` (`equipment_id`),
   KEY `terminal_id_idx` (`terminal_id`),
-  CONSTRAINT `equipment_id_containermaster` FOREIGN KEY (`equipment_id`) REFERENCES `equipmentmaster` (`equipment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `owner_id_containermaster` FOREIGN KEY (`owner_id`) REFERENCES `companymaster` (`company_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `containermaster_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categorymaster` (`category_id`),
   CONSTRAINT `terminal_id_containermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -539,6 +538,35 @@ LOCK TABLES `jurisdictionmaster` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `payment_terms`
+--
+
+DROP TABLE IF EXISTS `payment_terms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment_terms` (
+  `term_id` int(11) NOT NULL AUTO_INCREMENT,
+  `term` varchar(50) DEFAULT NULL,
+  `net_due_in` int(11) DEFAULT NULL,
+  `discount_percent` decimal(10,2) DEFAULT NULL,
+  `is_discount_paid` int(11) DEFAULT NULL,
+  `discount_within_days` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`term_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment_terms`
+--
+
+LOCK TABLES `payment_terms` WRITE;
+/*!40000 ALTER TABLE `payment_terms` DISABLE KEYS */;
+INSERT INTO `payment_terms` VALUES (2,'New11',12,34.80,1,4,0);
+/*!40000 ALTER TABLE `payment_terms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `powerunitmaster`
 --
 
@@ -612,9 +640,12 @@ DROP TABLE IF EXISTS `salespersonmaster`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `salespersonmaster` (
-  `person_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(30) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `address` varchar(45) DEFAULT NULL,
+  `unit_no` varchar(30) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
   `present_state` varchar(45) DEFAULT NULL,
   `postal_code` varchar(45) DEFAULT NULL,
@@ -622,8 +653,18 @@ CREATE TABLE `salespersonmaster` (
   `fax_no` varchar(45) DEFAULT NULL,
   `cellular_no` varchar(45) DEFAULT NULL,
   `pager_no` varchar(45) DEFAULT NULL,
+  `ext` varchar(30) DEFAULT NULL,
+  `sales_person_prefix` varchar(30) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `ar_cdn` varchar(30) DEFAULT NULL,
+  `ar_us` varchar(30) DEFAULT NULL,
+  `base_salary` decimal(10,2) DEFAULT NULL,
+  `paid` int(11) DEFAULT NULL,
+  `percent_on_applicable_revenue` varchar(30) DEFAULT NULL,
+  `percent_on_gross_profit` varchar(30) DEFAULT NULL,
+  `max_commission_paid` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -632,6 +673,7 @@ CREATE TABLE `salespersonmaster` (
 
 LOCK TABLES `salespersonmaster` WRITE;
 /*!40000 ALTER TABLE `salespersonmaster` DISABLE KEYS */;
+INSERT INTO `salespersonmaster` VALUES (2,'GGG',1,'GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG',234.00,4,'34','56','12');
 /*!40000 ALTER TABLE `salespersonmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1018,4 +1060,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-09 19:01:16
+-- Dump completed on 2016-09-15 19:20:22

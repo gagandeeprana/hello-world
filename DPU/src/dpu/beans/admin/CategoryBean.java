@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +36,7 @@ public class CategoryBean {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
     private TypeBean typeBean;
-
+    
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "categoryBean")
+    private ContainerBean containerBean;
 }

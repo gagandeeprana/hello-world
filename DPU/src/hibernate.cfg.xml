@@ -17,5 +17,8 @@
         <mapping class="dpu.beans.admin.CustomBrokerBean"/>
         <mapping class="dpu.beans.admin.BorderAgentBean"/>
         <mapping class="dpu.beans.admin.AdditionalContactBean"/>
+        <mapping class="dpu.beans.admin.PaymentTermsBean"/>
+        <mapping class="dpu.beans.admin.SalesPersonBean"/>
+        <mapping class="dpu.beans.admin.ContainerBean"/>
     </session-factory>
 </hibernate-configuration>
