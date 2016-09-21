@@ -32,12 +32,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     
     public ArrangedMainFrame3() {
         initComponents();
-//        DPU.autowire(this);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setButtonContentArea();
-        jInternalFrame1.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
-        jInternalFrame1.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        jLayeredPane1.setVisible(false);
         jPanel4.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
         root = getContentPane();
         jInternalFrame1.setVisible(false);
@@ -46,25 +42,13 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     }
     
     private void setButtonContentArea() {
-        btnDatamaintenance.setContentAreaFilled(false);
+        MainModules mainModules = new MainModules();
+        mainModules.setBounds(0, 0, getWidth(), getHeight());
+        ArrangedMainFrame3.jLayeredPane2.add(mainModules);
+        ArrangedMainFrame3.jLayeredPane2.setVisible(true);
+        mainModules.setVisible(true);
     }
 
-//    class AddButton extends JButton implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if (!timer.isRunning()) {
-//                animationStartTime = System.nanoTime() / 1000000;
-//                this.setText("Stop Animation");
-//                timer.start();
-//            } else {
-//                timer.stop();
-//                this.setText("Start Animation");
-//                alpha = 1.0f;
-//            }
-//        }
-//
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,9 +61,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jPanel2 = new javax.swing.JPanel();
-        btnDatamaintenance = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -136,32 +119,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
             e1.printStackTrace();
         }
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnDatamaintenance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Datamaintenance.png"))); // NOI18N
-        btnDatamaintenance.setToolTipText("Datamaintenance...");
-        btnDatamaintenance.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDatamaintenanceActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(btnDatamaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnDatamaintenance)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
@@ -170,21 +127,32 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
+        jLayeredPane2.setLayout(jLayeredPane2Layout);
+        jLayeredPane2Layout.setHorizontalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1280, Short.MAX_VALUE)
+        );
+        jLayeredPane2Layout.setVerticalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane2)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -250,19 +218,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDatamaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatamaintenanceActionPerformed
-//        Datamaintenance datamaintenance = new Datamaintenance();
-//        datamaintenance.setBounds(0, 0, getWidth(), getHeight());
-//        jLayeredPane1.add(datamaintenance);
-//        jLayeredPane1.setVisible(true);
-//        datamaintenance.setVisible(true);
-        DatamaintenanceOptions datamaintenanceOptions = new DatamaintenanceOptions();
-        datamaintenanceOptions.setBounds(0, 0, getWidth(), getHeight());
-        jLayeredPane1.add(datamaintenanceOptions);
-        jLayeredPane1.setVisible(true);
-        datamaintenanceOptions.setVisible(true);
-    }//GEN-LAST:event_btnDatamaintenanceActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -306,9 +261,9 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDatamaintenance;
     public static javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    public static javax.swing.JLayeredPane jLayeredPane1;
+    public static javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -318,8 +273,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    public static javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,14 +37,14 @@ public class ContainerBean {
     @Column(name = "type")
     private String type;
 
-    @OneToOne(mappedBy = "containerBean", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private TerminalBean terminalBean;
     
     @Column(name = "status")
     private int status;
     
-    @OneToOne(mappedBy = "containerBean", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private CategoryBean categoryBean;
     
