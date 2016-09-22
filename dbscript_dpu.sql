@@ -187,7 +187,7 @@ CREATE TABLE `border_agent` (
   PRIMARY KEY (`border_agent_id`),
   KEY `border_agent_ibfk_1` (`custom_broker_id`),
   CONSTRAINT `border_agent_ibfk_1` FOREIGN KEY (`custom_broker_id`) REFERENCES `custombrokermaster` (`custom_broker_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +240,7 @@ CREATE TABLE `classmaster` (
   `title` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`class_id`),
   UNIQUE KEY `class_id_UNIQUE` (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -370,7 +370,7 @@ CREATE TABLE `custombrokermaster` (
   `email` varchar(30) DEFAULT NULL,
   `website` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`custom_broker_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -446,7 +446,7 @@ CREATE TABLE `drivermaster` (
   CONSTRAINT `class_id_drivermaster` FOREIGN KEY (`class_id`) REFERENCES `classmaster` (`class_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `division_id_drivermaster` FOREIGN KEY (`division_id`) REFERENCES `divisionmaster` (`division_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `terminal_id_drivermaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -538,6 +538,45 @@ LOCK TABLES `jurisdictionmaster` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ordermaster`
+--
+
+DROP TABLE IF EXISTS `ordermaster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ordermaster` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `bill_to` varchar(50) DEFAULT NULL,
+  `caller_name` varchar(50) DEFAULT NULL,
+  `po_number` varchar(50) DEFAULT NULL,
+  `payment` int(11) DEFAULT NULL,
+  `probill` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `shipper_id` int(11) DEFAULT NULL,
+  `consignee_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `category_id` (`category_id`),
+  KEY `shipper_id` (`shipper_id`),
+  KEY `consignee_id` (`consignee_id`),
+  CONSTRAINT `ordermaster_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `companymaster` (`company_id`),
+  CONSTRAINT `ordermaster_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categorymaster` (`category_id`),
+  CONSTRAINT `ordermaster_ibfk_3` FOREIGN KEY (`shipper_id`) REFERENCES `shippermaster` (`shipper_id`),
+  CONSTRAINT `ordermaster_ibfk_4` FOREIGN KEY (`consignee_id`) REFERENCES `shippermaster` (`shipper_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ordermaster`
+--
+
+LOCK TABLES `ordermaster` WRITE;
+/*!40000 ALTER TABLE `ordermaster` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ordermaster` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `payment_terms`
 --
 
@@ -597,7 +636,7 @@ CREATE TABLE `powerunitmaster` (
   CONSTRAINT `owner_id` FOREIGN KEY (`owner_id`) REFERENCES `companymaster` (`company_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `terminal_id` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE,
   CONSTRAINT `tracking_id` FOREIGN KEY (`tracking_id`) REFERENCES `trackingmaster` (`tracking_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -664,7 +703,7 @@ CREATE TABLE `salespersonmaster` (
   `percent_on_gross_profit` varchar(30) DEFAULT NULL,
   `max_commission_paid` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -673,7 +712,7 @@ CREATE TABLE `salespersonmaster` (
 
 LOCK TABLES `salespersonmaster` WRITE;
 /*!40000 ALTER TABLE `salespersonmaster` DISABLE KEYS */;
-INSERT INTO `salespersonmaster` VALUES (2,'GGG',1,'GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG',234.00,4,'34','56','12');
+INSERT INTO `salespersonmaster` VALUES (2,'GGG',1,'GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG','GGG',234.00,4,'34','56','12'),(3,'asas',1,'asas','asas','asa','sasa','sas','asa','sasa','asa','as','222','sas','sas','asas','asasas','asas',232.00,0,'223','23','23');
 /*!40000 ALTER TABLE `salespersonmaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -790,7 +829,7 @@ CREATE TABLE `straighttruckmaster` (
   CONSTRAINT `category_id_straighttruckmaster` FOREIGN KEY (`category_id`) REFERENCES `categorymaster` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `terminal_id_straighttruckmaster` FOREIGN KEY (`terminal_id`) REFERENCES `terminalmaster` (`terminal_id`) ON DELETE CASCADE,
   CONSTRAINT `tracking_id_straighttruckmaster` FOREIGN KEY (`tracking_id`) REFERENCES `trackingmaster` (`tracking_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1007,7 +1046,7 @@ CREATE TABLE `working_hours_additionalcontact` (
   PRIMARY KEY (`working_id`),
   KEY `additional_contact_id` (`additional_contact_id`),
   CONSTRAINT `working_hours_additionalcontact_ibfk_1` FOREIGN KEY (`additional_contact_id`) REFERENCES `additionalcontactmaster` (`add_contact_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1039,7 +1078,7 @@ CREATE TABLE `working_hours_additionalshipper` (
   PRIMARY KEY (`working_id`),
   KEY `additional_shipper_id` (`additional_shipper_id`),
   CONSTRAINT `working_hours_additionalshipper_ibfk_1` FOREIGN KEY (`additional_shipper_id`) REFERENCES `shippermaster` (`shipper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1060,4 +1099,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-15 19:20:22
+-- Dump completed on 2016-09-21 16:45:27
