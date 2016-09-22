@@ -1,12 +1,18 @@
 package com.jiqa.dao;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
-public class CategoryDAO {
+import com.jiqa.beans.CategoryBean;
 
-	@Autowired
-	SessionFactory sessionFactory;
+public interface CategoryDAO {
+
+	public int addCategory(CategoryBean categoryBean);
+
+	public boolean updateCategory(CategoryBean categoryBean);
+
+	public int softDeleteCategory(int status, int categoryId);
+
+	public List<CategoryBean> getAllCategories(String title);
+
 	
-//	public 
 }
