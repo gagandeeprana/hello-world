@@ -12,10 +12,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.jiqa.beans.QuestionBean;
 import com.jiqa.dao.QuestionDAO;
 
+@Component
 class QuestionDAOImpl implements QuestionDAO {
 
 	Logger logger = Logger.getLogger(QuestionDAOImpl.class);
@@ -108,21 +110,25 @@ class QuestionDAOImpl implements QuestionDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<QuestionBean> getAllQuestions(String question, String answer, int categoryId) {
+	public List<QuestionBean> getAllQuestions(String question, String answer,
+			int categoryId) {
 		Session session = null;
 		List<QuestionBean> lstCategories = new ArrayList<QuestionBean>();
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(QuestionBean.class);
-			if(!"".equals(question)) {
-				criteria.add(Restrictions.like("question", question, MatchMode.ANYWHERE));
+			if (!"".equals(question)) {
+				criteria.add(Restrictions.like("question", question,
+						MatchMode.ANYWHERE));
 			}
-			if(!"".equals(answer)) {
-				criteria.add(Restrictions.like("answer", answer, MatchMode.ANYWHERE));
+			if (!"".equals(answer)) {
+				criteria.add(Restrictions.like("answer", answer,
+						MatchMode.ANYWHERE));
 			}
-			if(categoryId != 0) {
+			if (categoryId != 0) {
 				criteria.createCriteria("categoryBean");
-				criteria.add(Restrictions.eq("categoryBean.categoryId", categoryId));
+				criteria.add(Restrictions.eq("categoryBean.categoryId",
+						categoryId));
 			}
 			lstCategories = (List<QuestionBean>) criteria.list();
 		} catch (Exception e) {

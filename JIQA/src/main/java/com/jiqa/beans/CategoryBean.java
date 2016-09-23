@@ -10,13 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "categorymaster")
-@Getter
-@Setter
 public class CategoryBean {
 
 	@Id
@@ -29,7 +24,7 @@ public class CategoryBean {
 
 	@Column(name = "status")
 	private int status;
-	
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="categoryBean")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryBean")
 	private Set<QuestionBean> setOfQuestionBeans;
 }
