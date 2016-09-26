@@ -15,8 +15,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "questionmaster")
-@Getter
-@Setter
 public class QuestionBean {
 
 	@Id
@@ -36,4 +34,44 @@ public class QuestionBean {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
 	private CategoryBean categoryBean;
+
+	public int getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
+	}
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
+	}
 }
