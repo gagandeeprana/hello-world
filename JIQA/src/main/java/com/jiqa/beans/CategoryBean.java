@@ -22,6 +22,7 @@ public class CategoryBean {
 	@Column(name = "category_id")
 	private int categoryId;
 
+	
 	@Column(name = "title")
 	private String title;
 

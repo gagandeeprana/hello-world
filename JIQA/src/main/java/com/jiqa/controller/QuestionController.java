@@ -9,22 +9,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jiqa.beans.CategoryBean;
+import com.jiqa.beans.QuestionBean;
 import com.jiqa.service.CategoryService;
+import com.jiqa.service.QuestionService;
 
 @Controller
-public class CategoryController {
+public class QuestionController {
 
+	@Autowired
+	QuestionService questionService;
+	
 	@Autowired
 	CategoryService categoryService;
 
-	@RequestMapping(value = "/showcat", method = RequestMethod.GET)
+	@RequestMapping(value = "/showques", method = RequestMethod.GET)
 	public ModelAndView showCategoryScreen() {
 		ModelAndView modelAndView = new ModelAndView();
+		List<QuestionBean> lstQuestions = questionService.getAllQuestions("", "", 0);
 		List<CategoryBean> lstCategories = categoryService.getAllCategories("");
-		System.out.println("BB:  " + lstCategories.size());
+		modelAndView.addObject("LIST_QUES", lstQuestions);
 		modelAndView.addObject("LIST_CAT", lstCategories);
-		modelAndView.setViewName("category");
+		modelAndView.setViewName("questions");
 		return modelAndView;
 	}
-	
 }

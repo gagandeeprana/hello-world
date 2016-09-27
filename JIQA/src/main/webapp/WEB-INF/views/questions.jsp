@@ -22,11 +22,35 @@
 <script src="../js/jssor.slider.mini.js"></script>
 </head>
 <body>
+<form action="showques" method="GET">
 	<%
 		List<QuestionBean> lstQuestions = ((List<QuestionBean>) request.getAttribute("LIST_QUES"));
 		pageContext.setAttribute("LIST_QUES", lstQuestions);
+		List<CategoryBean> lstCategories = ((List<CategoryBean>) request.getAttribute("LIST_CAT"));
+		pageContext.setAttribute("LIST_CAT", lstCategories);
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<input type="text" name="question" placeholder="Write Question to Search..." class="form-control" />
+			</div>
+			<div class="col-sm-4">
+				<input type="text" name="answer" placeholder="Write Answer to Search..." class="form-control" />
+			</div>
+			<div class="col-sm-2">
+				<select class="form-control">
+					<option value="0">Select</option>
+					<c:forEach items="${LIST_CAT}" var="obj">
+						<option value="${obj.categoryId}">${obj.title}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<input type="submit" value="Search" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="table-responsive">
 			<table class="table table-striped table-hover table-condensed">
@@ -45,7 +69,7 @@
 							<td>${obj.question}</td>
 							<td>${obj.answer}</td>
 							<td>${obj.status}</td>
-							<td>${obj.cate}</td>
+							<td>${obj.categoryBean.title}</td>
 							<td><a>Update</a> / <a>Delete</a></td>
 						</tr>
 					</c:forEach>
@@ -53,5 +77,6 @@
 			</table>
 		</div>
 	</div>
+</form>
 </body>
 </html>

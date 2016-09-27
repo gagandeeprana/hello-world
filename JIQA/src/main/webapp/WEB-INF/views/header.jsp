@@ -59,7 +59,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="showcat">Category</a></li>
 				</ul></li>
-			<li><a href="#">Questions</a></li>
+			<li><a href="showques">Questions</a></li>
 		</ul>
 	</div>
 	</nav>
