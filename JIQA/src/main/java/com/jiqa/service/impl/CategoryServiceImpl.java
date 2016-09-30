@@ -31,4 +31,9 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDAO.getAllCategories(title);
 	}
 
+	@Override
+	public CategoryBean getCategoryInfoById(int id) {
+		return categoryDAO.getCategoryInfoById(id);
+	}
+
 }

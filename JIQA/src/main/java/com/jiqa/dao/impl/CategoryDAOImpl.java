@@ -88,12 +88,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 		Query query = null;
 		try {
 			session = sessionFactory.openSession();
-			query = session
-					.createQuery("update categorymaster set status = :status where category_is = :categoryId");
+			query = session.createQuery("update CategoryBean set status = :status where categoryId = :categoryId");
 			query.setParameter("status", status);
 			query.setParameter("categoryId", categoryId);
 			result = query.executeUpdate();
 		} catch (Exception e) {
+			System.out.println(e);
 			logger.error("CategoryDAOImpl: Inside softDeleteCategory: Exception is: "
 					+ e.getMessage());
 		} finally {
@@ -112,18 +112,14 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@SuppressWarnings("unchecked")
 	public List<CategoryBean> getAllCategories(String title) {
 		Session session = null;
-		System.out.println("222222");
 		List<CategoryBean> lstCategories = new ArrayList<CategoryBean>();
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(CategoryBean.class);
-			System.out.println("33333333");
 			if(!"".equals(title)) {
 				criteria.add(Restrictions.like("title", title, MatchMode.ANYWHERE));
 			}
-			System.out.println("44444444");
 			lstCategories = (List<CategoryBean>) criteria.list();
-			System.out.println("MMssss: " + lstCategories.size());
 		} catch (Exception e) {
 			logger.error("CategoryDAOImpl: Inside getAllCategories: Exception is: "
 					+ e.getMessage());
@@ -138,6 +134,33 @@ public class CategoryDAOImpl implements CategoryDAO {
 			}
 		}
 		return lstCategories;
+	}
+
+	@Override
+	public CategoryBean getCategoryInfoById(int id) {
+		Session session = null;
+		CategoryBean categoryBean = null;
+		try {
+			session = sessionFactory.openSession();
+			logger.info("getCategoryInfoById: categoryId is: " + id);
+			Criteria criteria = session.createCriteria(CategoryBean.class);
+			criteria.add(Restrictions.eq("categoryId", id));
+			categoryBean = (CategoryBean) criteria.list().get(0);
+		} catch (Exception e) {
+			System.err.println(e);
+			logger.info("CategoryDAOImpl: Inside getCategoryInfoById: Exception is: "
+					+ e.getMessage());
+		} finally {
+			try {
+				if (session != null) {
+					session.close();
+				}
+			} catch (Exception e2) {
+				logger.error("CategoryDAOImpl: Inside getCategoryInfoById: Inside Finally: Exception is: "
+						+ e2.getMessage());
+			}
+		}
+		return categoryBean;
 	}
 
 }

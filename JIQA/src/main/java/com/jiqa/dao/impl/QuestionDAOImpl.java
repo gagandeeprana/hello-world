@@ -115,13 +115,16 @@ class QuestionDAOImpl implements QuestionDAO {
 		Session session = null;
 		List<QuestionBean> lstCategories = new ArrayList<QuestionBean>();
 		try {
+			System.out.println(question + " qq ");
+			System.out.println(answer + " qq ");
+			System.out.println(categoryId + " qq ");
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(QuestionBean.class);
-			if (!"".equals(question)) {
+			if (question != null && !"".equals(question)) {
 				criteria.add(Restrictions.like("question", question,
 						MatchMode.ANYWHERE));
 			}
-			if (!"".equals(answer)) {
+			if (answer != null && !"".equals(answer)) {
 				criteria.add(Restrictions.like("answer", answer,
 						MatchMode.ANYWHERE));
 			}

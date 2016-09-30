@@ -29,7 +29,7 @@ public class CategoryBean {
 	@Column(name = "status")
 	private int status;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryBean")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean")
 	private Set<QuestionBean> setOfQuestionBeans;
 
 	public int getCategoryId() {

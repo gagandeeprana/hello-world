@@ -2,8 +2,11 @@ package com.jiqa.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,13 +26,25 @@ public class QuestionController {
 	CategoryService categoryService;
 
 	@RequestMapping(value = "/showques", method = RequestMethod.GET)
-	public ModelAndView showCategoryScreen() {
+	public ModelAndView showCategoryScreen(@ModelAttribute("manageques") QuestionBean questionBean,HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<QuestionBean> lstQuestions = questionService.getAllQuestions("", "", 0);
+		int categoryId = 0;
+		if(request.getParameter("categoryId")!=null) {
+			categoryId = Integer.parseInt(request.getParameter("categoryId"));
+		}
+		List<QuestionBean> lstQuestions = questionService.getAllQuestions(questionBean.getQuestion(), questionBean.getAnswer(), categoryId);
 		List<CategoryBean> lstCategories = categoryService.getAllCategories("");
 		modelAndView.addObject("LIST_QUES", lstQuestions);
 		modelAndView.addObject("LIST_CAT", lstCategories);
 		modelAndView.setViewName("questions");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/saveQues" , method = RequestMethod.POST)
+	public ModelAndView saveQuestion(@ModelAttribute("ques") QuestionBean questionBean) {
+		ModelAndView modelAndView = new ModelAndView();
+		questionService.addQuestion(questionBean);
+		modelAndView.setViewName("redirect:showques");
 		return modelAndView;
 	}
 }
