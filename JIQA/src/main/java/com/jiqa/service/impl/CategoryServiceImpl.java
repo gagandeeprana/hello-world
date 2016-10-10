@@ -28,8 +28,12 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	public List<CategoryBean> getAllCategories(String title) {
-		System.out.println("11111111");
 		return categoryDAO.getAllCategories(title);
+	}
+
+	@Override
+	public CategoryBean getCategoryInfoById(int id) {
+		return categoryDAO.getCategoryInfoById(id);
 	}
 
 }

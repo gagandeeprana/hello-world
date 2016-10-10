@@ -3,6 +3,8 @@ package com.jiqa.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -25,19 +27,20 @@ class QuestionDAOImpl implements QuestionDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	@Transactional
 	public int addQuestion(QuestionBean questionBean) {
 		Session session = null;
 		Transaction tx = null;
 		int maxId = 0;
 		try {
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+//			tx = session.beginTransaction();
 			maxId = (Integer) session.save(questionBean);
-			tx.commit();
+//			tx.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
+//			if (tx != null) {
+//				tx.rollback();
+//			}
 			logger.error("QuestionDAOImpl: Inside addQuestion: Exception is: "
 					+ e.getMessage());
 		} finally {
@@ -53,20 +56,21 @@ class QuestionDAOImpl implements QuestionDAO {
 		return maxId;
 	}
 
+	@Transactional
 	public boolean updateQuestion(QuestionBean questionBean) {
 		Session session = null;
 		Transaction tx = null;
 		boolean flag = false;
 		try {
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+//			tx = session.beginTransaction();
 			session.update(questionBean);
-			tx.commit();
+//			tx.commit();
 			flag = true;
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
+//			if (tx != null) {
+//				tx.rollback();
+//			}
 			logger.error("QuestionDAOImpl: Inside updateQuestion: Exception is: "
 					+ e.getMessage());
 		} finally {
@@ -82,6 +86,7 @@ class QuestionDAOImpl implements QuestionDAO {
 		return flag;
 	}
 
+	@Transactional
 	public int softDeleteQuestion(int status, int questionId) {
 		Session session = null;
 		int result = 0;
@@ -109,6 +114,7 @@ class QuestionDAOImpl implements QuestionDAO {
 		return result;
 	}
 
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public List<QuestionBean> getAllQuestions(String question, String answer,
 			int categoryId) {
@@ -117,11 +123,11 @@ class QuestionDAOImpl implements QuestionDAO {
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(QuestionBean.class);
-			if (!"".equals(question)) {
+			if (question != null && !"".equals(question)) {
 				criteria.add(Restrictions.like("question", question,
 						MatchMode.ANYWHERE));
 			}
-			if (!"".equals(answer)) {
+			if (answer != null && !"".equals(answer)) {
 				criteria.add(Restrictions.like("answer", answer,
 						MatchMode.ANYWHERE));
 			}

@@ -14,5 +14,5 @@ public interface CategoryDAO {
 
 	public List<CategoryBean> getAllCategories(String title);
 
-	
+	public CategoryBean getCategoryInfoById(int id);
 }
