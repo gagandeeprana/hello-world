@@ -30,6 +30,8 @@
                       <Component id="btnSaveAddClass" linkSize="6" min="-2" pref="119" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnCancelAddClass" linkSize="6" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSaveAndExit" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -73,6 +75,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSaveAddClass" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelAddClass" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSaveAndExit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
@@ -127,6 +130,11 @@
     <Component class="javax.swing.JLabel" name="lblClassIdAddClassFrameValidation">
     </Component>
     <Component class="javax.swing.JLabel" name="lblClassNameAddClassFrameValidation">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSaveAndExit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save&amp;Exit"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

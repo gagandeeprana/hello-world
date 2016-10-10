@@ -100,6 +100,7 @@ public class AddClassFrame extends javax.swing.JFrame {
         btnCancelAddClass = new javax.swing.JButton();
         lblClassIdAddClassFrameValidation = new javax.swing.JLabel();
         lblClassNameAddClassFrameValidation = new javax.swing.JLabel();
+        btnSaveAndExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +144,8 @@ public class AddClassFrame extends javax.swing.JFrame {
             }
         });
 
+        btnSaveAndExit.setText("Save&Exit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,7 +156,9 @@ public class AddClassFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSaveAddClass, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCancelAddClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnCancelAddClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSaveAndExit))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +193,8 @@ public class AddClassFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveAddClass)
-                    .addComponent(btnCancelAddClass))
+                    .addComponent(btnCancelAddClass)
+                    .addComponent(btnSaveAndExit))
                 .addGap(17, 17, 17))
         );
 
@@ -315,6 +321,7 @@ public class AddClassFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelAddClass;
     private javax.swing.JButton btnSaveAddClass;
+    private javax.swing.JButton btnSaveAndExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblClassIdAddClassFrameValidation;

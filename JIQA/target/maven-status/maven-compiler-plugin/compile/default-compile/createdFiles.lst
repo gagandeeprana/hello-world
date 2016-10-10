@@ -1,0 +1,12 @@
+com\jiqa\service\QuestionService.class
+com\jiqa\dao\CategoryDAO.class
+com\jiqa\service\impl\QuestionServiceImpl.class
+com\jiqa\controller\CategoryController.class
+com\jiqa\dao\QuestionDAO.class
+com\jiqa\dao\impl\QuestionDAOImpl.class
+com\jiqa\controller\LoginController.class
+com\jiqa\service\impl\CategoryServiceImpl.class
+com\jiqa\service\CategoryService.class
+com\jiqa\beans\CategoryBean.class
+com\jiqa\beans\QuestionBean.class
+com\jiqa\dao\impl\CategoryDAOImpl.class
