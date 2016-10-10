@@ -3,6 +3,8 @@ package com.jiqa.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -25,19 +27,23 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	@Transactional
 	public int addCategory(CategoryBean categoryBean) {
 		Session session = null;
 		Transaction tx = null;
 		int maxId = 0;
 		try {
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+			System.out.println("Transaction Begin..");
+//			tx = session.beginTransaction();
 			maxId = (Integer) session.save(categoryBean);
-			tx.commit();
+			System.out.println("Transaction Done..");
+//			tx.commit();
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
+//			if (tx != null) {
+//				tx.rollback();
+//			}
+			System.out.println("addCat: " + e);
 			logger.error("CategoryDAOImpl: Inside addCategory: Exception is: "
 					+ e.getMessage());
 		} finally {
@@ -53,35 +59,36 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return maxId;
 	}
 
+	@Transactional
 	public boolean updateCategory(CategoryBean categoryBean) {
 		Session session = null;
 		Transaction tx = null;
 		boolean flag = false;
 		try {
 			session = sessionFactory.openSession();
-			tx = session.beginTransaction();
+//			tx = session.beginTransaction();
 			session.update(categoryBean);
-			tx.commit();
+//			tx.commit();
 			flag = true;
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			logger.error("CategoryDAOImpl: Inside updateCategory: Exception is: "
-					+ e.getMessage());
+//			if (tx != null) {
+//				tx.rollback();
+//			}
+			System.out.println(e.getMessage());
+			logger.error("CategoryDAOImpl: Inside updateCategory: Exception is: " + e.getMessage());
 		} finally {
 			try {
 				if (session != null) {
 					session.close();
 				}
 			} catch (Exception e2) {
-				logger.error("CategoryDAOImpl: Inside updateCategory: Inside Finally: Exception is: "
-						+ e2.getMessage());
+				logger.error("CategoryDAOImpl: Inside updateCategory: Inside Finally: Exception is: " + e2.getMessage());
 			}
 		}
 		return flag;
 	}
 
+	@Transactional
 	public int softDeleteCategory(int status, int categoryId) {
 		Session session = null;
 		int result = 0;
@@ -110,6 +117,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<CategoryBean> getAllCategories(String title) {
 		Session session = null;
 		List<CategoryBean> lstCategories = new ArrayList<CategoryBean>();
@@ -136,10 +144,11 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return lstCategories;
 	}
 
+	@Transactional
 	@Override
 	public CategoryBean getCategoryInfoById(int id) {
 		Session session = null;
-		CategoryBean categoryBean = null;
+		CategoryBean categoryBean = new CategoryBean();
 		try {
 			session = sessionFactory.openSession();
 			logger.info("getCategoryInfoById: categoryId is: " + id);

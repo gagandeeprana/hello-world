@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jiqa.beans.CategoryBean;
@@ -41,8 +42,11 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "/saveQues" , method = RequestMethod.POST)
-	public ModelAndView saveQuestion(@ModelAttribute("ques") QuestionBean questionBean) {
+	public ModelAndView saveQuestion(@ModelAttribute("ques") QuestionBean questionBean,@RequestParam("categoryId") int categoryId) {
 		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("Question Controller...");
+		CategoryBean categoryBean = categoryService.getCategoryInfoById(categoryId);
+		questionBean.setCategoryBean(categoryBean);
 		questionService.addQuestion(questionBean);
 		modelAndView.setViewName("redirect:showques");
 		return modelAndView;

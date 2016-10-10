@@ -19,18 +19,49 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="../js/jssor.slider.mini.js"></script>
 <script type="text/javascript">
-	function submitForm() {
-			alert("121");
-		document.getElementById("frm1").action = "saveQues";
-		document.getElementById("frm1").method = "POST";
-		document.getElementById("frm1").submit();
+	$(document).ready(function(){
+		$('#btnSave').click(function(){
+			$('#frm1').submit();
+		});
+	});
+</script>
+<script type="text/javascript">
+	function checkFlag(field) {
+		document.getElementById("addUpdateFlag").value = field;
+		if(field == 'update') {
+			document.getElementById("btnSave").value = "Update";
+			document.getElementById("frm1").action = "updateQues";
+			$("#modelTitle").html("Edit Question");		
+		}
+		else if(field == 'add') {
+			document.getElementById("btnSave").value = "Save";			
+			$("#modelTitle").html("Add New Question");		
+		}
 	}
+</script>
+<script type="text/javascript">
+        function onClickMethod(quesId){
+        	if(catId != 0) {
+				$.get("getQues/quesId",{"quesId" : quesId}, function(data) {
+	            	document.getElementById('question').value = data.question;
+		            document.getElementById('quesid').value = data.quesId;
+		            if(data.status == 1) {
+		               	document.getElementById('status').selectedIndex = 0;            		
+		            }
+		            else {
+		               	document.getElementById('status').selectedIndex = 1;            		            		
+		            }
+            	});
+        	}
+        	else {
+           		document.getElementById('question').value = "";
+           		document.getElementById('status').selectedIndex = 0;            		
+        	}	
+        }
 </script>
 </head>
 <body>
-<form action="showques" method="GET" name="manageques">
 	<%
 		List<QuestionBean> lstQuestions = ((List<QuestionBean>) request.getAttribute("LIST_QUES"));
 		pageContext.setAttribute("LIST_QUES", lstQuestions);
@@ -62,7 +93,7 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<input type="text" class="form-control" placeHolder="Enter Question..." id="question" name="question" value="${cat.title}" />
+												<input type="text" class="form-control" placeHolder="Enter Question..." id="question" name="question" value="" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -70,7 +101,7 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<input type="text" class="form-control" placeHolder="Enter Answer" id="answer" name="answer" value="${cat.title}" />
+												<input type="text" class="form-control" placeHolder="Enter Answer" id="answer" name="answer" value="" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -89,7 +120,7 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-list"></i>												
 												</span>
-												<select class="form-control" name="category">
+												<select class="form-control" name="categoryId">
 													<c:forEach items="${LIST_CAT}" var="obj">
 														<option value="${obj.categoryId}">${obj.title}</option>
 													</c:forEach>
@@ -157,6 +188,5 @@
 			</table>
 		</div>
 	</div>
-</form>
 </body>
 </html>

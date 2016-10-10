@@ -35,8 +35,24 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/saveCat" , method = RequestMethod.POST)
 	public ModelAndView saveCategory(@ModelAttribute("cat") CategoryBean categoryBean) {
+		ModelAndView modelAndView = null;
+		try {
+			System.out.println("Here in save...");
+			modelAndView = new ModelAndView();
+			System.out.println(categoryBean.getTitle() + "   " + categoryBean.getStatus());
+			categoryService.addCategory(categoryBean);
+			modelAndView.setViewName("redirect:/showcat");
+		} catch (Exception e) {
+			System.out.println("CategoryController: Exception is: " + e);
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/updateCat" , method = RequestMethod.POST)
+	public ModelAndView updateCategory(@ModelAttribute("cat") CategoryBean categoryBean, @RequestParam("categoryid") int categoryId) {
 		ModelAndView modelAndView = new ModelAndView();
-		categoryService.addCategory(categoryBean);
+		categoryBean.setCategoryId(categoryId);
+		categoryService.updateCategory(categoryBean);
 		modelAndView.setViewName("redirect:showcat");
 		return modelAndView;
 	}
@@ -50,13 +66,12 @@ public class CategoryController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "getCat/catId" , method = RequestMethod.POST)
+	@RequestMapping(value = "getCat/catId" , method = RequestMethod.GET)
 	@ResponseBody  public CategoryBean getCategory(@RequestParam("catId") int categoryId) {
 		CategoryBean categoryBean = null;
 		try {
-			System.out.println("HERERERE " + categoryId);
 			categoryBean = categoryService.getCategoryInfoById(categoryId);
-			System.out.println("Ttle" + categoryBean.getTitle());
+			System.out.println(categoryBean.getCategoryId() +" " + categoryBean.getTitle() +"  "  + categoryBean.getStatus());
 		} catch (Exception e) {
 			System.out.println(e);
 			logger.info("Exception in getCategory is: " + e);

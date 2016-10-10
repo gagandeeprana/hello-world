@@ -2,6 +2,7 @@ package com.jiqa.beans;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "categorymaster")
@@ -29,8 +27,8 @@ public class CategoryBean {
 	@Column(name = "status")
 	private int status;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean")
-	private Set<QuestionBean> setOfQuestionBeans;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean", cascade=CascadeType.ALL)
+	private Set<QuestionBean> questions;
 
 	public int getCategoryId() {
 		return categoryId;
@@ -56,11 +54,11 @@ public class CategoryBean {
 		this.status = status;
 	}
 
-	public Set<QuestionBean> getSetOfQuestionBeans() {
-		return setOfQuestionBeans;
+	public Set<QuestionBean> getQuestions() {
+		return questions;
 	}
 
-	public void setSetOfQuestionBeans(Set<QuestionBean> setOfQuestionBeans) {
-		this.setOfQuestionBeans = setOfQuestionBeans;
+	public void setQuestions(Set<QuestionBean> questions) {
+		this.questions = questions;
 	}
 }

@@ -31,7 +31,7 @@ public class QuestionBean {
 	@Column(name = "status")
 	private int status;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
 	private CategoryBean categoryBean;
 
