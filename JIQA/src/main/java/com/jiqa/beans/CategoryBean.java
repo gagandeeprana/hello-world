@@ -11,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 @Entity
 @Table(name = "categorymaster")
+@JsonSerialize
 public class CategoryBean {
 
 	@Id
@@ -27,8 +30,8 @@ public class CategoryBean {
 	@Column(name = "status")
 	private int status;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean", cascade=CascadeType.ALL)
-	private Set<QuestionBean> questions;
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean", cascade=CascadeType.ALL)
+//	private Set<QuestionBean> questions;
 
 	public int getCategoryId() {
 		return categoryId;
@@ -54,11 +57,11 @@ public class CategoryBean {
 		this.status = status;
 	}
 
-	public Set<QuestionBean> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(Set<QuestionBean> questions) {
-		this.questions = questions;
-	}
+//	public Set<QuestionBean> getQuestions() {
+//		return questions;
+//	}
+//
+//	public void setQuestions(Set<QuestionBean> questions) {
+//		this.questions = questions;
+//	}
 }

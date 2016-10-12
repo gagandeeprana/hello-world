@@ -1,3 +1,4 @@
+<%@page import="com.jiqa.beans.QuestionBean"%>
 <%@page import="com.jiqa.service.impl.CategoryServiceImpl"%>
 <%@page import="com.jiqa.beans.CategoryBean"%>
 <%@page import="java.util.List"%>
@@ -30,23 +31,21 @@
 		document.getElementById("addUpdateFlag").value = field;
 		if(field == 'update') {
 			document.getElementById("btnSave").value = "Update";
-			document.getElementById("frm1").action = "updateCat";
-			$("#modelTitle").html("Edit Category");		
+			document.getElementById("frm1").action = "updateQues";
+			$("#modelTitle").html("Edit Question");		
 		}
 		else if(field == 'add') {
 			document.getElementById("btnSave").value = "Save";			
-			$("#modelTitle").html("Add New Category");		
+			$("#modelTitle").html("Add New Question");		
 		}
 	}
 </script>
 <script type="text/javascript">
-        function onClickMethod(catId){
+        function onClickMethod(quesId){
         	if(catId != 0) {
-        		alert(catId);
-				$.get("getCat/catId",{"catId" : catId}, function(data) {
-					alert(data.title + " ::title");
-	            	document.getElementById('title').value = data.title;
-		            document.getElementById('categoryid').value = data.categoryId;
+				$.get("getQues/quesId",{"quesId" : quesId}, function(data) {
+	            	document.getElementById('question').value = data.question;
+		            document.getElementById('quesid').value = data.quesId;
 		            if(data.status == 1) {
 		               	document.getElementById('status').selectedIndex = 0;            		
 		            }
@@ -56,7 +55,7 @@
             	});
         	}
         	else {
-           		document.getElementById('title').value = "";
+           		document.getElementById('question').value = "";
            		document.getElementById('status').selectedIndex = 0;            		
         	}	
         }
@@ -64,30 +63,29 @@
 </head>
 <body>
 	<%
-		List<CategoryBean> lstCategory = ((List<CategoryBean>) request.getAttribute("LIST_CAT"));
-		pageContext.setAttribute("LIST_CAT1", lstCategory);
+		List<QuestionBean> lstQuestions = ((List<QuestionBean>) request.getAttribute("LIST_QUES"));
+		pageContext.setAttribute("LIST_QUES", lstQuestions);
+		List<CategoryBean> lstCategories = ((List<CategoryBean>) request.getAttribute("LIST_CAT"));
+		pageContext.setAttribute("LIST_CAT", lstCategories);
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
-	
+		<div class="form-group">
 		<div class="row">
 			<div class="col-sm-12">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add');onClickMethod('0')" >Add New</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add','0')" >Add New</button>
+					<input type="hidden" id = "addUpdateFlag" value = "" />					
 					<div class="modal fade" id="myModal" role="dialog">
 					    <div class="modal-dialog">
 
 					      <!-- Modal content-->
-					      	<form action="saveCat" method="POST" name="cat" id="frm1">
-							<input type="hidden" id = "addUpdateFlag" value = "" />
-							<input type="hidden" id = "categoryid" name = "categoryid" value = "" />					      
 					      <div class="modal-content">
 					        <div class="modal-header">
 					          <button type="button" class="close" data-dismiss="modal">&times;</button>
-					          <h4 class="modal-title"><p id ="modelTitle">Add New Category</p></h4>
-											
+					          <h4 class="modal-title"><p id ="modelTitle">Add New Question</p></h4>
 					        </div>
 					        <div class="modal-body">
-					        	
+								<form action="saveQues" method="POST" name="ques" id="frm1">
 								<div class = "row">
 									<div class="col-sm-12">
 										<div class="form-group">
@@ -95,7 +93,15 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<input type="text" class="form-control" placeHolder="Enter CategoryName" id="title" name="title" value="" />
+												<input type="text" class="form-control" placeHolder="Enter Question..." id="question" name="question" value="" />
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<span class="input-group-addon">
+													 <i class="glyphicon glyphicon-inbox"></i>												
+												</span>
+												<input type="text" class="form-control" placeHolder="Enter Answer" id="answer" name="answer" value="" />
 											</div>
 										</div>
 										<div class="form-group">
@@ -103,50 +109,80 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-list-alt"></i>												
 												</span>
-												<select class="form-control" name="status" id="status">
+												<select class="form-control" name="status">
 													<option value="1">Active</option>
 													<option value="0">Inactive</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<span class="input-group-addon">
+													 <i class="glyphicon glyphicon-list"></i>												
+												</span>
+												<select class="form-control" name="categoryId">
+													<c:forEach items="${LIST_CAT}" var="obj">
+														<option value="${obj.categoryId}">${obj.title}</option>
+													</c:forEach>
 												</select>
 											</div>
 										</div>
 									</div>
 					        	</div>
 					        </div>
+					        	 </form>
 					        <div class="modal-footer">
-					          <input type="button" class="btn btn-primary" data-dismiss="modal" value="Save" id="btnSave" />
+					          <input type="button" class="btn btn-primary" data-dismiss="modal" value="Save" id="btnSave" onclick="submitForm()" />
 							  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 					        </div>
 					      </div>
-					      </form>
+					      
 					    </div>
 					  </div>
-					 
 			</div>
 		</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<input type="text" name="question" placeholder="Write Question to Search..." class="form-control" />
+			</div>
+			<div class="col-sm-4">
+				<input type="text" name="answer" placeholder="Write Answer to Search..." class="form-control" />
+			</div>
+			<div class="col-sm-2">
+				<select class="form-control" name="categoryId">
+					<option value="0">Select</option>
+					<c:forEach items="${LIST_CAT}" var="obj">
+						<option value="${obj.categoryId}">${obj.title}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<input type="submit" value="Search" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
+	<div class="container">
 		<div class="table-responsive">
 			<table class="table table-striped table-hover table-condensed">
 				<thead>
 					<tr>
-						<th>Title</th>
+						<th>Question</th>
+						<th>Answer</th>
 						<th>Status</th>
+						<th>Category</th>
 						<th>Links</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${LIST_CAT1}" var="obj">
-						<c:if test="${obj ne null}">
-							<tr class="info">
-								<td>${obj.title}</td>
-								<td>${obj.status}</td>
-								<c:if test="${obj.status == 1}">
-									<c:set var="status" value="0"/>
-								</c:if>
-								<c:if test="${obj.status == 0}">
-									<c:set var="status" value="1"/>
-								</c:if>
-								<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethod('${obj.categoryId}')">Update</a> / <a href="deleteCat/sta/${status}/catId/${obj.categoryId}">Delete</a></td>
-							</tr>
-						</c:if>
+					<c:forEach items="${LIST_QUES}" var="obj">
+						<tr class="info">
+							<td>${obj.question}</td>
+							<td>${obj.answer}</td>
+							<td>${obj.status}</td>
+							<td>${obj.categoryBean.title}</td>
+							<td><a>Update</a> / <a>Delete</a></td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
