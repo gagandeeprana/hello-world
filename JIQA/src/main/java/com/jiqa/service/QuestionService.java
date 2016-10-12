@@ -2,7 +2,7 @@ package com.jiqa.service;
 
 import java.util.List;
 
-import com.jiqa.beans.QuestionBean;
+import com.jiqa.entity.QuestionBean;
 
 public interface QuestionService {
 	public int addQuestion(QuestionBean QuestionBean);

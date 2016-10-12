@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.jiqa.beans.QuestionBean;
 import com.jiqa.dao.QuestionDAO;
+import com.jiqa.entity.QuestionBean;
 import com.jiqa.service.QuestionService;
 
 @Component

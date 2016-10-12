@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jiqa.beans.CategoryBean;
-import com.jiqa.beans.QuestionBean;
+import com.jiqa.entity.CategoryBean;
+import com.jiqa.entity.QuestionBean;
 import com.jiqa.service.CategoryService;
 import com.jiqa.service.QuestionService;
 

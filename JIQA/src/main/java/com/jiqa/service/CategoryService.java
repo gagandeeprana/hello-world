@@ -2,7 +2,7 @@ package com.jiqa.service;
 
 import java.util.List;
 
-import com.jiqa.beans.CategoryBean;
+import com.jiqa.entity.CategoryBean;
 
 public interface CategoryService {
 

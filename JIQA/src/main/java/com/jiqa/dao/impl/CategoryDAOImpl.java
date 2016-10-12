@@ -16,8 +16,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jiqa.beans.CategoryBean;
 import com.jiqa.dao.CategoryDAO;
+import com.jiqa.entity.CategoryBean;
 
 @Repository
 public class CategoryDAOImpl implements CategoryDAO {

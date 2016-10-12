@@ -1,4 +1,4 @@
-package com.jiqa.beans;
+package com.jiqa.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

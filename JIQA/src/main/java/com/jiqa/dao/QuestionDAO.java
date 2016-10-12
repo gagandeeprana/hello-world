@@ -2,7 +2,7 @@ package com.jiqa.dao;
 
 import java.util.List;
 
-import com.jiqa.beans.QuestionBean;
+import com.jiqa.entity.QuestionBean;
 
 public interface QuestionDAO {
 

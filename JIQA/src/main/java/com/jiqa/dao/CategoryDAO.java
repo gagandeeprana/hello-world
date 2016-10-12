@@ -2,7 +2,7 @@ package com.jiqa.dao;
 
 import java.util.List;
 
-import com.jiqa.beans.CategoryBean;
+import com.jiqa.entity.CategoryBean;
 
 public interface CategoryDAO {
 

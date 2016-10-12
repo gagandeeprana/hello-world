@@ -1,6 +1,6 @@
-<%@page import="com.jiqa.beans.QuestionBean"%>
+<%@page import="com.jiqa.entity.QuestionBean"%>
 <%@page import="com.jiqa.service.impl.CategoryServiceImpl"%>
-<%@page import="com.jiqa.beans.CategoryBean"%>
+<%@page import="com.jiqa.entity.CategoryBean"%>
 <%@page import="java.util.List"%>
 <%@page import="com.jiqa.service.CategoryService"%>
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
