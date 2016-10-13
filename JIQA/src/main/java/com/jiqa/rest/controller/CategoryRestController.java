@@ -19,4 +19,6 @@ public interface CategoryRestController {
 	@RequestMapping(value = "status/{status}/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
 	public Object softDeleteCategory(@PathVariable("status") int status, @PathVariable("id") int id);
 	
+	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+	public Object updateCategory(@RequestBody Category category);
 }

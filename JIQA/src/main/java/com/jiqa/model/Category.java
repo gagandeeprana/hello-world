@@ -6,14 +6,17 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize(include =Inclusion.NON_EMPTY)
+@JsonSerialize(include = Inclusion.NON_EMPTY)
 public class Category {
+
+	@JsonProperty("id")
+	private Integer id;
 
 	@JsonProperty("title")
 	private String title;
 
 	@JsonProperty("status")
-	private int status;
+	private Integer status;
 
 	public String getTitle() {
 		return title;
@@ -23,12 +26,19 @@ public class Category {
 		this.title = title;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

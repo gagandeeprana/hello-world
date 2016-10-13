@@ -2,7 +2,6 @@ package com.jiqa.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +26,12 @@ public class QuestionController {
 	CategoryService categoryService;
 
 	@RequestMapping(value = "/showques", method = RequestMethod.GET)
-	public ModelAndView showCategoryScreen(@ModelAttribute("manageques") QuestionBean questionBean,HttpServletRequest request) {
+	public ModelAndView showCategoryScreen(@ModelAttribute("manageques") QuestionBean questionBean) {
 		ModelAndView modelAndView = new ModelAndView();
 		int categoryId = 0;
-		if(request.getParameter("categoryId")!=null) {
-			categoryId = Integer.parseInt(request.getParameter("categoryId"));
-		}
+//		if(request.getParameter("categoryId")!=null) {
+//			categoryId = Integer.parseInt(request.getParameter("categoryId"));
+//		}
 		List<QuestionBean> lstQuestions = questionService.getAllQuestions(questionBean.getQuestion(), questionBean.getAnswer(), categoryId);
 		List<CategoryBean> lstCategories = categoryService.getAllCategories("");
 		modelAndView.addObject("LIST_QUES", lstQuestions);
