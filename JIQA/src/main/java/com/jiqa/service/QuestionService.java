@@ -11,6 +11,7 @@ public interface QuestionService {
 
 	public int softDeleteQuestion(int status, int questionId);
 
-	public List<QuestionBean> getAllQuestions(String question, String answer,
-			int categoryId);
+	public List<QuestionBean> getAllQuestions(String question, String answer, int categoryId);
+	
+	public QuestionBean getQuestionInfoById(int questionId);
 }

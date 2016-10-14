@@ -32,4 +32,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.getAllQuestions(question, answer, categoryId);
 	}
 
+	@Override
+	public QuestionBean getQuestionInfoById(int questionId) {
+		return questionDAO.getQuestionInfoById(questionId);
+	}
+
 }

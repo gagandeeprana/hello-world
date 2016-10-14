@@ -37,7 +37,6 @@ public class CategoryController {
 	public ModelAndView saveCategory(@ModelAttribute("cat") CategoryBean categoryBean) {
 		ModelAndView modelAndView = null;
 		try {
-			System.out.println("Here in save...");
 			modelAndView = new ModelAndView();
 			System.out.println(categoryBean.getTitle() + "   " + categoryBean.getStatus());
 			categoryService.addCategory(categoryBean);
@@ -61,7 +60,6 @@ public class CategoryController {
 	public ModelAndView deleteCategory(@PathVariable("catId") int categoryId,@PathVariable("sta") int status) {
 		ModelAndView modelAndView = new ModelAndView();
 		categoryService.softDeleteCategory(status, categoryId);
-		System.out.println(status + "  ss  " + categoryId);
 		modelAndView.setViewName("redirect:/showcat");
 		return modelAndView;
 	}
@@ -71,7 +69,6 @@ public class CategoryController {
 		CategoryBean categoryBean = null;
 		try {
 			categoryBean = categoryService.getCategoryInfoById(categoryId);
-			System.out.println(categoryBean.getCategoryId() +" " + categoryBean.getTitle() +"  "  + categoryBean.getStatus());
 		} catch (Exception e) {
 			System.out.println(e);
 			logger.info("Exception in getCategory is: " + e);

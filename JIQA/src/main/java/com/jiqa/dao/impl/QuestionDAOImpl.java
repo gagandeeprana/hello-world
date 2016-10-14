@@ -94,7 +94,7 @@ class QuestionDAOImpl implements QuestionDAO {
 		try {
 			session = sessionFactory.openSession();
 			query = session
-					.createQuery("update questionmaster set status = :status where question_id = :questionId");
+					.createQuery("update QuestionBean set status = :status where questionId = :questionId");
 			query.setParameter("status", status);
 			query.setParameter("questionId", questionId);
 			result = query.executeUpdate();
@@ -151,5 +151,30 @@ class QuestionDAOImpl implements QuestionDAO {
 			}
 		}
 		return lstCategories;
+	}
+
+	@Override
+	public QuestionBean getQuestionInfoById(int questionId) {
+		Session session = null;
+		QuestionBean questionBean = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(QuestionBean.class);
+			criteria.add(Restrictions.eq("questionId", questionId));
+			questionBean = (QuestionBean) criteria.list().get(0);
+		} catch (Exception e) {
+			logger.error("QuestionDAOImpl: Inside getQuestionInfoById: Exception is: "
+					+ e.getMessage());
+		} finally {
+			try {
+				if (session != null) {
+					session.close();
+				}
+			} catch (Exception e2) {
+				logger.error("QuestionDAOImpl: Inside getQuestionInfoById: Inside Finally: Exception is: "
+						+ e2.getMessage());
+			}
+		}
+		return questionBean;
 	}
 }

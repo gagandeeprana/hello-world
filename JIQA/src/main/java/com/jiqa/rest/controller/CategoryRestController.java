@@ -21,4 +21,7 @@ public interface CategoryRestController {
 	
 	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
 	public Object updateCategory(@RequestBody Category category);
+	
+	@RequestMapping(value = "{categoryId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public Object getCategoryInfoById(@PathVariable("categoryId") int id);
 }

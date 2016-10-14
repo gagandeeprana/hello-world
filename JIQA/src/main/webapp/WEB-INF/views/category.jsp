@@ -42,9 +42,7 @@
 <script type="text/javascript">
         function onClickMethod(catId){
         	if(catId != 0) {
-        		alert(catId);
 				$.get("getCat/catId",{"catId" : catId}, function(data) {
-					alert(data.title + " ::title");
 	            	document.getElementById('title').value = data.title;
 		            document.getElementById('categoryid').value = data.categoryId;
 		            if(data.status == 1) {

@@ -30,20 +30,11 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Transactional
 	public int addCategory(CategoryBean categoryBean) {
 		Session session = null;
-		Transaction tx = null;
 		int maxId = 0;
 		try {
 			session = sessionFactory.openSession();
-			System.out.println("Transaction Begin..");
-//			tx = session.beginTransaction();
 			maxId = (Integer) session.save(categoryBean);
-			System.out.println("Transaction Done..");
-//			tx.commit();
 		} catch (Exception e) {
-//			if (tx != null) {
-//				tx.rollback();
-//			}
-			System.out.println("addCat: " + e);
 			logger.error("CategoryDAOImpl: Inside addCategory: Exception is: "
 					+ e.getMessage());
 		} finally {
@@ -59,21 +50,20 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return maxId;
 	}
 
-	@Transactional
 	public boolean updateCategory(CategoryBean categoryBean) {
 		Session session = null;
-		Transaction tx = null;
 		boolean flag = false;
+		Transaction tx = null;
 		try {
 			session = sessionFactory.openSession();
-//			tx = session.beginTransaction();
-			session.update(categoryBean);
-//			tx.commit();
+			tx = session.beginTransaction();
+			session.saveOrUpdate(categoryBean);
+			tx.commit();
 			flag = true;
 		} catch (Exception e) {
-//			if (tx != null) {
-//				tx.rollback();
-//			}
+			if(tx != null) {
+				tx.rollback();
+			}
 			System.out.println(e.getMessage());
 			logger.error("CategoryDAOImpl: Inside updateCategory: Exception is: " + e.getMessage());
 		} finally {

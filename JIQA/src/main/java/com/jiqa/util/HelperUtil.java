@@ -13,19 +13,18 @@ import com.jiqa.model.Success;
 
 public class HelperUtil {
 
-	public ResponseEntity<Object> getErrorJSONString(String code, String message) throws JsonGenerationException, JsonMappingException, IOException {
+	public Object getErrorJSONString(String code, String message) throws JsonGenerationException, JsonMappingException, IOException {
 		Failed error = new Failed(code, message);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(error);
 		return new ResponseEntity<Object>(json, HttpStatus.BAD_REQUEST);
-//		return json;
 	}
 	
-	public String getSuccessJSONString(String code, String message) throws JsonGenerationException, JsonMappingException, IOException {
+	public Object getSuccessJSONString(String code, String message) throws JsonGenerationException, JsonMappingException, IOException {
 		Success success = new Success(code, message);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(success);
-		return json;
+		return new ResponseEntity<Object>(json, HttpStatus.OK);
 	}
 	
 	public boolean checkValue(String val) {

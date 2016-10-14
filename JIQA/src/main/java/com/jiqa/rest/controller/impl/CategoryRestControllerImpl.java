@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,10 +70,10 @@ public class CategoryRestControllerImpl extends MessageVariables implements Cate
 
 	@Override
 	public Object softDeleteCategory(@PathVariable("status") int status, @PathVariable("id") int id) {
-		String json = null;
+		Object obj = null;
 		boolean userExists = false;
 		try {
-//			json = helperUtil.getErrorJSONString(requestInvalidCode, requestInvalidMessage);
+			obj = helperUtil.getErrorJSONString(requestInvalidCode, requestInvalidMessage);
 
 			if(!(status >= 0 && status <= 1)) {
 				return helperUtil.getErrorJSONString(statusNotValidCode, statusNotValidMessage);
@@ -98,17 +97,17 @@ public class CategoryRestControllerImpl extends MessageVariables implements Cate
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return json;
+		return obj;
 	}
 
 	@Override
 	public Object updateCategory(@RequestBody Category category) {
-		ResponseEntity<Object> json = null;
+		Object obj = null;
 		boolean userExists = false;
 
 		try {
 			CategoryBean categoryBean = new CategoryBean();
-			json = helperUtil.getErrorJSONString(requestInvalidCode, requestInvalidMessage);
+			obj = helperUtil.getErrorJSONString(requestInvalidCode, requestInvalidMessage);
 			if(category == null) {
 				return helperUtil.getErrorJSONString(requestInvalidCode, requestInvalidMessage);
 			}
@@ -137,6 +136,19 @@ public class CategoryRestControllerImpl extends MessageVariables implements Cate
 				return helperUtil.getErrorJSONString(failedToAddCategoryCode, failedToAddCategoryMessage);
 			}
 		} catch (Exception e) {	
+			System.out.println(e);
+		}
+		return obj;
+	}
+
+	@Override
+	public Object getCategoryInfoById(@PathVariable("categoryId") int id) {
+		String json = null;
+		try {
+			CategoryBean categoryBean = categoryService.getCategoryInfoById(id);
+			ObjectMapper mapper = new ObjectMapper();
+			json = mapper.writeValueAsString(categoryBean);
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return json;
