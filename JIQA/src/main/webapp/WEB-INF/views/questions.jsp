@@ -19,10 +19,38 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+.modal-dialog {
+  width: 98%;
+  height: 100%;
+  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 5;
+}
+textarea{ 
+  width: 100%; 
+  min-width:100%; 
+  max-width:100%; 
+
+  height:360px; 
+  min-height:360px;  
+  max-height:360px;
+}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#btnSave').click(function(){
 			$('#frm1').submit();
+		});
+		$('#btnSearch').click(function(){
+			$("#frmSearch").change(function() {
+			  $("#frmSearch").attr("action", "showques");
+			});
+			$('#frmSearch').submit();
 		});
 	});
 </script>
@@ -30,8 +58,8 @@
 	function checkFlag(field) {
 		document.getElementById("addUpdateFlag").value = field;
 		if(field == 'update') {
-			document.getElementById("btnSave").value = "Update";
 			document.getElementById("frm1").action = "updateQuestion";
+			document.getElementById("btnSave").value = "Update";
 			$("#modelTitle").html("Edit Question");		
 		}
 		else if(field == 'add') {
@@ -53,7 +81,7 @@
 		            cId = data.categoryBean.categoryId;
 	            	document.getElementById('question').value = data.question;
 	            	document.getElementById('answer').value = data.answer;
-		            document.getElementById('quesid').value = data.quesId;
+		            document.getElementById("questionid").value = data.questionId;
 		            if(data.status == 1) {
 		               	document.getElementById('status').selectedIndex = 0;            		
 		            }
@@ -87,13 +115,15 @@
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add');onClickMethodQuestion('0')" >Add New</button>
 		<div class="form-group">
 		<div class="row">
-			<div class="col-sm-12">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add');onClickMethodQuestion('0')" >Add New</button>
+			<div class="col-sm-8">
 					<div class="modal fade" id="myModal" role="dialog">
 					    <div class="modal-dialog">
 						<form action="saveQues" method="POST" name="ques" id="frm1">
+						<input type="hidden" id = "questionid" name= "quesid" value = "" />					
+						<input type="hidden" id = "addUpdateFlag" value = "" />					
 	
 					      <!-- Modal content-->
 					      <div class="modal-content">
@@ -109,7 +139,6 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<input type="hidden" id = "addUpdateFlag" value = "" />					
 												<input type="text" class="form-control" placeHolder="Enter Question..." id="question" name="question" value="" />
 											</div>
 										</div>
@@ -118,48 +147,58 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<input type="hidden" id = "quesid" name= "quesid" value = "" />					
-												<input type="text" class="form-control" placeHolder="Enter Answer" id="answer" name="answer" value="" />
+												<textarea class="form-control" placeHolder="Enter Answer" id="answer" name="answer"></textarea>
 											</div>
 										</div>
-										<div class="form-group">
-											<div class="input-group">
-												<span class="input-group-addon">
-													 <i class="glyphicon glyphicon-list-alt"></i>												
-												</span>
-												<select class="form-control" name="status" id="status">
-													<option value="1">Active</option>
-													<option value="0">Inactive</option>
-												</select>
+										<div class = "row">
+											<div class="col-sm-4">
+												<div class="form-group">
+													<div class="input-group">
+														<span class="input-group-addon">
+															 <i class="glyphicon glyphicon-list-alt"></i>												
+														</span>
+														<select class="form-control" name="status" id="status">
+															<option value="1">Active</option>
+															<option value="0">Inactive</option>
+														</select>
+													</div>
+												</div>
+											
 											</div>
-										</div>
-										<div class="form-group">
-											<div class="input-group">
-												<span class="input-group-addon">
-													 <i class="glyphicon glyphicon-list"></i>												
-												</span>
-												<select class="form-control" name="categoryId" id="categoryId">
-													<c:forEach items="${LIST_CAT}" var="obj">
-														<option value="${obj.categoryId}">${obj.title}</option>
-													</c:forEach>
-												</select>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<div class="input-group">
+														<span class="input-group-addon">
+															 <i class="glyphicon glyphicon-list"></i>												
+														</span>
+														<select class="form-control" name="categoryId" id="categoryId">
+															<c:forEach items="${LIST_CAT}" var="obj">
+																<option value="${obj.categoryId}">${obj.title}</option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-4" >
+												<div class="form-group">
+														 <input type="button" class="btn btn-primary" style="width:40%" data-dismiss="modal" value="Save" id="btnSave" />
+								  						 <button type="button" class="btn btn-default" style="width:40%" data-dismiss="modal">Close</button>
+												</div>
 											</div>
 										</div>
 									</div>
 					        	</div>
 					        </div>
-					        <div class="modal-footer">
-					          <input type="button" class="btn btn-primary" data-dismiss="modal" value="Save" id="btnSave" />
-							  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-					        </div>
 					      </div>
 					      </form>
 					    </div>
 					  </div>
-			</div>
+				</div>
+				<div class="col-sm-4">
+				</div>
 		</div>
 		</div>	
-		<form action="showques" method="GET" name="ques" id="frm1">
+		<form action="showques" method="GET" name="ques" id="frmSearch">
 		<div class="row">
 			<div class="col-sm-4">
 				<input type="text" name="question" placeholder="Write Question to Search..." class="form-control" />
@@ -176,7 +215,7 @@
 				</select>
 			</div>
 			<div class="col-sm-2">
-				<input type="submit" value="Search" class="btn btn-primary" />
+				<button type="button" id = "btnSearch" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;&nbsp;Search</button>
 			</div>
 		</div>
 		</form>

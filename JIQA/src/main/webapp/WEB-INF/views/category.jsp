@@ -18,6 +18,28 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+	.btn-file {
+	    position: relative;
+	    overflow: hidden;
+	}
+	.btn-file input[type=file] {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    min-width: 100%;
+	    min-height: 100%;
+	    font-size: 100px;
+	    text-align: right;
+	    filter: alpha(opacity=0);
+	    opacity: 0;
+	    outline: none;
+	    background: white;
+	    cursor: inherit;
+	    display: block;
+	}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#btnSave').click(function(){
@@ -25,6 +47,7 @@
 		});
 	});
 </script>
+
 <script type="text/javascript">
 	function checkFlag(field) {
 		document.getElementById("addUpdateFlag").value = field;
@@ -93,7 +116,7 @@
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<input type="text" class="form-control" placeHolder="Enter CategoryName" id="title" name="title" value="" />
+												<input type="text" class="form-control" placeHolder="Enter CategoryName" id="title" name="title" value="" autofocus />
 											</div>
 										</div>
 										<div class="form-group">
@@ -105,6 +128,17 @@
 													<option value="1">Active</option>
 													<option value="0">Inactive</option>
 												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<span class="input-group-addon">
+													 <i class="glyphicon glyphicon-upload"></i>												
+												</span>
+												<!-- <span class="btn btn-default btn-file">
+												    Browse <input type="file">
+												</span> -->
+												<input type = "file" name="uploadImage" id="uploadImage" class = "file" data-show-preview="false" />
 											</div>
 										</div>
 									</div>
@@ -122,20 +156,27 @@
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-striped table-hover table-condensed">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>Title</th>
 						<th>Status</th>
 						<th>Links</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${LIST_CAT1}" var="obj">
+					<c:forEach items="${LIST_CAT1}" var="obj" varStatus="i">
 						<c:if test="${obj ne null}">
-							<tr class="info">
-								<td>${obj.title}</td>
-								<td>${obj.status}</td>
+							<c:if test="${i.index%2 == 0}">
+							<c:set var = "color" value = "danger"/>
+							</c:if>
+							<c:if test="${i.index%2 != 0}">
+							<c:set var = "color" value = ""/>
+							</c:if>
+							<tr class="${color}">
+								<td >${obj.title}</td>
+								<td >${obj.status}</td>
 								<c:if test="${obj.status == 1}">
 									<c:set var="status" value="0"/>
 								</c:if>
@@ -143,6 +184,7 @@
 									<c:set var="status" value="1"/>
 								</c:if>
 								<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethod('${obj.categoryId}')">Update</a> / <a href="deleteCat/sta/${status}/catId/${obj.categoryId}">Delete</a></td>
+								<td><img src = "" height = "40px" width = "50px" alt = "Image Loading..." /></td>
 							</tr>
 						</c:if>
 					</c:forEach>

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jiqa.dao.QuestionDAO;
+import com.jiqa.entity.CategoryBean;
 import com.jiqa.entity.QuestionBean;
 
 @Component
@@ -56,21 +57,22 @@ class QuestionDAOImpl implements QuestionDAO {
 		return maxId;
 	}
 
-	@Transactional
 	public boolean updateQuestion(QuestionBean questionBean) {
 		Session session = null;
 		Transaction tx = null;
 		boolean flag = false;
 		try {
 			session = sessionFactory.openSession();
-//			tx = session.beginTransaction();
+			tx = session.beginTransaction();
+			CategoryBean categoryBean = (CategoryBean) session.get(CategoryBean.class, questionBean.getCategoryId());
+			questionBean.setCategoryBean(categoryBean);
 			session.update(questionBean);
-//			tx.commit();
+			tx.commit();
 			flag = true;
 		} catch (Exception e) {
-//			if (tx != null) {
-//				tx.rollback();
-//			}
+			if (tx != null) {
+				tx.rollback();
+			}
 			logger.error("QuestionDAOImpl: Inside updateQuestion: Exception is: "
 					+ e.getMessage());
 		} finally {

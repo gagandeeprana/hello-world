@@ -60,6 +60,7 @@
 			<list>
 				<value>classpath:hibernate.properties</value>
 				<value>classpath:message.properties</value>
+				<value>classpath:prop.properties</value>
 			</list>
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
