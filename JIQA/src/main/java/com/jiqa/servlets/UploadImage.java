@@ -1,15 +1,11 @@
 package com.jiqa.servlets;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -28,20 +24,19 @@ import org.springframework.beans.factory.annotation.Value;
 @WebServlet(name = "UploadImage", urlPatterns = {"/UploadImage"})
 public class UploadImage extends HttpServlet {
 
-	@Value("${uploadPath}")
-	private String uploadImagePath;
+	private static final long serialVersionUID = -1411402141503358746L;
+	
+	private String uploadImagePath = "D:/Apache/apache-tomcat-8.0.33/webapps/Demo/";
 	
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
 //        String userId = request.getSession().getAttribute("userId").toString();
 //        String rootpath = new ReadFromPropertiesFile().getUploadPath() + File.separator + userId;
         String rootpath = uploadImagePath;
         String filename = "", msg = "";
-
-        try {
-            
-            PrintWriter out = response.getWriter();
+        try {	
             Part f1Image = request.getPart("uploadFile");
             if (f1Image != null) {
                 InputStream is = null;
@@ -52,6 +47,7 @@ public class UploadImage extends HttpServlet {
                 if (!fileToUpload.getParentFile().exists()) {
                     fileToUpload.getParentFile().mkdirs();
                 }
+
                 if (fileToUpload.isFile()) {
                     msg = "file already exists";
                 } else {
@@ -67,8 +63,14 @@ public class UploadImage extends HttpServlet {
 //                    msg = new CommonServices().updateProfileImage(filename, userId);
                 }
             }
+        } catch(Exception e) {
+        	System.out.println("UploadImage: " + e);
         } finally {
-            response.sendRedirect("index.html");
+//        	RequestDispatcher rd = request.getRequestDispatcher("saveCat");
+        	request.setAttribute("title", request.getParameter("title"));
+        	request.setAttribute("status", request.getParameter("status"));
+//        	rd.include(request, response);
+        	response.sendRedirect("saveCat");
         }
     }
 

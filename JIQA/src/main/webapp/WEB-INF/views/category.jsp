@@ -45,6 +45,14 @@
 		$('#btnSave').click(function(){
 			$('#frm1').submit();
 		});
+		/* $('#btnSave').click(function(){
+			$("#frm1").change(function() {
+			  $("#frm1").attr("action", "UploadImage");
+			  $("#frm1").attr("method", "POST");
+			  $("#frm1").attr("enctype", "multipart/form-data");
+			});
+			$('#frm1').submit();
+		}); */
 	});
 </script>
 
@@ -82,6 +90,35 @@
         	}	
         }
 </script>
+<script>
+$(function() {
+
+	  // We can attach the `fileselect` event to all file inputs on the page
+	  $(document).on('change', ':file', function() {
+	    var input = $(this),
+	        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+	        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+	    input.trigger('fileselect', [numFiles, label]);
+	  });
+
+	  // We can watch for our custom `fileselect` event like this
+	  $(document).ready( function() {
+	      $(':file').on('fileselect', function(event, numFiles, label) {
+
+	          var input = $(this).parents('.input-group').find(':text'),
+	              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+	          if( input.length ) {
+	              input.val(log);
+	          } else {
+	              if( log ) alert(log);
+	          }
+
+	      });
+	  });
+	  
+});
+</script>
 </head>
 <body>
 	<%
@@ -98,7 +135,7 @@
 					    <div class="modal-dialog">
 
 					      <!-- Modal content-->
-					      	<form action="saveCat" method="POST" name="cat" id="frm1">
+					      	<form action="UploadImage" method="POST" name="cat" id="frm1" enctype = "multipart/form-data">
 							<input type="hidden" id = "addUpdateFlag" value = "" />
 							<input type="hidden" id = "categoryid" name = "categoryid" value = "" />					      
 					      <div class="modal-content">
@@ -131,16 +168,22 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<div class="input-group">
-												<span class="input-group-addon">
-													 <i class="glyphicon glyphicon-upload"></i>												
-												</span>
 												<!-- <span class="btn btn-default btn-file">
 												    Browse <input type="file">
 												</span> -->
-												<input type = "file" name="uploadImage" id="uploadImage" class = "file" data-show-preview="false" />
+												<div class="input-group">
+												<span class="input-group-addon">
+													 <i class="glyphicon glyphicon-upload"></i>												
+												</span>
+								                <input type="text" class="form-control" readonly>
+								                <label class="input-group-btn">
+								                    <span class="btn btn-primary">
+								                        Browse&hellip; <input type="file" name = "uploadFile" style="display: none;" multiple>
+								                    </span>
+								                </label>
+								            </div>
+											<!--<input type = "file" name="uploadImage" id="uploadImage" class = "file" data-show-preview="false" /> -->
 											</div>
-										</div>
 									</div>
 					        	</div>
 					        </div>
@@ -152,11 +195,10 @@
 					      </form>
 					    </div>
 					  </div>
-					 
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-hover">
+			<table class="table table-hover table-condensed">
 				<thead>
 					<tr>
 						<th>Title</th>

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,12 +35,14 @@ public class CategoryController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/saveCat" , method = RequestMethod.POST)
-	public ModelAndView saveCategory(@ModelAttribute("cat") CategoryBean categoryBean) {
+	@RequestMapping(value = "/saveCat" , method = RequestMethod.GET)
+	public ModelAndView saveCategory(@RequestParam("title") String title, @RequestParam("status") int status) {
 		ModelAndView modelAndView = null;
 		try {
 			modelAndView = new ModelAndView();
-			System.out.println(categoryBean.getTitle() + "   " + categoryBean.getStatus());
+			CategoryBean categoryBean = new CategoryBean();
+			categoryBean.setTitle(title);
+			categoryBean.setStatus(status);
 			categoryService.addCategory(categoryBean);
 			modelAndView.setViewName("redirect:/showcat");
 		} catch (Exception e) {
