@@ -2,27 +2,34 @@ package com.jiqa.controller;
 
 import java.util.List;
 
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jiqa.entity.CategoryBean;
 import com.jiqa.service.CategoryService;
+import com.jiqa.util.UploadUtil;
 
 @Controller
 public class CategoryController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	UploadUtil uploadUtil = new UploadUtil();
 
 	Logger logger = Logger.getLogger(CategoryController.class);
 	
@@ -35,15 +42,17 @@ public class CategoryController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/saveCat" , method = RequestMethod.GET)
-	public ModelAndView saveCategory(@RequestParam("title") String title, @RequestParam("status") int status) {
+	@RequestMapping(value = "/saveCat" , method = RequestMethod.POST)
+	public ModelAndView saveCategory(@RequestParam("uploadFile") MultipartFile multipart, @RequestParam("title") String title, @RequestParam("status") int status) {
 		ModelAndView modelAndView = null;
 		try {
 			modelAndView = new ModelAndView();
 			CategoryBean categoryBean = new CategoryBean();
 			categoryBean.setTitle(title);
 			categoryBean.setStatus(status);
+			categoryBean.setImageName(multipart.getOriginalFilename());
 			categoryService.addCategory(categoryBean);
+			uploadUtil.processRequest(multipart, title);
 			modelAndView.setViewName("redirect:/showcat");
 		} catch (Exception e) {
 			System.out.println("CategoryController: Exception is: " + e);
@@ -68,7 +77,7 @@ public class CategoryController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "getCat/catId" , method = RequestMethod.GET)
+	@RequestMapping(value = "/getCat/catId" , method = RequestMethod.GET)
 	@ResponseBody  public CategoryBean getCategory(@RequestParam("catId") int categoryId) {
 		CategoryBean categoryBean = null;
 		try {
@@ -79,5 +88,7 @@ public class CategoryController {
 		}
 		return categoryBean;
 	}
+	
+	
 	
 }

@@ -8,3 +8,4 @@ regedit - it opens registry
 git ls-tree --full-tree -r HEAD    -> This lists all files and folders on git repository
 ping 8.8.8.8 - it will ping to google.com
 ipconfig/all - it shows complete details;
+netstat -a -> This tells which service is running on which port.

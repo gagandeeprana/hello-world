@@ -25,7 +25,7 @@
 
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="<c:url value="images/Image3.jpg" />" alt="Java1" />
+				<img src="<c:url value="images/Image7.jpg" />" alt="Java4" />
 			</div>
 
 			<div class="item">

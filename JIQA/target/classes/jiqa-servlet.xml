@@ -65,6 +65,8 @@
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

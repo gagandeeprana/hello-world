@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Categories</title>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@page isELIgnored="false"%>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -235,8 +236,22 @@ textarea{
 				<tbody>
 					<c:forEach items="${LIST_QUES}" var="obj">
 						<tr class="info">
-							<td>${obj.question}</td>
-							<td>${obj.answer}</td>
+							<c:if test = "${obj.question.length() <= 20}">
+								<c:set var = "ques" value="${obj.question}"/>
+							</c:if>
+							<c:if test = "${obj.question.length() > 20}">
+								<c:set var = "ques" value="${fn:substring(obj.question, 0, 19)}..."/>
+							</c:if>
+							
+							<td>${ques}</td>
+							
+							<c:if test = "${obj.answer.length() <= 20}">
+								<c:set var = "ans" value="${obj.answer}"/>
+							</c:if>
+							<c:if test = "${obj.answer.length() > 20}">
+								<c:set var = "ans" value="${fn:substring(obj.answer, 0, 19)}..."/>
+							</c:if>
+							<td>${ans}</td>
 							<td>${obj.status}</td>
 							<c:if test="${obj.status == 1}">
 									<c:set var="status" value="0"/>
@@ -245,7 +260,7 @@ textarea{
 									<c:set var="status" value="1"/>
 								</c:if>
 							<td>${obj.categoryBean.title}</td>
-							<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethodQuestion('${obj.questionId}')">Update</a> / <a href="deleteQues/sta/${status}/quesId/${obj.questionId}">Delete</a></td>
+							<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethodQuestion('${obj.questionId}')">Update</a> / <a href="deleteQues/sta/${status}/quesId/${obj.questionId}">Delete</a> / <a href="<c:url value='/showquestionbyid/${obj.questionId}'/>">View Detail</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

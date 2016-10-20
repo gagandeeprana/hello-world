@@ -43,16 +43,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#btnSave').click(function(){
+			/* $('#frm1').attr("enctype","multipart/form-data");
+			$('#frm1').attr("method","POST");
+			$('#frm1').attr("action","saveCat"); */
 			$('#frm1').submit();
 		});
-		/* $('#btnSave').click(function(){
-			$("#frm1").change(function() {
-			  $("#frm1").attr("action", "UploadImage");
-			  $("#frm1").attr("method", "POST");
-			  $("#frm1").attr("enctype", "multipart/form-data");
-			});
-			$('#frm1').submit();
-		}); */
 	});
 </script>
 
@@ -76,6 +71,7 @@
 				$.get("getCat/catId",{"catId" : catId}, function(data) {
 	            	document.getElementById('title').value = data.title;
 		            document.getElementById('categoryid').value = data.categoryId;
+		            document.getElementById('fileUpload').value = data.imageName;
 		            if(data.status == 1) {
 		               	document.getElementById('status').selectedIndex = 0;            		
 		            }
@@ -122,6 +118,8 @@ $(function() {
 </head>
 <body>
 	<%
+		String imagePath = "http://localhost:9090/CategoryImages/";
+		pageContext.setAttribute("imagePath", imagePath);
 		List<CategoryBean> lstCategory = ((List<CategoryBean>) request.getAttribute("LIST_CAT"));
 		pageContext.setAttribute("LIST_CAT1", lstCategory);
 	%>
@@ -135,7 +133,7 @@ $(function() {
 					    <div class="modal-dialog">
 
 					      <!-- Modal content-->
-					      	<form action="UploadImage" method="POST" name="cat" id="frm1" enctype = "multipart/form-data">
+					      	<form action="saveCat" method="POST" name="cat" id="frm1" enctype = "multipart/form-data">
 							<input type="hidden" id = "addUpdateFlag" value = "" />
 							<input type="hidden" id = "categoryid" name = "categoryid" value = "" />					      
 					      <div class="modal-content">
@@ -178,7 +176,7 @@ $(function() {
 								                <input type="text" class="form-control" readonly>
 								                <label class="input-group-btn">
 								                    <span class="btn btn-primary">
-								                        Browse&hellip; <input type="file" name = "uploadFile" style="display: none;" multiple>
+								                        Browse&hellip; <input type="file" name = "uploadFile" style="display: none;" multiple id = "fileUpload" value = "" />
 								                    </span>
 								                </label>
 								            </div>
@@ -188,7 +186,7 @@ $(function() {
 					        	</div>
 					        </div>
 					        <div class="modal-footer">
-					          <input type="button" class="btn btn-primary" data-dismiss="modal" value="Save" id="btnSave" />
+					          <input type="button" class="btn btn-primary" data-dismiss="modal" id= "btnSave" value="Save" />
 							  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 					        </div>
 					      </div>
@@ -226,7 +224,16 @@ $(function() {
 									<c:set var="status" value="1"/>
 								</c:if>
 								<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethod('${obj.categoryId}')">Update</a> / <a href="deleteCat/sta/${status}/catId/${obj.categoryId}">Delete</a></td>
-								<td><img src = "" height = "40px" width = "50px" alt = "Image Loading..." /></td>
+								<c:choose>
+									<c:when test="${obj.imageName ne null}">
+										<c:set var = "srcPath" value = "${imagePath}${obj.title}/${obj.imageName}"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var = "srcPath" value = "${imagePath}no-category-image.jpg"/>
+									</c:otherwise>
+								</c:choose>
+								
+								<td><img src = "${srcPath}" height = "80px" width = "70px" alt = "Image Loading..." /></td>
 							</tr>
 						</c:if>
 					</c:forEach>

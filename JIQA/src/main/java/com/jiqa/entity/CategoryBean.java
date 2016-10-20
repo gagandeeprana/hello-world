@@ -22,12 +22,23 @@ public class CategoryBean {
 
 	@Column(name = "status")
 	private int status;
+	
+	@Column(name = "image_name")
+	private String imageName;
 
 //	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean", cascade=CascadeType.ALL)
 //	private Set<QuestionBean> questions;
 
 	public int getCategoryId() {
 		return categoryId;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	public void setCategoryId(int categoryId) {

@@ -66,10 +66,8 @@ public class UploadImage extends HttpServlet {
         } catch(Exception e) {
         	System.out.println("UploadImage: " + e);
         } finally {
-//        	RequestDispatcher rd = request.getRequestDispatcher("saveCat");
         	request.setAttribute("title", request.getParameter("title"));
         	request.setAttribute("status", request.getParameter("status"));
-//        	rd.include(request, response);
         	response.sendRedirect("saveCat");
         }
     }
