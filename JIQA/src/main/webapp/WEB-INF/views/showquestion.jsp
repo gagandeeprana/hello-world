@@ -36,7 +36,6 @@ textarea{
 		String question = request.getParameter("question");
 		String answer = request.getParameter("answer");
 		pageContext.setAttribute("question", question);
-		pageContext.setAttribute("answer", answer);
 	%>
 	<jsp:include page="header2.jsp"></jsp:include>
 	<div class="container">
@@ -56,6 +55,10 @@ textarea{
 							<span class="input-group-addon">
 								<i><b>Answer</b>&nbsp;</i>
 							</span>
+							<%
+								answer = answer.replace("%20", " ");
+								pageContext.setAttribute("answer", answer);
+							%>
 							<textarea class="form-control" placeHolder="Enter Answer" id="answer" name="answer">${answer}</textarea>
 						</div>
 					</div>

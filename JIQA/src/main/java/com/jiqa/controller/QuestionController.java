@@ -2,6 +2,8 @@ package com.jiqa.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,26 +86,29 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "/show" , method = RequestMethod.GET)
-	public String show(Model model, @ModelAttribute("questionBean") QuestionBean questionBean) {
-		model.addAttribute("question", questionBean.getQuestion());
-		model.addAttribute("answer", questionBean.getAnswer());
+	public String show(Model model,HttpServletRequest request) {
+		String question = request.getParameter("question");
+		String answer = request.getParameter("answer");
+		model.addAttribute("question", question);
+		model.addAttribute("answer", answer);
 		return "showquestion";
 	}
 	
 	@RequestMapping(value = "/showquestionbyid/{q}" , method = RequestMethod.GET)
-	public String getQuestionById(@PathVariable("q") int questionId, RedirectAttributes redirectAttributes) {
-//		ModelAndView modelAndView = new ModelAndView();
+	public ModelAndView getQuestionById(@PathVariable("q") int questionId) {
+		ModelAndView modelAndView = new ModelAndView();
 
 		try {
 			if(questionId != 0) {
 				QuestionBean questionBean = questionService.getQuestionInfoById(questionId);
-				redirectAttributes.addAttribute("questionBean", questionBean);
-//				modelAndView.setViewName("redirect:/show");
+				modelAndView.addObject("questionBean", questionBean);
+				System.out.println(questionBean);
+				modelAndView.setViewName("redirect:/show?question=" + questionBean.getQuestion() + "&answer=" + questionBean.getAnswer());
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "redirect:/show";
+		return modelAndView;
 	}
 	
 }

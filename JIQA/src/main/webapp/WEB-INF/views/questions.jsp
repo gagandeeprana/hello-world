@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Categories</title>
+<title>Question/ Answer</title>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@page isELIgnored="false"%>
@@ -106,6 +106,22 @@ textarea{
         	}
         }
 </script>
+<script>
+	$(document).ready(function(){
+		//alert("111");
+		$('#answer').keyup(function(){
+			//alert("222");
+			var ans = $('#answer').val();
+			if(ans.indexOf("  ") >= 0) {
+				$('#answer').focus();
+				$('#divMsg').show();
+			}
+			if(ans.indexOf("  ") < 0) {
+				$('#divMsg').hide();
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<%
@@ -144,6 +160,9 @@ textarea{
 											</div>
 										</div>
 										<div class="form-group">
+										<div class="alert alert-warning" style="display: none;" id = "divMsg">
+  											<strong>Warning!</strong> Answer in Invalid Format.
+										</div>
 											<div class="input-group">
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
