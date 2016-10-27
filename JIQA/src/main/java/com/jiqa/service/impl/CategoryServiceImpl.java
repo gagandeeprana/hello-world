@@ -36,4 +36,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDAO.getCategoryInfoById(id);
 	}
 
+	@Override
+	public Long getQuestionsCountByCategory(int categoryId) {
+		return categoryDAO.getQuestionsCountByCategory(categoryId);
+	}
+	
+
 }

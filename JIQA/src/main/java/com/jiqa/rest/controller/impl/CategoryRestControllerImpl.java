@@ -31,7 +31,13 @@ public class CategoryRestControllerImpl extends MessageVariables implements Cate
 		String json = null;
 		try {
 			List<CategoryBean> lstCategories = categoryService.getAllCategories("");
+			for(CategoryBean categoryBean : lstCategories) {
+				long questionCount = categoryService.getQuestionsCountByCategory(categoryBean.getCategoryId());
+				System.out.println("QC: " + questionCount);
+				categoryBean.setQuestionCount(questionCount);
+			}
 			ObjectMapper mapper = new ObjectMapper();
+			System.out.println("REQUEST RECEIVED>>>>>> " + lstCategories.get(0).getQuestionCount());
 			json = mapper.writeValueAsString(lstCategories);
 		} catch (Exception e) {
 			System.out.println(e);

@@ -12,12 +12,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jiqa.dao.CategoryDAO;
 import com.jiqa.entity.CategoryBean;
+import com.jiqa.entity.QuestionBean;
 
 @Repository
 public class CategoryDAOImpl implements CategoryDAO {
@@ -132,6 +134,31 @@ public class CategoryDAOImpl implements CategoryDAO {
 			}
 		}
 		return lstCategories;
+	}
+	
+	@Transactional
+	public Long getQuestionsCountByCategory(int categoryId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(QuestionBean.class);
+			criteria.add(Restrictions.eq("categoryBean.categoryId", categoryId));
+			criteria.setProjection(Projections.rowCount());
+			return (Long)criteria.uniqueResult();
+		} catch (Exception e) {
+			logger.error("CategoryDAOImpl: Inside getQuestionsCountByCategory: Exception is: "
+					+ e.getMessage());
+		} finally {
+			try {
+				if (session != null) {
+					session.close();
+				}
+			} catch (Exception e2) {
+				logger.error("CategoryDAOImpl: Inside getQuestionsCountByCategory: Inside Finally: Exception is: "
+						+ e2.getMessage());
+			}
+		}
+		return 0l;
 	}
 
 	@Transactional
