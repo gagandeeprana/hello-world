@@ -3,6 +3,7 @@ package com.jiqa.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,24 +87,29 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "/show" , method = RequestMethod.GET)
-	public String show(Model model,HttpServletRequest request) {
-		String question = request.getParameter("question");
-		String answer = request.getParameter("answer");
-		model.addAttribute("question", question);
-		model.addAttribute("answer", answer);
-		return "showquestion";
+	public ModelAndView show(HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
+		String question = session.getAttribute("q").toString();
+		String answer = session.getAttribute("a").toString();
+		modelAndView.addObject("question", question);
+		modelAndView.addObject("answer", answer);
+		modelAndView.setViewName("showquestion");
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/showquestionbyid/{q}" , method = RequestMethod.GET)
-	public ModelAndView getQuestionById(@PathVariable("q") int questionId) {
+	public ModelAndView getQuestionById(@PathVariable("q") int questionId, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		try {
 			if(questionId != 0) {
 				QuestionBean questionBean = questionService.getQuestionInfoById(questionId);
 				modelAndView.addObject("questionBean", questionBean);
-				System.out.println(questionBean);
-				modelAndView.setViewName("redirect:/show?question=" + questionBean.getQuestion() + "&answer=" + questionBean.getAnswer());
+				HttpSession session = request.getSession();
+				session.setAttribute("q", questionBean.getQuestion());
+				session.setAttribute("a", questionBean.getAnswer());
+//				modelAndView.setViewName("redirect:/show?question=" + questionBean.getQuestion() + "&answer=" + questionBean.getAnswer());
+				modelAndView.setViewName("redirect:/show");
 			}
 		} catch (Exception e) {
 			System.out.println(e);

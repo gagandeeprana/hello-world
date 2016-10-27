@@ -61,11 +61,15 @@ textarea{
 		if(field == 'update') {
 			document.getElementById("frm1").action = "updateQuestion";
 			document.getElementById("btnSave").value = "Update";
-			$("#modelTitle").html("Edit Question");		
+			$("#modelTitle").html("Edit Question");
+			$("#cke_1_contents").css("height", "480px");
+			$("#cke_answer").css("height", "480px");
 		}
 		else if(field == 'add') {
 			document.getElementById("btnSave").value = "Save";			
-			$("#modelTitle").html("Add New Question");		
+			$("#modelTitle").html("Add New Question");
+			$("#cke_1_contents").css("height", "380px");
+			$("#cke_answer").css("height", "380px");
 		}
 		else if(field == 'search') {
 			document.getElementById("frm1").method = "GET";	
@@ -81,7 +85,10 @@ textarea{
 				$.get("getQues/quesId",{"quesId" : quesId}, function(data) {
 		            cId = data.categoryBean.categoryId;
 	            	document.getElementById('question').value = data.question;
-	            	document.getElementById('answer').value = data.answer;
+	            	CKEDITOR.replace( 'answer');
+		    		$("#cke_answer").css("height", "380px");
+	            	document.getElementById('cke_answer').value = data.answer;
+	            	//alert(document.getElementById('cke_answer').value);
 		            document.getElementById("questionid").value = data.questionId;
 		            if(data.status == 1) {
 		               	document.getElementById('status').selectedIndex = 0;            		
@@ -100,14 +107,17 @@ textarea{
             	});
         	}
         	else {
+        		CKEDITOR.replace( 'answer');
+	    		$("#cke_answer").css("height", "480px");
+				$("#cke_1_contents").css("height", "480px");
            		document.getElementById('question').value = "";
-           		document.getElementById('answer').value = "";
+           		document.getElementById('cke_answer').value = "";
            		document.getElementById('status').selectedIndex = 0;            		
         	}
         }
 </script>
 <script>
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 		//alert("111");
 		$('#answer').keyup(function(){
 			//alert("222");
@@ -120,6 +130,42 @@ textarea{
 				$('#divMsg').hide();
 			}
 		});
+	}); */
+</script>
+<script>
+function getSelectedText () {
+    if (window.getSelection) {
+        return window.getSelection ().toString ();
+    }
+    else {
+        if (document.selection) {
+            return document.selection.createRange ().text;
+        }
+    }
+    return '';
+}
+
+$ (document).ready (function() {
+
+    // User pressed a key 
+    $ (document).keydown (function(e) {
+        // is it CTRL+ENTER?
+    if (e.which == 66 && e.ctrlKey) {
+    		document.execCommand('bold');
+    		var selectedString = getSelectedText();
+    		selectedString = selectedString.replace(selectedString, selectedString.bold());
+            alert('You have selected ' + getSelectedText ());
+            // now I need to highlight the text I got
+            // ????
+    }
+    });
+});
+</script>
+<script src="//cdn.ckeditor.com/4.5.11/basic/ckeditor.js"></script>
+<script src="ckeditor/adapters/jquery.js"></script>
+<script>
+	$(document).ready(function() {
+		$('textarea#editor1').ckeditor();
 	});
 </script>
 </head>
@@ -163,11 +209,28 @@ textarea{
 										<div class="alert alert-warning" style="display: none;" id = "divMsg">
   											<strong>Warning!</strong> Answer in Invalid Format.
 										</div>
+										<div>
+										</div>
 											<div class="input-group">
 												<span class="input-group-addon">
 													 <i class="glyphicon glyphicon-inbox"></i>												
 												</span>
-												<textarea class="form-control" placeHolder="Enter Answer" id="answer" name="answer"></textarea>
+												<!-- <script>
+									                CKEDITOR.resize( '100%', '600px' )
+												</script> -->
+												<textarea id="answer" class="form-control" name="answer" placeHolder="Enter Answer" style="height: 300px important"></textarea>
+												<script>
+									                // Replace the <textarea id="editor1"> with a CKEditor
+									                // instance, using default configuration.
+									               /*  CKEDITOR.replace( 'answer');
+									    			$("#cke_answer").css("height", "380px"); */
+
+									                /* CKEDITOR.replace( 'answer', {
+														extraPlugins: 'placeholder',
+														toolbar: [ [ 'Source', 'Bold' ], ['CreatePlaceholder'] ]
+													}); */
+								            	</script>
+												<!-- <textarea class="form-control" placeHolder="Enter Answer" id="answer" name="answer"></textarea> -->
 											</div>
 										</div>
 										<div class = "row">
