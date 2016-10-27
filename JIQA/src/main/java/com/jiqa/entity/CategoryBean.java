@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -25,12 +26,25 @@ public class CategoryBean {
 	
 	@Column(name = "image_name")
 	private String imageName;
-
+	
+	@Transient
+	@Column(name = "question_count")
+	private Long questionCount;
+	
 //	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryBean", cascade=CascadeType.ALL)
 //	private Set<QuestionBean> questions;
 
+
 	public int getCategoryId() {
 		return categoryId;
+	}
+
+	public Long getQuestionCount() {
+		return questionCount;
+	}
+
+	public void setQuestionCount(Long questionCount) {
+		this.questionCount = questionCount;
 	}
 
 	public String getImageName() {

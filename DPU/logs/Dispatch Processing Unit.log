@@ -11756,3 +11756,21 @@ Dispatch Processing Unit 2016-10-08 23:00:07,939  INFO [AWT-EventQueue-0] (Drive
 Dispatch Processing Unit 2016-10-08 23:00:07,948  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
 Dispatch Processing Unit 2016-10-08 23:00:07,976  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
 Dispatch Processing Unit 2016-10-08 23:00:07,976  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-10-23 10:47:43,455  INFO [main] (DPU.java:41) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 10:47:46,353  INFO [main] (DPU.java:53) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-10-23 11:26:55,604  INFO [main] (DPU.java:41) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 11:26:56,855  INFO [main] (DPU.java:53) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-10-23 16:54:53,306  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 16:54:53,713  INFO [main] (DPU.java:56) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-10-23 16:55:14,026  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 16:55:14,639  INFO [main] (DPU.java:56) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-10-23 17:21:23,319  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 17:22:12,485  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 17:22:30,866  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 17:22:56,312  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 17:24:02,208  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 17:24:02,536  INFO [main] (DPU.java:60) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-10-23 17:36:12,029  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 17:36:12,873  INFO [main] (DPU.java:61) - Inside DPU: main(): ENDS
+Dispatch Processing Unit 2016-10-23 23:04:58,624  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS
+Dispatch Processing Unit 2016-10-23 23:05:00,212  INFO [main] (DPU.java:61) - Inside DPU: main(): ENDS

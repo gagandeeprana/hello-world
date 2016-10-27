@@ -15,5 +15,7 @@ public interface CategoryService {
 	public List<CategoryBean> getAllCategories(String title);
 
 	public CategoryBean getCategoryInfoById(int id);
+	public Long getQuestionsCountByCategory(int categoryId);
+
 
 }
