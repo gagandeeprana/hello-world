@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadUtil {
 
-	private String uploadImagePath = "D:/Apache/apache-tomcat-8.0.26/apache-tomcat-8.0.26/webapps/CategoryImages";
+	private String uploadImagePath = "http://52.66.158.140:8080/usr/local/apache-tomcat/webapps/CategoryImages";
 	
     public void processRequest(MultipartFile multipart, String title) throws ServletException, IOException {
 
