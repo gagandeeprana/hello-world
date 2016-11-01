@@ -179,4 +179,30 @@ class QuestionDAOImpl implements QuestionDAO {
 		}
 		return questionBean;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<QuestionBean> getQuestionsByCategoryId(int catId) {
+		List<QuestionBean> lstQuestions = new ArrayList<QuestionBean>();
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(QuestionBean.class);
+			criteria.add(Restrictions.eq("categoryBean.categoryId", catId));
+			lstQuestions = (List<QuestionBean>) criteria.list();
+		} catch (Exception e) {
+			logger.error("QuestionDAOImpl: Inside getQuestionsByCategoryId: Exception is: "
+					+ e.getMessage());
+		} finally {
+			try {
+				if (session != null) {
+					session.close();
+				}
+			} catch (Exception e2) {
+				logger.error("QuestionDAOImpl: Inside getQuestionsByCategoryId: Inside Finally: Exception is: "
+						+ e2.getMessage());
+			}
+		}
+		return lstQuestions;
+	}
 }

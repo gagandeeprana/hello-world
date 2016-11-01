@@ -24,4 +24,7 @@ public interface QuestionRestController {
 	
 	@RequestMapping(value = "{questionAnswerId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public Object getQuestionAnswerInfoById(@PathVariable("questionAnswerId") int id);
+	
+	@RequestMapping(value = "/catId/{catId}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	public Object getQuestionsByCategoryId(@PathVariable("catId") int id);
 }

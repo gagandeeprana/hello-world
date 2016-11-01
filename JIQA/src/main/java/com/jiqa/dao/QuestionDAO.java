@@ -15,4 +15,6 @@ public interface QuestionDAO {
 	public List<QuestionBean> getAllQuestions(String question,String answer, int categoryId);
 	
 	public QuestionBean getQuestionInfoById(int questionId);
+	
+	public List<QuestionBean> getQuestionsByCategoryId(int catId);
 }
