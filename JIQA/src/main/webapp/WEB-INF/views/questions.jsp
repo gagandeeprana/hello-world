@@ -62,12 +62,11 @@ textarea{
 			document.getElementById("frm1").action = "updateQuestion";
 			document.getElementById("btnSave").value = "Update";
 			$("#modelTitle").html("Edit Question");
-			$("#cke_1_contents").css("height", "480px");
-			$("#cke_answer").css("height", "480px");
 		}
 		else if(field == 'add') {
 			document.getElementById("btnSave").value = "Save";			
 			$("#modelTitle").html("Add New Question");
+			CKEDITOR.replace('answer');
 			$("#cke_1_contents").css("height", "380px");
 			$("#cke_answer").css("height", "380px");
 		}
@@ -80,14 +79,17 @@ textarea{
 </script>
 <script type="text/javascript">
         function onClickMethodQuestion(quesId){
+        	alert("HERE..");
         	var cId = 0;
         	if(quesId != 0) {
+        		alert("WITH VALUE GET..");
 				$.get("getQues/quesId",{"quesId" : quesId}, function(data) {
 		            cId = data.categoryBean.categoryId;
 	            	document.getElementById('question').value = data.question;
-	            	CKEDITOR.replace( 'answer');
-		    		$("#cke_answer").css("height", "380px");
-	            	document.getElementById('cke_answer').value = data.answer;
+	            	CKEDITOR.replace('answer');
+	    			$("#cke_1_contents").css("height", "380px");
+	    			$("#cke_answer").css("height", "380px");
+	            	document.getElementById('cke_1_contents').value = data.answer;
 	            	//alert(document.getElementById('cke_answer').value);
 		            document.getElementById("questionid").value = data.questionId;
 		            if(data.status == 1) {
@@ -107,11 +109,12 @@ textarea{
             	});
         	}
         	else {
+        		alert("ADD");
         		CKEDITOR.replace( 'answer');
-	    		$("#cke_answer").css("height", "480px");
-				$("#cke_1_contents").css("height", "480px");
+	    		$("#cke_answer").css("height", "380px");
+				$("#cke_1_contents").css("height", "380px");
            		document.getElementById('question').value = "";
-           		document.getElementById('cke_answer').value = "";
+           		document.getElementById('cke_1_contents').value = "";
            		document.getElementById('status').selectedIndex = 0;            		
         	}
         }
@@ -157,17 +160,18 @@ $ (document).ready (function() {
             alert('You have selected ' + getSelectedText ());
             // now I need to highlight the text I got
             // ????
-    }
+    	}
     });
 });
 </script>
 <script src="//cdn.ckeditor.com/4.5.11/basic/ckeditor.js"></script>
 <script src="ckeditor/adapters/jquery.js"></script>
-<script>
+<!-- <script>
 	$(document).ready(function() {
-		$('textarea#editor1').ckeditor();
+		alert("435345");
+		$('#answer').ckeditor();
 	});
-</script>
+</script> -->
 </head>
 <body>
 	<%
@@ -178,7 +182,7 @@ $ (document).ready (function() {
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add');onClickMethodQuestion('0')" >Add New</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add'); onClickMethodQuestion('0');" >Add New</button>
 		<div class="form-group">
 		<div class="row">
 			<div class="col-sm-8">
@@ -218,14 +222,14 @@ $ (document).ready (function() {
 												<!-- <script>
 									                CKEDITOR.resize( '100%', '600px' )
 												</script> -->
-												<textarea id="answer" class="form-control" name="answer" placeHolder="Enter Answer" style="height: 300px important"></textarea>
+												<textarea id="answer" class="form-control" name="answer" placeHolder="Enter Answer"></textarea>
 												<script>
 									                // Replace the <textarea id="editor1"> with a CKEditor
 									                // instance, using default configuration.
-									               /*  CKEDITOR.replace( 'answer');
-									    			$("#cke_answer").css("height", "380px"); */
+									                 /* CKEDITOR.replace( 'answer'); */
+									    			/* $("#cke_answer").css("height", "380px"); */
 
-									                /* CKEDITOR.replace( 'answer', {
+									                /*  CKEDITOR.replace( 'answer', {
 														extraPlugins: 'placeholder',
 														toolbar: [ [ 'Source', 'Bold' ], ['CreatePlaceholder'] ]
 													}); */

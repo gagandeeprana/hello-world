@@ -118,7 +118,7 @@ $(function() {
 </head>
 <body>
 	<%
-		String imagePath = "http://localhost:9090/CategoryImages/";
+		String imagePath = "http://52.66.158.140:8080/CategoryImages/";
 		pageContext.setAttribute("imagePath", imagePath);
 		List<CategoryBean> lstCategory = ((List<CategoryBean>) request.getAttribute("LIST_CAT"));
 		pageContext.setAttribute("LIST_CAT1", lstCategory);
