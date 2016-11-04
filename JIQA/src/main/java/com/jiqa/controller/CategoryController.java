@@ -1,6 +1,10 @@
 package com.jiqa.controller;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +42,20 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/saveCat" , method = RequestMethod.POST)
-	public ModelAndView saveCategory(@RequestParam("uploadFile") MultipartFile multipart, @RequestParam("title") String title, @RequestParam("status") int status) {
+	public ModelAndView saveCategory(@RequestParam("uploadFile") MultipartFile multipart, @RequestParam("title") String title, @RequestParam("status") int status, HttpServletRequest request) {
 		ModelAndView modelAndView = null;
 		try {
 			modelAndView = new ModelAndView();
 			CategoryBean categoryBean = new CategoryBean();
 			categoryBean.setTitle(title);
 			categoryBean.setStatus(status);
+			HttpSession session = request.getSession();
+			String createdBy = "";
+			if(session != null) {
+				createdBy = session.getAttribute("un").toString();
+			}
+			categoryBean.setCreatedBy(createdBy);
+			categoryBean.setCreatedOn(new Date());
 			categoryBean.setImageName(multipart.getOriginalFilename());
 			categoryService.addCategory(categoryBean);
 			uploadUtil.processRequest(multipart, title);

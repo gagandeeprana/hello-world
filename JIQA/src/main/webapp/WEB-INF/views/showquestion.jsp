@@ -30,6 +30,7 @@ textarea{
   max-height:360px;
 }
 </style>
+<script src="//cdn.ckeditor.com/4.5.11/basic/ckeditor.js"></script>
 </head>
 <body>
 	<jsp:include page="header2.jsp"></jsp:include>
@@ -51,6 +52,11 @@ textarea{
 								<i><b>Answer</b>&nbsp;</i>
 							</span>
 							<textarea class="form-control" placeHolder="Enter Answer" id="answer" name="answer">${answer}</textarea>
+							<script>
+								CKEDITOR.replace("answer", {
+									height : 320
+								});
+			            	</script>
 						</div>
 					</div>
 					<div class="form-group" align="right">

@@ -62,18 +62,18 @@ textarea{
 			document.getElementById("frm1").action = "updateQuestion";
 			document.getElementById("btnSave").value = "Update";
 			$("#modelTitle").html("Edit Question");
-			$("#cke_1_contents").css("height", "480px");
-			$("#cke_answer").css("height", "480px");
 		}
 		else if(field == 'add') {
-			document.getElementById("btnSave").value = "Save";			
+			//$("#cke_1_contents").html('');
+			CKEDITOR.instances['answer'].setData('');
+       		document.getElementById('question').value = "";
+       		document.getElementById('status').selectedIndex = 0;
+       		document.getElementById('categoryId').selectedIndex = 0;
+			document.getElementById("btnSave").value = "Save";
 			$("#modelTitle").html("Add New Question");
-			$("#cke_1_contents").css("height", "380px");
-			$("#cke_answer").css("height", "380px");
-		}
-		else if(field == 'search') {
-			document.getElementById("frm1").method = "GET";	
-			document.getElementById("frm1").action = "showques";	
+		} else if (field == 'search') {
+			document.getElementById("frm1").method = "GET";
+			document.getElementById("frm1").action = "showques";
 			document.getElementById("frm1").submit();
 		}
 	}
@@ -85,10 +85,8 @@ textarea{
 				$.get("getQues/quesId",{"quesId" : quesId}, function(data) {
 		            cId = data.categoryBean.categoryId;
 	            	document.getElementById('question').value = data.question;
-	            	CKEDITOR.replace( 'answer');
-		    		$("#cke_answer").css("height", "380px");
-	            	document.getElementById('cke_answer').value = data.answer;
-	            	//alert(document.getElementById('cke_answer').value);
+	            	CKEDITOR.instances['answer'].setData(data.answer);
+	            	//$("#cke_1_contents").html(data.answer);
 		            document.getElementById("questionid").value = data.questionId;
 		            if(data.status == 1) {
 		               	document.getElementById('status').selectedIndex = 0;            		
@@ -106,68 +104,9 @@ textarea{
 		            } 
             	});
         	}
-        	else {
-        		CKEDITOR.replace( 'answer');
-	    		$("#cke_answer").css("height", "480px");
-				$("#cke_1_contents").css("height", "480px");
-           		document.getElementById('question').value = "";
-           		document.getElementById('cke_answer').value = "";
-           		document.getElementById('status').selectedIndex = 0;            		
-        	}
         }
-</script>
-<script>
-	/* $(document).ready(function(){
-		//alert("111");
-		$('#answer').keyup(function(){
-			//alert("222");
-			var ans = $('#answer').val();
-			if(ans.indexOf("  ") >= 0) {
-				$('#answer').focus();
-				$('#divMsg').show();
-			}
-			if(ans.indexOf("  ") < 0) {
-				$('#divMsg').hide();
-			}
-		});
-	}); */
-</script>
-<script>
-function getSelectedText () {
-    if (window.getSelection) {
-        return window.getSelection ().toString ();
-    }
-    else {
-        if (document.selection) {
-            return document.selection.createRange ().text;
-        }
-    }
-    return '';
-}
-
-$ (document).ready (function() {
-
-    // User pressed a key 
-    $ (document).keydown (function(e) {
-        // is it CTRL+ENTER?
-    if (e.which == 66 && e.ctrlKey) {
-    		document.execCommand('bold');
-    		var selectedString = getSelectedText();
-    		selectedString = selectedString.replace(selectedString, selectedString.bold());
-            alert('You have selected ' + getSelectedText ());
-            // now I need to highlight the text I got
-            // ????
-    }
-    });
-});
 </script>
 <script src="//cdn.ckeditor.com/4.5.11/basic/ckeditor.js"></script>
-<script src="ckeditor/adapters/jquery.js"></script>
-<script>
-	$(document).ready(function() {
-		$('textarea#editor1').ckeditor();
-	});
-</script>
 </head>
 <body>
 	<%
@@ -178,7 +117,7 @@ $ (document).ready (function() {
 	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add');onClickMethodQuestion('0')" >Add New</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="checkFlag('add'); onClickMethodQuestion('0');" >Add New</button>
 		<div class="form-group">
 		<div class="row">
 			<div class="col-sm-8">
@@ -218,17 +157,11 @@ $ (document).ready (function() {
 												<!-- <script>
 									                CKEDITOR.resize( '100%', '600px' )
 												</script> -->
-												<textarea id="answer" class="form-control" name="answer" placeHolder="Enter Answer" style="height: 300px important"></textarea>
+												<textarea id="answer" class="form-control" name="answer" placeHolder="Enter Answer"></textarea>
 												<script>
-									                // Replace the <textarea id="editor1"> with a CKEditor
-									                // instance, using default configuration.
-									               /*  CKEDITOR.replace( 'answer');
-									    			$("#cke_answer").css("height", "380px"); */
-
-									                /* CKEDITOR.replace( 'answer', {
-														extraPlugins: 'placeholder',
-														toolbar: [ [ 'Source', 'Bold' ], ['CreatePlaceholder'] ]
-													}); */
+														CKEDITOR.replace("answer", {
+															height : 350
+														});
 								            	</script>
 												<!-- <textarea class="form-control" placeHolder="Enter Answer" id="answer" name="answer"></textarea> -->
 											</div>
@@ -342,7 +275,7 @@ $ (document).ready (function() {
 									<c:set var="status" value="1"/>
 								</c:if>
 							<td>${obj.categoryBean.title}</td>
-							<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethodQuestion('${obj.questionId}')">Update</a> / <a href="deleteQues/sta/${status}/quesId/${obj.questionId}">Delete</a> / <a href="<c:url value='/showquestionbyid/${obj.questionId}'/>">View Detail</a></td>
+							<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethodQuestion('${obj.questionId}')">Update</a> / <a href="deleteQues/sta/${status}/quesId/${obj.questionId}">Change Status</a> / <a href="<c:url value='/showquestionbyid/${obj.questionId}'/>">View Detail</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -138,6 +139,7 @@ class QuestionDAOImpl implements QuestionDAO {
 				criteria.add(Restrictions.eq("categoryBean.categoryId",
 						categoryId));
 			}
+			criteria.addOrder(Order.desc("createdOn"));
 			lstCategories = (List<QuestionBean>) criteria.list();
 		} catch (Exception e) {
 			logger.error("QuestionDAOImpl: Inside getAllCategories: Exception is: "
