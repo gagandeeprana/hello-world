@@ -30,7 +30,9 @@ public class UploadUtil {
 //                filename = getFileName(header);
                 filename = multipart.getOriginalFilename();
             	logger.info("UploadUtil: processRequest: filename: " + filename);
-                File fileToUpload = new File(rootpath + File.separator + title + File.separator + filename);
+            	rootpath = rootpath + File.separator + title + File.separator + filename;
+//            	rootpath = rootpath.replace(" ", "%20");
+                File fileToUpload = new File(rootpath);
 
                 if (!fileToUpload.getParentFile().exists()) {
                     fileToUpload.getParentFile().mkdirs();

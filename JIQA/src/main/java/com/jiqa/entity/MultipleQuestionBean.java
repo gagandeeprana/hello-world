@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "questionmaster")
-public class QuestionBean {
+@Table(name = "multiplechoice_questionmaster")
+public class MultipleQuestionBean {
 
 	@Id
 	@GeneratedValue
@@ -24,47 +24,39 @@ public class QuestionBean {
 	@Column(name = "question")
 	private String question;
 
-	@Column(name = "answer")
-	private String answer;
+	@Column(name = "has_multiple_answers")
+	private Integer hasMultipleAnswers;
 
-	@Column(name = "status")
-	private int status;
-	
 	@Column(name = "created_on")
 	private Date createdOn;
 	
 	@Column(name = "created_by")
 	private String createdBy;
+
+	@Column(name = "status")
+	private int status;
+	
+	@Transient
+	private int categoryId;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
 	private CategoryBean categoryBean;
-
-	@Transient
-	private int categoryId;
-
-	public Date getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
+	
 	public int getCategoryId() {
 		return categoryId;
 	}
 
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public CategoryBean getCategoryBean() {
+		return categoryBean;
+	}
+
+	public void setCategoryBean(CategoryBean categoryBean) {
+		this.categoryBean = categoryBean;
 	}
 
 	public int getQuestionId() {
@@ -83,12 +75,12 @@ public class QuestionBean {
 		this.question = question;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public Integer getHasMultipleAnswers() {
+		return hasMultipleAnswers;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setHasMultipleAnswers(Integer hasMultipleAnswers) {
+		this.hasMultipleAnswers = hasMultipleAnswers;
 	}
 
 	public int getStatus() {
@@ -99,11 +91,19 @@ public class QuestionBean {
 		this.status = status;
 	}
 
-	public CategoryBean getCategoryBean() {
-		return categoryBean;
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setCategoryBean(CategoryBean categoryBean) {
-		this.categoryBean = categoryBean;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 }

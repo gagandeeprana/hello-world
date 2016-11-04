@@ -275,7 +275,7 @@ textarea{
 									<c:set var="status" value="1"/>
 								</c:if>
 							<td>${obj.categoryBean.title}</td>
-							<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethodQuestion('${obj.questionId}')">Update</a> / <a href="deleteQues/sta/${status}/quesId/${obj.questionId}">Delete</a> / <a href="<c:url value='/showquestionbyid/${obj.questionId}'/>">View Detail</a></td>
+							<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethodQuestion('${obj.questionId}')">Update</a> / <a href="deleteQues/sta/${status}/quesId/${obj.questionId}">Change Status</a> / <a href="<c:url value='/showquestionbyid/${obj.questionId}'/>">View Detail</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

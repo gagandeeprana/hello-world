@@ -17,33 +17,34 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.jiqa.dao.QuestionDAO;
+import com.jiqa.dao.MultipleChoiceQuestionDAO;
 import com.jiqa.entity.CategoryBean;
+import com.jiqa.entity.MultipleQuestionBean;
 import com.jiqa.entity.QuestionBean;
 
 @Component
-class QuestionDAOImpl implements QuestionDAO {
+class MultipleChoiceQuestionDAOImpl implements MultipleChoiceQuestionDAO {
 
-	Logger logger = Logger.getLogger(QuestionDAOImpl.class);
+	Logger logger = Logger.getLogger(MultipleChoiceQuestionDAOImpl.class);
 
 	@Autowired
 	SessionFactory sessionFactory;
 
 	@Transactional
-	public int addQuestion(QuestionBean questionBean) {
+	public int addMultipleChoiceQuestion(MultipleQuestionBean multipleQuestionBean) {
 		Session session = null;
 		Transaction tx = null;
 		int maxId = 0;
 		try {
 			session = sessionFactory.openSession();
 //			tx = session.beginTransaction();
-			maxId = (Integer) session.save(questionBean);
+			maxId = (Integer) session.save(multipleQuestionBean);
 //			tx.commit();
 		} catch (Exception e) {
 //			if (tx != null) {
 //				tx.rollback();
 //			}
-			logger.error("QuestionDAOImpl: Inside addQuestion: Exception is: "
+			logger.error("MultipleChoiceQuestionDAOImpl: Inside addMultipleChoiceQuestion: Exception is: "
 					+ e.getMessage());
 		} finally {
 			try {
@@ -51,30 +52,30 @@ class QuestionDAOImpl implements QuestionDAO {
 					session.close();
 				}
 			} catch (Exception e2) {
-				logger.error("QuestionDAOImpl: Inside addQuestion: Inside Finally: Exception is: "
+				logger.error("MultipleChoiceQuestionDAOImpl: Inside addMultipleChoiceQuestion: Inside Finally: Exception is: "
 						+ e2.getMessage());
 			}
 		}
 		return maxId;
 	}
 
-	public boolean updateQuestion(QuestionBean questionBean) {
+	public boolean updateMultipleChoiceQuestion(MultipleQuestionBean multipleQuestionBean) {
 		Session session = null;
 		Transaction tx = null;
 		boolean flag = false;
 		try {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
-			CategoryBean categoryBean = (CategoryBean) session.get(CategoryBean.class, questionBean.getCategoryId());
-			questionBean.setCategoryBean(categoryBean);
-			session.update(questionBean);
+			CategoryBean categoryBean = (CategoryBean) session.get(CategoryBean.class, multipleQuestionBean.getCategoryId());
+			multipleQuestionBean.setCategoryBean(categoryBean);
+			session.update(multipleQuestionBean);
 			tx.commit();
 			flag = true;
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
-			logger.error("QuestionDAOImpl: Inside updateQuestion: Exception is: "
+			logger.error("MultipleChoiceQuestionDAOImpl: Inside updateMultipleChoiceQuestion: Exception is: "
 					+ e.getMessage());
 		} finally {
 			try {
@@ -82,7 +83,7 @@ class QuestionDAOImpl implements QuestionDAO {
 					session.close();
 				}
 			} catch (Exception e2) {
-				logger.error("QuestionDAOImpl: Inside updateQuestion: Inside Finally: Exception is: "
+				logger.error("MultipleChoiceQuestionDAOImpl: Inside updateMultipleChoiceQuestion: Inside Finally: Exception is: "
 						+ e2.getMessage());
 			}
 		}
@@ -90,19 +91,19 @@ class QuestionDAOImpl implements QuestionDAO {
 	}
 
 	@Transactional
-	public int softDeleteQuestion(int status, int questionId) {
+	public int softDeleteMultipleChoiceQuestion(int status, int questionId) {
 		Session session = null;
 		int result = 0;
 		Query query = null;
 		try {
 			session = sessionFactory.openSession();
 			query = session
-					.createQuery("update QuestionBean set status = :status where questionId = :questionId");
+					.createQuery("update MultipleQuestionBean set status = :status where questionId = :questionId");
 			query.setParameter("status", status);
 			query.setParameter("questionId", questionId);
 			result = query.executeUpdate();
 		} catch (Exception e) {
-			logger.error("QuestionDAOImpl: Inside softDeleteQuestion: Exception is: "
+			logger.error("MultipleChoiceQuestionDAOImpl: Inside softDeleteMultipleChoiceQuestion: Exception is: "
 					+ e.getMessage());
 		} finally {
 			try {
@@ -110,7 +111,7 @@ class QuestionDAOImpl implements QuestionDAO {
 					session.close();
 				}
 			} catch (Exception e2) {
-				logger.error("QuestionDAOImpl: Inside softDeleteQuestion: Inside Finally: Exception is: "
+				logger.error("MultipleChoiceQuestionDAOImpl: Inside softDeleteMultipleChoiceQuestion: Inside Finally: Exception is: "
 						+ e2.getMessage());
 			}
 		}
@@ -119,8 +120,7 @@ class QuestionDAOImpl implements QuestionDAO {
 
 	@Transactional
 	@SuppressWarnings("unchecked")
-	public List<QuestionBean> getAllQuestions(String question, String answer,
-			int categoryId) {
+	public List<QuestionBean> getAllMultipleChoiceQuestions(String question, String answer, int categoryId) {
 		Session session = null;
 		List<QuestionBean> lstCategories = new ArrayList<QuestionBean>();
 		try {

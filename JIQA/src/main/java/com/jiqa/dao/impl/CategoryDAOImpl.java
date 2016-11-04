@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +120,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 			if(!"".equals(title)) {
 				criteria.add(Restrictions.like("title", title, MatchMode.ANYWHERE));
 			}
+			criteria.addOrder(Order.desc("createdOn"));
 			lstCategories = (List<CategoryBean>) criteria.list();
 		} catch (Exception e) {
 			logger.error("CategoryDAOImpl: Inside getAllCategories: Exception is: "

@@ -118,7 +118,7 @@ $(function() {
 </head>
 <body>
 	<%
-		String imagePath = "http://35.154.0.56:8080/CategoryImages/";
+		String imagePath = "http://35.154.6.180:8080/CategoryImages/";
 		pageContext.setAttribute("imagePath", imagePath);
 		List<CategoryBean> lstCategory = ((List<CategoryBean>) request.getAttribute("LIST_CAT"));
 		pageContext.setAttribute("LIST_CAT1", lstCategory);
@@ -223,7 +223,7 @@ $(function() {
 								<c:if test="${obj.status == 0}">
 									<c:set var="status" value="1"/>
 								</c:if>
-								<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethod('${obj.categoryId}')">Update</a> / <a href="deleteCat/sta/${status}/catId/${obj.categoryId}">Delete</a></td>
+								<td><a href = "#" data-toggle="modal" data-target="#myModal" onclick="checkFlag('update');onClickMethod('${obj.categoryId}')">Update</a> / <a href="deleteCat/sta/${status}/catId/${obj.categoryId}">Change Status</a></td>
 								<c:choose>
 									<c:when test="${obj.imageName ne null}">
 										<c:set var = "srcPath" value = "${imagePath}${obj.title}/${obj.imageName}"/>

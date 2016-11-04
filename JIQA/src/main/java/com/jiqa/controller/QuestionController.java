@@ -1,5 +1,6 @@
 package com.jiqa.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jiqa.entity.CategoryBean;
 import com.jiqa.entity.QuestionBean;
@@ -47,10 +46,17 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "/saveQues" , method = RequestMethod.POST)
-	public ModelAndView saveQuestion(@ModelAttribute("ques") QuestionBean questionBean,@RequestParam("categoryId") int categoryId) {
+	public ModelAndView saveQuestion(@ModelAttribute("ques") QuestionBean questionBean,@RequestParam("categoryId") int categoryId, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		CategoryBean categoryBean = categoryService.getCategoryInfoById(categoryId);
 		questionBean.setCategoryBean(categoryBean);
+		HttpSession session = request.getSession();
+		String createdBy = "";
+		if(session != null) {
+			createdBy = session.getAttribute("un").toString();
+		}
+		questionBean.setCreatedBy(createdBy);
+		questionBean.setCreatedOn(new Date());
 		questionService.addQuestion(questionBean);
 		modelAndView.setViewName("redirect:showques");
 		return modelAndView;
