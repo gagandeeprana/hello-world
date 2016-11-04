@@ -1,26 +1,20 @@
 package com.jiqa.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.jiqa.dao.MultipleChoiceQuestionDAO;
 import com.jiqa.entity.CategoryBean;
 import com.jiqa.entity.MultipleQuestionBean;
-import com.jiqa.entity.QuestionBean;
 
 @Component
 class MultipleChoiceQuestionDAOImpl implements MultipleChoiceQuestionDAO {
@@ -118,7 +112,7 @@ class MultipleChoiceQuestionDAOImpl implements MultipleChoiceQuestionDAO {
 		return result;
 	}
 
-	@Transactional
+	/*@Transactional
 	@SuppressWarnings("unchecked")
 	public List<QuestionBean> getAllMultipleChoiceQuestions(String question, String answer, int categoryId) {
 		Session session = null;
@@ -155,9 +149,9 @@ class MultipleChoiceQuestionDAOImpl implements MultipleChoiceQuestionDAO {
 			}
 		}
 		return lstCategories;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public QuestionBean getQuestionInfoById(int questionId) {
 		Session session = null;
 		QuestionBean questionBean = null;
@@ -180,5 +174,25 @@ class MultipleChoiceQuestionDAOImpl implements MultipleChoiceQuestionDAO {
 			}
 		}
 		return questionBean;
+	}*/
+
+	@Override
+	public MultipleQuestionBean getMultipleChoiceQuestionInfoById(int questionId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MultipleQuestionBean getMultipleChoiceQuestionInfoByCategoryId(
+			int categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MultipleQuestionBean> getAllMultipleChoiceQuestions(
+			String question, String answer, int categoryId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
