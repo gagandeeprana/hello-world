@@ -21,5 +21,6 @@
         <mapping class="dpu.beans.admin.PaymentTermsBean"/>
         <mapping class="dpu.beans.admin.SalesPersonBean"/>
         <mapping class="dpu.beans.admin.ContainerBean"/>
+        <mapping class="dpu.entity.admin.Driver"/>
     </session-factory>
 </hibernate-configuration>
