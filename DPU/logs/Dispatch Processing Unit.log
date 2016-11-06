@@ -12301,3 +12301,5 @@ Dispatch Processing Unit 2016-11-06 18:49:46,587  INFO [AWT-EventQueue-0] (Drive
 Dispatch Processing Unit 2016-11-06 18:49:47,351  INFO [AWT-EventQueue-0] (Dialect.java:145) - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
 Dispatch Processing Unit 2016-11-06 18:49:47,847  INFO [AWT-EventQueue-0] (TransactionFactoryInitiator.java:62) - HHH000399: Using default transaction strategy (direct JDBC transactions)
 Dispatch Processing Unit 2016-11-06 18:49:47,857  INFO [AWT-EventQueue-0] (ASTQueryTranslatorFactory.java:47) - HHH000397: Using ASTQueryTranslatorFactory
+Dispatch Processing Unit 2016-11-06 21:02:30,311  INFO [main] (DPU.java:43) - Inside DPU: main(): STARTS11
+Dispatch Processing Unit 2016-11-06 21:02:31,021  INFO [main] (DPU.java:61) - Inside DPU: main(): ENDS
