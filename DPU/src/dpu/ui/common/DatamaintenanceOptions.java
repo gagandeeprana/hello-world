@@ -6,6 +6,7 @@
 package dpu.ui.common;
 
 import static dpu.ui.common.helper.CompanyUIHelper.lstCompanies;
+import dpu.ui.common.helper.DriverUIHelper;
 import dpu.ui.shipper.TestShipperPannel;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -19,6 +20,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class DatamaintenanceOptions extends javax.swing.JPanel {
 
+    DriverUIHelper driverUIHelper = new DriverUIHelper();
     /**
      * Creates new form DatamaintenanceOptions
      */
@@ -80,7 +82,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
-        jMenu11 = new javax.swing.JMenu();
+        resourceMenu = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
@@ -176,16 +178,26 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         jMenu9.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jMenuBar1.add(jMenu9);
 
-        jMenu11.setText("Resources");
-        jMenu11.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        resourceMenu.setText("Resources");
+        resourceMenu.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        resourceMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceMenuActionPerformed(evt);
+            }
+        });
 
         jMenuItem3.setText("Drivers");
-        jMenu11.add(jMenuItem3);
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        resourceMenu.add(jMenuItem3);
 
         jMenuItem4.setText("Power Units");
-        jMenu11.add(jMenuItem4);
+        resourceMenu.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu11);
+        jMenuBar1.add(resourceMenu);
 
         jMenu12.setText("Payroll Schedules");
         jMenu12.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
@@ -383,11 +395,23 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         root.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        internalFrameSettings();
+        DriverPanel driverPanel = new DriverPanel();
+        driverPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        root.add(driverPanel);
+        root.setVisible(true);
+        driverUIHelper.showAllDrivers();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void resourceMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu15;
@@ -411,5 +435,6 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenu resourceMenu;
     // End of variables declaration//GEN-END:variables
 }
