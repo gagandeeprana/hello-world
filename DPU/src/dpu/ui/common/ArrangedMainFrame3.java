@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 import properties.ReadFromPropertiesFile;
 
@@ -32,12 +33,27 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     
     public ArrangedMainFrame3() {
         initComponents();
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        setButtonContentArea();
-        jPanel4.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
+        
         root = getContentPane();
+        System.out.println("Values::   W" + (getWidth() - 10));
+        System.out.println("Values::   H" + (getHeight() - 10));
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//        setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
+        setButtonContentArea();
+//        jPanel4.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
+//        jPanel4.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        jPanel4.setBounds(0,0,screenSize.width, screenSize.height);
+        jPanel4.setVisible(true);
         jInternalFrame1.setVisible(false);
-        jInternalFrame1.setBorder(null);
+//        jInternalFrame1.setBorder(null);
+        jPanel6.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
+        jInternalFrame1.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
+        
+//        jPanel6.setBounds(0,0,screenSize.width, screenSize.height);
+//        jPanel6.setVisible(true);
+//        jInternalFrame1.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
     }
     
@@ -76,11 +92,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        jInternalFrame1.setBackground(new java.awt.Color(255, 255, 255));
         jInternalFrame1.setBorder(null);
         jInternalFrame1.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Application-Exe.png"))); // NOI18N
         jInternalFrame1.setName(""); // NOI18N
@@ -90,27 +101,24 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1271, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 430, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jInternalFrame1)
-                .addGap(0, 0, 0))
+            .addComponent(jInternalFrame1)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jInternalFrame1)
+                .addGap(0, 0, 0))
         );
 
         try {
@@ -123,7 +131,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +142,7 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
         jLayeredPane2.setLayout(jLayeredPane2Layout);
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,6 +282,6 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
+    public static javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }

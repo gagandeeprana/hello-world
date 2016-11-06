@@ -38,11 +38,12 @@ public class CompanyPanel extends javax.swing.JPanel {
     public CompanyPanel() {
         initComponents();
 //        DPU.autowire(this);
+
         doWork();
     }
 
     private void doWork() {
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         companyUIHelper = new CompanyUIHelper();
         companyUIHelper.generateTable();
         btnPrint.setToolTipText("Print Company Report...");
@@ -69,7 +70,6 @@ public class CompanyPanel extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1265, 539));
 
         jPanel2.setBackground(new java.awt.Color(135, 192, 248));
@@ -123,10 +123,12 @@ public class CompanyPanel extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane4.setBackground(new java.awt.Color(255, 51, 0));
         jScrollPane4.setToolTipText("Company Listing...");
         jScrollPane4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         tblCompany.setAutoCreateRowSorter(true);
+        tblCompany.setBackground(new java.awt.Color(204, 255, 204));
         tblCompany.setFont(new java.awt.Font("BatangChe", 0, 14)); // NOI18N
         tblCompany.setForeground(new java.awt.Color(255, 102, 102));
         tblCompany.setModel(new javax.swing.table.DefaultTableModel(
@@ -216,8 +218,7 @@ public class CompanyPanel extends javax.swing.JPanel {
                     .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnPrint, jPanel1});
@@ -230,9 +231,7 @@ public class CompanyPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -323,8 +322,8 @@ public class CompanyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int companyIdToBeDeleted = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow()).getCompanyId();
-        companyUIHelper.delete(companyIdToBeDeleted);
+//        int companyIdToBeDeleted = CompanyUIHelper.lstCompanies.get(tblCompany.getSelectedRow()).getCompanyId();
+//        companyUIHelper.delete(companyIdToBeDeleted);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

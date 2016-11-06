@@ -5,9 +5,11 @@
  */
 package dpu.ui.common;
 
-import dpu.DPU;
+import static dpu.ui.common.helper.CompanyUIHelper.lstCompanies;
 import dpu.ui.shipper.TestShipperPannel;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JRootPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -52,9 +54,10 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         bi.setEastPane(null);
         bi.setWestPane(null);
         bi.setSouthPane(null);
-        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
+        ArrangedMainFrame3.jInternalFrame1.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+//        ArrangedMainFrame3.jInternalFrame1.setBorder(null);
         root = ArrangedMainFrame3.jInternalFrame1.getContentPane();
-        root.setVisible(false);
+        root.setVisible(true);
     }
 
     /**
@@ -285,12 +288,13 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
         internalFrameSettings();
-        CompanyPanel testCompanyPanel = new CompanyPanel();
-        testCompanyPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        CompanyPanel1 testCompanyPanel = new CompanyPanel1();
+        testCompanyPanel.setBounds(0, 0, getWidth(), getHeight()-150);
         root.add(testCompanyPanel);
         root.setVisible(true);
     }//GEN-LAST:event_jMenu1MousePressed
@@ -334,7 +338,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         internalFrameSettings();
         TypePanel typePanel = new TypePanel();
-        typePanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        typePanel.setBounds(0, 0, getWidth(), getHeight());
         root.add(typePanel);
         root.setVisible(true);
      }//GEN-LAST:event_jMenuItem1ActionPerformed

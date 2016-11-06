@@ -33,7 +33,7 @@ public class ConnectDB {
         String database = "dpu";
 //        String username = readFromPropertiesFile.getProperty("jdbc.username");
         String username = "root";
-        String password = "root";
+        String password = "";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
