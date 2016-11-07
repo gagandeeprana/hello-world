@@ -56,9 +56,9 @@ public class CompanyUIHelper {
             CompanyPanel1.tblCompany.setModel(defaultTableModel);
             CompanyPanel1.tblCompany.setAutoCreateRowSorter(true);
 //            CompanyPanel1 cp = new CompanyPanel1();
-            CompanyTable ct = new CompanyUIHelper.CompanyTable();
-            ct.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 1024);
-            CompanyPanel1.tblCompany.setDefaultRenderer(Object.class, ct);
+//            CompanyTable ct = new CompanyUIHelper.CompanyTable();
+//            ct.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 1024);
+//            CompanyPanel1.tblCompany.setDefaultRenderer(Object.class, ct);
             if (lstCompanies.size() > 0) {
                 Object[][] data = new Object[lstCompanies.size()][15];
                 for (int i = 0; i < lstCompanies.size(); i++) {
@@ -259,7 +259,7 @@ public class CompanyUIHelper {
         public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             table.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 
-            table.setEnabled(false);
+//            table.set
             JTextField editor = new JTextField();
             editor.setFont(new Font(Font.SANS_SERIF, 0, 12));
             editor.setBorder(null);
