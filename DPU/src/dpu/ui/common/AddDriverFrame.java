@@ -7,6 +7,7 @@ package dpu.ui.common;
 
  
 import dpu.ui.common.helper.DriverUIHelper;
+import dpu.ui.common.helper.StateHelper;
 
 /**
  *
@@ -15,6 +16,8 @@ import dpu.ui.common.helper.DriverUIHelper;
 public class AddDriverFrame extends javax.swing.JFrame {
     
     DriverUIHelper driverUIHelper = new DriverUIHelper();
+    
+    StateHelper stateHeper = new StateHelper();
 
     /**
      * Creates new form AddDriverFrame
@@ -121,6 +124,17 @@ public class AddDriverFrame extends javax.swing.JFrame {
         });
 
         pvsLabel.setText("PVS");
+
+        txtPvs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPvsMouseClicked(evt);
+            }
+        });
+        txtPvs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPvsActionPerformed(evt);
+            }
+        });
 
         emailLabel.setText("E-Mail");
 
@@ -405,6 +419,23 @@ public class AddDriverFrame extends javax.swing.JFrame {
     private void ddlTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlTerminalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ddlTerminalActionPerformed
+
+    private void txtPvsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPvsMouseClicked
+        // TODO add your handling code here:
+         //stateHeper.getAllStates();
+         //new ProvincialFrame().setVisible(true);
+          ProvincialFrame addDriverFrame = new ProvincialFrame();
+                
+                stateHeper.getAllStates();
+                addDriverFrame.setVisible(true);
+                
+         
+       
+    }//GEN-LAST:event_txtPvsMouseClicked
+
+    private void txtPvsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPvsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPvsActionPerformed
 
     /**
      * @param args the command line arguments
