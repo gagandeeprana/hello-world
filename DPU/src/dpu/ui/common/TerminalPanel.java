@@ -9,7 +9,7 @@ import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.TerminalDAO;
 import dpu.dao.admin.impl.TerminalDAOImpl;
 import dpu.reports.common.JasperReportGenerator;
-import dpu.ui.common.helper.TerminalUIHelper;
+import dpu.ui.common.helper.TerminalUIHelper1;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,14 +22,14 @@ public class TerminalPanel extends javax.swing.JPanel {
      * S
      * Creates new form TestTerminal
      */
-    TerminalUIHelper terminalUIHelper = null;
+    TerminalUIHelper1 terminalUIHelper = null;
     TerminalDAO terminalDAO = null;
 
     public TerminalPanel() {
         initComponents();
-        terminalUIHelper = new TerminalUIHelper();
+        terminalUIHelper = new TerminalUIHelper1();
         terminalDAO = new TerminalDAOImpl();
-        TerminalUIHelper.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        TerminalUIHelper1.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
         terminalUIHelper.generateTable();
 
     }
@@ -150,21 +150,21 @@ public class TerminalPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        TerminalUIHelper.addUpdateFlag = "add";
+        TerminalUIHelper1.addUpdateFlag = "add";
         AddTerminalFrame addTerminalFrame = new AddTerminalFrame();
         addTerminalFrame.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int terminalIdToBeDeleted = TerminalUIHelper.lstTerminals.get(tblTerminal.getSelectedRow()).getTerminalId();
+        int terminalIdToBeDeleted = TerminalUIHelper1.lstTerminals.get(tblTerminal.getSelectedRow()).getTerminalId();
         String msg = terminalUIHelper.delete(terminalIdToBeDeleted);
         JOptionPane.showMessageDialog(null, msg);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        TerminalBean terminalBean = TerminalUIHelper.lstTerminals.get(tblTerminal.getSelectedRow());
-        TerminalUIHelper.terminalId = terminalBean.getTerminalId();
-        TerminalUIHelper.addUpdateFlag = "update";
+        TerminalBean terminalBean = TerminalUIHelper1.lstTerminals.get(tblTerminal.getSelectedRow());
+        TerminalUIHelper1.terminalId = terminalBean.getTerminalId();
+        TerminalUIHelper1.addUpdateFlag = "update";
         AddTerminalFrame addTerminalFrame = new AddTerminalFrame(terminalBean);
         addTerminalFrame.setVisible(true);
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -174,7 +174,7 @@ public class TerminalPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        TerminalUIHelper.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        TerminalUIHelper1.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
         terminalUIHelper.generateTable();
     }//GEN-LAST:event_txtSearchKeyReleased
 
