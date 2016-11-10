@@ -1,16 +1,23 @@
 package dpu.dao.admin;
 
-import dpu.beans.admin.DriverBean;
+ 
+import dpu.entity.admin.Driver;
 import java.util.List;
 
 public interface DriverDAO {
 
-    List<DriverBean> getAllDrivers(String name);
+    public List<Driver> getAllDrivers(String name);
 
-    String addDriver(DriverBean obj);
+    public String addDriver(Driver obj);
 
-    String updateDriver(DriverBean obj);
+    public String updateDriver(Driver obj);
 
-    String deleteDriver(int driverId);
+    public String deleteDriver(int driverId);
+    
+    public List<Driver> showAllDrivers( );
+    
+    public List<Driver> QuickFilterDrivers();
+    
+    
 
 }

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2796c216-049f-4f4d-aaf7-bff3b02ea1af">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     companymaster.`name` AS companymaster_name,
+     companymaster.`city` AS companymaster_city,
+     companymaster.`email` AS companymaster_email,
+     companymaster.`contact` AS companymaster_contact,
+     companymaster.`position` AS companymaster_position,
+     companymaster.`province_state` AS companymaster_province_state
+FROM
+     `companymaster` companymaster]]>
+	</queryString>
+	<field name="companymaster_name" class="java.lang.String"/>
+	<field name="companymaster_city" class="java.lang.String"/>
+	<field name="companymaster_email" class="java.lang.String"/>
+	<field name="companymaster_contact" class="java.lang.String"/>
+	<field name="companymaster_position" class="java.lang.String"/>
+	<field name="companymaster_province_state" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="0e22dc57-f393-4994-90ae-01339a80e096" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="c72efa10-cad4-4c9e-b443-c72f1cebdca7" x="20" y="20" width="234" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Customers]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c861a62d-2231-4f09-b7b9-fe6826c4d78c" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Description]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement uuid="ff84f9b3-86d8-4c38-bf33-76980e2aeba4" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<staticText>
+				<reportElement uuid="d3ded4c4-fa40-4f00-90fe-028761ea9911" mode="Opaque" x="0" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[companymaster_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5e4e5756-2bab-461b-a630-62caca42b4e1" mode="Opaque" x="92" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[companymaster_city]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8cfc1389-74da-4374-ba39-a9e7c530d4b4" mode="Opaque" x="184" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[companymaster_email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="68dbf039-6652-4ee0-be1b-501b9433345e" mode="Opaque" x="276" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[companymaster_contact]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="63bf7948-b1c1-4c5a-88fb-78d3de619611" mode="Opaque" x="368" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[companymaster_position]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec8a741c-f037-4b25-84f6-449f265e51c9" mode="Opaque" x="460" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[companymaster_province_state]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement uuid="cca9e841-5732-4d30-9cda-3f25e1d95759" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8395a319-eeca-4eb6-b36d-91e73c9c41df" x="0" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companymaster_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="c958e955-0a63-4c71-8ba5-5c7d42e38321" x="92" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companymaster_city}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="3a799c40-bb11-48c4-bd38-af7207f98a5c" x="184" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companymaster_email}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="af0ce7e0-d8c8-45a9-b189-59cc4b26b28f" x="276" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companymaster_contact}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1c44acd7-6ad4-47a7-b12d-c862af525853" x="368" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companymaster_position}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="bb424a63-0357-4e14-bbb8-b45d57cf8849" x="460" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companymaster_province_state}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="dc43c869-1260-4d03-a9d1-1f540d908c3e" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="0eef48c4-3d55-4af4-b008-7b790d0ac822" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="91ea0596-5251-4791-9ae2-0b712ac359ee" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

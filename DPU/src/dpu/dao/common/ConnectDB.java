@@ -28,17 +28,19 @@ public class ConnectDB {
     public static Connection connect() {
         Connection conn = null;
 //        String url = readFromPropertiesFile.getProperty("jdbc.url");
-        String url = "jdbc:mysql:///";
+//        String url = "jdbc:mysql:///";
+        String url = "jdbc:mysql://dpu.cdiqqkgwzwga.us-west-2.rds.amazonaws.com:3306/dpu";
 //        String database = readFromPropertiesFile.getProperty("jdbc.database");
-        String database = "dpu";
+//        String database = "dpu";
 //        String username = readFromPropertiesFile.getProperty("jdbc.username");
-        String username = "root";
-        String password = "";
+        String username = "dpu";
+        String password = "dpu12345";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
 //            Class.forName("D:\\JavaGit\\hello-world\\DPU\\lib\\mysql\\mysql-connector-java-5.1.23-bin.jar");
-            conn = DriverManager.getConnection(url + database, username, password);
+//            conn = DriverManager.getConnection(url + database, username, password);
+            conn = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             System.out.println("connect(): " + e);
 //            logger.error("ConnectDB : connect : " + e);

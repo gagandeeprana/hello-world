@@ -11,10 +11,12 @@ import dpu.dao.admin.impl.AdditionalContactDAOImpl;
 import dpu.dao.admin.impl.BillingLocationDAOImpl;
 import dpu.ui.common.AddCustomerFrame;
 import dpu.ui.common.CompanyPanel;
+import dpu.ui.common.CompanyPanel1;
 import java.awt.Color;
 //import static dpu.ui.common.CompanyPanel.mainTabbedPane;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,50 +48,63 @@ public class CompanyUIHelper {
     }
 
     public void generateTable() {
-        Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"};
-        lstCompanies = companyDAO.getAllCompanies(CompanyPanel.txtCompanySearch.getText());
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
-        CompanyPanel.tblCompany.setModel(defaultTableModel);
-        CompanyPanel.tblCompany.setAutoCreateRowSorter(true);
-        CompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
-        if (lstCompanies.size() > 0) {
-            Object[][] data = new Object[lstCompanies.size()][15];
-            for (int i = 0; i < lstCompanies.size(); i++) {
-                CompanyBean obj = lstCompanies.get(i);
-                data[i][0] = obj.getCompanyId();
-                data[i][1] = obj.getCompanyName();
-                data[i][2] = obj.getAddress();
-                data[i][3] = obj.getUnitNo();
-                data[i][4] = obj.getCity();
-                data[i][5] = obj.getProvinceState();
-                data[i][6] = obj.getZip();
-                data[i][7] = obj.getEmail();
-                data[i][8] = obj.getWebsite();
-                data[i][9] = obj.getContact();
-                data[i][10] = obj.getPosition();
-                data[i][11] = obj.getPhone();
-                data[i][12] = obj.getExt();
-                data[i][13] = obj.getFax();
-                data[i][14] = obj.getPager();
-                CompanyPanel.tblCompany.setRowHeight(30);
+        try {
+
+            Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"};
+            lstCompanies = companyDAO.getAllCompanies(CompanyPanel1.txtSearch.getText());
+            DefaultTableModel defaultTableModel = new DefaultTableModel();
+            CompanyPanel1.tblCompany.setModel(defaultTableModel);
+            CompanyPanel1.tblCompany.setAutoCreateRowSorter(true);
+//            CompanyPanel1 cp = new CompanyPanel1();
+//            CompanyTable ct = new CompanyUIHelper.CompanyTable();
+//            ct.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(), 1024);
+//            CompanyPanel1.tblCompany.setDefaultRenderer(Object.class, ct);
+            if (lstCompanies.size() > 0) {
+                Object[][] data = new Object[lstCompanies.size()][15];
+                for (int i = 0; i < lstCompanies.size(); i++) {
+                    CompanyBean obj = lstCompanies.get(i);
+                    data[i][0] = obj.getCompanyId();
+                    data[i][1] = obj.getCompanyName();
+                    data[i][2] = obj.getAddress();
+                    data[i][3] = obj.getUnitNo();
+                    data[i][4] = obj.getCity();
+                    data[i][5] = obj.getProvinceState();
+                    data[i][6] = obj.getZip();
+                    data[i][7] = obj.getEmail();
+                    data[i][8] = obj.getWebsite();
+                    data[i][9] = obj.getContact();
+                    data[i][10] = obj.getPosition();
+                    data[i][11] = obj.getPhone();
+                    data[i][12] = obj.getExt();
+                    data[i][13] = obj.getFax();
+                    data[i][14] = obj.getPager();
+                    CompanyPanel1.tblCompany.setRowHeight(30);
+                }
+                CompanyPanel1.tblCompany.setColumnSelectionAllowed(false);
+//                CompanyPanel1.tblCompany.se
+                defaultTableModel.setDataVector(data, cols);
+                CompanyPanel1.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+                CompanyPanel1.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
+                CompanyPanel1.tblCompany.setIntercellSpacing(new Dimension(0, 0));
+//            CompanyPanel1 cp = new CompanyPanel1();
+
+                CompanyPanel1.jScrollPane4.setViewportView(CompanyPanel1.tblCompany);
+//            CompanyPanel1.tblCompany.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), ((lstCompanies.size() * 40) + 10));
+//            CompanyPanel1.jScrollPane4.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), ((lstCompanies.size() * 40) + 10));
+
+            } else {
+                generateEmptyTable();
             }
-            CompanyPanel.tblCompany.setColumnSelectionAllowed(false);
-            defaultTableModel.setDataVector(data, cols);
-            CompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-            CompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
-            CompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
-            CompanyPanel.tblCompany.setShowGrid(false);
-            CompanyPanel.jScrollPane4.setViewportView(CompanyPanel.tblCompany);
-        } else {
-            generateEmptyTable();
+        } catch (Exception e) {
+            System.out.println("dpu.ui.common.helper.CompanyUIHelper.generateTable() " + e);
         }
     }
 
     private void generateEmptyTable() {
         Object[] cols = {"Company Id", "Company Name", "Address", "Unit No", "City", "Province/State", "Zip", "Email", "Website", "Contact", "Position", "Phone", "Ext", "Fax", "Pager"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        CompanyPanel.tblCompany.setModel(defaultTableModel);
-        CompanyPanel.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
+        CompanyPanel1.tblCompany.setModel(defaultTableModel);
+        CompanyPanel1.tblCompany.setDefaultRenderer(Object.class, new CompanyUIHelper.CompanyTable());
         Object[][] data = new Object[7][17];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
@@ -109,17 +124,17 @@ public class CompanyUIHelper {
             data[i][14] = "";
             data[i][15] = "";
             data[i][16] = "";
-            CompanyPanel.tblCompany.setRowHeight(30);
+            CompanyPanel1.tblCompany.setRowHeight(30);
         }
-        CompanyPanel.tblCompany.setColumnSelectionAllowed(false);
+        CompanyPanel1.tblCompany.setColumnSelectionAllowed(false);
 
         defaultTableModel.setDataVector(data, cols);
 
-        CompanyPanel.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-        CompanyPanel.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
-        CompanyPanel.tblCompany.setIntercellSpacing(new Dimension(0, 0));
-        CompanyPanel.tblCompany.setShowGrid(false);
-        CompanyPanel.jScrollPane4.setViewportView(CompanyPanel.tblCompany);
+        CompanyPanel1.tblCompany.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        CompanyPanel1.tblCompany.getTableHeader().setForeground(Color.DARK_GRAY);
+        CompanyPanel1.tblCompany.setIntercellSpacing(new Dimension(0, 0));
+        CompanyPanel1.tblCompany.setShowGrid(false);
+        CompanyPanel1.jScrollPane4.setViewportView(CompanyPanel1.tblCompany);
     }
 
     public String save() {
@@ -242,9 +257,11 @@ public class CompanyUIHelper {
 
         @Override
         public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            table.setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+
+//            table.set
             JTextField editor = new JTextField();
-            editor.setFont(new Font(Font.SANS_SERIF, 0, 15));
-            editor.setEditable(false);
+            editor.setFont(new Font(Font.SANS_SERIF, 0, 12));
             editor.setBorder(null);
             if (value != null) {
                 editor.setText("   " + value.toString());
