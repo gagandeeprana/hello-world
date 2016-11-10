@@ -22,5 +22,9 @@
         <mapping class="dpu.beans.admin.SalesPersonBean"/>
         <mapping class="dpu.beans.admin.ContainerBean"/>
         <mapping class="dpu.entity.admin.Driver"/>
+        <mapping class="dpu.entity.admin.Category"/>
+        <mapping class="dpu.entity.admin.Classs"/>
+        <mapping class="dpu.entity.admin.Role"/>
+        <mapping class="dpu.entity.admin.Status"/>
     </session-factory>
 </hibernate-configuration>

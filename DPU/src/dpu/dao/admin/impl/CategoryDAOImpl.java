@@ -7,7 +7,9 @@ package dpu.dao.admin.impl;
 
 import dpu.DPU;
 import dpu.beans.admin.CategoryBean;
+import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.CategoryDAO;
+import dpu.entity.admin.Category;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -124,4 +126,26 @@ public class CategoryDAOImpl implements CategoryDAO {
         }
         return "Failed to Delete Category";
     }
+
+    @Override
+    public List<Category> getAllCategory() {
+        List<Category> listOfCategory = new ArrayList<Category>();
+        Session session = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Category.class);
+            listOfCategory = criteria.list();
+        } catch (Exception e) {
+            logger.error("CategoryDAOImpl : getAllCategories : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return listOfCategory;
+    }
+     
 }
