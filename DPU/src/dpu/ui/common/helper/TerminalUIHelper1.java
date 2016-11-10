@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gagandeep.rana
  */
-public class TerminalUIHelper {
+public class TerminalUIHelper1 {
 
     public static List<TerminalBean> lstTerminals = new ArrayList();
     TerminalDAO terminalDAO = new TerminalDAOImpl();
@@ -52,7 +52,7 @@ public class TerminalUIHelper {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TerminalPanel.tblTerminal.setModel(defaultTableModel);
         TerminalPanel.tblTerminal.setAutoCreateRowSorter(true);
-        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper.TerminalTable());
+        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper1.TerminalTable());
         if (lstTerminals.size() > 0) {
             Object[][] data = new Object[lstTerminals.size()][2];
             for (int i = 0; i < lstTerminals.size(); i++) {
@@ -75,7 +75,7 @@ public class TerminalUIHelper {
     public void generateEmptyTable() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         TerminalPanel.tblTerminal.setModel(defaultTableModel);
-        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper.TerminalTable());
+        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper1.TerminalTable());
         Object[][] data = new Object[7][2];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
@@ -97,7 +97,7 @@ public class TerminalUIHelper {
         terminalBean.setTerminalName(AddTerminalFrame.txt1.getText());
         terminalBean.setLocation(AddTerminalFrame.txt2.getText());
         String msg = "";
-        if (TerminalUIHelper.addUpdateFlag.equals("add")) {
+        if (TerminalUIHelper1.addUpdateFlag.equals("add")) {
             int i = terminalDAO.addTerminal(terminalBean);
             if (i > 0) {
                 msg = "New Terminal Added";
