@@ -6,6 +6,7 @@
 package dpu.dao.admin;
 
 import dpu.beans.admin.RoleBean;
+import dpu.entity.admin.Role;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
  */
 public interface RoleDAO {
 
+    List<Role> getAllRole();
+    
     List<RoleBean> getAllRoles(String name);
 
     String addRole(RoleBean obj);

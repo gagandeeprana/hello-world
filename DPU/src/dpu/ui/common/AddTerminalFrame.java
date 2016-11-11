@@ -6,7 +6,7 @@
 package dpu.ui.common;
 
 import dpu.beans.admin.TerminalBean;
-import dpu.ui.common.helper.TerminalUIHelper;
+import dpu.ui.common.helper.TerminalUIHelper1;
 
 public class AddTerminalFrame extends javax.swing.JFrame {
 
@@ -14,19 +14,19 @@ public class AddTerminalFrame extends javax.swing.JFrame {
      * Creates new form AddTerminal
      */
     String msg = "";
-    TerminalUIHelper terminalUI = null;
+    TerminalUIHelper1 terminalUI = null;
     String addUpdateFlag = "";
     TerminalBean terminalBean;
 
     public AddTerminalFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        terminalUI = new TerminalUIHelper();
+        terminalUI = new TerminalUIHelper1();
     }
 
     public AddTerminalFrame(TerminalBean terminalBean) {
         initComponents();
-        terminalUI = new TerminalUIHelper();
+        terminalUI = new TerminalUIHelper1();
         this.terminalBean = terminalBean;
         setLocationRelativeTo(null);
         terminalUI.showData(terminalBean);

@@ -9,10 +9,12 @@ public interface DriverDAO {
     public List<Driver> getAllDrivers(String name);
 
     public String addDriver(Driver obj);
+    
+    public void updateDriver(Driver driver);
 
-    public String updateDriver(Driver obj);
+    public List<Driver> updateDriver(String driverCode);
 
-    public String deleteDriver(int driverId);
+    public String deleteDriver(String driverCode);
     
     public List<Driver> showAllDrivers( );
     

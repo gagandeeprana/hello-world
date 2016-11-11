@@ -95,7 +95,7 @@ public class Driver implements Serializable{
     @Column(name="status")
     private Long statusId;
     
-    @Column(name="class")
+    @Column(name="classId")
     private Long classId;
     
 

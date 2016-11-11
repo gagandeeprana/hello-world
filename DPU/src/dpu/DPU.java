@@ -40,7 +40,7 @@ public class DPU {
 
     public static void main(String[] args) {
 
-        logger.info("Inside DPU: main(): STARTS");
+        logger.info("Inside DPU: main(): STARTS11");
         try {
             //**********************************Spring Configuration*********************************
 //            applicationContext = new ClassPathXmlApplicationContext("beans.xml");
@@ -53,7 +53,7 @@ public class DPU {
 //            loginFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource(ReadFromPropertiesFile.imagePath + "Application-Exe.png")));
 //            loginFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Application-Exe.png")));
 //            loginFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images\\Application-Exe.png")));
-            loginFrame.setVisible(true);
+           loginFrame.setVisible(true);
         } catch (Exception e) {
             System.out.println("Main: " + e);
         }
@@ -66,6 +66,7 @@ public class DPU {
         if (sessionFactory == null) {
             Configuration configuration = new Configuration();
             sessionFactory = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
+            System.out.println("session created");
         }
         return sessionFactory;
     }

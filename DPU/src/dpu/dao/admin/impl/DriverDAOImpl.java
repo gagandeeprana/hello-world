@@ -11,6 +11,7 @@ import dpu.dao.admin.DriverDAO;
 import dpu.dao.common.ConnectDB;
 import dpu.entity.admin.Driver;
 import dpu.ui.common.DriverPanel;
+import dpu.ui.common.helper.DriverUIHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,8 +64,12 @@ public class DriverDAOImpl implements DriverDAO {
         try {
             session = DPU.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            maxId = (int) session.save(driver);
+            logger.info("class ID : ." +driver.getClassId());
+            session.saveOrUpdate(driver);
+            
             tx.commit();
+            DriverUIHelper driverUIHelper = new DriverUIHelper();
+            driverUIHelper.QuickFilterDrivers();
             logger.info("Driver Added Successfully." );
             return "Driver Added Successfully.";
         } catch (Exception e) {
@@ -85,36 +90,72 @@ public class DriverDAOImpl implements DriverDAO {
     }
 
     @Override
-    public String updateDriver(Driver obj) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("update drivermaster set first_name = ?,last_name=?,def_truck=?,address=?,home_phone=?,cellular=?,pager=?,status=?,last_trip=?,last_ETA=?,last_event=?,last_location=?,last_city=?,L/S=?,fax_no=?,division_id=?,terminal_id = ?,category_id=?, class_id = ?,zip=?,role_id = ? where driver_id = ?");
-            pstmt.setString(1, obj.getFirstName());
-            pstmt.setString(2, obj.getLastName());
-             
-            pstmt.setInt(22, obj.getDriverId());
-            int i = pstmt.executeUpdate();
-            if (i > 0) {
-                return "Driver Updated";
-            }
-        } catch (Exception e) {
-            logger.error("DriverDAOImpl : updateDriver : " + e);
+    public List<Driver> updateDriver(String driverCode) {
+        Session session = null;
+        Transaction tx = null;
+         
+        
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            
+            Criteria criteria = session.createCriteria(Driver.class);
+            criteria.add(Restrictions.eq("driverCode",driverCode));
+            List<Driver> drivers = criteria.list();
+             return drivers;
         }
-        return "Failed to Update Driver";
+    @Override
+    public void updateDriver(Driver driver) {
+        
+        Session session = null;
+        Transaction tx = null;
+         
+        try{
+            session = DPU.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            session.update(driver);
+            
+            tx.commit();
+            logger.info("Driver Updated Successfully." );
+             
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            logger.error("[DriverDAOImpl ]: UpdatedDriver : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+         
+         
     }
 
     @Override
-    public String deleteDriver(int driverId) {
+    public String deleteDriver(String driverCode) {
+        System.out.println("driverCode :"+driverCode);
          Session session = null;
         Transaction tx = null;
          
         try {
             session = DPU.getSessionFactory().openSession();
-            session.delete(driverId);
-            logger.info("Driver Deleted Successfully." );
-            return "Driver Deleted Successfully.";
+            tx = session.beginTransaction();
+            Driver driver = new Driver();
+            Criteria criteria = session.createCriteria(Driver.class);
+            criteria.add(Restrictions.eq("driverCode",driverCode));
+            List<Driver> drivers = criteria.list();
+            //driver = session.get(Driver.class,new String());
+            if(drivers != null){
+                for(Driver deleteDriver : drivers){
+                    session.delete(deleteDriver);
+                }
+                logger.info("Driver Deleted Successfully." );
+                tx.commit();
+                return "Driver Deleted Successfully";
+            }
         } catch (Exception e) {
             logger.error("[deleteDriver]Exception : " +e);
               

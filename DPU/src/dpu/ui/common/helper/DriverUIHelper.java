@@ -6,6 +6,7 @@ import dpu.dao.admin.impl.DriverDAOImpl;
 import dpu.entity.admin.Driver;
 import dpu.ui.common.AddDriverFrame;
 import dpu.ui.common.DriverPanel;
+import static dpu.ui.common.DriverPanel.driverTable;
 //import dpu.ui.common.AddDriverFrame;
 import dpu.ui.common.TestDriverPanel;
 import java.awt.Color;
@@ -29,12 +30,12 @@ import javax.swing.table.TableCellRenderer;
 
 public class DriverUIHelper extends DefaultTableCellRenderer {
 
-    public String addUpdateFlag = "";
-    int driverId = 0;
+    public  static String addUpdateFlag = "";
+    public static String driverId = "";
     String driverName;
     DriverDAO driverDAO = new DriverDAOImpl();
-    List<Driver> lstDrivers = null;
-    int driverIdToBeDeleted = 0;
+    public static List<Driver> lstDrivers = null;
+    String driverIdToBeDeleted = "";
     String msg = "";
 
     public void clear() {
@@ -104,7 +105,7 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
                 button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Delete.png"));
 
             }
-            driverIdToBeDeleted = lstDrivers.get(row).getDriverId();
+            driverIdToBeDeleted = lstDrivers.get(row).getDriverCode();
             label = (value == null) ? "" : value.toString();
             button.setText(label);
             isPushed = true;
@@ -183,8 +184,8 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
                 button.setBackground(table.getBackground());
                 button.setIcon(new ImageIcon("src\\dpu\\ui\\common\\Update.png"));
             }
-            driverIdToBeDeleted = lstDrivers.get(row).getDriverId();
-            driverId = lstDrivers.get(row).getDriverId();
+            driverIdToBeDeleted = lstDrivers.get(row).getDriverCode();
+            driverId = lstDrivers.get(row).getDriverCode();
             driverName = lstDrivers.get(row).getFirstName();
             label = (value == null) ? "" : value.toString();
             button.setText(label);
@@ -194,8 +195,8 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                DriverBean driverBean = new DriverBean();
-                driverBean.setDriverId(driverId);
+                Driver driver = new Driver();
+                driver.setDriverCode(driverId);
 //                driverBean.setName(driverName);
 //                AddDriverFrame addDriverFrame = new AddDriverFrame(driverBean);
 //                addDriverFrame.setVisible(true);
@@ -273,16 +274,17 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         String pvs = AddDriverFrame.txtPvs.getText();
         String postal = AddDriverFrame.txtPostal.getText();
         String email = AddDriverFrame.txtEmail.getText();
-        String home = AddDriverFrame.txtHome.getText();
-        String faxNo = AddDriverFrame.txtFaxNo.getText();
-        String cellular = AddDriverFrame.txtCellular.getText();
-        String pager = AddDriverFrame.txtPager.getText();
+        String home = AddDriverFrame.jFormattedHome.getText();
+        String faxNo = AddDriverFrame.jFormattedFaxNo.getText();
+        String cellular = AddDriverFrame.jFormattedCellular.getText();
+        String pager = AddDriverFrame.jFormattedPager.getText();
         String division = AddDriverFrame.txtDivision.getText();
         String terminal = AddDriverFrame.ddlTerminal.getSelectedItem().toString();
         String category = AddDriverFrame.ddlCategory.getSelectedItem().toString();
         String role = AddDriverFrame.ddlRole.getSelectedItem().toString();
         String status = AddDriverFrame.ddlStatus.getSelectedItem().toString();
-        String classs = AddDriverFrame.ddlClass.getSelectedItem().toString();
+        String classId = AddDriverFrame.ddlClassId.getSelectedItem().toString();
+        System.out.println("=-=-=-=-=classs :"+classId);
         driver.setDriverCode(driverCode);
         driver.setFirstName(firstName);
         driver.setLastName(lastName);
@@ -301,7 +303,7 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         driver.setCatogoryId(Long.parseLong(category));
         driver.setRoleId(Long.parseLong(role));
         driver.setStatusId(Long.parseLong(status));
-        driver.setClassId(Long.parseLong(classs));
+        driver.setClassId(Long.parseLong(classId));
          
 //        obj.setDriverId(Integer.parseInt(AddDriverFrame.txtDriverIdAddDriver.getText()));
 //        obj.setName(AddDriverFrame.txtDriverNameAddDriver.getText());
@@ -342,11 +344,11 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
             data[i][15] = obj.getCatogoryId();
             data[i][16] = obj.getRoleId();
             data[i][17] = obj.getStatusId();
-            data[i][18] = obj.getClass();
+            data[i][18] = obj.getClassId();
              
             DriverPanel.driverTable.setRowHeight(30);
         }
-        Object[] cols = {"Driver Code", "First Name", "Last Name", "Address", "Unit#", "City", "PVS", "Postal Zip", "E-Mail", "Home", "Fax No.", "Cellullar", "Pager", "Division", "Terminal", "Category", "Role", "Status", "class"};
+        Object[] cols = {"Driver Code", "First Name", "Last Name", "Address", "Unit#", "City", "PVS", "Postal Zip", "E-Mail", "Home", "Fax No.", "Cellullar", "Pager", "Division", "Terminal", "Category", "Role", "Status", "ClassId"};
         defaultTableModel.setDataVector(data, cols);
         //DriverPanel.driverTable.getColumn(" ").setCellRenderer(new ButtonRenderer());
         //DriverPanel.driverTable.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
@@ -356,7 +358,7 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         // DriverPanel.driverTable.getColumn("  ").setMaxWidth(25);
         DriverPanel.driverTable.setIntercellSpacing(new Dimension(0, 0));
         DriverPanel.driverTable.setShowGrid(false);
-        DriverPanel.jScrollPane2.setViewportView(DriverPanel.driverTable);
+        DriverPanel.jScrollPane1.setViewportView(DriverPanel.driverTable);
         
          
          
@@ -390,11 +392,11 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
             data[i][15] = obj.getCatogoryId();
             data[i][16] = obj.getRoleId();
             data[i][17] = obj.getStatusId();
-            data[i][18] = obj.getClass();
+            data[i][18] = obj.getClassId();
              
             DriverPanel.driverTable.setRowHeight(30);
         }
-        Object[] cols = {"Driver Code", "First Name", "Last Name", "Address", "Unit#", "City", "PVS", "Postal Zip", "E-Mail", "Home", "Fax No.", "Cellullar", "Pager", "Division", "Terminal", "Category", "Role", "Status", "class"};
+        Object[] cols = {"Driver Code", "First Name", "Last Name", "Address", "Unit#", "City", "PVS", "Postal Zip", "E-Mail", "Home", "Fax No.", "Cellullar", "Pager", "Division", "Terminal", "Category", "Role", "Status", "ClassId"};
         defaultTableModel.setDataVector(data, cols);
         //DriverPanel.driverTable.getColumn(" ").setCellRenderer(new ButtonRenderer());
         //DriverPanel.driverTable.getColumn(" ").setCellEditor(new ButtonEditor(new JCheckBox()));
@@ -404,16 +406,16 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         // DriverPanel.driverTable.getColumn("  ").setMaxWidth(25);
         DriverPanel.driverTable.setIntercellSpacing(new Dimension(0, 0));
         DriverPanel.driverTable.setShowGrid(false);
-        DriverPanel.jScrollPane2.setViewportView(DriverPanel.driverTable);
+        DriverPanel.jScrollPane1.setViewportView(DriverPanel.driverTable);
         
          
          
     }
     
     
-    public String deleteDriver(){
+    public String deleteDriver(String driverCode){
         DriverDAO driverDAO = new DriverDAOImpl();
-        String msg = driverDAO.deleteDriver(driverIdToBeDeleted);
+        String msg = driverDAO.deleteDriver(driverCode);
         disable(true);
         generateTable();
 //        TestDriverPanel.mainTabbedPane.setEnabled(true);
@@ -421,11 +423,80 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         return msg;
     }
 
-    public String update(Driver driver) {
-        DriverDAO divisionDAO = new DriverDAOImpl();
-        String msg = divisionDAO.updateDriver(driver);
+    public String update() {
+        
+        DefaultTableModel model = (DefaultTableModel)driverTable.getModel();
+        // get Selected Row Index
+        
+            int selectedRowIndex = driverTable.getSelectedRow();
+            String driverCode = model.getValueAt(selectedRowIndex, 0).toString();
+            
+            Driver driver = new Driver();
+            DriverDAO driverDAO = new DriverDAOImpl();
+            List<Driver> drivers = driverDAO.updateDriver(driverCode);
+            //Long classId = Long.parseLong(model.getValueAt(selectedRowIndex, 18).toString());
+            
+            if(drivers != null && !drivers.isEmpty())
+            {
+                for(Driver driverObj : drivers) {
+                    AddDriverFrame.txtDriverCode.setText(driverCode);
+                    AddDriverFrame.txtFirstName.setText(driverObj.getFirstName());
+                    AddDriverFrame.txtLastName.setText(driverObj.getLastName());
+                    AddDriverFrame.txtAddress.setText(driverObj.getAddress());
+                    AddDriverFrame.txtUnit.setText(driverObj.getUnit());
+                    AddDriverFrame.txtCity.setText(driverObj.getCity());
+                    AddDriverFrame.txtPvs.setText(driverObj.getPvs());
+                    AddDriverFrame.txtPostal.setText(driverObj.getPostalCode());
+                    AddDriverFrame.txtEmail.setText(driverObj.getEmail());
+                    AddDriverFrame.jFormattedHome.setText(driverObj.getHome());
+                    AddDriverFrame.jFormattedFaxNo.setText(driverObj.getFaxNo());
+                    AddDriverFrame.jFormattedCellular.setText(driverObj.getCellular());
+                    AddDriverFrame.jFormattedPager.setText(driverObj.getPager());
+                    AddDriverFrame.txtDivision.setText(driverObj.getDivision());
+                    AddDriverFrame.ddlTerminal.setSelectedItem(driverObj.getTerminalId());
+                    AddDriverFrame.ddlCategory.setSelectedItem(driverObj.getCatogoryId());
+                    AddDriverFrame.ddlRole.setSelectedItem(driverObj.getRoleId());
+                    AddDriverFrame.ddlStatus.setSelectedItem(driverObj.getStatusId());
+                }
+            }
+                    driver.setDriverCode(AddDriverFrame.txtDriverCode.getText());
+                    driver.setFirstName(AddDriverFrame.txtFirstName.getText());
+                    driver.setLastName(AddDriverFrame.txtLastName.getText());
+                    driver.setAddress(AddDriverFrame.txtAddress.getText());
+                    driver.setUnit(AddDriverFrame.txtUnit.getText());
+                    driver.setCity( AddDriverFrame.txtCity.getText());
+                    driver.setPvs( AddDriverFrame.txtPvs.getText());
+                    driver.setPostalCode( AddDriverFrame.txtPostal.getText());
+                    driver.setEmail( AddDriverFrame.txtEmail.getText());
+                    driver.setHome( AddDriverFrame.jFormattedHome.getText());
+                    driver.setFaxNo( AddDriverFrame.jFormattedFaxNo.getText());
+                    driver.setCellular( AddDriverFrame.jFormattedCellular.getText());
+                    driver.setPager( AddDriverFrame.jFormattedPager.getText());
+                    driver.setDivision( AddDriverFrame.txtDivision.getText());
+                    driver.setTerminalId(Long.parseLong( AddDriverFrame.ddlTerminal.getSelectedItem().toString()));
+                    driver.setCatogoryId(Long.parseLong(AddDriverFrame.ddlCategory.getSelectedItem().toString()));
+                    driver.setRoleId( Long.parseLong(AddDriverFrame.ddlRole.getSelectedItem().toString()));
+                    driver.setStatusId(Long.parseLong(AddDriverFrame.ddlStatus.getSelectedItem().toString()));
+                    driver.setClassId(Long.parseLong(AddDriverFrame.ddlClassId.getSelectedItem().toString()));
+             //AddDriverFrame.ddlClassId.setSelectedItem(classId);
+            //String newdriverCode = JOptionPane.showInputDialog(null,"enter the new driverCode",driverCode);
+            //String newfirstName= JOptionPane.showInputDialog(null,"enter the new firstName",firstName);
+            //String newlastName = JOptionPane.showInputDialog(null,"enter the new lastName",lastName);
+            //String newaddress = JOptionPane.showInputDialog(null,"enter the new address",address);
+            //String newunit = JOptionPane.showInputDialog(null,"enter the new unit",unit);
+            
+            
+           // model.setValueAt(newdriverCode, selectedRowIndex, 0);
+            //model.setValueAt(newfirstName, selectedRowIndex, 1);
+           // model.setValueAt(newlastName, selectedRowIndex, 2);
+            //model.setValueAt(newaddress, selectedRowIndex, 3);
+            //model.setValueAt(newunit, selectedRowIndex, 4);
+     
+    
+        
+         driverDAO.updateDriver(driver);
         disable(true);
-        generateTable();
+        //generateTable();
 //        TestDriverPanel.mainTabbedPane.setEnabled(true);
 //        TestDriverPanel.driverPanel.setEnabled(true);
         return msg;

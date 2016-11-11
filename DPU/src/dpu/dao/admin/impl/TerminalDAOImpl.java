@@ -24,6 +24,7 @@ public class TerminalDAOImpl implements TerminalDAO {
     @Override
     public List<TerminalBean> getAllTerminals(String terminalName) {
         List<TerminalBean> lstTerminals = new ArrayList<>();
+        System.out.println("terminalName"+terminalName);
         Session session = null;
         try {
             session = DPU.getSessionFactory().openSession();

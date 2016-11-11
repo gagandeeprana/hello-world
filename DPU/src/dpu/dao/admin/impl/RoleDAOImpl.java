@@ -5,16 +5,21 @@
  */
 package dpu.dao.admin.impl;
 
+import dpu.DPU;
 import dpu.beans.admin.RoleBean;
 import dpu.dao.admin.RoleDAO;
 import dpu.dao.admin.RoleDAO;
 import dpu.dao.common.ConnectDB;
+import dpu.entity.admin.Category;
+import dpu.entity.admin.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class RoleDAOImpl implements RoleDAO {
@@ -101,4 +106,26 @@ public class RoleDAOImpl implements RoleDAO {
         }
         return "Failed to Delete Role";
     }
+
+    @Override
+    public List<Role> getAllRole() {
+         List<Role> listOfRoles = new ArrayList<Role>();
+        Session session = null;
+        try {
+            session = DPU.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Role.class);
+            listOfRoles = criteria.list();
+        } catch (Exception e) {
+            logger.error("RoleDAOImpl : getAllRoles : " + e);
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return listOfRoles;
+    }
+     
 }

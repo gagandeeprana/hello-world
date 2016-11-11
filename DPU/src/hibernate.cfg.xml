@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dpu</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.url">jdbc:mysql://dpu.cdiqqkgwzwga.us-west-2.rds.amazonaws.com:3306/dpu</property>
+        <property name="hibernate.connection.username">dpu</property>
+        <property name="hibernate.connection.password">dpu12345</property>
         <mapping class="dpu.beans.admin.CompanyBean"/>
         <mapping class="dpu.beans.admin.BillingLocationBean"/>
         <mapping class="dpu.beans.admin.TypeBean"/>
@@ -22,5 +21,9 @@
         <mapping class="dpu.beans.admin.SalesPersonBean"/>
         <mapping class="dpu.beans.admin.ContainerBean"/>
         <mapping class="dpu.entity.admin.Driver"/>
+        <mapping class="dpu.entity.admin.Category"/>
+        <mapping class="dpu.entity.admin.Classs"/>
+        <mapping class="dpu.entity.admin.Role"/>
+        <mapping class="dpu.entity.admin.Status"/>
     </session-factory>
 </hibernate-configuration>
