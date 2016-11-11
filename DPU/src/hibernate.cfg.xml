@@ -25,5 +25,6 @@
         <mapping class="dpu.entity.admin.Classs"/>
         <mapping class="dpu.entity.admin.Role"/>
         <mapping class="dpu.entity.admin.Status"/>
+        <mapping class="dpu.entity.admin.State"/>
     </session-factory>
 </hibernate-configuration>
