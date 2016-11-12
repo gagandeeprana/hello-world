@@ -103,6 +103,7 @@ public class AddCustomerFrame extends javax.swing.JFrame {
                     return mask;
                 }
             });
+            
             billingLocationUIHelper = new BillingLocationUIHelper();
             additionalContactUIHelper = new AdditionalContactUIHelper();
             setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
@@ -467,6 +468,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         jLabel22.setText("After Hours");
 
         txtPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPhoneActionPerformed(evt);
+            }
+        });
         txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPhoneKeyPressed(evt);
@@ -480,6 +486,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         });
 
         txtFax.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtFax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFaxActionPerformed(evt);
+            }
+        });
         txtFax.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFaxKeyPressed(evt);
@@ -519,6 +530,11 @@ public class AddCustomerFrame extends javax.swing.JFrame {
         });
 
         txtCellular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtCellular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCellularActionPerformed(evt);
+            }
+        });
         txtCellular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCellularKeyPressed(evt);
@@ -1161,6 +1177,18 @@ public class AddCustomerFrame extends javax.swing.JFrame {
             System.out.println("Unable to open web-browser..  " + e);
         }
     }//GEN-LAST:event_lblBrowserMousePressed
+
+    private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneActionPerformed
+
+    private void txtFaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFaxActionPerformed
+
+    private void txtCellularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCellularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCellularActionPerformed
 
     /**
      * @param args the command line arguments

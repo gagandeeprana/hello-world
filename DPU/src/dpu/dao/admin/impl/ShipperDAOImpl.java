@@ -558,4 +558,46 @@ public class ShipperDAOImpl implements ShipperDAO {
 
     }
 
+    @Override
+    public ShippermasterBean getShipperByCompany(String company) {
+         ShippermasterBean shippermasterBean = null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet resultSet = null;
+        try {
+            pstmt = conn.prepareStatement("select * from shippermaster where company = ?");
+            pstmt.setString(1, company);
+            resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                shippermasterBean = new ShippermasterBean();
+                shippermasterBean.setAddress(resultSet.getString("address"));
+                shippermasterBean.setCity(resultSet.getString("city"));
+                shippermasterBean.setCompany(resultSet.getString("company"));
+                shippermasterBean.setContact(resultSet.getString("contact"));
+                shippermasterBean.setEmail(resultSet.getString("email"));
+                shippermasterBean.setExt(resultSet.getString("ext"));
+                shippermasterBean.setFax(resultSet.getString("fax"));
+                shippermasterBean.setImporter(resultSet.getString("importer"));
+                shippermasterBean.setInternalNotes(resultSet.getString("internam_notes"));
+                shippermasterBean.setLeadTime(resultSet.getString("lead_time"));
+                shippermasterBean.setPhone(resultSet.getString("phone"));
+                shippermasterBean.setPlant(resultSet.getString("plant"));
+                shippermasterBean.setPosition(resultSet.getString("position"));
+                shippermasterBean.setPostalZip(resultSet.getString("postal_zip"));
+                shippermasterBean.setPrefix(resultSet.getString("prefix"));
+                shippermasterBean.setProvinceState(resultSet.getString("prov_state"));
+                shippermasterBean.setStandardNotes(resultSet.getString("standard_notes"));
+                shippermasterBean.setStatus(resultSet.getInt("status"));
+                shippermasterBean.setShipperId(resultSet.getInt("shipper_id"));
+                shippermasterBean.setTimeZone(resultSet.getString("time_zone"));
+                shippermasterBean.setTollFree(resultSet.getString("toll_free"));
+                shippermasterBean.setUnit(resultSet.getString("unit"));
+                shippermasterBean.setZone(resultSet.getString("zone"));
+            }
+        } catch (Exception e) {
+            System.out.println("in getShipperByCompany " + e);
+        }
+        return shippermasterBean;
+    }
+
 }
