@@ -9,7 +9,7 @@ import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.TerminalDAO;
 import dpu.dao.admin.impl.TerminalDAOImpl;
 import dpu.ui.common.AddTerminalFrame;
-import dpu.ui.common.TerminalPanel;
+import dpu.ui.common.TerminalPanel1;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -37,7 +37,7 @@ public class TerminalUIHelper1 {
 
     public String delete(int terminalIdToBeDeleted) {
         String msg = terminalDAO.deleteTerminal(terminalIdToBeDeleted);
-        lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        lstTerminals = terminalDAO.getAllTerminals(TerminalPanel1.txtSearch.getText());
         generateTable();
         return msg;
     }
@@ -50,23 +50,23 @@ public class TerminalUIHelper1 {
     public void generateTable() {
         Object[] cols = {"Terminal", "Location"};
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TerminalPanel.tblTerminal.setModel(defaultTableModel);
-        TerminalPanel.tblTerminal.setAutoCreateRowSorter(true);
-        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper1.TerminalTable());
+        TerminalPanel1.tblTerminal.setModel(defaultTableModel);
+        TerminalPanel1.tblTerminal.setAutoCreateRowSorter(true);
+        TerminalPanel1.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper1.TerminalTable());
         if (lstTerminals.size() > 0) {
             Object[][] data = new Object[lstTerminals.size()][2];
             for (int i = 0; i < lstTerminals.size(); i++) {
                 TerminalBean obj = lstTerminals.get(i);
                 data[i][0] = obj.getTerminalName();
                 data[i][1] = obj.getLocation();
-                TerminalPanel.tblTerminal.setRowHeight(30);
+                TerminalPanel1.tblTerminal.setRowHeight(30);
             }
             defaultTableModel.setDataVector(data, cols);
-            TerminalPanel.tblTerminal.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-            TerminalPanel.tblTerminal.getTableHeader().setForeground(Color.DARK_GRAY);
-            TerminalPanel.tblTerminal.setIntercellSpacing(new Dimension(0, 0));
-            TerminalPanel.tblTerminal.setShowGrid(false);
-            TerminalPanel.jScrollPane9.setViewportView(TerminalPanel.tblTerminal);
+            TerminalPanel1.tblTerminal.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+            TerminalPanel1.tblTerminal.getTableHeader().setForeground(Color.DARK_GRAY);
+            TerminalPanel1.tblTerminal.setIntercellSpacing(new Dimension(0, 0));
+            TerminalPanel1.tblTerminal.setShowGrid(false);
+            TerminalPanel1.jScrollPane9.setViewportView(TerminalPanel1.tblTerminal);
         } else {
             generateEmptyTable();
         }
@@ -74,22 +74,22 @@ public class TerminalUIHelper1 {
 
     public void generateEmptyTable() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        TerminalPanel.tblTerminal.setModel(defaultTableModel);
-        TerminalPanel.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper1.TerminalTable());
+        TerminalPanel1.tblTerminal.setModel(defaultTableModel);
+        TerminalPanel1.tblTerminal.setDefaultRenderer(Object.class, new TerminalUIHelper1.TerminalTable());
         Object[][] data = new Object[7][2];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
             data[i][1] = "";
-            TerminalPanel.tblTerminal.setRowHeight(30);
+            TerminalPanel1.tblTerminal.setRowHeight(30);
         }
         Object[] cols = {"Terminal", "Location"};
 
         defaultTableModel.setDataVector(data, cols);
-        TerminalPanel.tblTerminal.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
-        TerminalPanel.tblTerminal.getTableHeader().setForeground(Color.DARK_GRAY);
-        TerminalPanel.tblTerminal.setIntercellSpacing(new Dimension(0, 0));
-        TerminalPanel.tblTerminal.setShowGrid(false);
-        TerminalPanel.jScrollPane9.setViewportView(TerminalPanel.tblTerminal);
+        TerminalPanel1.tblTerminal.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        TerminalPanel1.tblTerminal.getTableHeader().setForeground(Color.DARK_GRAY);
+        TerminalPanel1.tblTerminal.setIntercellSpacing(new Dimension(0, 0));
+        TerminalPanel1.tblTerminal.setShowGrid(false);
+        TerminalPanel1.jScrollPane9.setViewportView(TerminalPanel1.tblTerminal);
     }
 
     public void save() {
@@ -106,7 +106,7 @@ public class TerminalUIHelper1 {
             terminalBean.setTerminalId(terminalId);
             msg = terminalDAO.updateTerminal(terminalBean);
         }
-        lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        lstTerminals = terminalDAO.getAllTerminals(TerminalPanel1.txtSearch.getText());
         generateTable();
         JOptionPane.showMessageDialog(null, msg);
     }

@@ -12,12 +12,15 @@ import dpu.ui.shipper.Directions;
 import dpu.ui.shipper.NewShipperFrame;
 import dpu.ui.shipper.NotePad;
 import dpu.ui.shipper.TestShipperPannel;
+import dpu.ui.terminal.AddTerminal;
+import dpu.ui.terminal.LocationFrame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -30,7 +33,6 @@ import javax.swing.table.TableCellRenderer;
  */
 public class ShipperUIHelper {
 
-    
     public static String addUpdateFlag = "";
     public static ArrayList<ShippermasterBean> shipperList = null;
     ShipperDAO shipperDAO = null;
@@ -51,16 +53,24 @@ public class ShipperUIHelper {
                 //here space is given to provide some left margin while showing data on textfield..
                 editor.setText("   " + value.toString());
             }
-            if (row % 2 == 0) {
-                Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
+//            if (row % 2 == 0) {
+//                Border border = BorderFactory.createLineBorder(Color.WHITE, 4);
+//                editor.setBorder(border);
+//
+//            } else {
+//                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
+//                editor.setBorder(border);
+//
+//            }
+//            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+            Border border = BorderFactory.createLineBorder(Color.WHITE, 1);
+            editor.setBorder(border);
+            editor.setBackground(Color.white);
+            if (isSelected) {
+                border = BorderFactory.createLineBorder(Color.CYAN, 4);
                 editor.setBorder(border);
-
-            } else {
-                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4);
-                editor.setBorder(border);
-
+                editor.setBackground(Color.CYAN);
             }
-            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
             return editor;
         }
     }
@@ -176,4 +186,37 @@ public class ShipperUIHelper {
         return msg;
     }
 
+    public void generateLocationTable() {
+        shipperList = shipperDAO.getAllShipper(AddTerminal.txtLocation.getText());
+        System.out.println("dasd " + AddTerminal.txtLocation.getText());
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        LocationFrame.tblLocation = new JTable(defaultTableModel);
+        LocationFrame.tblLocation.setAutoCreateRowSorter(true);
+        //LocationFrame.tblLocation.getTableHeader().setBackground(Color.red);
+        LocationFrame.tblLocation.setDefaultRenderer(Object.class, new ShipperUIHelper.ShipperTable());
+        System.out.println("sizeshipper" + shipperList.size());
+        Object[][] data = new Object[shipperList.size()][22];
+        for (int i = 0; i < shipperList.size(); i++) {
+            ShippermasterBean obj = shipperList.get(i);
+            data[i][0] = obj.getCompany();
+            data[i][1] = obj.getAddress();
+            data[i][2] = obj.getUnit();
+            data[i][3] = obj.getCity();
+            data[i][4] = obj.getProvinceState();
+            data[i][5] = obj.getPostalZip();
+            LocationFrame.tblLocation.setRowHeight(20);
+        }
+        Object[] cols = {"Location Name", "Address", "Unit No", "City", "P/S", "Postal/Zip"};
+        defaultTableModel.setDataVector(data, cols);
+        //  LocationFrame.tblLocation.getTableHeader().setBackground(Color.DARK_GRAY);
+        LocationFrame.tblLocation.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
+        LocationFrame.tblLocation.getTableHeader().setForeground(Color.DARK_GRAY);
+        TableCellRenderer renderer = LocationFrame.tblLocation.getTableHeader().getDefaultRenderer();
+        JLabel label = (JLabel) renderer;
+        label.setHorizontalAlignment(JLabel.LEFT);
+        LocationFrame.tblLocation.setIntercellSpacing(new Dimension(0, 0));
+        LocationFrame.tblLocation.setShowGrid(false);
+        LocationFrame.tblLocation.setShowVerticalLines(true);
+        LocationFrame.jScrollPane1.setViewportView(LocationFrame.tblLocation);
+    }
 }

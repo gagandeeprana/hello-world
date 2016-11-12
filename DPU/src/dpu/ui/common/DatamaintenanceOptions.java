@@ -5,11 +5,10 @@
  */
 package dpu.ui.common;
 
-import static dpu.ui.common.helper.CompanyUIHelper.lstCompanies;
 import dpu.ui.common.helper.DriverUIHelper;
 import dpu.ui.shipper.TestShipperPannel;
+import dpu.ui.terminal.TerminalPanel;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JRootPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;

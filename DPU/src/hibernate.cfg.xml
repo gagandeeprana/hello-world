@@ -4,9 +4,9 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://dpu.cdiqqkgwzwga.us-west-2.rds.amazonaws.com:3306/dpu</property>
-        <property name="hibernate.connection.username">dpu</property>
-        <property name="hibernate.connection.password">dpu12345</property>
+        <property name="hibernate.connection.url">jdbc:mysql://35.154.2.156:3306/dpu</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">alpha925</property>
         <mapping class="dpu.beans.admin.CompanyBean"/>
         <mapping class="dpu.beans.admin.BillingLocationBean"/>
         <mapping class="dpu.beans.admin.TypeBean"/>

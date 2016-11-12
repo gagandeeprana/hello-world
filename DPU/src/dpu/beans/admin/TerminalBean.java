@@ -24,6 +24,9 @@ public class TerminalBean {
     @Column(name = "terminal_name")
     private String terminalName;
 
+     @Column(name = "facility")
+    private String facility;
+    
     @Column(name = "location")
     private String location;
     

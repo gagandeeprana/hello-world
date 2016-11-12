@@ -44,4 +44,5 @@ public interface ShipperDAO {
     public String updateAdditionalContact(AdditionalShippperContactBean additionalShippperContactBean);
     
     public String deleteContact(int contactId);
+        
 }
