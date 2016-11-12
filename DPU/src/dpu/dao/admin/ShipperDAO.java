@@ -20,6 +20,8 @@ public interface ShipperDAO {
      public String addShipper(ShippermasterBean shippermasterBean);
 
     public ArrayList getAllShipper(String search);
+    
+    public ShippermasterBean getShipperByCompany(String company);
 
     public ShippermasterBean getShipperInfoById(int shipperId);
 
