@@ -19,10 +19,13 @@ import dpu.entity.admin.Status;
 import static dpu.ui.common.AddCustomerFrame.txtPhone;
 import dpu.ui.common.helper.CompanyUIHelper;
 import dpu.ui.common.helper.DriverUIHelper;
+
+import dpu.ui.common.helper.StateHelper;
 import java.text.ParseException;
 import java.util.List;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
+
 
 /**
  *
@@ -31,8 +34,13 @@ import javax.swing.text.MaskFormatter;
 public class AddDriverFrame extends javax.swing.JFrame {
     
     DriverUIHelper driverUIHelper = new DriverUIHelper();
+
+    
+    StateHelper stateHeper = new StateHelper();
+
     MaskFormatter mask = null;
     private JFormattedTextField jFormattedTextField1;
+
     /**
      * Creates new form AddDriverFrame
      */
@@ -278,6 +286,17 @@ public class AddDriverFrame extends javax.swing.JFrame {
         });
 
         pvsLabel.setText("PVS");
+
+        txtPvs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPvsMouseClicked(evt);
+            }
+        });
+        txtPvs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPvsActionPerformed(evt);
+            }
+        });
 
         emailLabel.setText("E-Mail");
 
@@ -857,6 +876,24 @@ public class AddDriverFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ddlTerminalActionPerformed
 
+
+    private void txtPvsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPvsMouseClicked
+        // TODO add your handling code here:
+         //stateHeper.getAllStates();
+         //new ProvincialFrame().setVisible(true);
+          ProvincialFrame addDriverFrame = new ProvincialFrame();
+                
+                stateHeper.getAllStates();
+                addDriverFrame.setVisible(true);
+                
+         
+       
+    }//GEN-LAST:event_txtPvsMouseClicked
+
+    private void txtPvsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPvsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPvsActionPerformed
+
     private void ddlStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlStatusActionPerformed
         // TODO add your handling code here:
         
@@ -873,6 +910,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
 
     /**
      * @param args the command line arguments
