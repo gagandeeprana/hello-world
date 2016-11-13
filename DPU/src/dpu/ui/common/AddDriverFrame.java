@@ -7,25 +7,26 @@ package dpu.ui.common;
 
  
 import dpu.beans.admin.TerminalBean;
+import dpu.dao.admin.DriverDAO;
 import dpu.dao.admin.impl.CategoryDAOImpl;
 import dpu.dao.admin.impl.ClasssDAOImpl;
+import dpu.dao.admin.impl.DriverDAOImpl;
 import dpu.dao.admin.impl.RoleDAOImpl;
 import dpu.dao.admin.impl.StatusDAOImpl;
 import dpu.dao.admin.impl.TerminalDAOImpl;
 import dpu.entity.admin.Category;
 import dpu.entity.admin.Classs;
+import dpu.entity.admin.Driver;
 import dpu.entity.admin.Role;
 import dpu.entity.admin.Status;
-import static dpu.ui.common.AddCustomerFrame.txtPhone;
-import dpu.ui.common.helper.CompanyUIHelper;
+ 
+ 
 import dpu.ui.common.helper.DriverUIHelper;
-
 import dpu.ui.common.helper.StateHelper;
-import java.text.ParseException;
+ 
 import java.util.List;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
-
 
 /**
  *
@@ -34,32 +35,34 @@ import javax.swing.text.MaskFormatter;
 public class AddDriverFrame extends javax.swing.JFrame {
     
     DriverUIHelper driverUIHelper = new DriverUIHelper();
-
-    
-    StateHelper stateHeper = new StateHelper();
-
-    MaskFormatter mask = null;
+    public  MaskFormatter mask = null;
+    public static int updateDriverId = 0;
     private JFormattedTextField jFormattedTextField1;
-
     /**
      * Creates new form AddDriverFrame
      */
     
+     public  static  String flag = "";
+    
+      
+
+        
     public AddDriverFrame()  {
-         try{
+        
+        flag = "add";
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Add New Driver");
-        
-         
+        setLocationRelativeTo(null);
         fillTerminalDropDown();
         fillCtegoryDropDown();
         fillRoleDropDown();
         fillStatusDropDown();
         fillClasssDropDown();
-         
-        mask = new MaskFormatter("(###) ###-####");
-        mask.setPlaceholderCharacter('_');
+        try {
+          mask = new MaskFormatter("(###) ###-####");
+          mask.setPlaceholderCharacter('_');
+          
         jFormattedCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
                 @Override
                 public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
@@ -84,60 +87,95 @@ public class AddDriverFrame extends javax.swing.JFrame {
                     return mask;
                 }
             });
-         }catch(Exception e){
-             
-         }
+         
+          txtPvs.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPvsMouseClicked(evt);
+            }
+        });
        
+    }catch(Exception e){
+        e.printStackTrace();;
     }
-    
-    public  void formatFieldDate(){
-      MaskFormatter mf = null; 
-    try {
-        mf = new MaskFormatter("##/##/2008");
-    } catch (ParseException p) {
-        p.printStackTrace();
     }
-    
-  }
+  
     public AddDriverFrame(String message) {
+        
         initComponents();
         //for to close single window.
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle(message);
+        flag = "update";
+        setTitle("Update Driver");
         driverUIHelper.update();
+        //try {
+          //mask = new MaskFormatter("(###) ###-####");
+          //mask.setPlaceholderCharacter('_');
+          
+        //jFormattedCellular.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+          //      @Override
+              //  public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+             //       return mask;
+              //  }
+            //});
+        //jFormattedFaxNo.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+          //      @Override
+            //    public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+              //      return mask;
+                //}
+            //});
+         //jFormattedHome.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+           //     @Override
+             //   public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+               //     return mask;
+               // }
+            //});
+          //jFormattedPager.setFormatterFactory(new JFormattedTextField.AbstractFormatterFactory() {
+            //    @Override
+              //  public JFormattedTextField.AbstractFormatter getFormatter(JFormattedTextField tf) {
+                //    return mask;
+                //}
+            //});
+         
+       
+   // }catch(Exception e){
+         
+   // }
+       
         
         
     }
     
-    private void fillTerminalDropDown() {
+    private static void fillTerminalDropDown() {
         List<TerminalBean> lst = new TerminalDAOImpl().getAllTerminals("");
         for(TerminalBean terminalBean : lst) {
             ddlTerminal.addItem(terminalBean.getTerminalName());
         } 
     }
     
-    private void fillCtegoryDropDown() {
+    private static void fillCtegoryDropDown() {
         List<Category> lst = new CategoryDAOImpl().getAllCategory();
         for(Category category : lst) {
             ddlCategory.addItem(category.getCatgoryValue());
         } 
     }
     
-    private void fillRoleDropDown() {
+    private static void fillRoleDropDown() {
         List<Role> lst = new RoleDAOImpl().getAllRole();
         for(Role role : lst) {
             ddlRole.addItem(role.getRoleName());
         } 
     }
     
-    private void fillStatusDropDown() {
+    private static void fillStatusDropDown() {
         List<Status> lst = new StatusDAOImpl().getAllStatus();
         for(Status status : lst) {
             ddlStatus.addItem(status.getStatusValue());
         } 
     }
     
-    private void fillClasssDropDown() {
+    private static void fillClasssDropDown() {
         List<Classs> lst = new ClasssDAOImpl().getAllClass();
         for(Classs classs : lst) {
             ddlClassId.addItem(classs.getClassValue());
@@ -180,7 +218,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtDivision = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        ddlTerminal = new javax.swing.JComboBox();
+        ddlTerminal = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         ddlCategory = new javax.swing.JComboBox();
         jLabel15 = new javax.swing.JLabel();
@@ -287,17 +325,6 @@ public class AddDriverFrame extends javax.swing.JFrame {
 
         pvsLabel.setText("PVS");
 
-        txtPvs.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPvsMouseClicked(evt);
-            }
-        });
-        txtPvs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPvsActionPerformed(evt);
-            }
-        });
-
         emailLabel.setText("E-Mail");
 
         jLabel8.setText("Home");
@@ -339,6 +366,11 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jLabel17.setText("ClassId");
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnNotes.setText("Notes");
         btnNotes.addActionListener(new java.awt.event.ActionListener() {
@@ -441,7 +473,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addGap(0, 224, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -555,7 +587,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
                             .addComponent(jLabel34))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                            .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                             .addComponent(jTextField11)
                             .addComponent(jTextField12)
                             .addComponent(jTextField13)
@@ -605,7 +637,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 863, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,7 +650,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 863, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -631,7 +663,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 863, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +676,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 863, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -657,7 +689,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 863, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,88 +703,83 @@ public class AddDriverFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pvsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPvs, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDriverCode, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(236, 236, 236)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(ddlCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ddlClassId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(44, 44, 44)
-                                .addComponent(ddlRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8)
-                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ddlTerminal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDivision)
-                            .addComponent(txtEmail)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jFormattedHome)
-                                    .addComponent(jFormattedCellular, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(pvsLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPvs, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDriverCode, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel16))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ddlCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jFormattedFaxNo)
-                                    .addComponent(jFormattedPager, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(270, 270, 270))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNotes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(ddlClassId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ddlRole, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8)
+                                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jFormattedHome)
+                                            .addComponent(jFormattedCellular, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(77, 77, 77)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel11))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jFormattedFaxNo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jFormattedPager, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtEmail)
+                                    .addComponent(txtDivision)
+                                    .addComponent(ddlTerminal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -790,6 +817,9 @@ public class AddDriverFrame extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(txtPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel14))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(113, 113, 113)
@@ -816,28 +846,32 @@ public class AddDriverFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(ddlTerminal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(ddlCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15)
-                            .addComponent(ddlRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)
-                            .addComponent(ddlClassId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(ddlRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ddlCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16)
+                                .addComponent(ddlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ddlClassId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNotes)
-                        .addGap(202, 202, 202)
+                        .addGap(203, 203, 203)
                         .addComponent(btnSave)
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCancel))
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(132, 132, 132))
+                .addContainerGap())
         );
 
         pack();
@@ -865,8 +899,49 @@ public class AddDriverFrame extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        //dispose();
-        driverUIHelper.save();
+        System.out.println("SAVE Button ACTION");
+        dispose();
+        if(!flag.equals("update")){
+            System.out.println("flag is used for Add Driver");
+            driverUIHelper.save();
+        } else{
+             
+            System.out.println("flag is used for update Driver");
+            
+             
+            Driver  driver = new Driver();
+                    driver.setDriverId(updateDriverId);
+                    driver.setDriverCode(AddDriverFrame.txtDriverCode.getText());
+                    driver.setFirstName(AddDriverFrame.txtFirstName.getText());
+                    driver.setLastName(AddDriverFrame.txtLastName.getText());
+                    driver.setAddress(AddDriverFrame.txtAddress.getText());
+                    driver.setUnit(AddDriverFrame.txtUnit.getText());
+                    driver.setCity( AddDriverFrame.txtCity.getText());
+                    driver.setPvs( AddDriverFrame.txtPvs.getText());
+                    driver.setPostalCode( AddDriverFrame.txtPostal.getText());
+                    driver.setEmail( AddDriverFrame.txtEmail.getText());
+                    String homeValue = AddDriverFrame.jFormattedHome.getText();
+                    driver.setHome( homeValue.replaceAll("[^A-Za-z0-9]",""));
+                    String faxNo = AddDriverFrame.jFormattedFaxNo.getText();
+                    driver.setFaxNo( faxNo.replaceAll("[^A-Za-z0-9]",""));
+                    String cellularNo = AddDriverFrame.jFormattedCellular.getText();
+                    driver.setCellular(cellularNo.replaceAll("[^A-Za-z0-9]",""));
+                    String pager = AddDriverFrame.jFormattedPager.getText();
+                    driver.setPager( pager.replaceAll("[^A-Za-z0-9]",""));
+                   
+                    driver.setDivision( AddDriverFrame.txtDivision.getText());
+                    driver.setTerminalId( AddDriverFrame.ddlTerminal.getSelectedItem().toString());
+                    driver.setCatogoryId( AddDriverFrame.ddlCategory.getSelectedItem().toString());
+                    driver.setRoleId(  AddDriverFrame.ddlRole.getSelectedItem().toString());
+                    driver.setStatusId( AddDriverFrame.ddlStatus.getSelectedItem().toString());
+                    driver.setClassId( AddDriverFrame.ddlClassId.getSelectedItem().toString());
+                    
+             
+            DriverDAO driverDAO = new DriverDAOImpl();
+            driverDAO.updateDriver(driver);
+            
+        }
+         
         
         
         
@@ -875,24 +950,6 @@ public class AddDriverFrame extends javax.swing.JFrame {
     private void ddlTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlTerminalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ddlTerminalActionPerformed
-
-
-    private void txtPvsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPvsMouseClicked
-        // TODO add your handling code here:
-         //stateHeper.getAllStates();
-         //new ProvincialFrame().setVisible(true);
-          ProvincialFrame addDriverFrame = new ProvincialFrame();
-                
-                stateHeper.getAllStates();
-                addDriverFrame.setVisible(true);
-                
-         
-       
-    }//GEN-LAST:event_txtPvsMouseClicked
-
-    private void txtPvsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPvsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPvsActionPerformed
 
     private void ddlStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlStatusActionPerformed
         // TODO add your handling code here:
@@ -911,6 +968,10 @@ public class AddDriverFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -955,7 +1016,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
     public static javax.swing.JComboBox ddlClassId;
     public static javax.swing.JComboBox ddlRole;
     public static javax.swing.JComboBox ddlStatus;
-    public static javax.swing.JComboBox ddlTerminal;
+    public static javax.swing.JComboBox<String> ddlTerminal;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
@@ -1038,4 +1099,17 @@ public class AddDriverFrame extends javax.swing.JFrame {
     public static javax.swing.JTextField txtPvs;
     public static javax.swing.JTextField txtUnit;
     // End of variables declaration//GEN-END:variables
+private void txtPvsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPvsMouseClicked
+        // TODO add your handling code here:
+         //stateHeper.getAllStates();
+         //new ProvincialFrame().setVisible(true);
+         System.out.println("-==--=-=-MouseClicked=-=-=-=-");
+          ProvincialFrame addDriverFrame = new ProvincialFrame();
+                StateHelper stateHeper = new StateHelper();
+                stateHeper.getAllStates();
+                addDriverFrame.setVisible(true);
+                
+         
+       
+    }//GEN-LAST:event_txtPvsMouseClicked
 }

@@ -6,6 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.HibernateUtil;
 import dpu.beans.admin.RoleBean;
 import dpu.dao.admin.RoleDAO;
 import dpu.dao.admin.RoleDAO;
@@ -109,23 +110,20 @@ public class RoleDAOImpl implements RoleDAO {
 
     @Override
     public List<Role> getAllRole() {
-         List<Role> listOfRoles = new ArrayList<Role>();
+         
         Session session = null;
         try {
-            session = DPU.getSessionFactory().openSession();
+             session = HibernateUtil.getSession();
+             
             Criteria criteria = session.createCriteria(Role.class);
-            listOfRoles = criteria.list();
+            List<Role> listOfRoles = criteria.list();
+            return listOfRoles;
         } catch (Exception e) {
             logger.error("RoleDAOImpl : getAllRoles : " + e);
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
-        }
-        return listOfRoles;
+        }   // finally{
+            //HibernateUtil.closeSession();
+        //}
+        return null;
     }
      
 }

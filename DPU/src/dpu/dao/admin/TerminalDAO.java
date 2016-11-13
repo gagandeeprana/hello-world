@@ -15,4 +15,5 @@ public interface TerminalDAO {
 
     String deleteTerminal(int terminalId);
 
+    
 }

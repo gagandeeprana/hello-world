@@ -5,11 +5,10 @@
  */
 package dpu.ui.common;
 
-import static dpu.ui.common.helper.CompanyUIHelper.lstCompanies;
 import dpu.ui.common.helper.DriverUIHelper;
 import dpu.ui.shipper.TestShipperPannel;
+import dpu.ui.terminal.TerminalPanel;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JRootPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -398,7 +397,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         internalFrameSettings();
         DriverPanel driverPanel = new DriverPanel();
-        driverPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        driverPanel.setBounds(0, 0, getWidth() , getHeight() - 50);
         root.add(driverPanel);
         root.setVisible(true);
         driverUIHelper.showAllDrivers();

@@ -6,6 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.HibernateUtil;
 import dpu.dao.admin.StatusDAO;
 import dpu.entity.admin.Role;
 import dpu.entity.admin.Status;
@@ -22,23 +23,20 @@ public class StatusDAOImpl implements StatusDAO{
 
     @Override
     public List<Status> getAllStatus() {
-           List<Status> listOfStatus = new ArrayList<Status>();
-        Session session = null;
+           
+         
         try {
-            session = DPU.getSessionFactory().openSession();
+            Session  session = HibernateUtil.getSession();
+             
             Criteria criteria = session.createCriteria(Status.class);
-            listOfStatus = criteria.list();
+           List<Status> listOfStatus = criteria.list();
+           return listOfStatus;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
+        }  finally {
+            
         }
-        return listOfStatus;
+        return null;
     }
      
     

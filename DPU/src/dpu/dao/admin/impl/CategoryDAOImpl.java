@@ -6,6 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.HibernateUtil;
 import dpu.beans.admin.CategoryBean;
 import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.CategoryDAO;
@@ -140,19 +141,15 @@ public class CategoryDAOImpl implements CategoryDAO {
         List<Category> listOfCategory = new ArrayList<Category>();
         Session session = null;
         try {
-            session = DPU.getSessionFactory().openSession();
+             session = HibernateUtil.getSession();
+             
             Criteria criteria = session.createCriteria(Category.class);
             listOfCategory = criteria.list();
         } catch (Exception e) {
             logger.error("CategoryDAOImpl : getAllCategories : " + e);
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
-        }
+        }  //finally{
+            //HibernateUtil.closeSession();
+            //}
         return listOfCategory;
     }
      

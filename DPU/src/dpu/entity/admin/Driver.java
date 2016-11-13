@@ -84,19 +84,19 @@ public class Driver implements Serializable{
     private String division;
     
     @Column(name="terminal")
-    private Long terminalId;
+    private String terminalId;
     
     @Column(name="category")
-    private Long catogoryId;
+    private String catogoryId;
     
     @Column(name="role")
-    private Long roleId;
+    private String roleId;
 
     @Column(name="status")
-    private Long statusId;
+    private String statusId;
     
     @Column(name="classId")
-    private Long classId;
+    private String classId;
     
 
 }

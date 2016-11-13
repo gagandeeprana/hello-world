@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author gagandeep.rana
  */
-public class TerminalPanel extends javax.swing.JPanel {
+public class TerminalPanel1 extends javax.swing.JPanel {
 
     /**
      * S
@@ -25,11 +25,11 @@ public class TerminalPanel extends javax.swing.JPanel {
     TerminalUIHelper1 terminalUIHelper = null;
     TerminalDAO terminalDAO = null;
 
-    public TerminalPanel() {
+    public TerminalPanel1() {
         initComponents();
         terminalUIHelper = new TerminalUIHelper1();
         terminalDAO = new TerminalDAOImpl();
-        TerminalUIHelper1.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        TerminalUIHelper1.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel1.txtSearch.getText());
         terminalUIHelper.generateTable();
 
     }
@@ -174,7 +174,7 @@ public class TerminalPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        TerminalUIHelper1.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel.txtSearch.getText());
+        TerminalUIHelper1.lstTerminals = terminalDAO.getAllTerminals(TerminalPanel1.txtSearch.getText());
         terminalUIHelper.generateTable();
     }//GEN-LAST:event_txtSearchKeyReleased
 

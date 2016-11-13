@@ -6,6 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.HibernateUtil;
 import dpu.beans.admin.ClassBean;
 import dpu.dao.admin.ClassDAO;
 import dpu.dao.admin.ClasssDAO;
@@ -22,24 +23,20 @@ import org.hibernate.Session;
  */
 public class ClasssDAOImpl implements ClasssDAO{
 
-    @Override
+   @Override
     public List<Classs> getAllClass() {
           List<Classs> listOfClass = new ArrayList<Classs>();
         Session session = null;
         try {
-            session = DPU.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
+            
             Criteria criteria = session.createCriteria(Classs.class);
             listOfClass = criteria.list();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
-        }
+        }   //finally{
+            //HibernateUtil.closeSession();
+        //}
         return listOfClass;
     }
    

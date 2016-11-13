@@ -5,7 +5,14 @@
  */
 package dpu.ui.common;
 
+import dpu.beans.admin.CompanyBean;
+import dpu.entity.admin.Driver;
+import static dpu.ui.common.CompanyPanel1.tblCompany;
+import dpu.ui.common.helper.CompanyUIHelper;
 import dpu.ui.common.helper.DriverUIHelper;
+import java.awt.Toolkit;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,13 +20,19 @@ import javax.swing.table.DefaultTableModel;
  * @author Durga
  */
 public class DriverPanel extends javax.swing.JPanel {
+    
 
     DriverUIHelper driverUIHelper = new DriverUIHelper();
     /**
      * Creates new form DriverPanel
      */
     public DriverPanel() {
+        
+    
         initComponents();
+            setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        driverTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+         driverTable.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
     /**
@@ -35,7 +48,6 @@ public class DriverPanel extends javax.swing.JPanel {
         txtQuickFilter = new javax.swing.JTextField();
         btnQuickFilter = new javax.swing.JButton();
         cbShowAll = new javax.swing.JCheckBox();
-        lblShowAll = new javax.swing.JLabel();
         btnPrint = new javax.swing.JButton();
         btnUpdateDriver = new javax.swing.JButton();
         btnDeleteDriver = new javax.swing.JButton();
@@ -53,14 +65,12 @@ public class DriverPanel extends javax.swing.JPanel {
             }
         });
 
-        cbShowAll.setText("jCheckBox1");
+        cbShowAll.setText("Show All");
         cbShowAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbShowAllActionPerformed(evt);
             }
         });
-
-        lblShowAll.setText("Show All");
 
         btnPrint.setText("Print");
 
@@ -80,7 +90,9 @@ public class DriverPanel extends javax.swing.JPanel {
 
         btnEmail.setText("E-Mail");
 
-        btnAddDriver.setText("Add");
+        btnAddDriver.setText("+");
+        btnAddDriver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAddDriver.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/dpu/ui/common/Add-Images.png"))); // NOI18N
         btnAddDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddDriverActionPerformed(evt);
@@ -95,9 +107,17 @@ public class DriverPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Driver Code", "First Name", "Last Name", "Address", "Unit", "City", "Pvs", "Postal", "Email", "Home", "FaxNo", "Cellular", "Pager", "Division", "Terminal", "Category", "Role", "Status", "ClassId"
+                "Driver Code                                                                ", "First Name", "Last Name", "Address", "Unit", "City", "Pvs", "Postal", "Email", "Home", "FaxNo", "Cellular", "Pager", "Division", "Terminal", "Category", "Role", "Status", "ClassId"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(driverTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -107,55 +127,59 @@ public class DriverPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddDriver)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtQuickFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnQuickFilter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblShowAll, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddDriver)
-                        .addGap(18, 18, 18)
                         .addComponent(btnUpdateDriver)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDeleteDriver)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEmail)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPrint)
-                        .addGap(0, 346, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 644, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAddDriver)
-                        .addComponent(btnDeleteDriver)
-                        .addComponent(btnEmail)
-                        .addComponent(btnUpdateDriver)
-                        .addComponent(btnPrint)
-                        .addComponent(lblShowAll))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txtQuickFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnQuickFilter)
-                        .addComponent(cbShowAll)))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeleteDriver)
+                    .addComponent(btnEmail)
+                    .addComponent(btnUpdateDriver)
+                    .addComponent(btnPrint)
+                    .addComponent(cbShowAll)
+                    .addComponent(btnQuickFilter)
+                    .addComponent(txtQuickFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnAddDriver))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddDriver, btnDeleteDriver, btnEmail, btnPrint, btnQuickFilter, btnUpdateDriver, cbShowAll, jLabel1, txtQuickFilter});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowAllActionPerformed
         // TODO add your handling code here:
+        if(cbShowAll.isSelected() == true){
+            driverUIHelper.showAll();
+        }
+         else{
+            driverUIHelper.QuickFilterDrivers();
+        }
     }//GEN-LAST:event_cbShowAllActionPerformed
 
     private void btnAddDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDriverActionPerformed
@@ -188,8 +212,11 @@ public class DriverPanel extends javax.swing.JPanel {
     private void btnUpdateDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDriverActionPerformed
         // TODO add your handling code here:
         String value = "Update Driver";
+        
         AddDriverFrame addDriverFrame = new AddDriverFrame(value);
         addDriverFrame.setVisible(true);
+         
+         
     }//GEN-LAST:event_btnUpdateDriverActionPerformed
 
     private void btnQuickFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickFilterActionPerformed
@@ -205,11 +232,10 @@ public class DriverPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnQuickFilter;
     private javax.swing.JButton btnUpdateDriver;
-    private javax.swing.JCheckBox cbShowAll;
+    public static javax.swing.JCheckBox cbShowAll;
     public static javax.swing.JTable driverTable;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblShowAll;
     public static javax.swing.JTextField txtQuickFilter;
     // End of variables declaration//GEN-END:variables
 }
