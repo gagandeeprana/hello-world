@@ -10,6 +10,7 @@ import dpu.dao.admin.CategoryDAO;
 import dpu.dao.admin.impl.CategoryDAOImpl;
 import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.common.helper.CategoryUIHelper;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,9 +28,10 @@ public class CategoryPanel extends javax.swing.JPanel {
 
     public CategoryPanel() {
         initComponents();
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         categoryUIHelper = new CategoryUIHelper();
         categoryDAO = new CategoryDAOImpl();
-        CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText());
+        CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
         categoryUIHelper.generateTable();
 
     }
@@ -51,6 +53,8 @@ public class CategoryPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         tblCategory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,43 +110,65 @@ public class CategoryPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Go");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setText("Show All");
+        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox1StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 1248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane9)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdd)
-                        .addGap(11, 11, 11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPrint)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)))
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addContainerGap(710, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
                     .addComponent(jLabel10)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPrint)
-                    .addComponent(btnAdd)
                     .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDelete)
+                    .addComponent(jButton1)
+                    .addComponent(jCheckBox1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, btnDelete, btnPrint, btnUpdate, jLabel10, txtSearch});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
@@ -156,17 +182,21 @@ public class CategoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int categoryIdToBeDeleted = CategoryUIHelper.lstCategories.get(tblCategory.getSelectedRow()).getCategoryId();
-        String msg = categoryUIHelper.delete(categoryIdToBeDeleted);
-        JOptionPane.showMessageDialog(null, msg);
+        if(!(tblCategory.getSelectedRow() < 0)) {
+            int categoryIdToBeDeleted = CategoryUIHelper.lstCategories.get(tblCategory.getSelectedRow()).getCategoryId();
+            String msg = categoryUIHelper.delete(categoryIdToBeDeleted);
+            JOptionPane.showMessageDialog(null, msg);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        CategoryBean categoryBean = CategoryUIHelper.lstCategories.get(tblCategory.getSelectedRow());
-        CategoryUIHelper.categoryId = categoryBean.getCategoryId();
-        CategoryUIHelper.addUpdateFlag = "update";
-        AddCategoryFrame addCategoryFrame = new AddCategoryFrame(categoryBean);
-        addCategoryFrame.setVisible(true);
+        if(!(tblCategory.getSelectedRow() < 0)) {
+            CategoryBean categoryBean = CategoryUIHelper.lstCategories.get(tblCategory.getSelectedRow());
+            CategoryUIHelper.categoryId = categoryBean.getCategoryId();
+            CategoryUIHelper.addUpdateFlag = "update";
+            AddCategoryFrame addCategoryFrame = new AddCategoryFrame(categoryBean);
+            addCategoryFrame.setVisible(true);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
@@ -174,9 +204,28 @@ public class CategoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText());
-        categoryUIHelper.generateTable();
+     
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jCheckBox1.isSelected()) {
+            CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 2);
+        } else {
+            CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
+        }
+        categoryUIHelper.generateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+        // TODO add your handling code here:
+        if(jCheckBox1.isSelected()) {
+          CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 2);
+        } else {
+          CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
+        }
+        categoryUIHelper.generateTable();
+    }//GEN-LAST:event_jCheckBox1StateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -184,6 +233,8 @@ public class CategoryPanel extends javax.swing.JPanel {
     public static javax.swing.JButton btnDelete;
     public static javax.swing.JButton btnPrint;
     public static javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel10;
     public static javax.swing.JScrollPane jScrollPane9;
     public static javax.swing.JTable tblCategory;

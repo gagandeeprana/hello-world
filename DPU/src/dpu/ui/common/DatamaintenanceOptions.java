@@ -358,7 +358,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         internalFrameSettings();
         CategoryPanel categoryPanel = new CategoryPanel();
-        categoryPanel.setBounds(0, 0, getWidth() - 12, getHeight() - 10);
+        categoryPanel.setBounds(0, 0, getWidth(), getHeight() - 150);
         root.add(categoryPanel);
         root.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed

@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class CategoryDAOImpl implements CategoryDAO {
@@ -24,7 +26,7 @@ public class CategoryDAOImpl implements CategoryDAO {
     Logger logger = Logger.getLogger(CategoryDAOImpl.class);
 
     @Override
-    public List<CategoryBean> getAllCategories(String categoryName) {
+    public List<CategoryBean> getAllCategories(String categoryName, int status) {
         List<CategoryBean> lstCategories = new ArrayList<>();
         Session session = null;
         try {
@@ -33,6 +35,10 @@ public class CategoryDAOImpl implements CategoryDAO {
             if (!"".equals(categoryName)) {
                 criteria.add(Restrictions.like("categoryName", categoryName, MatchMode.ANYWHERE));
             }
+            if (status != 2) {
+                criteria.add(Restrictions.eq("status", status));
+            }
+            criteria.addOrder(Order.desc("createdOn"));
             lstCategories = (List<CategoryBean>) criteria.list();
         } catch (Exception e) {
             logger.error("CategoryDAOImpl : getAllCategories : " + e);
@@ -106,9 +112,11 @@ public class CategoryDAOImpl implements CategoryDAO {
         Transaction tx = null;
         try {
             session = DPU.getSessionFactory().openSession();
-            CategoryBean obj = (CategoryBean) session.get(CategoryBean.class, categoryId);
             tx = session.beginTransaction();
-            session.delete(obj);
+            Query query = session.createQuery("update CategoryBean set status =:s where categoryId=:c");
+            query.setParameter("s", 1);
+            query.setParameter("c", categoryId);
+            query.executeUpdate();
             tx.commit();
             return "Category Deleted";
         } catch (Exception e) {

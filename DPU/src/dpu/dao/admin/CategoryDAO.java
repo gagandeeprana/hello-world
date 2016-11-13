@@ -11,7 +11,7 @@ import java.util.List;
 public interface CategoryDAO {
     List<Category> getAllCategory();
 
-    List<CategoryBean> getAllCategories(String categoryName);
+    List<CategoryBean> getAllCategories(String categoryName, int status);
 
     int addCategory(CategoryBean obj);
 
