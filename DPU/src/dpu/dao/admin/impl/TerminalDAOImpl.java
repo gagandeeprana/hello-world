@@ -6,6 +6,7 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.HibernateUtil;
 import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.TerminalDAO;
 import java.util.ArrayList;
@@ -27,7 +28,10 @@ public class TerminalDAOImpl implements TerminalDAO {
         System.out.println("terminalName"+terminalName);
         Session session = null;
         try {
-            session = DPU.getSessionFactory().openSession();
+            
+            session = HibernateUtil.getSession();
+             
+            
             Criteria criteria = session.createCriteria(TerminalBean.class);
             if (!"".equals(terminalName)) {
                 criteria.add(Restrictions.like("terminalName", terminalName, MatchMode.ANYWHERE));
@@ -35,13 +39,8 @@ public class TerminalDAOImpl implements TerminalDAO {
             lstTerminals = (List<TerminalBean>) criteria.list();
         } catch (Exception e) {
             logger.error("TerminalDAOImpl : getAllTerminals : " + e);
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
+        } finally{
+            HibernateUtil.closeSession();;
         }
         return lstTerminals;
     }

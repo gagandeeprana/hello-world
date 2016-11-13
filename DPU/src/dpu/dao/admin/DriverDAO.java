@@ -10,6 +10,8 @@ public interface DriverDAO {
 
     public String addDriver(Driver obj);
     
+    public List<Driver> showAll();
+    
     public void updateDriver(Driver driver);
 
     public List<Driver> updateDriver(String driverCode);

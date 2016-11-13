@@ -6,63 +6,48 @@
 package dpu.dao.admin.impl;
 
 import dpu.DPU;
+import dpu.HibernateUtil;
 import dpu.beans.admin.DriverBean;
+import dpu.common.properties.Iconstant;
 import dpu.dao.admin.DriverDAO;
 import dpu.dao.common.ConnectDB;
 import dpu.entity.admin.Driver;
+import dpu.ui.common.AddDriverFrame;
 import dpu.ui.common.DriverPanel;
+import static dpu.ui.common.DriverPanel.cbShowAll;
 import dpu.ui.common.helper.DriverUIHelper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+ 
 
 public class DriverDAOImpl implements DriverDAO {
 
-   @Autowired
-    ConnectDB connectDB;
+   
+     
     Logger logger = Logger.getLogger(DriverDAOImpl.class);
 
-    @Override
-    public List<Driver> getAllDrivers(String name) {
-        List<Driver> lstDrivers = new ArrayList<>();
-        Connection conn = null;
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
-        try {
-            conn = connectDB.connect();
-            pstmt = conn.prepareStatement("select * from drivermaster where first_name like ?");
-            pstmt.setString(1, "%" + name + "%");
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Driver obj = new Driver();
-                obj.setDriverId(rs.getInt("driver_id"));
-                obj.setFirstName(rs.getString("first_name"));
-                obj.setLastName(rs.getString("last_name"));
-                 
-                lstDrivers.add(obj);
-            }
-        } catch (Exception e) {
-            logger.error("DriverDAOImpl : getAllDrivers : " + e);
-        }
-        return lstDrivers;
-    }
+     //DriverUIHelper driverUIHelper = new DriverUIHelper();
 
     @Override
     public String addDriver(Driver driver) {
         Session session = null;
         Transaction tx = null;
-        int maxId = 0;
+         
+        
+        if(AddDriverFrame.flag.equals("add")){
         try {
-            session = DPU.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
             tx = session.beginTransaction();
             logger.info("class ID : ." +driver.getClassId());
             session.saveOrUpdate(driver);
@@ -70,6 +55,7 @@ public class DriverDAOImpl implements DriverDAO {
             tx.commit();
             DriverUIHelper driverUIHelper = new DriverUIHelper();
             driverUIHelper.QuickFilterDrivers();
+            JOptionPane.showMessageDialog(null, "Driver Added Successfully.");
             logger.info("Driver Added Successfully." );
             return "Driver Added Successfully.";
         } catch (Exception e) {
@@ -77,44 +63,43 @@ public class DriverDAOImpl implements DriverDAO {
                 tx.rollback();
             }
             logger.error("DriverDAOImpl : addType : " + e);
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
         }
+       }  else if(AddDriverFrame.flag.equals("update")){
+           
+       }
          
         return "Failed to Add Driver";
+        
     }
 
     @Override
     public List<Driver> updateDriver(String driverCode) {
-        Session session = null;
-        Transaction tx = null;
          
-        
-            session = DPU.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-            
+            Session session = HibernateUtil.getSession();
             Criteria criteria = session.createCriteria(Driver.class);
             criteria.add(Restrictions.eq("driverCode",driverCode));
             List<Driver> drivers = criteria.list();
-             return drivers;
+            return drivers;
         }
     @Override
     public void updateDriver(Driver driver) {
         
         Session session = null;
+        
         Transaction tx = null;
          
         try{
-            session = DPU.getSessionFactory().openSession();
+            session = HibernateUtil.getSession();
+            session.clear() ;
             tx = session.beginTransaction();
+             
             session.update(driver);
-            
+            logger.info("Driver ID : "+ driver.getDriverId() );
+            logger.info("Driver FRTST NAME : "+ driver.getFirstName() );
             tx.commit();
+             DriverUIHelper driverUIHelper = new DriverUIHelper();
+            driverUIHelper.QuickFilterDrivers();
+            JOptionPane.showMessageDialog(null, "Driver Updated Successfully.");
             logger.info("Driver Updated Successfully." );
              
         } catch (Exception e) {
@@ -122,14 +107,14 @@ public class DriverDAOImpl implements DriverDAO {
                 tx.rollback();
             }
             logger.error("[DriverDAOImpl ]: UpdatedDriver : " + e);
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception e) {
-            }
-        }
+        } //finally {
+            //try {
+              //  if (session != null) {
+                //    session.close();
+                //}
+            //} catch (Exception e) {
+            //}
+        //}
          
          
     }
@@ -149,15 +134,26 @@ public class DriverDAOImpl implements DriverDAO {
             List<Driver> drivers = criteria.list();
             //driver = session.get(Driver.class,new String());
             if(drivers != null){
-                for(Driver deleteDriver : drivers){
-                    session.delete(deleteDriver);
+                 Driver deleteDriver = drivers.get(0);
+                 int id = deleteDriver.getDriverId();
+                 deleteDriver.setDriverId(id);
+                 deleteDriver.setStatusId("InActive");
+                 session.update(deleteDriver);
+                 tx.commit();
+                 JOptionPane.showMessageDialog(null, "Driver Deleted Successfully.");
+                 
+                 DriverUIHelper driverUIHelper = new DriverUIHelper();
+                // driverUIHelper.QuickFilterDrivers();
+                 driverUIHelper.showAllDrivers();
                 }
                 logger.info("Driver Deleted Successfully." );
-                tx.commit();
+                
+                
                 return "Driver Deleted Successfully";
-            }
+             
         } catch (Exception e) {
             logger.error("[deleteDriver]Exception : " +e);
+            tx.rollback();
               
         } finally {
             try {
@@ -173,43 +169,101 @@ public class DriverDAOImpl implements DriverDAO {
 
     @Override
     public List<Driver> showAllDrivers() {
-        Session session = null;
+         List<Driver> listOfDriver = null;  
+        try{
+            Session session = HibernateUtil.getSession();
+            Criteria  driverCriteria = session.createCriteria(Driver.class);
+            driverCriteria.add(Restrictions.eq("statusId", Iconstant.statusActive));
+            listOfDriver = driverCriteria.list();
+            logger.info("List Of Drivers showing..." );
+            return listOfDriver;
         
-        session = DPU.getSessionFactory().openSession();
-        Criteria  driverCriteria = session.createCriteria(Driver.class);
-        List<Driver> listOfDriver = driverCriteria.list();
-        logger.info("List Of Drivers showing..." );
+        }catch(Exception e){
+            
+        } finally{
+            HibernateUtil.closeSession();
+        }
+        
         return listOfDriver;
         }
     
     @Override
      public List<Driver> QuickFilterDrivers(){
-        Session session = null;
-        session = DPU.getSessionFactory().openSession();
+        
+        Session session = HibernateUtil.getSession();
+        
+         
         
         String filterByName = null;
         filterByName = "%"+DriverPanel.txtQuickFilter.getText().trim()+"%";
         logger.info("List Of Drivers showing...] filterByName :" + filterByName);
-        if(filterByName.equals("%%") || filterByName == null){
+         
+                if(filterByName.equals("%%")  && cbShowAll.isSelected() == true){
+                    Criteria  driverCriteria = session.createCriteria(Driver.class);
+             
+                    List<Driver> listOfDriver = driverCriteria.list();
+                    logger.info("List Of Drivers showing..." );
+                    return listOfDriver;
+               }
+        if(filterByName.equals("%%") && cbShowAll.isSelected() == false) {
             Criteria  driverCriteria = session.createCriteria(Driver.class);
+            driverCriteria.add(Restrictions.eq("statusId", Iconstant.statusActive));
             List<Driver> listOfDriver = driverCriteria.list();
             logger.info("List Of Drivers showing..." );
             return listOfDriver;
         } 
         
-        Criteria cr = session.createCriteria(Driver.class);
-        cr.add(Restrictions.like("firstName", filterByName));
+        else{
+             if(cbShowAll.isSelected() == true){
+                Criteria cr = session.createCriteria(Driver.class);
+                cr.add(Restrictions.like("firstName", filterByName));
+                List<Driver> listOfDriver = cr.list();
+                for(Driver driver : listOfDriver){
+                logger.info("driver Name : "+driver.getFirstName() );
+            }
+            logger.info("List Of Filter Drivers showing..." );
         
-       // Criteria  driverNameCriteria = session.createCriteria(Driver.class);
-        //Criterion criterion = Restrictions.like("firstName", filterByName);
-        //driverNameCriteria.add(criterion);
-        
-        List<Driver> listOfDriver = cr.list();
-        for(Driver driver : listOfDriver){
-            logger.info("driver Name : "+driver.getFirstName() );
-        }
-        logger.info("List Of Filter Drivers showing..." );
+         
         return listOfDriver;
+        }else{
+                  Criteria driverCriteria = session.createCriteria(Driver.class);
+                driverCriteria.add(Restrictions.like("firstName", filterByName));
+                driverCriteria.add(Restrictions.eq("statusId", Iconstant.statusActive));
+                List<Driver> listOfDriver = driverCriteria.list();
+                for(Driver driver : listOfDriver){
+                logger.info("driver Name : "+driver.getFirstName() );
+            }
+            logger.info("List Of Filter Drivers showing..." );
+        
+         
+        return listOfDriver;
+             }
+        }
      }
+
+    @Override
+    public List<Driver> getAllDrivers(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Driver> showAll() {
+          List<Driver> listOfDriver = null;  
+        try{
+            Session session = HibernateUtil.getSession();
+            Criteria  driverCriteria = session.createCriteria(Driver.class);
+             
+            listOfDriver = driverCriteria.list();
+            logger.info("List Of Drivers showing..." );
+            return listOfDriver;
+        
+        }catch(Exception e){
+            
+        } finally{
+            HibernateUtil.closeSession();
+        }
+        
+        return listOfDriver;
+    }
          
     }
