@@ -44,7 +44,11 @@ public class AddDriverFrame extends javax.swing.JFrame {
     
      public  static  String flag = "";
     
+      
+
+        
     public AddDriverFrame()  {
+        
         flag = "add";
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -84,6 +88,12 @@ public class AddDriverFrame extends javax.swing.JFrame {
                 }
             });
          
+          txtPvs.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPvsMouseClicked(evt);
+            }
+        });
        
     }catch(Exception e){
         e.printStackTrace();;
@@ -1093,6 +1103,7 @@ private void txtPvsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
         // TODO add your handling code here:
          //stateHeper.getAllStates();
          //new ProvincialFrame().setVisible(true);
+         System.out.println("-==--=-=-MouseClicked=-=-=-=-");
           ProvincialFrame addDriverFrame = new ProvincialFrame();
                 StateHelper stateHeper = new StateHelper();
                 stateHeper.getAllStates();
