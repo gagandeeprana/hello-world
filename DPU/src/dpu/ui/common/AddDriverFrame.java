@@ -22,6 +22,7 @@ import dpu.entity.admin.Status;
  
  
 import dpu.ui.common.helper.DriverUIHelper;
+import dpu.ui.common.helper.StateHelper;
  
 import java.util.List;
 import javax.swing.JFormattedTextField;
@@ -1088,4 +1089,16 @@ public class AddDriverFrame extends javax.swing.JFrame {
     public static javax.swing.JTextField txtPvs;
     public static javax.swing.JTextField txtUnit;
     // End of variables declaration//GEN-END:variables
+private void txtPvsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPvsMouseClicked
+        // TODO add your handling code here:
+         //stateHeper.getAllStates();
+         //new ProvincialFrame().setVisible(true);
+          ProvincialFrame addDriverFrame = new ProvincialFrame();
+                StateHelper stateHeper = new StateHelper();
+                stateHeper.getAllStates();
+                addDriverFrame.setVisible(true);
+                
+         
+       
+    }//GEN-LAST:event_txtPvsMouseClicked
 }
