@@ -29,12 +29,12 @@ public class ConnectDB {
         Connection conn = null;
 //        String url = readFromPropertiesFile.getProperty("jdbc.url");
 //        String url = "jdbc:mysql:///";
-        String url = "jdbc:mysql://35.154.2.156:3306/dpu";
+        String url = "jdbc:mysql://127.0.0.1:3306/dpu";
 //        String database = readFromPropertiesFile.getProperty("jdbc.database");
 //        String database = "dpu";
 //        String username = readFromPropertiesFile.getProperty("jdbc.username");
         String username = "root";
-        String password = "alpha925";
+        String password = "";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
