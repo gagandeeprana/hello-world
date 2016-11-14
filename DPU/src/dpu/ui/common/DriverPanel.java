@@ -43,22 +43,24 @@ public class DriverPanel extends javax.swing.JPanel {
         driverTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
          driverTable.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
          
-        driverTable.setModel(new DefaultTableModel() {
+         DefaultTableModel defaultTableModel = new DefaultTableModel() {
 
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        }
-    });
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
        //sort();
     }
     
 public void sort(){
+    driverTable.setAutoCreateRowSorter(true);
     TableRowSorter<TableModel> sorter = new TableRowSorter<>(driverTable.getModel());
 driverTable.setRowSorter(sorter);
 List<RowSorter.SortKey> sortKeys = new ArrayList<>();
  
-int columnIndexToSort = 1;
+int columnIndexToSort = 2;
 sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
  
 sorter.setSortKeys(sortKeys);
@@ -83,11 +85,7 @@ sorter.sort();
         btnEmail = new javax.swing.JButton();
         btnAddDriver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        driverTable = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false;   //Disallow the editing of any cell
-            }
-        };
+        driverTable = new javax.swing.JTable();
 
         jLabel1.setText("QuickFilter");
 
@@ -132,6 +130,12 @@ sorter.sort();
             }
         });
 
+        driverTable = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
+        driverTable.setAutoCreateRowSorter(true);
         driverTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -159,7 +163,9 @@ sorter.sort();
             }
         }
     );
+    driverTable.setFocusable(false);
     jScrollPane1.setViewportView(driverTable);
+    driverTable.setAutoCreateRowSorter(true);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);

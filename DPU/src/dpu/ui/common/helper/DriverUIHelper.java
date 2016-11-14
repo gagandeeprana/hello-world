@@ -232,9 +232,16 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
 
     public void generateTable() {
         lstDrivers = driverDAO.getAllDrivers(TestDriverPanel.txtSearchManageDriver.getText());
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel(){
+             @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
         TestDriverPanel.tblDriver = new JTable(defaultTableModel);
         TestDriverPanel.tblDriver.setDefaultRenderer(Object.class, new DriverTable());
+         DriverPanel.driverTable.setAutoCreateRowSorter(true);
         Object[][] data = new Object[lstDrivers.size()][24];
         for (int i = 0; i < lstDrivers.size(); i++) {
             Driver obj = lstDrivers.get(i);
@@ -299,6 +306,7 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         String role = AddDriverFrame.ddlRole.getSelectedItem().toString();
         String status = AddDriverFrame.ddlStatus.getSelectedItem().toString();
         String classId = AddDriverFrame.ddlClassId.getSelectedItem().toString();
+        DriverPanel.driverTable.setAutoCreateRowSorter(true);
         System.out.println("=-=-=-=-=classs :"+classId);
         driver.setDriverCode(driverCode);
         driver.setFirstName(firstName);
@@ -336,8 +344,15 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         DriverDAO driverDAO = new DriverDAOImpl();
         List<Driver> listOfDrivers = driverDAO.showAll();
        // lstDrivers = driverDAO.getAllDrivers(TestDriverPanel.txtSearchManageDriver.getText());
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel(){
+             @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
         DriverPanel.driverTable = new JTable(defaultTableModel);
+        DriverPanel.driverTable.setAutoCreateRowSorter(true);
         DriverPanel.driverTable.setDefaultRenderer(Object.class, new DriverTable());
         Object[][] data = new Object[listOfDrivers.size()][24];
         for (int i = 0; i < listOfDrivers.size(); i++) {
@@ -379,9 +394,17 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         DriverDAO driverDAO = new DriverDAOImpl();
         List<Driver> listOfDrivers = driverDAO.showAllDrivers();
        // lstDrivers = driverDAO.getAllDrivers(TestDriverPanel.txtSearchManageDriver.getText());
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel(){
+             @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
         DriverPanel.driverTable = new JTable(defaultTableModel);
+         DriverPanel.driverTable.setAutoCreateRowSorter(true);
         DriverPanel.driverTable.setDefaultRenderer(Object.class, new DriverTable());
+        // DriverPanel.driverTable.isCellEditable(TOP , TOP);
         Object[][] data = new Object[listOfDrivers.size()][24];
         for (int i = 0; i < listOfDrivers.size(); i++) {
             Driver obj = listOfDrivers.get(i);
@@ -427,8 +450,16 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         DriverDAO driverDAO = new DriverDAOImpl();
         List<Driver> listOfDrivers = driverDAO.QuickFilterDrivers();
        // lstDrivers = driverDAO.getAllDrivers(TestDriverPanel.txtSearchManageDriver.getText());
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel(){
+             @Override
+            public boolean isCellEditable(int row, int column) {
+                //Only the third column
+                return false;
+            }
+        };
+         
         DriverPanel.driverTable = new JTable(defaultTableModel);
+        DriverPanel.driverTable.setAutoCreateRowSorter(true);
         DriverPanel.driverTable.setDefaultRenderer(Object.class, new DriverTable());
         Object[][] data = new Object[listOfDrivers.size()][24];
         for (int i = 0; i < listOfDrivers.size(); i++) {
