@@ -61,10 +61,10 @@ public class CategoryUIHelper {
 
     public void generateTable() {
         Object[] cols = {"Type", "Category Name"};
-        DefaultTableModel defaultTableModel = new DefaultTableModel();
-        CategoryPanel.tblCategory.setModel(defaultTableModel);
+//        DefaultTableModel defaultTableModel = new DefaultTableModel();
+//        CategoryPanel.tblCategory.setModel(defaultTableModel);
         CategoryPanel.tblCategory.setAutoCreateRowSorter(true);
-        CategoryPanel.tblCategory.setDefaultRenderer(Object.class, new CategoryUIHelper.CategoryTable());
+//        CategoryPanel.tblCategory.setDefaultRenderer(Object.class, new CategoryUIHelper.CategoryTable());
         if (lstCategories.size() > 0) {
             Object[][] data = new Object[lstCategories.size()][2];
             for (int i = 0; i < lstCategories.size(); i++) {
@@ -73,11 +73,12 @@ public class CategoryUIHelper {
                 data[i][1] = obj.getCategoryName();
                 CategoryPanel.tblCategory.setRowHeight(15);
             }
-            defaultTableModel.setDataVector(data, cols);
+//            defaultTableModel.setDataVector(data, cols);
             CategoryPanel.tblCategory.getTableHeader().setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
             CategoryPanel.tblCategory.getTableHeader().setForeground(Color.DARK_GRAY);
             CategoryPanel.tblCategory.setIntercellSpacing(new Dimension(0, 0));
 //            CategoryPanel.tblCategory.setShowGrid(true);
+            CategoryPanel.tblCategory = new JTable(data, cols);
             CategoryPanel.jScrollPane9.setViewportView(CategoryPanel.tblCategory);
         } else {
             generateEmptyTable();
@@ -87,7 +88,7 @@ public class CategoryUIHelper {
     public void generateEmptyTable() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         CategoryPanel.tblCategory.setModel(defaultTableModel);
-        CategoryPanel.tblCategory.setDefaultRenderer(Object.class, new CategoryUIHelper.CategoryTable());
+//        CategoryPanel.tblCategory.setDefaultRenderer(Object.class, new CategoryUIHelper.CategoryTable());
         Object[][] data = new Object[7][2];
         for (int i = 0; i < 7; i++) {
             data[i][0] = "";
@@ -126,33 +127,33 @@ public class CategoryUIHelper {
         JOptionPane.showMessageDialog(null, msg);
     }
 
-    class CategoryTable extends DefaultTableCellRenderer {
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            JTextField editor = new JTextField();
-            editor.setFont(new Font(Font.SANS_SERIF, 0, 12));
-            editor.setEditable(false);
-            editor.setBorder(null);
-
-            if (value != null) {
-                editor.setText("   " + value.toString());
-            }
-            if (row % 2 == 0) {
-                Border border = BorderFactory.createLineBorder(Color.WHITE, 1);
-                editor.setBorder(border);
-
-            } else {
-                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
-                editor.setBorder(border);
-            }
-            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
-            if (isSelected) {
-                Border border = BorderFactory.createLineBorder(Color.decode("#DCDCDC"), 1);
-                editor.setBorder(border);
-                editor.setBackground(Color.decode("#DCDCDC"));
-            }
-            return editor;
-        }
-    }
+//    class CategoryTable extends DefaultTableCellRenderer {
+//
+//        @Override
+//        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//            JTextField editor = new JTextField();
+//            editor.setFont(new Font(Font.SANS_SERIF, 0, 12));
+//            editor.setEditable(false);
+//            editor.setBorder(null);
+//            table.setEnabled(false);
+//            if (value != null) {
+//                editor.setText("   " + value.toString());
+//            }
+//            if (row % 2 == 0) {
+//                Border border = BorderFactory.createLineBorder(Color.WHITE, 1);
+//                editor.setBorder(border);
+//
+//            } else {
+//                Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
+//                editor.setBorder(border);
+//            }
+//            editor.setBackground((row % 2 == 0) ? Color.white : Color.LIGHT_GRAY);
+//            if (isSelected) {
+//                Border border = BorderFactory.createLineBorder(Color.decode("#DCDCDC"), 1);
+//                editor.setBorder(border);
+//                editor.setBackground(Color.decode("#DCDCDC"));
+//            }
+//            return editor;
+//        }
+//    }
 }
