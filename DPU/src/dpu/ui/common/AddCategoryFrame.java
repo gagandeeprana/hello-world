@@ -21,13 +21,16 @@ public class AddCategoryFrame extends javax.swing.JFrame {
     CategoryUIHelper categoryUIHelper = null;
 
     public AddCategoryFrame() {
-        initComponents();
-        setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
-        setLocationRelativeTo(null);
-        setTitle("Add New Category");
-        categoryUIHelper = new CategoryUIHelper();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        fillTypes();
+        if (!isVisible()) {
+            initComponents();
+            setIconImage(new ImageIcon("src\\dpu\\ui\\common\\Application-Icon.png").getImage());
+            setLocationRelativeTo(null);
+            setTitle("Add New Category");
+            categoryUIHelper = new CategoryUIHelper();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            fillTypes();
+            setVisible(true);
+        }
     }
 
     public AddCategoryFrame(CategoryBean categoryBean) {

@@ -35,10 +35,10 @@ public class CategoryBean {
 
     @Column(name = "status")
     private int status;
-    
+
     @Column(name = "created_by")
     private String createdBy;
-    
+
     @Column(name = "created_on")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
@@ -46,7 +46,7 @@ public class CategoryBean {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
     private TypeBean typeBean;
-    
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "categoryBean")
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "categoryBean")
     private ContainerBean containerBean;
 }

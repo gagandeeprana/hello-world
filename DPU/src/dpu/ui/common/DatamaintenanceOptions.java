@@ -10,8 +10,10 @@ import dpu.ui.shipper.TestShipperPannel;
 import dpu.ui.terminal.TerminalPanel;
 import java.awt.Container;
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.JRootPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -24,8 +26,11 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
      * Creates new form DatamaintenanceOptions
      */
     Container root = null;
+    static Logger logger = Logger.getLogger(DatamaintenanceOptions.class);
 
     public DatamaintenanceOptions() {
+        long startTime = new Date().getTime();
+
         initComponents();
 //        DPU.autowire(this);
         jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
@@ -38,6 +43,9 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
         bi.setEastPane(null);
         bi.setWestPane(null);
         bi.setSouthPane(null);
+        long endTime = new Date().getTime();
+
+        logger.info("DatamaintenanceOptions: Time-Taken: " + (endTime - startTime) + "ms");
     }
 
     private void internalFrameSettings() {
@@ -299,13 +307,13 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
         internalFrameSettings();
         CompanyPanel1 testCompanyPanel = new CompanyPanel1();
-        testCompanyPanel.setBounds(0, 0, getWidth(), getHeight()-150);
+        testCompanyPanel.setBounds(0, 0, getWidth(), getHeight() - 150);
         root.add(testCompanyPanel);
         root.setVisible(true);
     }//GEN-LAST:event_jMenu1MousePressed
@@ -397,7 +405,7 @@ public class DatamaintenanceOptions extends javax.swing.JPanel {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         internalFrameSettings();
         DriverPanel driverPanel = new DriverPanel();
-        driverPanel.setBounds(0, 0, getWidth() , getHeight() - 50);
+        driverPanel.setBounds(0, 0, getWidth(), getHeight() - 50);
         root.add(driverPanel);
         root.setVisible(true);
         driverUIHelper.showAllDrivers();

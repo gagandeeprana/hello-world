@@ -6,13 +6,11 @@
 package dpu;
 
 import dpu.ui.common.LoginFrame;
-import java.awt.Toolkit;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import properties.ReadFromPropertiesFile;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -24,23 +22,22 @@ public class DPU {
 
     private static ApplicationContext applicationContext;
 
-    public static void autowire(Object object) {
-        try {
-            System.out.println("Object : " + object.getClass());
-            applicationContext.getAutowireCapableBeanFactory().autowireBean(object);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+//    public static void autowire(Object object) {
+//        try {
+//            System.out.println("Object : " + object.getClass());
+//            applicationContext.getAutowireCapableBeanFactory().autowireBean(object);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 
-    @Autowired
-    private void setApplicationContext(ApplicationContext applicationContext) {
-        DPU.applicationContext = applicationContext;
-    }
+//    @Autowired
+//    private void setApplicationContext(ApplicationContext applicationContext) {
+//        DPU.applicationContext = applicationContext;
+//    }
 
     public static void main(String[] args) {
 
-        logger.info("Inside DPU: main(): STARTS11");
         try {
             //**********************************Spring Configuration*********************************
 //            applicationContext = new ClassPathXmlApplicationContext("beans.xml");
@@ -54,11 +51,10 @@ public class DPU {
 //            loginFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Application-Exe.png")));
 //            loginFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images\\Application-Exe.png")));
            loginFrame.setVisible(true);
+         
         } catch (Exception e) {
             System.out.println("Main: " + e);
         }
-
-        logger.info("Inside DPU: main(): ENDS");
     }
 
     public static SessionFactory getSessionFactory() {

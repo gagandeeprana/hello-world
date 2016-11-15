@@ -9,9 +9,11 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import org.apache.log4j.Logger;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -23,6 +25,8 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     /**
      * Creates new form ArrangedMainFrame
      */
+    static Logger logger = Logger.getLogger(ArrangedMainFrame3.class);
+
     float alpha = 1.0f;
     Timer timer;
     int animationDuration = 2000;
@@ -30,33 +34,34 @@ public class ArrangedMainFrame3 extends javax.swing.JFrame {
     BufferedImage buttonImage = null;
     boolean flag = true;
     Container root = null;
-    
+
     public ArrangedMainFrame3() {
+        long startTime = new Date().getTime();
+
         initComponents();
-        
         root = getContentPane();
-        System.out.println("Values::   W" + (getWidth() - 10));
-        System.out.println("Values::   H" + (getHeight() - 10));
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
         setButtonContentArea();
 //        jPanel4.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
 //        jPanel4.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        jPanel4.setBounds(0,0,screenSize.width, screenSize.height);
+        jPanel4.setBounds(0, 0, screenSize.width, screenSize.height);
         jPanel4.setVisible(true);
         jInternalFrame1.setVisible(false);
 //        jInternalFrame1.setBorder(null);
         jPanel6.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
         jInternalFrame1.setPreferredSize(new Dimension(getWidth() - 10, getHeight() - 10));
-        
+
 //        jPanel6.setBounds(0,0,screenSize.width, screenSize.height);
 //        jPanel6.setVisible(true);
 //        jInternalFrame1.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setIconImage(new ImageIcon(ReadFromPropertiesFile.imagePath + "Application-Exe.png").getImage());
+        long endTime = new Date().getTime();
+        logger.info("ArrangedMainFrame3: Time-Taken: " + (endTime - startTime) + "ms");
     }
-    
+
     private void setButtonContentArea() {
         MainModules mainModules = new MainModules();
         mainModules.setBounds(0, 0, getWidth(), getHeight());

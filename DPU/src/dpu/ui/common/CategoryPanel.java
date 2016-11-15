@@ -11,7 +11,9 @@ import dpu.dao.admin.impl.CategoryDAOImpl;
 import dpu.reports.common.JasperReportGenerator;
 import dpu.ui.common.helper.CategoryUIHelper;
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -23,16 +25,25 @@ public class CategoryPanel extends javax.swing.JPanel {
      * S
      * Creates new form TestCategory
      */
+//    @Autowired
+    CategoryDAO categoryDAO;
+    
     CategoryUIHelper categoryUIHelper = null;
-    CategoryDAO categoryDAO = null;
+
+    static Logger logger = Logger.getLogger(CategoryPanel.class);
 
     public CategoryPanel() {
+        long startTime = new Date().getTime();
+
         initComponents();
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
         categoryUIHelper = new CategoryUIHelper();
         categoryDAO = new CategoryDAOImpl();
         CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
         categoryUIHelper.generateTable();
+        long endTime = new Date().getTime();
+
+        logger.info("CategoryPanel: Time-Taken: " + (endTime - startTime) + "ms");
 
     }
 
@@ -178,11 +189,11 @@ public class CategoryPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         CategoryUIHelper.addUpdateFlag = "add";
         AddCategoryFrame addCategoryFrame = new AddCategoryFrame();
-        addCategoryFrame.setVisible(true);
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if(!(tblCategory.getSelectedRow() < 0)) {
+        if (!(tblCategory.getSelectedRow() < 0)) {
             int categoryIdToBeDeleted = CategoryUIHelper.lstCategories.get(tblCategory.getSelectedRow()).getCategoryId();
             String msg = categoryUIHelper.delete(categoryIdToBeDeleted);
             JOptionPane.showMessageDialog(null, msg);
@@ -190,7 +201,7 @@ public class CategoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        if(!(tblCategory.getSelectedRow() < 0)) {
+        if (!(tblCategory.getSelectedRow() < 0)) {
             CategoryBean categoryBean = CategoryUIHelper.lstCategories.get(tblCategory.getSelectedRow());
             CategoryUIHelper.categoryId = categoryBean.getCategoryId();
             CategoryUIHelper.addUpdateFlag = "update";
@@ -204,12 +215,12 @@ public class CategoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-     
+
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jCheckBox1.isSelected()) {
+        if (jCheckBox1.isSelected()) {
             CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 2);
         } else {
             CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
@@ -219,10 +230,10 @@ public class CategoryPanel extends javax.swing.JPanel {
 
     private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
         // TODO add your handling code here:
-        if(jCheckBox1.isSelected()) {
-          CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 2);
+        if (jCheckBox1.isSelected()) {
+            CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 2);
         } else {
-          CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
+            CategoryUIHelper.lstCategories = categoryDAO.getAllCategories(CategoryPanel.txtSearch.getText(), 0);
         }
         categoryUIHelper.generateTable();
     }//GEN-LAST:event_jCheckBox1StateChanged

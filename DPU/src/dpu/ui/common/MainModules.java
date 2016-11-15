@@ -5,10 +5,11 @@
  */
 package dpu.ui.common;
 
-import dpu.ui.shipper.TestShipperPannel;
 import java.awt.Container;
+import java.util.Date;
 import javax.swing.JRootPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,7 +22,11 @@ public class MainModules extends javax.swing.JPanel {
      */
     Container root = null;
 
+    static Logger logger = Logger.getLogger(MainModules.class);
+
     public MainModules() {
+        long startTime = new Date().getTime();
+
         initComponents();
         jInternalFrame1.putClientProperty("JInternalFrame.isPalette", Boolean.FALSE);
         jInternalFrame1.setMaximizable(false);
@@ -33,6 +38,8 @@ public class MainModules extends javax.swing.JPanel {
         bi.setEastPane(null);
         bi.setWestPane(null);
         bi.setSouthPane(null);
+        long endTime = new Date().getTime();
+        logger.info("MainModules: Time-Taken: " + (endTime - startTime) + "ms");
     }
 
     private void internalFrameSettings() {

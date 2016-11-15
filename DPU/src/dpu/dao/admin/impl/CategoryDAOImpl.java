@@ -21,6 +21,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Component;
 
 public class CategoryDAOImpl implements CategoryDAO {
 

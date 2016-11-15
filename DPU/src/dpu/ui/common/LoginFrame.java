@@ -8,7 +8,9 @@ package dpu.ui.common;
 import dpu.dao.admin.UserDAO;
 import dpu.dao.admin.impl.UserDAOImpl;
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 import properties.ReadFromPropertiesFile;
 
 /**
@@ -22,13 +24,18 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
 //    static MainTabbedPane mainTabbedPane = null;
+    static Logger logger = Logger.getLogger(LoginFrame.class);
+
     public LoginFrame() {
+        long startTime = new Date().getTime();
         initComponents();
 //        DPU.autowire(this);
         setIconImage(Toolkit.getDefaultToolkit().getImage(ReadFromPropertiesFile.imagePath + "Application-Exe.png"));
         setResizable(false);
         setTitle("Authentication - DPU");
         setLocationRelativeTo(null);
+        long endTime = new Date().getTime();
+        logger.info("LoginFrame: Time-Taken: " + (endTime - startTime) + "ms");
     }
 
     /**
