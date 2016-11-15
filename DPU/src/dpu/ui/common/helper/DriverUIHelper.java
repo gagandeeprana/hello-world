@@ -558,9 +558,8 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
         
         DefaultTableModel model = (DefaultTableModel)driverTable.getModel();
         // get Selected Row Index
-        
-            int selectedRowIndex = driverTable.getSelectedRow();
-            String driverCode = model.getValueAt(selectedRowIndex, 0).toString();
+            int index = driverTable.getSelectedRow(); 
+            String driverCode=   (String)driverTable.getModel().getValueAt(driverTable.convertRow‌​IndexToModel(index), 0);
             System.out.println("------------------Driver Code : "+driverCode);
             Driver driver = new Driver();
             DriverDAO driverDAO = new DriverDAOImpl();
