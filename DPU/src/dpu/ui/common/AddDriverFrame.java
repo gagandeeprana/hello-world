@@ -6,7 +6,9 @@
 package dpu.ui.common;
 
  
+import dpu.beans.admin.CategoryBean;
 import dpu.beans.admin.TerminalBean;
+import dpu.common.properties.Iconstant;
 import dpu.dao.admin.DriverDAO;
 import dpu.dao.admin.impl.CategoryDAOImpl;
 import dpu.dao.admin.impl.ClasssDAOImpl;
@@ -155,11 +157,20 @@ public class AddDriverFrame extends javax.swing.JFrame {
     }
     
     private static void fillCtegoryDropDown() {
-        List<Category> lst = new CategoryDAOImpl().getAllCategory();
-        for(Category category : lst) {
-            ddlCategory.addItem(category.getCatgoryValue());
+        //List<CategoryBean> getAllCategories(String categoryName, int status);
+        
+        List<CategoryBean> lst = new CategoryDAOImpl().getAllCategories("Cat",0);
+        System.out.println(lst);
+        for(CategoryBean category : lst) {
+            ddlCategory.addItem(category.getCategoryName());
         } 
     }
+   // private static void fillCtegoryDropDown() {
+     //   List<Category> lst = new CategoryDAOImpl().getAllCategory();
+       // for(Category category : lst) {
+         //   ddlCategory.addItem(category.getCatgoryValue());
+     //   } 
+   // }
     
     private static void fillRoleDropDown() {
         List<Role> lst = new RoleDAOImpl().getAllRole();
