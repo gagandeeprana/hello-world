@@ -97,6 +97,8 @@ public class Driver implements Serializable{
     
     @Column(name="classId")
     private String classId;
+
+     
     
 
 }
