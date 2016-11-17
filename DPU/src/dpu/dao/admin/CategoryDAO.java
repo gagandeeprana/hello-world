@@ -9,7 +9,7 @@ import java.util.List;
  * @author gagandeep.rana
  */
 public interface CategoryDAO {
-    List<Category> getAllCategory();
+    List<CategoryBean> getAllCategory();
 
     List<CategoryBean> getAllCategories(String categoryName, int status);
 

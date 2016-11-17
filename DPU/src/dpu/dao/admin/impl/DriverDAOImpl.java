@@ -29,6 +29,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
  
 
 public class DriverDAOImpl implements DriverDAO {
@@ -58,6 +59,8 @@ public class DriverDAOImpl implements DriverDAO {
             JOptionPane.showMessageDialog(null, "Driver Added Successfully.");
             logger.info("Driver Added Successfully." );
             return "Driver Added Successfully.";
+        }catch(ConstraintViolationException cve){
+            JOptionPane.showMessageDialog(null, "Driver Code "+driver.getDriverCode()+" Already Exist.");
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();

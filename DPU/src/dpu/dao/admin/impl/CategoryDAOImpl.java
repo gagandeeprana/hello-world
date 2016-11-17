@@ -138,13 +138,13 @@ public class CategoryDAOImpl implements CategoryDAO {
     }
 
     @Override
-    public List<Category> getAllCategory() {
-        List<Category> listOfCategory = new ArrayList<Category>();
+    public List<CategoryBean> getAllCategory() {
+        List<CategoryBean> listOfCategory = new ArrayList<CategoryBean>();
         Session session = null;
         try {
              session = HibernateUtil.getSession();
              
-            Criteria criteria = session.createCriteria(Category.class);
+            Criteria criteria = session.createCriteria(CategoryBean.class);
             listOfCategory = criteria.list();
         } catch (Exception e) {
             logger.error("CategoryDAOImpl : getAllCategories : " + e);

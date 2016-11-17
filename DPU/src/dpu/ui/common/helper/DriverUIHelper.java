@@ -1,5 +1,6 @@
 package dpu.ui.common.helper;
 
+import dpu.beans.admin.CategoryBean;
 import dpu.beans.admin.DriverBean;
 import dpu.beans.admin.TerminalBean;
 import dpu.dao.admin.DriverDAO;
@@ -522,9 +523,9 @@ public class DriverUIHelper extends DefaultTableCellRenderer {
     }
     
        private void fillCtegoryDropDown() {
-        List<Category> lst = new CategoryDAOImpl().getAllCategory();
-        for(Category category : lst) {
-            ddlCategory.addItem(category.getCatgoryValue());
+        List<CategoryBean> lst = new CategoryDAOImpl().getAllCategory();
+        for(CategoryBean category : lst) {
+            ddlCategory.addItem(category.getCategoryName());
         } 
     }
     

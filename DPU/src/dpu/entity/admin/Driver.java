@@ -15,6 +15,7 @@ package dpu.entity.admin;
  * and open the template in the editor.
  */
 
+ 
 import dpu.beans.admin.ContainerBean;
 import dpu.beans.admin.TypeBean;
 import java.io.Serializable;
@@ -31,6 +32,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+ 
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,10 +51,12 @@ public class Driver implements Serializable{
     @Column(name="driver_id")
     private int driverId;
     
-     @Column(name="driver_code")
+     
+    
+    @Column(unique = true , name="driver_code")
     private String driverCode;
     
-     @Column(name="first_name")
+    @Column(name="first_name")
     private String firstName;
      
     @Column(name="last_name") 

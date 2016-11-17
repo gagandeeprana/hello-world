@@ -159,7 +159,7 @@ public class AddDriverFrame extends javax.swing.JFrame {
     private static void fillCtegoryDropDown() {
         //List<CategoryBean> getAllCategories(String categoryName, int status);
         
-        List<CategoryBean> lst = new CategoryDAOImpl().getAllCategories("Cat",0);
+        List<CategoryBean> lst = new CategoryDAOImpl().getAllCategory();
         System.out.println(lst);
         for(CategoryBean category : lst) {
             ddlCategory.addItem(category.getCategoryName());
